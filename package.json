@@ -34,7 +34,7 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "exports": "node scripts/generate-exports.mjs",
-    "test": "node --test test/"
+    "test": "node --test \"test/*.test.mjs\""
   },
   "publishConfig": {
     "access": "public"

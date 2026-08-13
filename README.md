@@ -118,6 +118,12 @@ npm test           # run the test suite
 npm run exports    # regenerate package exports, barrel, and docs nav
 ```
 
+The tests need a DOM. Since the package itself ships zero dependencies, jsdom isn't one either — point at a copy you already have, or the suite skips rather than fails:
+
+```bash
+JSDOM=/path/to/node_modules/jsdom/lib/api.js npm test
+```
+
 `npm run exports` reads `Library/components/` and rewrites three generated files: the `exports` map in `package.json`, the `Library/index.mjs` barrel, and `public/js/nav.data.mjs`. Run it after adding or removing a component directory — never edit those three by hand.
 
 The dev server serves `Library/` directly, so the documentation imports the same source a consumer gets from npm. There is no build, and therefore no way for the docs to document a stale copy.

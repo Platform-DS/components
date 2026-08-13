@@ -7,34 +7,53 @@
 //
 // Run: npm test
 
-import { test, before, describe } from 'node:test';
+import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { createRequire } from 'node:module';
 
-// jsdom isn't a dependency of this package — the library ships zero. It's
-// resolved from wherever the developer already has it, and the whole suite
-// skips if it isn't found, so `npm test` never fails for a missing test-only
-// tool on a fresh clone.
-const require = createRequire(import.meta.url);
+// jsdom isn't a dependency of this package — the library ships zero — so it's
+// resolved from wherever the developer already has it. Missing it SKIPS the
+// suite rather than failing it, so `npm test` on a fresh clone reports honestly
+// instead of red.
+//
+// ESM ignores NODE_PATH, so an out-of-tree copy has to be pointed at
+// explicitly:
+//   JSDOM=/path/to/node_modules/jsdom/lib/api.js npm test
+//
+// This runs at module scope, not in before(): node:test needs `skip` as a
+// BOOLEAN when the describe() is declared. A function there is merely truthy,
+// which silently skips everything.
+let BaseElement, define;
+let skip = false;
 
-let BaseElement, define, available = true;
+/** First importable candidate wins. */
+async function loadJSDOM() {
+    const candidates = [process.env.JSDOM, 'jsdom'].filter(Boolean);
+    const failures = [];
 
-before(async () => {
-    let JSDOM;
-    try {
-        ({ JSDOM } = require('jsdom'));
-    } catch {
-        available = false;
-        return;
+    for (const specifier of candidates) {
+        try {
+            return await import(specifier);
+        } catch (error) {
+            failures.push(`${specifier}: ${error.message.split('\n')[0]}`);
+        }
     }
 
+    throw new Error(failures.join('; '));
+}
+
+try {
+    const { JSDOM } = await loadJSDOM();
     const dom = new JSDOM('<!doctype html><body></body>', { pretendToBeVisual: true });
+
     for (const key of ['window', 'document', 'HTMLElement', 'customElements', 'CustomEvent', 'Event', 'Node']) {
         globalThis[key] = key === 'window' ? dom.window : dom.window[key];
     }
 
     ({ BaseElement, define } = await import('../Library/_core/elements/BaseElement.mjs'));
-});
+} catch (error) {
+    skip = 'jsdom not found — set JSDOM=/path/to/jsdom/lib/api.js';
+    console.error(`\n  Skipping DOM tests. ${error.message}\n`);
+}
 
 /** Define a throwaway component and return a connected instance. */
 let seq = 0;
@@ -54,7 +73,7 @@ function mount({ props = {}, state = {}, mode = 'light', onRender } = {}) {
     return el;
 }
 
-describe('typed props', { skip: () => !available }, () => {
+describe('typed props', { skip }, () => {
     test('defaults apply before any attribute is set', () => {
         const el = mount({ props: {
             label: { type: String, default: 'hi' },
@@ -143,7 +162,7 @@ describe('typed props', { skip: () => !available }, () => {
     });
 });
 
-describe('state', { skip: () => !available }, () => {
+describe('state', { skip }, () => {
     test('is typed but never becomes an attribute', () => {
         const el = mount({ state: { internal: { type: Number, default: 5 } } });
 
@@ -179,7 +198,7 @@ describe('state', { skip: () => !available }, () => {
     });
 });
 
-describe('DOM mode', { skip: () => !available }, () => {
+describe('DOM mode', { skip }, () => {
     test('light mode attaches no shadow root', () => {
         const el = mount({ mode: 'light' });
         assert.equal(el.shadowRoot, null);
@@ -193,7 +212,7 @@ describe('DOM mode', { skip: () => !available }, () => {
     });
 });
 
-describe('events and registration', { skip: () => !available }, () => {
+describe('events and registration', { skip }, () => {
     test('emit dispatches a composed CustomEvent with detail', () => {
         const el = mount();
         let heard = null;
