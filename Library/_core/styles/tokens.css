@@ -1,0 +1,141 @@
+/*------------------------------------------------
+  Platform Components — Design Tokens
+
+  The one stylesheet a consumer loads into their DOCUMENT:
+
+      <link rel="stylesheet" href="node_modules/@platformdesign/components/tokens.css">
+      @import "@platformdesign/components/tokens.css";
+
+  Custom properties are the only styling channel that crosses a shadow
+  boundary, so this file IS the theming API. Override any token in your own
+  :root and every component follows — no build step, no configuration file,
+  no rebuild.
+
+  Every token is namespaced --pl-* so it cannot collide with a host app's
+  own custom properties. Components reference them with fallbacks, so they
+  still render correctly if this file is never loaded.
+-------------------------------------------------*/
+
+:root {
+  color-scheme: light dark;
+
+  /*------------------------------------------------
+    Brand — yellow
+  -------------------------------------------------*/
+  --pl-yellow-50:  oklch(0.99 0.02 100);
+  --pl-yellow-100: oklch(0.97 0.05 100);
+  --pl-yellow-200: oklch(0.95 0.09 99);
+  --pl-yellow-300: oklch(0.93 0.13 98);
+  --pl-yellow-400: oklch(0.90 0.16 97);
+  --pl-yellow-500: oklch(0.87 0.19 96);
+  --pl-yellow-600: oklch(0.78 0.17 92);
+  --pl-yellow-700: oklch(0.63 0.14 87);
+  --pl-yellow-800: oklch(0.47 0.10 83);
+  --pl-yellow-900: oklch(0.32 0.07 80);
+
+  /*------------------------------------------------
+    Neutrals — black through white
+  -------------------------------------------------*/
+  --pl-gray-0:   oklch(1 0 0);
+  --pl-gray-50:  oklch(0.98 0 0);
+  --pl-gray-100: oklch(0.95 0 0);
+  --pl-gray-200: oklch(0.90 0 0);
+  --pl-gray-300: oklch(0.82 0 0);
+  --pl-gray-400: oklch(0.70 0 0);
+  --pl-gray-500: oklch(0.58 0 0);
+  --pl-gray-600: oklch(0.47 0 0);
+  --pl-gray-700: oklch(0.36 0 0);
+  --pl-gray-800: oklch(0.26 0 0);
+  --pl-gray-900: oklch(0.18 0 0);
+  --pl-gray-950: oklch(0.13 0 0);
+  --pl-black:    oklch(0.09 0 0);
+
+  /*------------------------------------------------
+    Semantic — resolved per color scheme.
+
+    light-dark() reads color-scheme, so a consumer flips the whole system
+    with `color-scheme: dark` on :root (or lets the OS decide, as above).
+  -------------------------------------------------*/
+  --pl-color-brand:          var(--pl-yellow-500);
+  --pl-color-brand-hover:    var(--pl-yellow-400);
+  --pl-color-brand-active:   var(--pl-yellow-600);
+  --pl-color-on-brand:       var(--pl-black);
+
+  --pl-color-surface:        light-dark(var(--pl-gray-0),   var(--pl-gray-950));
+  --pl-color-surface-raised: light-dark(var(--pl-gray-50),  var(--pl-gray-900));
+  --pl-color-surface-sunken: light-dark(var(--pl-gray-100), var(--pl-black));
+
+  --pl-color-text:           light-dark(var(--pl-black),    var(--pl-gray-50));
+  --pl-color-text-muted:     light-dark(var(--pl-gray-600), var(--pl-gray-400));
+  --pl-color-text-on-dark:   var(--pl-gray-50);
+
+  --pl-color-border:         light-dark(var(--pl-gray-200), var(--pl-gray-800));
+  --pl-color-border-strong:  light-dark(var(--pl-gray-400), var(--pl-gray-600));
+
+  --pl-color-focus:          light-dark(var(--pl-yellow-700), var(--pl-yellow-400));
+
+  --pl-color-danger:         light-dark(oklch(0.55 0.20 27),  oklch(0.68 0.19 27));
+  --pl-color-success:        light-dark(oklch(0.55 0.15 150), oklch(0.72 0.16 150));
+
+  /*------------------------------------------------
+    Space — 4px base
+  -------------------------------------------------*/
+  --pl-space-3xs: 0.125rem;
+  --pl-space-2xs: 0.25rem;
+  --pl-space-xs:  0.5rem;
+  --pl-space-sm:  0.75rem;
+  --pl-space-md:  1rem;
+  --pl-space-lg:  1.5rem;
+  --pl-space-xl:  2rem;
+  --pl-space-2xl: 3rem;
+  --pl-space-3xl: 4rem;
+
+  /*------------------------------------------------
+    Type
+  -------------------------------------------------*/
+  --pl-font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pl-font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+
+  --pl-text-xs:   0.75rem;
+  --pl-text-sm:   0.875rem;
+  --pl-text-base: 1rem;
+  --pl-text-lg:   1.125rem;
+  --pl-text-xl:   1.375rem;
+  --pl-text-2xl:  1.75rem;
+  --pl-text-3xl:  2.25rem;
+  --pl-text-4xl:  3rem;
+
+  --pl-leading-tight: 1.15;
+  --pl-leading-base:  1.6;
+
+  --pl-weight-normal: 400;
+  --pl-weight-medium: 500;
+  --pl-weight-bold:   700;
+
+  /*------------------------------------------------
+    Radius / elevation / motion
+  -------------------------------------------------*/
+  --pl-radius-sm:   0.25rem;
+  --pl-radius-md:   0.5rem;
+  --pl-radius-lg:   0.875rem;
+  --pl-radius-full: 9999px;
+
+  --pl-shadow-sm: 0 1px 2px oklch(0 0 0 / 0.08);
+  --pl-shadow-md: 0 4px 12px oklch(0 0 0 / 0.10);
+  --pl-shadow-lg: 0 12px 32px oklch(0 0 0 / 0.16);
+
+  --pl-duration-fast: 120ms;
+  --pl-duration-base: 200ms;
+  --pl-ease: cubic-bezier(0.2, 0, 0.2, 1);
+
+  /* Focus ring — one definition, used by every focusable component. */
+  --pl-focus-ring: 0 0 0 2px var(--pl-color-surface), 0 0 0 4px var(--pl-color-focus);
+}
+
+/* Respect the user's motion preference system-wide. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --pl-duration-fast: 0ms;
+    --pl-duration-base: 0ms;
+  }
+}

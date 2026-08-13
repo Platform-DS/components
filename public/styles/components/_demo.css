@@ -1,0 +1,74 @@
+/*------------------------------------------------
+  Components: Live demo panel
+
+  A real, rendered instance sitting directly above the markup that produced
+  it — the demo IS the source, stamped into the page, so the two can't
+  disagree.
+-------------------------------------------------*/
+
+.demo {
+  border: 1px solid var(--pl-color-border);
+  border-radius: var(--pl-radius-lg);
+  overflow: hidden;
+}
+
+.demo__stage {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pl-space-md);
+  padding: var(--pl-space-xl);
+  background: var(--pl-color-surface);
+
+  /* A subtle checker so transparent/ghost variants stay visible. */
+  background-image:
+    linear-gradient(45deg, var(--pl-color-surface-sunken) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--pl-color-surface-sunken) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--pl-color-surface-sunken) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--pl-color-surface-sunken) 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+.demo__stage[data-layout="stack"] {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.demo__stage[data-layout="center"] { justify-content: center; }
+
+.demo .code {
+  border: 0;
+  border-block-start: 1px solid var(--pl-color-border);
+  border-radius: 0;
+}
+
+/* Toolbar for demos that expose knobs. */
+.demo__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pl-space-md);
+  padding: var(--pl-space-sm) var(--pl-space-md);
+  background: var(--pl-color-surface-raised);
+  border-block-start: 1px solid var(--pl-color-border);
+  font-size: var(--pl-text-sm);
+}
+
+.demo__control {
+  display: flex;
+  align-items: center;
+  gap: var(--pl-space-2xs);
+}
+
+.demo__control label { color: var(--pl-color-text-muted); }
+
+.demo__control select,
+.demo__control input[type="text"] {
+  font: inherit;
+  font-size: var(--pl-text-sm);
+  padding: 0.15rem 0.4rem;
+  color: var(--pl-color-text);
+  background: var(--pl-color-surface);
+  border: 1px solid var(--pl-color-border);
+  border-radius: var(--pl-radius-sm);
+}

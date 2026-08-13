@@ -1,0 +1,136 @@
+/*------------------------------------------------
+  Layout: Site chrome (header + footer)
+
+  Shared by the static home page and the documentation SPA, so the frame
+  never shifts when you cross between them.
+-------------------------------------------------*/
+
+.site-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  gap: var(--pl-space-lg);
+
+  block-size: var(--site-header);
+  padding-inline: var(--pl-space-lg);
+
+  background: var(--site-ink);
+  color: var(--site-on-ink);
+  border-block-end: 1px solid var(--site-ink-line);
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--pl-space-xs);
+  font-weight: var(--pl-weight-bold);
+  font-size: var(--pl-text-lg);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* The mark: a yellow block, the site's whole visual signature. */
+.site-header__mark {
+  display: grid;
+  place-items: center;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border-radius: var(--pl-radius-sm);
+  background: var(--pl-color-brand);
+  color: var(--pl-color-on-brand);
+  font-size: var(--pl-text-sm);
+  font-weight: var(--pl-weight-bold);
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--pl-space-md);
+  margin-inline-start: auto;
+  font-size: var(--pl-text-sm);
+}
+
+.site-header__nav a {
+  color: var(--site-on-ink-muted);
+  text-decoration: none;
+  padding-block: var(--pl-space-2xs);
+}
+
+.site-header__nav a:hover,
+.site-header__nav a[aria-current],
+.site-header__nav a[data-section="current"] {
+  color: var(--site-on-ink);
+}
+
+.site-header__nav a[aria-current],
+.site-header__nav a[data-section="current"] {
+  box-shadow: inset 0 -2px 0 var(--pl-color-brand);
+}
+
+/* Theme toggle — flips color-scheme on :root. */
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--site-ink-line);
+  border-radius: var(--pl-radius-md);
+  cursor: pointer;
+}
+
+.theme-toggle:hover { background: var(--site-ink-raised); }
+
+/*------------------------------------------------
+  Footer
+-------------------------------------------------*/
+
+.site-footer {
+  padding-block: var(--pl-space-2xl);
+  padding-inline: var(--pl-space-lg);
+  background: var(--site-ink);
+  color: var(--site-on-ink-muted);
+  border-block-start: 1px solid var(--site-ink-line);
+  font-size: var(--pl-text-sm);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pl-space-lg);
+  justify-content: space-between;
+  max-inline-size: var(--site-max);
+  margin-inline: auto;
+}
+
+.site-footer a { color: var(--site-on-ink); }
+
+/*------------------------------------------------
+  Shared
+-------------------------------------------------*/
+
+.container {
+  max-inline-size: var(--site-max);
+  margin-inline: auto;
+  padding-inline: var(--pl-space-lg);
+}
+
+.skip-link {
+  position: absolute;
+  inset-block-start: -100%;
+  inset-inline-start: var(--pl-space-md);
+  z-index: 100;
+  padding: var(--pl-space-xs) var(--pl-space-md);
+  background: var(--pl-color-brand);
+  color: var(--pl-color-on-brand);
+  border-radius: 0 0 var(--pl-radius-md) var(--pl-radius-md);
+  font-weight: var(--pl-weight-medium);
+}
+
+.skip-link:focus { inset-block-start: 0; }

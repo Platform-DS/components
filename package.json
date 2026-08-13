@@ -1,0 +1,42 @@
+{
+  "name": "@platformdesign/components",
+  "version": "0.1.0",
+  "description": "Native web components. No build step, no framework, no dependencies — just the browser.",
+  "license": "MIT",
+  "author": "Platform Design",
+  "type": "module",
+  "sideEffects": [
+    "./Library/index.mjs",
+    "./Library/components/**/index.mjs"
+  ],
+  "files": [
+    "Library",
+    "README.md"
+  ],
+  "keywords": [
+    "web-components",
+    "custom-elements",
+    "shadow-dom",
+    "design-system",
+    "no-build",
+    "vanilla"
+  ],
+  "exports": {
+    ".": "./Library/index.mjs",
+    "./tokens.css": "./Library/_core/styles/tokens.css",
+    "./_core/*": "./Library/_core/*",
+    "./utilities/*": "./Library/utilities/*",
+    "./pl-button": "./Library/components/app/inputs/pl-button/index.mjs",
+    "./pl-icon": "./Library/components/app/ui/pl-icon/index.mjs",
+    "./pl-label": "./Library/components/app/inputs/pl-label/index.mjs",
+    "./*": "./Library/components/*/index.mjs"
+  },
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "exports": "node scripts/generate-exports.mjs",
+    "test": "node --test test/"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

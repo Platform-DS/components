@@ -1,0 +1,220 @@
+/*------------------------------------------------
+  Layout: Home (marketing)
+-------------------------------------------------*/
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(4rem, 12vw, 8rem);
+  background: var(--site-ink);
+  color: var(--site-on-ink);
+}
+
+/* A faint yellow grid — the only ornament on the page. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, oklch(0.87 0.19 96 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.87 0.19 96 / 0.07) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent);
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  max-inline-size: var(--site-max);
+  margin-inline: auto;
+  padding-inline: var(--pl-space-lg);
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pl-space-xs);
+  padding: var(--pl-space-3xs) var(--pl-space-sm);
+  margin-block-end: var(--pl-space-lg);
+
+  font-size: var(--pl-text-xs);
+  font-weight: var(--pl-weight-medium);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  color: var(--pl-color-brand);
+  border: 1px solid oklch(0.87 0.19 96 / 0.35);
+  border-radius: var(--pl-radius-full);
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  max-inline-size: 20ch;
+  margin-block-end: var(--pl-space-lg);
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--pl-color-brand);
+}
+
+.hero__lede {
+  max-inline-size: 54ch;
+  font-size: var(--pl-text-lg);
+  color: var(--site-on-ink-muted);
+  margin-block-end: var(--pl-space-xl);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pl-space-sm);
+  align-items: center;
+}
+
+/* The install line doubles as proof of the pitch: one command, no toolchain. */
+.hero__install {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pl-space-sm);
+  padding: var(--pl-space-xs) var(--pl-space-md);
+  font-family: var(--pl-font-mono);
+  font-size: var(--pl-text-sm);
+  color: var(--site-on-ink);
+  background: var(--site-ink-raised);
+  border: 1px solid var(--site-ink-line);
+  border-radius: var(--pl-radius-md);
+}
+
+.hero__install span { color: var(--pl-color-brand); }
+
+/*------------------------------------------------
+  Selling points
+-------------------------------------------------*/
+
+.section {
+  padding-block: var(--pl-space-3xl);
+}
+
+.section--ink {
+  background: var(--site-ink);
+  color: var(--site-on-ink);
+}
+
+.section__head {
+  max-inline-size: var(--site-prose);
+  margin-block-end: var(--pl-space-2xl);
+}
+
+.section__head p {
+  margin-block-start: var(--pl-space-sm);
+  color: var(--pl-color-text-muted);
+  font-size: var(--pl-text-lg);
+}
+
+.section--ink .section__head p { color: var(--site-on-ink-muted); }
+
+.pitch-grid {
+  display: grid;
+  gap: var(--pl-space-lg);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+
+.pitch {
+  padding: var(--pl-space-lg);
+  border: 1px solid var(--pl-color-border);
+  border-radius: var(--pl-radius-lg);
+  background: var(--pl-color-surface-raised);
+}
+
+.section--ink .pitch {
+  background: var(--site-ink-raised);
+  border-color: var(--site-ink-line);
+}
+
+.pitch__icon {
+  display: grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  margin-block-end: var(--pl-space-md);
+  border-radius: var(--pl-radius-md);
+  background: var(--pl-color-brand);
+  color: var(--pl-color-on-brand);
+}
+
+.pitch h3 {
+  font-size: var(--pl-text-base);
+  margin-block-end: var(--pl-space-2xs);
+}
+
+.pitch p {
+  font-size: var(--pl-text-sm);
+  color: var(--pl-color-text-muted);
+  margin: 0;
+}
+
+.section--ink .pitch p { color: var(--site-on-ink-muted); }
+
+/*------------------------------------------------
+  Side-by-side code comparison
+-------------------------------------------------*/
+
+.compare {
+  display: grid;
+  gap: var(--pl-space-lg);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  align-items: start;
+}
+
+.compare__item h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--pl-space-xs);
+  font-size: var(--pl-text-sm);
+  font-weight: var(--pl-weight-medium);
+  margin-block-end: var(--pl-space-sm);
+  color: var(--pl-color-text-muted);
+}
+
+.compare__tally {
+  margin-block-start: var(--pl-space-sm);
+  font-size: var(--pl-text-sm);
+  color: var(--pl-color-text-muted);
+}
+
+.compare__tally strong { color: var(--pl-color-text); }
+
+/*------------------------------------------------
+  Closing call to action
+-------------------------------------------------*/
+
+.cta {
+  text-align: center;
+  padding-block: var(--pl-space-3xl);
+  padding-inline: var(--pl-space-lg);
+  background: var(--pl-color-brand);
+  color: var(--pl-color-on-brand);
+}
+
+.cta h2 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  margin-block-end: var(--pl-space-md);
+}
+
+.cta p {
+  max-inline-size: 46ch;
+  margin-inline: auto;
+  margin-block-end: var(--pl-space-xl);
+  opacity: 0.75;
+}
+
+/* The secondary variant reads its colours from the page's text token, which is
+   near-white in dark mode — unreadable on this yellow panel. Pin it to ink,
+   which is exactly the per-instance override the theming page documents. */
+.cta pl-button {
+  --pl-button-fg: var(--pl-color-on-brand);
+  --pl-button-border: var(--pl-color-on-brand);
+  --pl-button-bg-hover: oklch(0.09 0 0 / 0.12);
+  --pl-button-bg-active: oklch(0.09 0 0 / 0.2);
+}

@@ -1,0 +1,63 @@
+/*------------------------------------------------
+  Base: Typography
+-------------------------------------------------*/
+
+body {
+  font-family: var(--pl-font-sans);
+  font-size: var(--pl-text-base);
+  line-height: var(--pl-leading-base);
+  color: var(--pl-color-text);
+  background: var(--pl-color-surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: var(--pl-leading-tight);
+  font-weight: var(--pl-weight-bold);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--pl-text-4xl); }
+h2 { font-size: var(--pl-text-2xl); }
+h3 { font-size: var(--pl-text-xl); }
+h4 { font-size: var(--pl-text-lg); }
+
+p, li { text-wrap: pretty; }
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover { text-decoration-color: var(--pl-color-brand); }
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--pl-color-focus);
+  outline-offset: 2px;
+  border-radius: var(--pl-radius-sm);
+}
+
+code, kbd, pre, samp {
+  font-family: var(--pl-font-mono);
+  font-size: 0.9em;
+}
+
+/* Inline code — distinct from the block-level <pre> treatment. */
+:not(pre) > code {
+  padding: 0.15em 0.4em;
+  border-radius: var(--pl-radius-sm);
+  background: var(--pl-color-surface-sunken);
+  border: 1px solid var(--pl-color-border);
+  white-space: nowrap;
+}
+
+hr {
+  height: 1px;
+  border: 0;
+  background: var(--pl-color-border);
+  margin-block: var(--pl-space-2xl);
+}

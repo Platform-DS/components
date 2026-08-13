@@ -1,0 +1,81 @@
+/*------------------------------------------------
+  Base: Reset Styles
+-------------------------------------------------*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+input, button,
+textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-style: italic;
+  max-inline-size: 100%;
+  max-width: 100%;
+  shape-margin: var(--size-12);
+  vertical-align: middle;
+}
+
+button {
+  background-color: unset;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  outline-color: transparent;
+}
+
+input {
+  background-color: transparent;
+  border: var(--border-width-thin) solid var(--color-border-default);
+  border-radius: var(--border-radius-sm);
+  outline-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+[hidden] {
+  display: none;
+}
+
+dl,dt,dd {
+  margin: 0;
+}
+
+/* Hide all scrollbars by default */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}

@@ -1,0 +1,50 @@
+/*------------------------------------------------
+  Components: API table (props, events, parts, slots)
+-------------------------------------------------*/
+
+.api-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--pl-color-border);
+  border-radius: var(--pl-radius-md);
+}
+
+.api-table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: var(--pl-text-sm);
+}
+
+.api-table th,
+.api-table td {
+  padding: var(--pl-space-xs) var(--pl-space-sm);
+  text-align: start;
+  vertical-align: top;
+  border-block-end: 1px solid var(--pl-color-border);
+}
+
+.api-table thead th {
+  font-size: var(--pl-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pl-color-text-muted);
+  background: var(--pl-color-surface-raised);
+  white-space: nowrap;
+}
+
+.api-table tbody tr:last-child th,
+.api-table tbody tr:last-child td { border-block-end: 0; }
+
+.api-table tbody tr:hover { background: var(--pl-color-surface-sunken); }
+
+.api-table code { white-space: nowrap; }
+
+.api-table__name { font-weight: var(--pl-weight-medium); }
+
+.api-table__desc { color: var(--pl-color-text-muted); }
+
+/* Native-inherited rows read as secondary — they document the platform, not
+   this library. */
+.api-table tr[data-native] .api-table__name code {
+  opacity: 0.8;
+  border-style: dashed;
+}

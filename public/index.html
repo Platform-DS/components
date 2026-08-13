@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Platform Components — web components without the web stack</title>
+    <meta name="description" content="A component library built on native custom elements and CSS custom properties. No build step, no framework, no dependencies. Works in React, Vue, Angular, Rails, or plain HTML.">
+
+    <link rel="icon" href="/img/favicons/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/favicons/apple-icon.png">
+    <link rel="stylesheet" href="/styles/styles.css">
+
+    <!-- Applied before first paint so a stored theme never flashes. -->
+    <script>
+        try {
+            const stored = localStorage.getItem('pl-theme');
+            if (stored) document.documentElement.dataset.theme = stored;
+        } catch {}
+    </script>
+
+    <script type="module" src="/js/home.mjs"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <a class="site-header__brand" href="/">
+            <span class="site-header__mark" aria-hidden="true">PL</span>
+            Platform
+        </a>
+
+        <nav class="site-header__nav" aria-label="Main">
+            <a href="/documentation">Documentation</a>
+            <a href="/documentation/installation">Install</a>
+            <a href="https://github.com/platformdesign" rel="noopener">GitHub</a>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+                <pl-icon icon="sun" size="1rem"></pl-icon>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main">
+
+        <!-- ------------------------------------------------------------
+             Hero
+        ------------------------------------------------------------- -->
+        <section class="hero">
+            <div class="hero__inner">
+                <p class="hero__eyebrow">Zero dependencies</p>
+
+                <h1>Components that outlive your <em>framework</em>.</h1>
+
+                <p class="hero__lede">
+                    Platform is a component library built entirely on native custom elements
+                    and CSS custom properties. There is no build step, no runtime, and no
+                    dependency tree — because the browser already does this.
+                </p>
+
+                <div class="hero__actions">
+                    <pl-button size="lg" onclick="location.href='/documentation'">
+                        Read the docs
+                    </pl-button>
+                    <span class="hero__install">
+                        <span aria-hidden="true">$</span>
+                        npm i @platformdesign/components
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ------------------------------------------------------------
+             The pitch
+        ------------------------------------------------------------- -->
+        <section class="section">
+            <div class="container">
+                <div class="section__head">
+                    <h2>Four fewer things to worry about</h2>
+                    <p>
+                        Every one of these is a problem the platform solved years ago,
+                        and that most component libraries reintroduce.
+                    </p>
+                </div>
+
+                <div class="pitch-grid">
+                    <article class="pitch">
+                        <div class="pitch__icon" aria-hidden="true">
+                            <pl-icon icon="cube" size="1.25rem"></pl-icon>
+                        </div>
+                        <h3>No toolchain</h3>
+                        <p>
+                            Ship the source. It's standard ES modules and standard CSS, so a
+                            <code>&lt;script type="module"&gt;</code> tag is a complete
+                            integration. Nothing to compile, configure, or keep current.
+                        </p>
+                    </article>
+
+                    <article class="pitch">
+                        <div class="pitch__icon" aria-hidden="true">
+                            <pl-icon icon="grid" size="1.25rem"></pl-icon>
+                        </div>
+                        <h3>No framework</h3>
+                        <p>
+                            A custom element is just an HTML element. It works in React, Vue,
+                            Angular, Svelte, Rails, Django, a static file — anywhere HTML
+                            works. You don't need a port for each one.
+                        </p>
+                    </article>
+
+                    <article class="pitch">
+                        <div class="pitch__icon" aria-hidden="true">
+                            <pl-icon icon="swatch" size="1.25rem"></pl-icon>
+                        </div>
+                        <h3>No theming API</h3>
+                        <p>
+                            Custom properties are the only thing that crosses a shadow
+                            boundary, so they <em>are</em> the theming API. Override a token in
+                            your own CSS and every component follows. No rebuild.
+                        </p>
+                    </article>
+
+                    <article class="pitch">
+                        <div class="pitch__icon" aria-hidden="true">
+                            <pl-icon icon="thumbtack" size="1.25rem"></pl-icon>
+                        </div>
+                        <h3>No supply chain</h3>
+                        <p>
+                            Zero dependencies means zero transitive dependencies. Nothing to
+                            audit, nothing that can be hijacked upstream, no postinstall
+                            script. The whole library is readable in an afternoon.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ------------------------------------------------------------
+             Comparison
+        ------------------------------------------------------------- -->
+        <section class="section section--ink">
+            <div class="container">
+                <div class="section__head">
+                    <h2>The same button, twice</h2>
+                    <p>Both render a button. Only one of them still runs in five years.</p>
+                </div>
+
+                <div class="compare">
+                    <div class="compare__item">
+                        <h3>The usual way</h3>
+                        <div class="code">
+                            <div class="code__head"><span class="code__lang">bash</span></div>
+                            <pre><code>npm i @scope/ui react react-dom
+npm i -D vite @vitejs/plugin-react
+# 200+ transitive packages
+# a config file
+# a build before you can look at it</code></pre>
+                        </div>
+                        <p class="compare__tally">
+                            <strong>Then:</strong> a framework upgrade, a build tool migration,
+                            and a rewrite when the library is abandoned.
+                        </p>
+                    </div>
+
+                    <div class="compare__item">
+                        <h3>This way</h3>
+                        <div class="code">
+                            <div class="code__head"><span class="code__lang">html</span></div>
+                            <pre><code>&lt;script type="module"
+        src="/components/pl-button/index.mjs"&gt;&lt;/script&gt;
+
+&lt;pl-button variant="primary"&gt;Save&lt;/pl-button&gt;</code></pre>
+                        </div>
+                        <p class="compare__tally">
+                            <strong>Then:</strong> nothing. It's HTML. The browser is the
+                            runtime and it doesn't break its own APIs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ------------------------------------------------------------
+             Live proof — real components, on the marketing page
+        ------------------------------------------------------------- -->
+        <section class="section">
+            <div class="container">
+                <div class="section__head">
+                    <h2>These are real components</h2>
+                    <p>
+                        Everything below is a live instance from the library, rendered by this
+                        static HTML page. There is no framework on this site either.
+                    </p>
+                </div>
+
+                <div class="demo">
+                    <div class="demo__stage">
+                        <pl-button>Primary</pl-button>
+                        <pl-button variant="secondary">Secondary</pl-button>
+                        <pl-button variant="ghost">Ghost</pl-button>
+                        <pl-button variant="danger">Danger</pl-button>
+                        <pl-button loading>Loading</pl-button>
+                        <pl-button disabled>Disabled</pl-button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ------------------------------------------------------------
+             Close
+        ------------------------------------------------------------- -->
+        <section class="cta">
+            <h2>Use the browser.</h2>
+            <p>
+                It ships components, encapsulation, theming, and a module loader.
+                You already paid for it.
+            </p>
+            <pl-button variant="secondary" size="lg" onclick="location.href='/documentation'">
+                Get started
+            </pl-button>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <p>Platform Components — MIT licensed.</p>
+            <nav aria-label="Footer">
+                <a href="/documentation">Documentation</a> ·
+                <a href="/documentation/authoring">Authoring guide</a> ·
+                <a href="https://github.com/platformdesign" rel="noopener">GitHub</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

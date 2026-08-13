@@ -1,0 +1,80 @@
+/*------------------------------------------------
+  Components: Code block
+-------------------------------------------------*/
+
+.code {
+  position: relative;
+  border: 1px solid var(--site-ink-line);
+  border-radius: var(--pl-radius-md);
+  background: var(--site-ink);
+  overflow: hidden;
+}
+
+.code__head {
+  display: flex;
+  align-items: center;
+  gap: var(--pl-space-xs);
+  padding: var(--pl-space-2xs) var(--pl-space-sm);
+  border-block-end: 1px solid var(--site-ink-line);
+  font-family: var(--pl-font-mono);
+  font-size: var(--pl-text-xs);
+  color: var(--site-on-ink-muted);
+}
+
+.code__lang { margin-inline-end: auto; }
+
+.code__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0.15rem 0.5rem;
+  font: inherit;
+  font-size: var(--pl-text-xs);
+  color: var(--site-on-ink-muted);
+  background: transparent;
+  border: 1px solid var(--site-ink-line);
+  border-radius: var(--pl-radius-sm);
+  cursor: pointer;
+}
+
+.code__copy:hover {
+  color: var(--site-on-ink);
+  border-color: var(--pl-color-brand);
+}
+
+.code__copy[data-copied] {
+  color: var(--pl-color-on-brand);
+  background: var(--pl-color-brand);
+  border-color: var(--pl-color-brand);
+}
+
+.code pre {
+  margin: 0;
+  padding: var(--pl-space-md);
+  overflow-x: auto;
+  color: var(--site-on-ink);
+  font-size: var(--pl-text-sm);
+  line-height: 1.65;
+  tab-size: 2;
+}
+
+.code pre code {
+  padding: 0;
+  background: none;
+  border: 0;
+  white-space: pre;
+}
+
+/*------------------------------------------------
+  Minimal token colors — applied by js/components/highlight.mjs.
+  Deliberately few: keywords, strings, comments, tags. Anything more needs a
+  real grammar, and a real grammar needs a dependency.
+-------------------------------------------------*/
+
+.tok-comment { color: oklch(0.55 0 0); font-style: italic; }
+.tok-string  { color: oklch(0.85 0.13 140); }
+.tok-keyword { color: var(--pl-color-brand); }
+.tok-number  { color: oklch(0.80 0.11 60); }
+.tok-tag     { color: oklch(0.78 0.13 20); }
+.tok-attr    { color: oklch(0.85 0.15 96); }
+.tok-punct   { color: oklch(0.60 0 0); }

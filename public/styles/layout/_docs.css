@@ -1,0 +1,230 @@
+/*------------------------------------------------
+  Layout: Documentation shell
+
+  A three-column frame: sidebar rail, prose column, on-this-page rail. The
+  sidebar mirrors Library/components/ exactly, so the navigation and the
+  source tree are the same shape.
+-------------------------------------------------*/
+
+.docs {
+  display: grid;
+  grid-template-columns: var(--site-sidebar) minmax(0, 1fr);
+  align-items: start;
+  max-inline-size: var(--site-max);
+  margin-inline: auto;
+}
+
+/*------------------------------------------------
+  Sidebar
+-------------------------------------------------*/
+
+.docs-sidebar {
+  position: sticky;
+  inset-block-start: var(--site-header);
+  block-size: calc(100dvh - var(--site-header));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  padding: var(--pl-space-lg) var(--pl-space-md);
+  border-inline-end: 1px solid var(--pl-color-border);
+}
+
+.docs-sidebar__search {
+  inline-size: 100%;
+  padding: var(--pl-space-xs) var(--pl-space-sm);
+  margin-block-end: var(--pl-space-lg);
+  font: inherit;
+  font-size: var(--pl-text-sm);
+  color: var(--pl-color-text);
+  background: var(--pl-color-surface-sunken);
+  border: 1px solid var(--pl-color-border);
+  border-radius: var(--pl-radius-md);
+}
+
+.docs-sidebar__search::placeholder { color: var(--pl-color-text-muted); }
+
+/* Each Library directory is a <details> — native disclosure, no JS. */
+.docs-nav__group { margin-block-end: var(--pl-space-xs); }
+
+.docs-nav__group > summary {
+  display: flex;
+  align-items: center;
+  gap: var(--pl-space-2xs);
+  padding: var(--pl-space-2xs) var(--pl-space-xs);
+  border-radius: var(--pl-radius-sm);
+
+  font-size: var(--pl-text-xs);
+  font-weight: var(--pl-weight-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pl-color-text-muted);
+  cursor: pointer;
+  list-style: none;
+}
+
+.docs-nav__group > summary::-webkit-details-marker { display: none; }
+
+.docs-nav__group > summary::before {
+  content: "";
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  border-inline-end: 1.5px solid currentColor;
+  border-block-end: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform var(--pl-duration-fast) var(--pl-ease);
+}
+
+.docs-nav__group[open] > summary::before { transform: rotate(45deg); }
+
+.docs-nav__group > summary:hover { color: var(--pl-color-text); }
+
+.docs-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 var(--pl-space-xs) var(--pl-space-sm);
+}
+
+.docs-nav__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pl-space-xs);
+
+  padding: var(--pl-space-3xs) var(--pl-space-xs);
+  border-radius: var(--pl-radius-sm);
+  border-inline-start: 2px solid transparent;
+
+  font-size: var(--pl-text-sm);
+  color: var(--pl-color-text-muted);
+  text-decoration: none;
+}
+
+.docs-nav__link:hover {
+  color: var(--pl-color-text);
+  background: var(--pl-color-surface-sunken);
+}
+
+.docs-nav__link[aria-current="page"] {
+  color: var(--pl-color-text);
+  font-weight: var(--pl-weight-medium);
+  border-inline-start-color: var(--pl-color-brand);
+  background: var(--pl-color-surface-sunken);
+}
+
+/* "Planned" marker for the scaffolded components that aren't written yet —
+   the sidebar shows the whole map, honestly labelled. */
+.docs-nav__link[data-status="planned"] { opacity: 0.45; }
+
+.docs-nav__badge {
+  font-size: 0.625rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0 0.3em;
+  border-radius: var(--pl-radius-sm);
+  border: 1px solid var(--pl-color-border);
+  color: var(--pl-color-text-muted);
+}
+
+/*------------------------------------------------
+  Content column
+-------------------------------------------------*/
+
+.docs-main {
+  min-inline-size: 0;
+  padding: var(--pl-space-2xl) var(--pl-space-xl) var(--pl-space-3xl);
+}
+
+.docs-article { max-inline-size: var(--site-prose); }
+
+/* The router focuses the heading after each navigation so keyboard and screen
+   reader users land in the new content. It's a non-interactive target, so it
+   takes focus without drawing a ring — the announcement is the point, not a
+   visible indicator on something you can't act on. */
+.docs-article h1[tabindex="-1"]:focus { outline: none; }
+
+.docs-article > * + * { margin-block-start: var(--pl-space-md); }
+
+.docs-article h2 {
+  margin-block-start: var(--pl-space-2xl);
+  padding-block-start: var(--pl-space-lg);
+  border-block-start: 1px solid var(--pl-color-border);
+}
+
+.docs-article h3 { margin-block-start: var(--pl-space-xl); }
+
+.docs-article p,
+.docs-article li { color: var(--pl-color-text); }
+
+.docs-article ul,
+.docs-article ol { padding-inline-start: var(--pl-space-lg); }
+
+.docs-article li + li { margin-block-start: var(--pl-space-2xs); }
+
+.docs-header__tag {
+  display: inline-block;
+  padding: var(--pl-space-3xs) var(--pl-space-xs);
+  font-family: var(--pl-font-mono);
+  font-size: var(--pl-text-sm);
+  color: var(--pl-color-on-brand);
+  background: var(--pl-color-brand);
+  border-radius: var(--pl-radius-sm);
+}
+
+.docs-header__lede {
+  font-size: var(--pl-text-lg);
+  color: var(--pl-color-text-muted);
+}
+
+/* Anatomy callout — Shadow vs Light, stated on every component page. */
+.docs-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pl-space-lg);
+  padding: var(--pl-space-md);
+  border: 1px solid var(--pl-color-border);
+  border-radius: var(--pl-radius-md);
+  background: var(--pl-color-surface-raised);
+  font-size: var(--pl-text-sm);
+}
+
+.docs-meta__item { display: grid; gap: 0.1rem; }
+
+.docs-meta__label {
+  font-size: var(--pl-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pl-color-text-muted);
+}
+
+.docs-meta__value { font-weight: var(--pl-weight-medium); }
+
+.docs-meta__value code { white-space: nowrap; }
+
+/*------------------------------------------------
+  Empty / planned page
+-------------------------------------------------*/
+
+.docs-empty {
+  padding: var(--pl-space-2xl);
+  text-align: center;
+  border: 1px dashed var(--pl-color-border);
+  border-radius: var(--pl-radius-lg);
+  color: var(--pl-color-text-muted);
+}
+
+/*------------------------------------------------
+  Small screens — the rail collapses into a disclosure above the content.
+-------------------------------------------------*/
+
+@media (max-width: 60rem) {
+  .docs { grid-template-columns: minmax(0, 1fr); }
+
+  .docs-sidebar {
+    position: static;
+    block-size: auto;
+    border-inline-end: 0;
+    border-block-end: 1px solid var(--pl-color-border);
+  }
+
+  .docs-main { padding-inline: var(--pl-space-lg); }
+}

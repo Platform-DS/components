@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Documentation — Platform Components</title>
+    <meta name="description" content="Component reference and authoring guide for Platform Components.">
+
+    <link rel="icon" href="/img/favicons/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/favicons/apple-icon.png">
+    <link rel="stylesheet" href="/styles/styles.css">
+
+    <!-- Applied before first paint so a stored theme never flashes. -->
+    <script>
+        try {
+            const stored = localStorage.getItem('pl-theme');
+            if (stored) document.documentElement.dataset.theme = stored;
+        } catch {}
+    </script>
+
+    <script type="module" src="/js/app.mjs"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <a class="site-header__brand" href="/">
+            <span class="site-header__mark" aria-hidden="true">PL</span>
+            Platform
+        </a>
+
+        <nav class="site-header__nav" aria-label="Main">
+            <!--
+                No aria-current here: the sidebar marks the current PAGE, and
+                only one element in a document may claim that. The header link
+                is styled as active via [data-section] instead.
+            -->
+            <a href="/documentation" data-section="current">Documentation</a>
+            <a href="https://github.com/platformdesign" rel="noopener">GitHub</a>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+                <pl-icon icon="sun" size="1rem"></pl-icon>
+            </button>
+        </nav>
+    </header>
+
+    <!--
+        The sidebar and content outlet are appended by js/app.mjs. The sidebar
+        is generated from the Library directory tree, so hard-coding it here
+        would mean maintaining the same list in two places.
+    -->
+    <div class="docs"></div>
+</body>
+</html>

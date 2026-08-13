@@ -1,0 +1,26 @@
+/*------------------------------------------------
+  Components: Callout
+-------------------------------------------------*/
+
+.callout {
+  display: flex;
+  gap: var(--pl-space-sm);
+  padding: var(--pl-space-md);
+  border-radius: var(--pl-radius-md);
+  border: 1px solid var(--pl-color-border);
+  border-inline-start: 3px solid var(--pl-color-border-strong);
+  background: var(--pl-color-surface-raised);
+  font-size: var(--pl-text-sm);
+}
+
+.callout p { margin: 0; }
+.callout p + p { margin-block-start: var(--pl-space-xs); }
+
+.callout__title {
+  font-weight: var(--pl-weight-bold);
+  margin-block-end: var(--pl-space-2xs);
+}
+
+.callout--note    { border-inline-start-color: var(--pl-color-brand); }
+.callout--warn    { border-inline-start-color: var(--pl-color-danger); }
+.callout--a11y    { border-inline-start-color: var(--pl-color-success); }

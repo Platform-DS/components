@@ -1,0 +1,34 @@
+/*------------------------------------------------
+  Tokens
+
+  The site's palette IS the library's palette — this imports the exact
+  tokens.css that ships to consumers, so the documentation can't drift from
+  what it documents. Anything below is site chrome only (page widths, the
+  sidebar rail), never component styling.
+-------------------------------------------------*/
+
+@import "../../../Library/_core/styles/tokens.css";
+
+:root {
+  /* Site defaults to dark. The theme toggle flips this one declaration and
+     every light-dark() token in the library re-resolves — which is the whole
+     theming story, demonstrated on the site that explains it. */
+  color-scheme: dark;
+
+  /* Layout */
+  --site-max: 78rem;
+  --site-prose: 46rem;
+  --site-sidebar: 17rem;
+  --site-header: 4rem;
+
+  /* Site chrome — fixed, not scheme-aware: the page frame stays black in
+     both themes so the yellow reads the same way on every screen. */
+  --site-ink: oklch(0.09 0 0);
+  --site-ink-raised: oklch(0.14 0 0);
+  --site-ink-line: oklch(0.24 0 0);
+  --site-on-ink: oklch(0.97 0 0);
+  --site-on-ink-muted: oklch(0.70 0 0);
+}
+
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"]  { color-scheme: dark; }
