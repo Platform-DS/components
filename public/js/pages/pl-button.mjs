@@ -78,16 +78,16 @@ export default () => page(
        button submits, the reset button resets, and neither needed a line of JavaScript here:`),
 
     demo(`
-        <form onsubmit="event.preventDefault(); this.querySelector('output').value = 'Submitted!'">
-            <label>
-                Email
-                <input type="email" name="email" required placeholder="you@example.com">
-            </label>
-            <br><br>
-            <pl-button type="submit">Submit</pl-button>
-            <pl-button type="reset" variant="ghost">Reset</pl-button>
+        <pl-form onsubmit="event.preventDefault(); this.querySelector('output').value = 'Submitted!'">
+            <pl-label text="Email">
+                <pl-input type="email" name="email" required placeholder="you@example.com"></pl-input>
+            </pl-label>
+            <div data-actions>
+                <pl-button type="submit">Submit</pl-button>
+                <pl-button type="reset" variant="ghost">Reset</pl-button>
+            </div>
             <output></output>
-        </form>
+        </pl-form>
     `, { layout: 'stack' }),
 
     section('Props'),
@@ -133,13 +133,12 @@ export default () => page(
     section('Custom properties'),
 
     table(
-        ['Property', 'Description'],
+        ['Property', 'Falls back to', 'Description'],
         [
-            { cells: ['<code>--pl-button-bg</code>', 'Background colour.'] },
-            { cells: ['<code>--pl-button-fg</code>', 'Text colour.'] },
-            { cells: ['<code>--pl-button-border</code>', 'Border colour.'] },
-            { cells: ['<code>--pl-button-bg-hover</code>', 'Hover background.'] },
-            { cells: ['<code>--pl-button-bg-active</code>', 'Active background.'] },
+            { cells: ['<code>--button-background</code>', '<code>--pl-color-primary</code>', 'Fill colour.'] },
+            { cells: ['<code>--button-color</code>', '<code>--pl-color-on-primary</code>', 'Text colour — white on every filled variant.'] },
+            { cells: ['<code>--button-border</code>', '<code>transparent</code>', 'Border colour.'] },
+            { cells: ['<code>--button-background-hover</code>', '<code>--pl-color-primary-hover</code>', 'Hover fill.'] },
         ],
     ),
 

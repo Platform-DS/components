@@ -8,8 +8,10 @@
 // The important one is demo(): it takes ONE markup string, renders it live AND
 // prints it as the code sample. A page physically cannot show an example that
 // differs from what it runs.
-
-import { highlight } from './highlight.mjs';
+//
+// Code samples render through <pl-code-block> (the library's own component) —
+// it owns the head, copy button, and syntax highlighting, so the docs don't
+// re-implement any of it.
 
 /** Build an element from a tag, optional attributes, and children. */
 export function el(tag, attrs = {}, ...children) {
@@ -73,29 +75,11 @@ export function meta(items) {
 
 /** A syntax-highlighted code block with a copy button. */
 export function code(source, lang = 'html') {
-    const text = dedent(source);
-
-    const button = el('button', {
-        class: 'code__copy',
-        type: 'button',
-        onClick: async () => {
-            await navigator.clipboard.writeText(text);
-            button.textContent = 'Copied';
-            button.dataset.copied = '';
-            setTimeout(() => {
-                button.textContent = 'Copy';
-                delete button.dataset.copied;
-            }, 1400);
-        },
-    }, 'Copy');
-
-    return el('div', { class: 'code' },
-        el('div', { class: 'code__head' },
-            el('span', { class: 'code__lang' }, lang),
-            button,
-        ),
-        el('pre', {}, el('code', { html: highlight(text, lang) })),
-    );
+    // The source is slotted as plain TEXT — <pl-code-block> reads it, tokenises
+    // it, and renders a highlighted copy in its shadow root. Passing text (not
+    // markup) is what keeps a sample like `<pl-button>` from being parsed as a
+    // real element on the page.
+    return el('pl-code-block', { language: lang }, dedent(source));
 }
 
 /**

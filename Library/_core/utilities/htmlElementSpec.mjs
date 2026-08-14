@@ -254,6 +254,51 @@ export const HTML_ELEMENT_SPEC = Object.freeze({
         ]),
     }),
 
+    select: Object.freeze({
+        // JS property only — <select> has no value/selectedIndex content
+        // attributes; its value lives on the element.
+        properties: frozen(
+            { name: 'value', type: 'string' },
+            { name: 'selectedIndex', type: 'number' },
+            { name: 'length', type: 'number' },
+            { name: 'options', type: 'HTMLOptionsCollection' },
+            { name: 'selectedOptions', type: 'HTMLCollection' },
+            { name: 'type', type: 'string' },
+            { name: 'validity', type: 'ValidityState' },
+            { name: 'validationMessage', type: 'string' },
+            { name: 'willValidate', type: 'boolean' },
+        ),
+        attributes: Object.freeze([]),
+        reflected: frozen(
+            { name: 'autocomplete', type: 'string' },
+            { name: 'disabled', type: 'boolean' },
+            { name: 'form', type: 'string' },
+            { name: 'multiple', type: 'boolean' },
+            { name: 'name', type: 'string' },
+            { name: 'required', type: 'boolean' },
+            { name: 'size', type: 'number' },
+        ),
+        prefixes: Object.freeze([]),
+        // `remove` is deliberately omitted — forwarding it would clobber the
+        // host's own Element.remove(). Use el.options / el.native for that.
+        methods: Object.freeze([
+            'add',
+            'item',
+            'namedItem',
+            'checkValidity',
+            'reportValidity',
+            'setCustomValidity',
+            'showPicker',
+        ]),
+        // change/input compose already; invalid does not, so createNativeElement
+        // re-emits it on the host.
+        events: Object.freeze([
+            'change',
+            'input',
+            'invalid',
+        ]),
+    }),
+
     img: Object.freeze({
         // Resolved/intrinsic state — read-only properties with no attribute.
         // createNativeElement mirrors that read-only-ness automatically (it

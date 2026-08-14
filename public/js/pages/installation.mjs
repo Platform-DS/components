@@ -65,8 +65,9 @@ class SubmitButton extends Button {
     section('Styles'),
 
     p(`Components carry their own styles. The one stylesheet you load yourself is the token
-       file — it defines the custom properties that every component reads, and it is the entire
-       theming surface.`),
+       file — the design tokens every component reads, and the entire theming surface. It's a
+       default export in the <a href="https://platformdesign.app" rel="noopener">platformdesign.app</a>
+       format; swap in your own export to re-theme.`),
 
     code(`@import "@platformdesign/components/tokens.css";`, 'css'),
 
@@ -76,8 +77,8 @@ class SubmitButton extends Button {
 
     callout('note', 'Tokens are optional, not required',
         `Every component references tokens with fallbacks, so it still renders correctly
-         without this file. Loading it is what makes components share one palette and lets you
-         restyle them all at once.`),
+         without this file. Loading it — or your own platformdesign.app export — is what makes
+         the set share one system. See <a href="/documentation/theming">Theming</a>.`),
 
     section('Framework integration'),
 

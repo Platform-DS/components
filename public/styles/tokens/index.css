@@ -1,34 +1,117 @@
 /*------------------------------------------------
   Tokens
 
-  The site's palette IS the library's palette — this imports the exact
-  tokens.css that ships to consumers, so the documentation can't drift from
-  what it documents. Anything below is site chrome only (page widths, the
-  sidebar rail), never component styling.
+  The site's palette IS the library's default export — this imports the exact
+  tokens.css that ships to consumers, so the documentation can't drift from the
+  contract it documents. This site is itself a consumer of platformdesign.app
+  tokens: everything below either derives site semantics from those tokens or
+  adds site-only chrome that is not part of the design system.
 -------------------------------------------------*/
 
 @import "../../../Library/_core/styles/tokens.css";
 
 :root {
-  /* Site defaults to dark. The theme toggle flips this one declaration and
-     every light-dark() token in the library re-resolves — which is the whole
-     theming story, demonstrated on the site that explains it. */
-  color-scheme: dark;
+  /*------------------------------------------------
+    Site semantic layer — thin aliases the docs CSS uses. Since the library
+    gained real semantic surface tokens, these now just point at them rather
+    than reaching for raw scale steps (which cannot flip with the theme).
+  -------------------------------------------------*/
+  --ui-surface-raised: var(--color-surface-raised);
+  --ui-surface-sunken: var(--color-surface-sunken);
+  --ui-border-strong:  var(--color-border-strong);
 
-  /* Layout */
+  /* Platform's own brand, for SITE chrome only — the logo, the active nav
+     underline, the marketing pages. The library itself is deliberately
+     unbranded (a neutral blue primary), so this yellow lives here and never
+     leaks into a shipped component. */
+  --ui-brand:    #FAD200;
+  --ui-on-brand: #111111;
+  --ui-focus:    var(--color-focus);
+
+  /* Motion — platformdesign.app exports no motion tokens, so these are the
+     site's own. */
+  --ease: cubic-bezier(0.2, 0, 0.2, 1);
+  --transition-fast: 120ms;
+
+  /*------------------------------------------------
+    Layout
+  -------------------------------------------------*/
   --site-max: 78rem;
   --site-prose: 46rem;
   --site-sidebar: 17rem;
   --site-header: 4rem;
 
-  /* Site chrome — fixed, not scheme-aware: the page frame stays black in
-     both themes so the yellow reads the same way on every screen. */
-  --site-ink: oklch(0.09 0 0);
-  --site-ink-raised: oklch(0.14 0 0);
-  --site-ink-line: oklch(0.24 0 0);
-  --site-on-ink: oklch(0.97 0 0);
-  --site-on-ink-muted: oklch(0.70 0 0);
+  /*------------------------------------------------
+    Site chrome — fixed, theme-independent. The page frame (header, footer,
+    hero, code blocks) stays black in both themes so the yellow reads the same
+    on every screen. Not design-system tokens; deliberately literal.
+  -------------------------------------------------*/
+  --site-ink: #111111;
+  --site-ink-raised: #1c1c1c;
+  --site-ink-line: #2e2e2e;
+  --site-on-ink: #f5f5f5;
+  --site-on-ink-muted: #b1b1b1;
 }
 
-:root[data-theme="light"] { color-scheme: light; }
-:root[data-theme="dark"]  { color-scheme: dark; }
+/*------------------------------------------------
+  Dark theme — the theming model the docs describe: a theme is a single
+  palette, and "dark mode" is a DIFFERENT export swapped in. The header toggle
+  sets data-theme="dark", which re-points the SEMANTIC --color-* tokens at dark
+  values; the raw scales never move. Components re-theme instantly because they
+  read the semantic names.
+
+  Note the three surface levels invert their ORDER: raised is lighter than the
+  page in the dark, and darker than it in the light. That is exactly why
+  components must not reach for --color-gray-50 directly — a raw step is light
+  in both themes, which is what put white cards on a dark page.
+-------------------------------------------------*/
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-surface:        #0F1115;
+  --color-surface-raised: #171A21;
+  --color-surface-sunken: #0A0C10;
+
+  --color-ink:            #E9EBEF;
+  --color-ink-secondary:  #9BA3AF;
+
+  --color-border:         #2A2F3A;
+  --color-border-strong:  #414958;
+
+  /* The solid fills deliberately do NOT move in the dark theme.
+     Lightening them looks tempting, but white on blue-500 is only 3.68:1 —
+     below AA — so a "brighter in the dark" fill quietly breaks the rule that a
+     coloured button always carries white text. The 600/700 fills stay put:
+     they keep white at AA and still clear 3:1 against the dark page, which is
+     the threshold that actually applies to a control's own boundary.
+
+     Error is the one exception: red-700 against this near-black page is only
+     2.92:1, so the button's own edge disappears. Red-600 clears both bars —
+     4.83:1 with white text and 3.5:1 against the page — so it moves one step
+     and the others stay.
+
+     The focus ring lightens too, because it is a border against the page
+     rather than a surface carrying text. */
+  --color-error:          var(--color-red-600);
+  --color-error-hover:    var(--color-red-500);
+  --color-focus:          var(--color-blue-400);
+
+  /* Tinted intent surfaces become deep washes, with their ink lightened to
+     read on top. */
+  --color-primary-surface: #12203A;
+  --color-primary-border:  #1E3A8A;
+  --color-primary-ink:     #BFDBFE;
+  --color-primary-ink-secondary: #93C5FD;
+
+  --color-success-surface: #0B2A20;
+  --color-success-border:  #065F46;
+  --color-success-ink:     #A7F3D0;
+
+  --color-warning-surface: #2A1D08;
+  --color-warning-border:  #92400E;
+  --color-warning-ink:     #FDE68A;
+
+  --color-error-surface:   #2C1315;
+  --color-error-border:    #991B1B;
+  --color-error-ink:       #FECACA;
+}

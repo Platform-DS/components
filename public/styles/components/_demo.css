@@ -7,27 +7,25 @@
 -------------------------------------------------*/
 
 .demo {
-  border: 1px solid var(--pl-color-border);
-  border-radius: var(--pl-radius-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-large);
   overflow: hidden;
+  /* Never let a wide example widen the article that holds it. */
+  min-inline-size: 0;
 }
 
 .demo__stage {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--pl-space-md);
-  padding: var(--pl-space-xl);
-  background: var(--pl-color-surface);
+  gap: var(--size-16);
+  padding: var(--size-32);
+  background: var(--color-surface);
 
-  /* A subtle checker so transparent/ghost variants stay visible. */
-  background-image:
-    linear-gradient(45deg, var(--pl-color-surface-sunken) 25%, transparent 25%),
-    linear-gradient(-45deg, var(--pl-color-surface-sunken) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, var(--pl-color-surface-sunken) 75%),
-    linear-gradient(-45deg, transparent 75%, var(--pl-color-surface-sunken) 75%);
-  background-size: 16px 16px;
-  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  /* A stage narrower than its widest example scrolls itself rather than
+     stretching the page. */
+  min-inline-size: 0;
+  overflow-x: auto;
 }
 
 .demo__stage[data-layout="stack"] {
@@ -37,9 +35,21 @@
 
 .demo__stage[data-layout="center"] { justify-content: center; }
 
-.demo .code {
+/* Bleed — for content sections, which are full-width bands that paint their own
+   background and own their own vertical rhythm. Stage padding would inset the
+   band and double its spacing, so both are dropped and the section renders as
+   itself, edge to edge. */
+.demo__stage[data-layout="bleed"] {
+  display: block;
+  padding: 0;
+}
+
+/* The sample's code block sits flush at the bottom of the demo — no border or
+   radius of its own, just a divider from the stage above. Document rules win
+   over the component's :host defaults, so this reshapes it from outside. */
+.demo pl-code-block {
   border: 0;
-  border-block-start: 1px solid var(--pl-color-border);
+  border-block-start: 1px solid var(--color-border);
   border-radius: 0;
 }
 
@@ -47,28 +57,28 @@
 .demo__controls {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--pl-space-md);
-  padding: var(--pl-space-sm) var(--pl-space-md);
-  background: var(--pl-color-surface-raised);
-  border-block-start: 1px solid var(--pl-color-border);
-  font-size: var(--pl-text-sm);
+  gap: var(--size-16);
+  padding: var(--size-12) var(--size-16);
+  background: var(--ui-surface-raised);
+  border-block-start: 1px solid var(--color-border);
+  font-size: var(--font-size-sm);
 }
 
 .demo__control {
   display: flex;
   align-items: center;
-  gap: var(--pl-space-2xs);
+  gap: var(--size-4);
 }
 
-.demo__control label { color: var(--pl-color-text-muted); }
+.demo__control label { color: var(--color-ink-secondary); }
 
 .demo__control select,
 .demo__control input[type="text"] {
   font: inherit;
-  font-size: var(--pl-text-sm);
+  font-size: var(--font-size-sm);
   padding: 0.15rem 0.4rem;
-  color: var(--pl-color-text);
-  background: var(--pl-color-surface);
-  border: 1px solid var(--pl-color-border);
-  border-radius: var(--pl-radius-sm);
+  color: var(--color-ink);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-small);
 }

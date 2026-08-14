@@ -57,25 +57,56 @@ import '@platformdesign/components/app/inputs/pl-button';
 
 ### Styles
 
-Components carry their own styles. The one stylesheet you load is the token file — it defines the custom properties every component reads, and it is the entire theming surface.
+Components carry their own styles. The one stylesheet you load is the token file — the design tokens every component reads, and the entire theming surface.
 
 ```css
 @import "@platformdesign/components/tokens.css";
 ```
 
-It's optional: every component references tokens with fallbacks and renders correctly without it. Loading it is what makes components share a palette and lets you restyle them all at once.
+It's optional: every component references tokens with fallbacks and renders correctly without it. Loading it (or your own theme) is what makes the set share one system.
+
+### Theming
+
+Platform Components is the sibling of [platformdesign.app](https://platformdesign.app). You design a system there, export it as CSS custom properties, and drop it in — the components read those exact token names, so an export is drop-in.
+
+The contract is a naming convention: one prefix per type, no project namespace, so the tokens a designer produces and the tokens a component reads are the same tokens.
 
 ```css
 :root {
-    --pl-color-brand: oklch(0.72 0.19 250);
+    --color-primary: #2563EB;      /* solid fill for controls */
+    --color-on-primary: #FFFFFF;   /* text carried on that fill */
+    --color-surface: #FFFFFF;
+    --color-ink: #111827;
+    --size-16: 1rem;
+    --border-radius-medium: 8px;
 }
 ```
 
-Light and dark switch on one declaration, because semantic tokens are defined with `light-dark()`:
+The package's `tokens.css` ships a deliberately **neutral** default — a conventional blue primary with green, amber, and red intents — so it reads as a starting point rather than as somebody else's brand. Point the contract tokens at your own values to re-theme everything.
+
+A filled control always pairs an intent fill with its on-colour, and every on-colour is **white**, in light and dark alike. Dark text on a saturated fill is the usual way a button breaks when a theme flips, so that pairing is fixed rather than derived from the page's ink.
+
+A theme is a **single palette**. There is no `light-dark()` in the tokens; "dark mode" is a different export swapped in (e.g. by toggling `data-theme` and re-pointing the semantic `--color-*` tokens). Components re-theme instantly because they read the names, not a scheme.
+
+### Your tokens vs the components' tokens
+
+Components never read the contract names directly. They read a parallel set of `--pl-*` aliases, and `tokens.css` points each one at its contract counterpart:
 
 ```css
-:root { color-scheme: dark; }
+:root {
+    --color-primary: #2563EB;                 /* the contract */
+    --pl-color-primary: var(--color-primary); /* what components read */
+}
 ```
+
+That one level of indirection gives you both halves of what you usually have to choose between:
+
+- **Inheritance** — the alias resolves lazily, so whatever `--color-primary` computes to on your page is what components use. Load order doesn't matter.
+- **Insulation** — the alias is a seam. If your application wants its own `--color-primary` for its own layout, distinct from the primary its components render with, pin `--pl-color-primary` instead and the two can diverge.
+
+Keep `tokens.css` loaded — it *is* the bridge. Components fall back to built-in defaults when an alias is missing, so an export loaded on its own would be silently ignored.
+
+For a one-off, each component also exposes `--<component>-*` hooks (`--button-background`, `--button-color`) that sit in front of the tokens.
 
 ---
 
@@ -156,7 +187,7 @@ Values are typed and coerced — `this.props.open` is a real boolean, and assign
 
 ## Browser support
 
-Requires ES modules, custom elements, `CSSStyleSheet.replaceSync`, and `light-dark()` — Chrome/Edge 123+, Safari 17.5+, Firefox 120+. No polyfills are shipped, and none are planned; the whole point is to use what the browser already does.
+Requires ES modules, custom elements, and `CSSStyleSheet.replaceSync` — Chrome/Edge 120+, Safari 16.4+, Firefox 115+. No polyfills are shipped, and none are planned; the whole point is to use what the browser already does.
 
 ---
 

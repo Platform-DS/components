@@ -7,8 +7,24 @@
     <title>Documentation — Platform Components</title>
     <meta name="description" content="Component reference and authoring guide for Platform Components.">
 
-    <link rel="icon" href="/img/favicons/favicon.ico">
-    <link rel="apple-touch-icon" href="/img/favicons/apple-icon.png">
+    <!-- Favicons. SVG for modern browsers, .ico as the universal fallback,
+         PNGs for older ones, apple-touch for iOS, manifest + tile config for
+         installable/Windows. -->
+    <link rel="icon" href="/img/favicons/favicon.ico" sizes="any">
+    <link rel="icon" href="/img/favicons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-icon-180x180.png">
+    <link rel="manifest" href="/img/favicons/manifest.json">
+    <meta name="msapplication-config" content="/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#111111">
+
+    <!-- Outfit — the display face for headings. Loaded by the docs SITE, not
+         the library: the package itself ships no external requests. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap">
+
     <link rel="stylesheet" href="/styles/styles.css">
 
     <!-- Applied before first paint so a stored theme never flashes. -->
@@ -26,7 +42,13 @@
 
     <header class="site-header">
         <a class="site-header__brand" href="/">
-            <span class="site-header__mark" aria-hidden="true">PL</span>
+            <svg class="site-header__logo" viewBox="0 0 412 643" aria-hidden="true">
+                <rect y="231" width="180.714" height="180.714" fill="currentColor"/>
+                <rect y="462" width="180.714" height="180.714" fill="currentColor"/>
+                <rect width="180.714" height="180.714" fill="currentColor"/>
+                <path d="M411.715 231C411.715 330.805 330.807 411.714 231.001 411.714L231.001 231L411.715 231Z" fill="currentColor"/>
+                <path d="M231.001 0C330.807 0 411.715 80.9083 411.715 180.714L231.001 180.714L231.001 0Z" fill="currentColor"/>
+            </svg>
             Platform
         </a>
 
@@ -37,7 +59,7 @@
                 is styled as active via [data-section] instead.
             -->
             <a href="/documentation" data-section="current">Documentation</a>
-            <a href="https://github.com/platformdesign" rel="noopener">GitHub</a>
+            <a href="https://github.com/Platform-DS/components" rel="noopener">GitHub</a>
             <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
                 <pl-icon icon="sun" size="1rem"></pl-icon>
             </button>

@@ -1,11 +1,48 @@
 /*------------------------------------------------
   Components: Code block
+
+  <pl-code-block> (the library component) renders every code sample in the docs
+  SPA — head, copy button, and syntax highlighting all live in its shadow root.
+  This file only THEMES it: mapping the component's --code-block-* hooks onto
+  the site's dark chrome so a code block matches the header and footer in either
+  page theme. The syntax colours are the same palette the docs used before.
+
+  The plain .code rules below are for the static marketing page's comparison
+  blocks (public/index.html), which are unhighlighted and don't use the component.
+-------------------------------------------------*/
+
+pl-code-block {
+  --code-block-background: var(--site-ink);
+  --code-block-color: var(--site-on-ink);
+  --code-block-border: var(--site-ink-line);
+  --code-block-head: var(--site-on-ink-muted);
+
+  --code-block-accent: var(--ui-brand);
+  --code-block-on-accent: var(--ui-on-brand);
+
+  --code-block-syntax-comment: oklch(0.6 0 0);
+  --code-block-syntax-string: oklch(0.85 0.13 140);
+  --code-block-syntax-keyword: var(--ui-brand);
+  --code-block-syntax-number: oklch(0.8 0.11 60);
+  --code-block-syntax-property: oklch(0.8 0.1 230);
+  /* Bracket punctuation only now — the tag name itself renders in the block's
+     plain text colour. Same warm hue as --syntax-number, since both are
+     literals rather than identifiers. */
+  --code-block-syntax-tag: oklch(0.8 0.11 60);
+  /* Attribute names share --syntax-property's blue: a key introducing a
+     value, same as an object/CSS property. */
+  --code-block-syntax-attr: oklch(0.8 0.1 230);
+  --code-block-syntax-punctuation: oklch(0.62 0 0);
+}
+
+/*------------------------------------------------
+  Static marketing-page code blocks — plain, unhighlighted.
 -------------------------------------------------*/
 
 .code {
   position: relative;
   border: 1px solid var(--site-ink-line);
-  border-radius: var(--pl-radius-md);
+  border-radius: var(--border-radius-medium);
   background: var(--site-ink);
   overflow: hidden;
 }
@@ -13,47 +50,23 @@
 .code__head {
   display: flex;
   align-items: center;
-  gap: var(--pl-space-xs);
-  padding: var(--pl-space-2xs) var(--pl-space-sm);
+  gap: var(--size-8);
+  padding: var(--size-4) var(--size-12);
   border-block-end: 1px solid var(--site-ink-line);
-  font-family: var(--pl-font-mono);
-  font-size: var(--pl-text-xs);
+  font-family: var(--font-family-monospace);
+  font-size: var(--font-size-xs);
   color: var(--site-on-ink-muted);
 }
 
 .code__lang { margin-inline-end: auto; }
 
-.code__copy {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3em;
-  padding: 0.15rem 0.5rem;
-  font: inherit;
-  font-size: var(--pl-text-xs);
-  color: var(--site-on-ink-muted);
-  background: transparent;
-  border: 1px solid var(--site-ink-line);
-  border-radius: var(--pl-radius-sm);
-  cursor: pointer;
-}
-
-.code__copy:hover {
-  color: var(--site-on-ink);
-  border-color: var(--pl-color-brand);
-}
-
-.code__copy[data-copied] {
-  color: var(--pl-color-on-brand);
-  background: var(--pl-color-brand);
-  border-color: var(--pl-color-brand);
-}
-
 .code pre {
   margin: 0;
-  padding: var(--pl-space-md);
+  padding: var(--size-16);
   overflow-x: auto;
   color: var(--site-on-ink);
-  font-size: var(--pl-text-sm);
+  font-family: var(--font-family-monospace);
+  font-size: var(--font-size-sm);
   line-height: 1.65;
   tab-size: 2;
 }
@@ -64,17 +77,3 @@
   border: 0;
   white-space: pre;
 }
-
-/*------------------------------------------------
-  Minimal token colors — applied by js/components/highlight.mjs.
-  Deliberately few: keywords, strings, comments, tags. Anything more needs a
-  real grammar, and a real grammar needs a dependency.
--------------------------------------------------*/
-
-.tok-comment { color: oklch(0.55 0 0); font-style: italic; }
-.tok-string  { color: oklch(0.85 0.13 140); }
-.tok-keyword { color: var(--pl-color-brand); }
-.tok-number  { color: oklch(0.80 0.11 60); }
-.tok-tag     { color: oklch(0.78 0.13 20); }
-.tok-attr    { color: oklch(0.85 0.15 96); }
-.tok-punct   { color: oklch(0.60 0 0); }

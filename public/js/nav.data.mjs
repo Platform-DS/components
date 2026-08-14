@@ -15,39 +15,39 @@ export const NAV = [
                 "components": [
                     {
                         "tag": "pl-accordion",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-accordion-group",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-carousel",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-code-block",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-dialog",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-feedback",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-popover",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-product-card",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-profile-card",
-                        "status": "planned"
+                        "status": "ready"
                     }
                 ]
             },
@@ -69,7 +69,7 @@ export const NAV = [
                 "components": [
                     {
                         "tag": "pl-autocomplete",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-button",
@@ -77,63 +77,63 @@ export const NAV = [
                     },
                     {
                         "tag": "pl-button-group",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-button-link",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-checkbox",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-color-picker",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-form",
-                        "status": "planned"
+                        "status": "ready"
+                    },
+                    {
+                        "tag": "pl-input",
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-label",
                         "status": "ready"
                     },
                     {
-                        "tag": "pl-meter",
-                        "status": "planned"
-                    },
-                    {
                         "tag": "pl-radio",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-radio-group",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-range",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-ratings",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-search",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-select",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-switch",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-textarea",
-                        "status": "planned"
+                        "status": "ready"
                     }
                 ]
             },
@@ -142,15 +142,15 @@ export const NAV = [
                 "components": [
                     {
                         "tag": "pl-avatar",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-badge",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-chip",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-icon",
@@ -163,6 +163,10 @@ export const NAV = [
                 "components": [
                     {
                         "tag": "pl-loading",
+                        "status": "planned"
+                    },
+                    {
+                        "tag": "pl-meter",
                         "status": "planned"
                     },
                     {
@@ -198,31 +202,31 @@ export const NAV = [
                 "components": [
                     {
                         "tag": "pl-benefits",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-cta",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-faqs",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-features",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-hero",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-social-proof",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-testimonials",
-                        "status": "planned"
+                        "status": "ready"
                     }
                 ]
             },
@@ -252,11 +256,11 @@ export const NAV = [
                 "components": [
                     {
                         "tag": "pl-footer",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-header",
-                        "status": "planned"
+                        "status": "ready"
                     },
                     {
                         "tag": "pl-sidebar",

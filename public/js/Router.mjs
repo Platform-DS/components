@@ -21,10 +21,21 @@ export const GUIDES = [
     { slug: 'installation', title: 'Installation', module: './pages/installation.mjs' },
     { slug: 'authoring', title: 'Authoring components', module: './pages/authoring.mjs' },
     { slug: 'theming', title: 'Theming', module: './pages/theming.mjs' },
+    { slug: 'sections', title: 'Content sections', module: './pages/sections.mjs' },
 ];
 
 /** Every component that has a written page module. */
-const COMPONENT_PAGES = new Set(['pl-button', 'pl-icon', 'pl-label']);
+const COMPONENT_PAGES = new Set([
+    'pl-button', 'pl-icon', 'pl-label', 'pl-code-block',
+    'pl-input', 'pl-textarea', 'pl-checkbox', 'pl-radio', 'pl-range', 'pl-button-link',
+    'pl-select', 'pl-search',
+    'pl-hero', 'pl-social-proof', 'pl-benefits', 'pl-features',
+    'pl-testimonials', 'pl-faqs', 'pl-cta', 'pl-header', 'pl-footer',
+    'pl-button-group', 'pl-form', 'pl-switch', 'pl-color-picker', 'pl-radio-group',
+    'pl-autocomplete', 'pl-ratings', 'pl-avatar', 'pl-chip', 'pl-badge',
+    'pl-accordion', 'pl-accordion-group', 'pl-dialog', 'pl-popover', 'pl-feedback',
+    'pl-product-card', 'pl-profile-card', 'pl-carousel',
+]);
 
 /** The URL for a documentation slug. */
 export const href = slug => (slug ? `${BASE}/${slug}` : BASE);

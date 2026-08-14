@@ -38,7 +38,7 @@ export default () => page(
 
     demo(`
         <pl-label text="Email address">
-            <input type="email" placeholder="you@example.com">
+            <pl-input type="email" placeholder="you@example.com"></pl-input>
         </pl-label>
     `, { layout: 'stack' }),
 
@@ -51,13 +51,13 @@ export default () => page(
 
     demo(`
         <pl-label text="Password" hint="At least 12 characters." required>
-            <input type="password">
+            <pl-input type="password"></pl-input>
         </pl-label>
     `, { layout: 'stack' }),
 
     demo(`
         <pl-label text="Username" error="That username is already taken.">
-            <input type="text" value="platform">
+            <pl-input type="text" value="platform"></pl-input>
         </pl-label>
     `, { layout: 'stack' }),
 
@@ -87,13 +87,13 @@ export default () => page(
 
     demo(`
         <pl-label text="Full name" required>
-            <input type="text">
+            <pl-input type="text"></pl-input>
         </pl-label>
     `, { layout: 'stack' }),
 
     demo(`
         <pl-label text="Account ID" hint="Assigned automatically." disabled>
-            <input type="text" value="PL-4417">
+            <pl-input type="text" value="PL-4417"></pl-input>
         </pl-label>
     `, { layout: 'stack' }),
 

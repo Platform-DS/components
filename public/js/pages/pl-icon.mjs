@@ -19,7 +19,7 @@ function gallery() {
         const cell = el('button', {
             type: 'button',
             title: `Copy "${name}"`,
-            style: 'display:grid;gap:.4rem;justify-items:center;padding:.75rem .25rem;font:inherit;font-size:var(--pl-text-xs);color:var(--pl-color-text-muted);background:none;border:1px solid var(--pl-color-border);border-radius:var(--pl-radius-md);cursor:pointer;overflow:hidden',
+            style: 'display:grid;gap:.4rem;justify-items:center;padding:.75rem .25rem;font:inherit;font-size:var(--font-size-xs);color:var(--color-ink-secondary);background:none;border:1px solid var(--color-border);border-radius:var(--border-radius-medium);cursor:pointer;overflow:hidden',
             onClick: async () => {
                 await navigator.clipboard.writeText(name);
                 const label = cell.lastElementChild;

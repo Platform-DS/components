@@ -4,23 +4,28 @@
 
 .callout {
   display: flex;
-  gap: var(--pl-space-sm);
-  padding: var(--pl-space-md);
-  border-radius: var(--pl-radius-md);
-  border: 1px solid var(--pl-color-border);
-  border-inline-start: 3px solid var(--pl-color-border-strong);
-  background: var(--pl-color-surface-raised);
-  font-size: var(--pl-text-sm);
+  gap: var(--size-12);
+  padding: var(--size-16);
+  border-radius: var(--border-radius-medium);
+  border: 1px solid var(--color-border);
+  border-inline-start: 3px solid var(--ui-border-strong);
+  background: var(--ui-surface-raised);
+  font-size: var(--font-size-sm);
+  min-inline-size: 0;
 }
+
+/* Flex children default to min-width:auto, so a long unbreakable token inside
+   would set the callout's floor width and, through it, the article's. */
+.callout > * { min-inline-size: 0; }
 
 .callout p { margin: 0; }
-.callout p + p { margin-block-start: var(--pl-space-xs); }
+.callout p + p { margin-block-start: var(--size-8); }
 
 .callout__title {
-  font-weight: var(--pl-weight-bold);
-  margin-block-end: var(--pl-space-2xs);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--size-4);
 }
 
-.callout--note    { border-inline-start-color: var(--pl-color-brand); }
-.callout--warn    { border-inline-start-color: var(--pl-color-danger); }
-.callout--a11y    { border-inline-start-color: var(--pl-color-success); }
+.callout--note    { border-inline-start-color: var(--ui-brand); }
+.callout--warn    { border-inline-start-color: var(--color-error-ink); }
+.callout--a11y    { border-inline-start-color: var(--color-success-ink); }

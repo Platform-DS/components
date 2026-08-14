@@ -41,6 +41,18 @@ const NON_COMPOSED_EVENTS = new Set([
 // The JS property for a spec entry (spec `prop` when the name differs).
 const propOf = entry => entry.prop ?? entry.name;
 
+// Elements that carry a submittable value — the ones worth making
+// form-associated so their value survives the shadow boundary.
+const FORM_CONTROLS = new Set(['input', 'textarea', 'select']);
+
+// ValidityState → the plain flags dict setValidity() wants. Copying the flags
+// (rather than passing the live ValidityState) keeps it a serialisable snapshot.
+const VALIDITY_FLAGS = [
+    'valueMissing', 'typeMismatch', 'patternMismatch', 'tooLong', 'tooShort',
+    'rangeUnderflow', 'rangeOverflow', 'stepMismatch', 'badInput', 'customError',
+];
+const flagsFrom = validity => Object.fromEntries(VALIDITY_FLAGS.map(flag => [flag, validity[flag]]));
+
 // Walk a native element's prototype chain for a property's descriptor, so we can
 // mirror its writability (many native props — relList, validity, list, form,
 // options — are read-only; a delegated setter for those would throw on use).
@@ -93,10 +105,14 @@ export function createNativeElement(tag) {
         // real <button>/<input>, so an outside .focus() — or a wrapping
         // <pl-label> — must land on the native element inside the shadow root.
         static delegatesFocus = true;
+        // Form controls submit through the shadow boundary via ElementInternals.
+        // Buttons and anchors carry no submittable value, so they stay out.
+        static formAssociated = FORM_CONTROLS.has(tag);
         static props = nativeProps;     // attribute-backed, typed, reflected
         static state = {};              // JS-only typed values (no attribute)
 
         #store = {};                    // backing store for props + state
+        #internals = null;              // ElementInternals, when form-associated
 
         static get observedAttributes() {
             return Object.keys(this.props);
@@ -127,6 +143,36 @@ export function createNativeElement(tag) {
             // the internal element by delegation, so they need no props slot.
             this.props = buildProps(this, this.#store, this.constructor.props, config => config.native);
             this.state = buildState(this, this.#store, this.constructor.state);
+
+            // Form-associated controls forward the real control's value and
+            // validity to the page's <form>, which can't see into the shadow.
+            if (this.constructor.formAssociated && this.attachInternals) {
+                this.#internals = this.attachInternals();
+                for (const type of ['input', 'change']) {
+                    native?.addEventListener(type, () => this.#syncForm());
+                }
+            }
+        }
+
+        // Mirror the internal control's value + validity onto the form.
+        #syncForm() {
+            const el = this.native;
+            if (!el || !this.#internals) return;
+
+            // A checkbox/radio submits its value only when checked (absent = no
+            // entry), matching native form serialisation. Everything else
+            // submits its value string.
+            if (el.type === 'checkbox' || el.type === 'radio') {
+                this.#internals.setFormValue(el.checked ? (el.value || 'on') : null);
+            } else {
+                this.#internals.setFormValue(el.value);
+            }
+
+            if (el.validity.valid) {
+                this.#internals.setValidity({});
+            } else {
+                this.#internals.setValidity(flagsFrom(el.validity), el.validationMessage, el);
+            }
         }
 
         // The internal native element everything bridges to.
@@ -149,7 +195,37 @@ export function createNativeElement(tag) {
         connectedCallback() {
             this.#reflectNative();
             this.render();
+            if (this.constructor.formAssociated) this.#syncForm();
         }
+
+        // Form lifecycle — the browser calls these on form-associated elements.
+        formResetCallback() {
+            const el = this.native;
+            if (!el) return;
+            if (el.type === 'checkbox' || el.type === 'radio') el.checked = el.defaultChecked;
+            else el.value = el.defaultValue;
+            this.#syncForm();
+            this.render();
+        }
+
+        formDisabledCallback(disabled) {
+            const el = this.native;
+            if (el) el.disabled = disabled;
+        }
+
+        formStateRestoreCallback(state) {
+            const el = this.native;
+            if (!el) return;
+            if (el.type === 'checkbox' || el.type === 'radio') el.checked = state != null;
+            else el.value = state ?? '';
+            this.#syncForm();
+            this.render();
+        }
+
+        // Public re-sync — a group controller (a radio unchecking its peers)
+        // changes a control programmatically and must refresh its form value.
+        // No-op on non-form elements.
+        syncForm() { this.#syncForm(); }
 
         // Implementation hook — override for custom (non-native) props.
         render() {}

@@ -3,25 +3,27 @@
 -------------------------------------------------*/
 
 body {
-  font-family: var(--pl-font-sans);
-  font-size: var(--pl-text-base);
-  line-height: var(--pl-leading-base);
-  color: var(--pl-color-text);
-  background: var(--pl-color-surface);
+  font-family: var(--font-family-sans-serif);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-medium);
+  color: var(--color-ink);
+  background: var(--color-surface);
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  line-height: var(--pl-leading-tight);
-  font-weight: var(--pl-weight-bold);
+  font-family: var(--font-family-display);
+  font-optical-sizing: auto;
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
-h1 { font-size: var(--pl-text-4xl); }
-h2 { font-size: var(--pl-text-2xl); }
-h3 { font-size: var(--pl-text-xl); }
-h4 { font-size: var(--pl-text-lg); }
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-2xl); }
+h3 { font-size: var(--font-size-xl); }
+h4 { font-size: var(--font-size-lg); }
 
 p, li { text-wrap: pretty; }
 
@@ -31,33 +33,38 @@ a {
   text-decoration-thickness: 1px;
 }
 
-a:hover { text-decoration-color: var(--pl-color-brand); }
+a:hover { text-decoration-color: var(--ui-brand); }
 
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-  outline: 2px solid var(--pl-color-focus);
+  outline: 2px solid var(--ui-focus);
   outline-offset: 2px;
-  border-radius: var(--pl-radius-sm);
+  border-radius: var(--border-radius-small);
 }
 
 code, kbd, pre, samp {
-  font-family: var(--pl-font-mono);
+  font-family: var(--font-family-monospace);
   font-size: 0.9em;
 }
 
 /* Inline code — distinct from the block-level <pre> treatment. */
 :not(pre) > code {
   padding: 0.15em 0.4em;
-  border-radius: var(--pl-radius-sm);
-  background: var(--pl-color-surface-sunken);
-  border: 1px solid var(--pl-color-border);
-  white-space: nowrap;
+  border-radius: var(--border-radius-small);
+  background: var(--ui-surface-sunken);
+  border: 1px solid var(--color-border);
+
+  /* No `white-space: nowrap` here: it would override overflow-wrap and stop a
+     long package path from ever breaking, setting a floor width for the whole
+     column on a narrow screen. break-word only breaks a token that would
+     otherwise overflow, so short tokens still stay intact. */
+  overflow-wrap: break-word;
 }
 
 hr {
   height: 1px;
   border: 0;
-  background: var(--pl-color-border);
-  margin-block: var(--pl-space-2xl);
+  background: var(--color-border);
+  margin-block: var(--size-48);
 }
