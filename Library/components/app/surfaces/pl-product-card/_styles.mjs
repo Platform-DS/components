@@ -44,11 +44,14 @@ export const STYLES = /*css*/`
     display: block;
   }
 
-  /* Anything marked as a badge floats over the image's corner. */
+  /* Anything marked as a badge floats over the image's corner. A pl-badge here
+     wants the "standalone" attribute: without it the badge straddles its host's
+     corner and half of it lands outside the cropped media box. */
   pl-product-card [data-media] [data-badge] {
     position: absolute;
     inset-block-start: var(--pl-size-8, 0.5rem);
     inset-inline-start: var(--pl-size-8, 0.5rem);
+    z-index: 1;
   }
 
   /*------------------------------------------------

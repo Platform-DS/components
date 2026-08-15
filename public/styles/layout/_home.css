@@ -8,20 +8,16 @@
   padding-block: clamp(4rem, 12vw, 8rem);
   background: var(--site-ink);
   color: var(--site-on-ink);
+
+  --dots-color: var(--site-on-ink);
+  --dots-opacity: 0.14;
+  --dots-height: 100%;
+  --dots-fade: 88%;
 }
 
-/* A faint yellow grid — the only ornament on the page. */
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, oklch(0.87 0.19 96 / 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.87 0.19 96 / 0.07) 1px, transparent 1px);
-  background-size: 3rem 3rem;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent);
-  pointer-events: none;
-}
+/* The hero carries the same dot field as the documentation masthead (see
+   styles/utilities). Only the tuning differs: light dots on the dark band
+   instead of dark dots on paper. */
 
 .hero__inner {
   position: relative;
@@ -72,21 +68,13 @@
   align-items: center;
 }
 
-/* The install line doubles as proof of the pitch: one command, no toolchain. */
+/* The install line doubles as proof of the pitch: one command, no toolchain.
+   It is a real pl-code-block, so the copy button is the component's own. */
 .hero__install {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--size-12);
-  padding: var(--size-8) var(--size-16);
-  font-family: var(--font-family-monospace);
-  font-size: var(--font-size-sm);
-  color: var(--site-on-ink);
-  background: var(--site-ink-raised);
-  border: 1px solid var(--site-ink-line);
-  border-radius: var(--border-radius-medium);
+  display: block;
+  max-inline-size: 26rem;
+  margin-block-start: var(--size-32);
 }
-
-.hero__install span { color: var(--ui-brand); }
 
 /*------------------------------------------------
   Selling points
@@ -210,7 +198,7 @@
 }
 
 /* The secondary variant reads its colours from --color-ink, unreadable on this
-   yellow panel. Pin the button's own hooks to the near-black on-brand ink —
+   yellow panel. Pin the button's own hooks to the near-black on-brand ink:
    exactly the per-instance override the theming page documents. */
 .cta pl-button {
   --button-color: var(--ui-on-brand);
@@ -218,7 +206,7 @@
   --button-background-hover: #00000014;
 }
 
-/* Platform's marketing pages brand the primary button bright yellow — a
+/* Platform's marketing pages brand the primary button bright yellow: a
    SITE-level theme via the component's --button-* hooks, not the library
    default (which the pl-button doc page still shows unbranded). Scoped to the
    home sections, and only the default variant. */
@@ -228,4 +216,186 @@
   --button-background: var(--ui-brand);
   --button-color: var(--ui-on-brand);
   --button-background-hover: var(--color-yellow-300);
+}
+
+/*------------------------------------------------
+  Facts
+
+  A thin band of checkable figures directly under the hero. Every number on it
+  is verifiable from the repository, which is the point: the page claims very
+  little that a reader cannot go and confirm.
+-------------------------------------------------*/
+
+.facts {
+  border-block-end: 1px solid var(--color-border);
+  background: var(--ui-surface-raised);
+}
+
+.facts__grid {
+  display: grid;
+  /* 7rem, so a phone gets a tight 2x2 rather than four full-width rows, and a
+     desktop still lays all four out in one line. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr));
+  gap: var(--size-24);
+  padding-block: var(--size-32);
+}
+
+.fact { text-align: center; }
+
+.fact__figure {
+  font-family: var(--font-family-display, inherit);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+/* The unit rides small and muted next to the figure it belongs to. */
+.fact__figure span {
+  font-size: 0.45em;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0;
+  color: var(--color-ink-secondary);
+  margin-inline-start: 0.15em;
+}
+
+.fact__label {
+  margin-block-start: var(--size-8);
+  font-size: var(--font-size-sm);
+  color: var(--color-ink-secondary);
+}
+
+/*------------------------------------------------
+  Live showcase
+-------------------------------------------------*/
+
+.section--muted { background: var(--ui-surface-raised); }
+
+.showcase {
+  display: grid;
+  gap: var(--size-24);
+  /* 26rem, not 21: at the narrower figure a 1280px page fits three panels and
+     the fourth wraps alone, leaving a hole beside it. Two up keeps the rows
+     balanced at every width the grid actually reaches. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+  /* Natural heights. Stretching them makes the shorter panel a tall box with
+     its content stranded at the top, which looks more broken than two cards
+     of honestly different heights. */
+  align-items: start;
+}
+
+.showcase__panel {
+  padding: var(--size-24);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-large);
+  background: var(--color-surface);
+}
+
+.showcase__panel > h3 {
+  margin-block-end: var(--size-16);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-secondary);
+}
+
+.showcase__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--size-12);
+}
+
+.showcase__row + .showcase__row { margin-block-start: var(--size-16); }
+
+.showcase__stack {
+  display: grid;
+  gap: var(--size-16);
+}
+
+/* The label owns its own width so the field does not stretch the flex row. */
+.showcase__row pl-label { flex: 1 1 14rem; }
+
+/*------------------------------------------------
+  Inventory
+-------------------------------------------------*/
+
+.inventory {
+  display: grid;
+  gap: var(--size-16);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
+.inventory__group {
+  display: block;
+  padding: var(--size-24);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-large);
+  background: var(--color-surface);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 120ms ease, transform 120ms ease;
+}
+
+.inventory__group:hover {
+  border-color: var(--color-border-strong);
+  transform: translateY(-2px);
+}
+
+.inventory__group:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.inventory__count {
+  font-family: var(--font-family-display, inherit);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--ui-brand);
+}
+
+.inventory__group h3 {
+  margin-block: var(--size-8) var(--size-4);
+  font-size: var(--font-size-base);
+}
+
+.inventory__group p:last-child {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-ink-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inventory__group { transition: none; }
+  .inventory__group:hover { transform: none; }
+}
+
+/*------------------------------------------------
+  Buttons on the dark bands
+
+  The secondary and ghost variants take their colours from --pl-color-ink,
+  which is near-black: correct on paper, invisible on the ink band. These pin
+  the button's own hooks to the on-ink palette, which is the same per-instance
+  override the theming page documents.
+-------------------------------------------------*/
+
+.hero pl-button:is([variant="secondary"], [variant="ghost"]),
+.section--ink pl-button:is([variant="secondary"], [variant="ghost"]) {
+  --button-color: var(--site-on-ink);
+  --button-border: var(--site-ink-line);
+  --button-background-hover: oklch(1 0 0 / 0.1);
+}
+
+/* The showcase is the one place on this page that must show the LIBRARY, not
+   the site. Setting a custom property to `initial` makes it guaranteed-invalid,
+   so every var() reading it falls back to the component's own default: the
+   yellow site branding above is dropped and the buttons come out the blue they
+   would be in your app, which is what the section claims. */
+.section .showcase pl-button:not([variant]) {
+  --button-background: initial;
+  --button-color: initial;
+  --button-background-hover: initial;
 }

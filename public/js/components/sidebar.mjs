@@ -1,5 +1,5 @@
 // ------------------------------
-// sidebar — documentation navigation
+// sidebar: documentation navigation
 // ------------------------------
 // Built from the generated NAV tree, so its shape IS Library/components/:
 // two surface sections (App, Content), each a header over its collapsible
@@ -7,11 +7,11 @@
 // than a prefix on every group, so "Inputs" reads as "Inputs", not
 // "app / inputs" ten times over.
 //
-// Groups are native <details> disclosures — open/closed state, keyboard
+// Groups are native <details> disclosures: open/closed state, keyboard
 // support, and the accessible name all come from the platform.
 //
 // sidebar() builds the rail only. The filter input is searchField(), a
-// separate export — it lives in the site header (app.mjs places it there),
+// separate export: it lives in the site header (app.mjs places it there),
 // not the rail it searches. It just hides non-matching links: no library, no
 // virtual list.
 
@@ -31,7 +31,7 @@ function link(slug, text, status) {
             href: href(slug),
             'data-slug': slug,
             'data-status': status === 'planned' ? 'planned' : null,
-            title: status === 'planned' ? 'Scaffolded — not written yet' : null,
+            title: status === 'planned' ? 'Scaffolded, not written yet' : null,
         },
             el('span', {}, text),
             status === 'planned' ? el('span', { class: 'docs-nav__badge' }, 'soon') : null,
@@ -57,7 +57,7 @@ function block(title, ...content) {
 
 export function sidebar() {
     const nav = el('nav', { class: 'docs-nav', 'aria-label': 'Documentation' },
-        // Guides are few and always relevant — a plain list, no disclosure.
+        // Guides are few and always relevant: a plain list, no disclosure.
         block('Guides',
             el('ul', { class: 'docs-nav__list' },
                 GUIDES.map(g => link(g.slug, g.title))),
@@ -83,7 +83,7 @@ export function sidebar() {
 
 /**
  * The filter input, built separately from sidebar() so the caller can place
- * it in the header instead of the rail — the sidebar is pure navigation, and
+ * it in the header instead of the rail: the sidebar is pure navigation, and
  * a "search this page" affordance conventionally lives with the rest of the
  * header controls, not buried at the top of the thing it searches.
  *
@@ -129,7 +129,7 @@ function filter(nav, query) {
     }
 }
 
-/** Mark the active link — called by the router after every navigation. */
+/** Mark the active link: called by the router after every navigation. */
 export function setActive(root, slug) {
     for (const link of root.querySelectorAll('.docs-nav__link')) {
         const active = link.dataset.slug === slug;

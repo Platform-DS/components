@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-code-block
+// Documentation: pl-code-block
 // ------------------------------
 // Live examples are built with el('pl-code-block', …): passing the source as a
 // text node keeps angle brackets literal, so an HTML sample isn't parsed into
@@ -14,7 +14,7 @@ export default () => page(
     header({
         tag: 'pl-code-block',
         title: 'Code Block',
-        lede: 'A self-highlighting code surface with a copy button — and no dependency to do it.',
+        lede: 'A self-highlighting code surface with a copy button, and no dependency to do it.',
     }),
 
     meta({
@@ -25,11 +25,11 @@ export default () => page(
 
     p(`<code>&lt;pl-code-block&gt;</code> takes source as slotted text, tokenises it, and renders a
        highlighted copy in its shadow root with a head bar carrying the language label and a copy
-       button. The highlighter is a small, dependency-free tokeniser — a handful of grammars, not a
-       parser — in keeping with the library's no-build, no-dependency stance.`),
+       button. The highlighter is a small, dependency-free tokeniser: a handful of grammars, not a
+       parser, in keeping with the library's no-build, no-dependency stance.`),
 
     callout('note', 'These docs run on it',
-        `Every code sample on this site — including the ones on this page — is a
+        `Every code sample on this site, including the ones on this page: is a
          <code>&lt;pl-code-block&gt;</code>. The documentation renders through the same component
          it documents.`),
 
@@ -99,13 +99,13 @@ export default () => page(
 
     section('Copy'),
 
-    p(`The copy button writes the <strong>raw</strong> source to the clipboard — never the
-       highlighted markup — and confirms with a brief "Copied". Try it on any block on this page.`),
+    p(`The copy button writes the <strong>raw</strong> source to the clipboard, never the
+       highlighted markup, and confirms with a brief "Copied". Try it on any block on this page.`),
 
     section('Overflow'),
 
     p(`A block only scrolls sideways when its content is too wide, and only then does it become a
-       keyboard-focusable, labelled scroll region (per WCAG 2.1.1) — so a long line is reachable
+       keyboard-focusable, labelled scroll region (per WCAG 2.1.1), so a long line is reachable
        without a mouse, and a short one adds no stray tab stop.`),
 
     sample('js', `const message = "a deliberately long line that will not wrap, so the block has to scroll sideways to reveal the rest of it";`),
@@ -156,9 +156,9 @@ export default () => page(
     section('Accessibility'),
 
     ul([
-        'Source is rendered from <code>textContent</code>, never <code>innerHTML</code> — author code is never parsed as markup.',
+        'Source is rendered from <code>textContent</code>, never <code>innerHTML</code>: author code is never parsed as markup.',
         'A block that overflows becomes a focusable, labelled scroll region; one that fits adds no tab stop.',
         'The copy button is a real <code>&lt;button&gt;</code> with a visible label and copied-state feedback.',
-        'Highlighting is presentational — a screen reader hears the code, not the colours.',
+        'Highlighting is presentational: a screen reader hears the code, not the colours.',
     ]),
 );

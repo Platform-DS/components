@@ -7,6 +7,13 @@
 // platform — this file adds only what a plain <button> lacks: variant, size
 // and a loading state.
 //
+// That inheritance now includes the two things a <button> does that are about
+// its position in the document rather than its attributes: submitting or
+// resetting the surrounding form, and invoking a popover or dialog. Both are
+// bridged across the shadow boundary by createNativeElement, so a pl-button
+// behaves like a button in a form and as an invoker without this file — or any
+// consumer — having to know that the real one lives in a shadow root.
+//
 // Reference implementation for the patterns in
 // Developer_Docs/component-authoring-guide.md.
 

@@ -1,9 +1,9 @@
 // ------------------------------
-// highlight — a deliberately small syntax highlighter
+// highlight: a deliberately small syntax highlighter
 // ------------------------------
 // The site's pitch is "no dependencies", so shipping a 200KB highlighter to
-// prove it would be a poor look. This colors four things — comments, strings,
-// keywords/tags, and numbers — which is all a short example needs.
+// prove it would be a poor look. This colors four things: comments, strings,
+// keywords/tags, and numbers: which is all a short example needs.
 //
 // It is NOT a parser. It tokenizes with one pass of alternation, ordered so
 // that comments and strings win before anything else can match inside them.

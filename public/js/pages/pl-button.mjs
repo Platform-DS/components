@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-button
+// Documentation: pl-button
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-button',
         title: 'Button',
-        lede: 'A real <button>, styled and extended — not a <div> pretending.',
+        lede: 'A real <button>, styled and extended, not a <div> pretending.',
     }),
 
     meta({
@@ -19,9 +19,9 @@ export default () => page(
     }),
 
     p(`<code>&lt;pl-button&gt;</code> puts a genuine <code>&lt;button&gt;</code> in its shadow
-       root and bridges the whole native surface to it. Everything a button does — submitting
+       root and bridges the whole native surface to it. Everything a button does: submitting
        forms, participating in validation, responding to Enter and Space, announcing itself as a
-       button — is inherited, not reimplemented.`),
+       button: is inherited, not reimplemented.`),
 
     section('Usage'),
 
@@ -60,7 +60,7 @@ export default () => page(
     section('Disabled'),
 
     p(`<code>disabled</code> is the native attribute, delegated straight to the internal
-       <code>&lt;button&gt;</code> — so it behaves exactly as it would on a plain button,
+       <code>&lt;button&gt;</code>, so it behaves exactly as it would on a plain button,
        including being skipped in the tab order.`),
 
     demo(`
@@ -103,9 +103,9 @@ export default () => page(
             { cells: ['<code>full</code>', '<code>Boolean</code>', '<code>false</code>', 'Stretches the button to fill its container.'] },
             { native: true, cells: ['<code>disabled</code>', '<code>Boolean</code>', '<code>false</code>', 'Native. Disables the button.'] },
             { native: true, cells: ['<code>type</code>', '<code>String</code>', '<code>"submit"</code>', 'Native. <code>submit</code>, <code>reset</code>, or <code>button</code>.'] },
-            { native: true, cells: ['<code>name</code>', '<code>String</code>', '—', 'Native. Submitted with the form.'] },
-            { native: true, cells: ['<code>value</code>', '<code>String</code>', '—', 'Native. Submitted with the form.'] },
-            { native: true, cells: ['<code>form</code>', '<code>String</code>', '—', 'Native. Associates with a form by id.'] },
+            { native: true, cells: ['<code>name</code>', '<code>String</code>', ': ', 'Native. Submitted with the form.'] },
+            { native: true, cells: ['<code>value</code>', '<code>String</code>', ': ', 'Native. Submitted with the form.'] },
+            { native: true, cells: ['<code>form</code>', '<code>String</code>', ': ', 'Native. Associates with a form by id.'] },
         ],
     ),
 
@@ -136,7 +136,7 @@ export default () => page(
         ['Property', 'Falls back to', 'Description'],
         [
             { cells: ['<code>--button-background</code>', '<code>--pl-color-primary</code>', 'Fill colour.'] },
-            { cells: ['<code>--button-color</code>', '<code>--pl-color-on-primary</code>', 'Text colour — white on every filled variant.'] },
+            { cells: ['<code>--button-color</code>', '<code>--pl-color-on-primary</code>', 'Text colour: white on every filled variant.'] },
             { cells: ['<code>--button-border</code>', '<code>transparent</code>', 'Border colour.'] },
             { cells: ['<code>--button-background-hover</code>', '<code>--pl-color-primary-hover</code>', 'Hover fill.'] },
         ],
@@ -154,12 +154,12 @@ export default () => page(
     ul([
         'The internal element is a real <code>&lt;button&gt;</code>, so its role, keyboard behaviour, and focus handling are the platform\'s.',
         '<code>loading</code> sets <code>aria-busy</code> and disables interaction, so a click cannot land twice.',
-        'Focus is delegated: <code>.focus()</code> from outside — or a wrapping <a href="/documentation/pl-label">pl-label</a> — reaches the real button inside.',
+        'Focus is delegated: <code>.focus()</code> from outside, or a wrapping <a href="/documentation/pl-label">pl-label</a>: reaches the real button inside.',
         'Focus rings use <code>:focus-visible</code>, so they appear for keyboard users without flashing on a mouse click.',
-        'Icon-only buttons need an accessible name — add <code>aria-label</code>.',
+        'Icon-only buttons need an accessible name. Add <code>aria-label</code>.',
     ]),
 
     callout('a11y', 'Icon-only buttons',
-        `<code>&lt;pl-button aria-label="Delete"&gt;&lt;pl-icon icon="trash"&gt;&lt;/pl-icon&gt;&lt;/pl-button&gt;</code>
-         — without the label, a screen reader announces "button" and nothing else.`),
+        `<code>&lt;pl-button aria-label="Delete"&gt;&lt;pl-icon icon="trash"&gt;&lt;/pl-icon&gt;&lt;/pl-button&gt;</code>,
+         without the label, a screen reader announces "button" and nothing else.`),
 );

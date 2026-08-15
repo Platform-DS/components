@@ -36,14 +36,35 @@ const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input'
 // costs the other primitives nothing.
 const NON_COMPOSED_EVENTS = new Set([
     'change', 'invalid', 'select', 'reset', 'submit', 'toggle', 'load', 'error',
+    // Media events are the same story: none of them bubble or compose, so a
+    // listener on <pl-video> would never hear the <video> inside it.
+    'play', 'pause', 'ended', 'timeupdate', 'loadedmetadata', 'volumechange',
 ]);
 
 // The JS property for a spec entry (spec `prop` when the name differs).
 const propOf = entry => entry.prop ?? entry.name;
 
-// Elements that carry a submittable value — the ones worth making
-// form-associated so their value survives the shadow boundary.
-const FORM_CONTROLS = new Set(['input', 'textarea', 'select']);
+// ------------------------------
+// Form participation
+// ------------------------------
+// A form only ever collects controls from its OWN tree, so a native element in
+// a shadow root is invisible to the page's <form> no matter how faithfully its
+// attributes are reflected. ElementInternals is the one sanctioned way back in,
+// and it covers TWO separate things that are easy to conflate:
+//
+//   value      — what gets submitted. Only some elements have one.
+//   activation — submitting or resetting the form. A button has no value worth
+//                submitting, but pressing it is the whole point of it.
+//
+// Bridging only the first is why <pl-button type="submit"> sat in a form and
+// did nothing: it was correctly reflected, correctly rendered, and not part of
+// the form at all.
+const FORM_VALUE = new Set(['input', 'textarea', 'select']);
+const FORM_ASSOCIATED = new Set([...FORM_VALUE, 'button']);
+
+// Types whose activation behaviour acts on the owning form. <button> defaults
+// to submit; an <input> has to say so.
+const ACTIVATION = new Set(['submit', 'reset']);
 
 // ValidityState → the plain flags dict setValidity() wants. Copying the flags
 // (rather than passing the live ValidityState) keeps it a serialisable snapshot.
@@ -74,8 +95,17 @@ export function createNativeElement(tag) {
     // (reflected + attribute-only). Global attrs (class/id/tabindex…) belong on
     // the host, not the internal element, so they're excluded.
     const reflectAttrs = [...local.reflected, ...local.attributes];
-    // Properties to delegate: the element's own reflected + prop-only.
-    const delegateProps = [...local.reflected, ...local.properties];
+    // Properties to delegate: the element's own reflected + prop-only. IDREF
+    // entries are excluded — they name a RELATIONSHIP rather than carry a
+    // value, and are resolved against the host's tree instead (see
+    // #bridgeInvokers). Delegating them would hand the internal element an id
+    // that means nothing where it lands.
+    const delegateProps = [...local.reflected.filter(entry => !entry.idref), ...local.properties];
+
+    // Invoker relationships this element supports, per the spec table.
+    const attrNames = new Set(reflectAttrs.map(entry => entry.name));
+    const hasPopoverTarget = attrNames.has('popovertarget');
+    const hasCommand = attrNames.has('command');
     // Methods to forward: interaction methods (global) + element methods, minus
     // `animate` (the host animates itself).
     const forwardMethods = merged.methods.filter(name => name !== 'animate');
@@ -105,9 +135,10 @@ export function createNativeElement(tag) {
         // real <button>/<input>, so an outside .focus() — or a wrapping
         // <pl-label> — must land on the native element inside the shadow root.
         static delegatesFocus = true;
-        // Form controls submit through the shadow boundary via ElementInternals.
-        // Buttons and anchors carry no submittable value, so they stay out.
-        static formAssociated = FORM_CONTROLS.has(tag);
+        // Form participation through the shadow boundary, via ElementInternals:
+        // a value for the controls that have one, and form activation for the
+        // button. Anchors have neither, so they stay out.
+        static formAssociated = FORM_ASSOCIATED.has(tag);
         static props = nativeProps;     // attribute-backed, typed, reflected
         static state = {};              // JS-only typed values (no attribute)
 
@@ -152,12 +183,127 @@ export function createNativeElement(tag) {
                     native?.addEventListener(type, () => this.#syncForm());
                 }
             }
+
+            // The internal element's click reaches the host composed, so one
+            // listener covers both activation and command invocation.
+            if (FORM_ASSOCIATED.has(tag) || hasCommand) {
+                this.addEventListener('click', () => {
+                    if (this.native?.disabled) return;
+                    this.#activate();
+                    this.#invoke();
+                });
+            }
+        }
+
+        /**
+         * Submit or reset the owning form.
+         *
+         * The internal element cannot do this itself: it is not in the form's
+         * tree, so it is not the form's submit button and its activation
+         * behaviour has nothing to act on. The HOST is in that tree, and
+         * ElementInternals hands us the form it belongs to — including when the
+         * host uses a `form="…"` attribute to point somewhere else.
+         *
+         * requestSubmit() rather than submit(): it runs validation and fires a
+         * cancellable `submit` event, which is what listeners — and a
+         * `method="dialog"` form closing its dialog — are waiting for.
+         * submit() would skip both.
+         *
+         * One limitation worth stating: the form has no SUBMITTER element, so a
+         * name/value pair on the button is not part of the submission.
+         */
+        #activate() {
+            if (!FORM_ASSOCIATED.has(tag)) return;
+
+            // <button> is a submit button unless told otherwise; <input> is not.
+            const type = (this.getAttribute('type') ?? (tag === 'button' ? 'submit' : '')).toLowerCase();
+            if (!ACTIVATION.has(type)) return;
+
+            const form = this.#internals?.form;
+            if (!form) return;
+
+            // Called off the prototype, NOT as form.reset() / form.submit().
+            // A form exposes its own controls as named properties, so a field
+            // called "reset" or "submit" shadows the method of that name and
+            // `form.reset()` throws with "not a function" — on a form that is
+            // otherwise perfectly ordinary. A native button never trips over
+            // this because it activates the form internally rather than
+            // through the IDL, and going via the prototype is how this reaches
+            // the same method the browser would have.
+            if (type === 'reset') HTMLFormElement.prototype.reset.call(form);
+            else HTMLFormElement.prototype.requestSubmit.call(form);
+        }
+
+        /** The element an IDREF attribute on the HOST names, in the host's tree. */
+        #lookup(name) {
+            const id = this.getAttribute(name);
+            return id ? (this.getRootNode().getElementById?.(id) ?? null) : null;
+        }
+
+        /**
+         * Popover and command targets are IDREFs, and an id is resolved against
+         * the tree the element is IN — for the internal element that is this
+         * shadow root, where the author's dialog or popover does not exist. So
+         * the attribute alone silently does nothing.
+         *
+         * The popover half has a native way through: popoverTargetElement is the
+         * same relationship expressed as an element reference, and a reference
+         * crosses a shadow boundary perfectly well. Everything after that — top
+         * layer, light dismiss, focus return — is still the browser's.
+         */
+        #bridgeInvokers() {
+            const el = this.native;
+            if (!el || !hasPopoverTarget) return;
+
+            const target = this.#lookup('popovertarget');
+            // Only touched when there is something to say, so an element that
+            // is not an invoker is left exactly as the platform made it.
+            if (target || el.popoverTargetElement) el.popoverTargetElement = target;
+            if (this.hasAttribute('popovertargetaction')) {
+                el.popoverTargetAction = this.getAttribute('popovertargetaction');
+            }
+        }
+
+        /**
+         * Commands have no equivalent escape hatch: commandForElement exists,
+         * but invoking still requires invoker and target to share a tree, so
+         * assigning it changes nothing. This is the one relationship the
+         * platform genuinely cannot express across the boundary, so it is the
+         * one bridged by hand — and the bridge stays thin, calling the SAME
+         * native method the browser would have called.
+         */
+        #invoke() {
+            if (!hasCommand) return;
+
+            const command = this.getAttribute('command');
+            const target = this.#lookup('commandfor');
+            if (!command || !target) return;
+
+            switch (command) {
+                case 'show-modal': target.showModal?.(); break;
+                case 'close': target.close?.(); break;
+                case 'request-close': (target.requestClose ?? target.close)?.call(target); break;
+                case 'show-popover': target.showPopover?.(); break;
+                case 'hide-popover': target.hidePopover?.(); break;
+                case 'toggle-popover': target.togglePopover?.(); break;
+                default:
+                    // Author-defined commands start with "--" and the platform
+                    // delivers them as a CommandEvent, so this does too rather
+                    // than inventing a different channel.
+                    if (command.startsWith('--') && globalThis.CommandEvent) {
+                        target.dispatchEvent(new CommandEvent('command', { command, source: this, bubbles: false }));
+                    }
+            }
         }
 
         // Mirror the internal control's value + validity onto the form.
         #syncForm() {
             const el = this.native;
             if (!el || !this.#internals) return;
+            // Form-associated for activation only — a button has no value the
+            // form should be collecting, and setting one would submit it on
+            // every request rather than only when the button was pressed.
+            if (!FORM_VALUE.has(tag)) return;
 
             // A checkbox/radio submits its value only when checked (absent = no
             // entry), matching native form serialisation. Everything else
@@ -201,7 +347,10 @@ export function createNativeElement(tag) {
         // Form lifecycle — the browser calls these on form-associated elements.
         formResetCallback() {
             const el = this.native;
-            if (!el) return;
+            // A button is form-associated for activation only. It has no
+            // defaultValue, so restoring one would assign undefined and leave
+            // the literal string "undefined" behind.
+            if (!el || !FORM_VALUE.has(tag)) return;
             if (el.type === 'checkbox' || el.type === 'radio') el.checked = el.defaultChecked;
             else el.value = el.defaultValue;
             this.#syncForm();
@@ -215,7 +364,7 @@ export function createNativeElement(tag) {
 
         formStateRestoreCallback(state) {
             const el = this.native;
-            if (!el) return;
+            if (!el || !FORM_VALUE.has(tag)) return;
             if (el.type === 'checkbox' || el.type === 'radio') el.checked = state != null;
             else el.value = state ?? '';
             this.#syncForm();
@@ -252,6 +401,8 @@ export function createNativeElement(tag) {
                 else if (this.hasAttribute(name)) el.setAttribute(name, this.getAttribute(name));
                 else el.removeAttribute(name);
             }
+
+            this.#bridgeInvokers();
         }
     }
 

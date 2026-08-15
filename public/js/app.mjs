@@ -1,9 +1,9 @@
 // ------------------------------
-// app — documentation SPA bootstrap
+// app: documentation SPA bootstrap
 // ------------------------------
 // Builds the shell once (sidebar + content outlet), then hands navigation to
 // the Router. The shell is assembled here rather than written into
-// documentation.html because the sidebar is generated from the Library tree —
+// documentation.html because the sidebar is generated from the Library tree:
 // putting it in the HTML would mean maintaining the same list twice.
 
 import Router from './Router.mjs';
@@ -21,7 +21,7 @@ const MENU_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
  *
  * The rail is a full-height panel that slides in from the left, with a
  * scrim behind it. Built here rather than in the HTML because, exactly as with
- * pl-header, the collapse CSS is gated on a flag this sets — so if the script
+ * pl-header, the collapse CSS is gated on a flag this sets, so if the script
  * never runs, the rail stays a plain visible column instead of being stranded
  * off-screen behind a button that cannot work.
  */
@@ -47,7 +47,7 @@ function initOffCanvas(shell, nav) {
         document.body.style.overflow = open ? 'hidden' : '';
         // The search field used to live in this panel and took focus on open;
         // it's in the header now, so move focus to the first thing in the
-        // panel instead — a group summary or, above "Guides", a plain link.
+        // panel instead: a group summary or, above "Guides", a plain link.
         if (open) nav.querySelector('summary, a')?.focus();
     };
 
@@ -83,7 +83,8 @@ function boot() {
 
     const nav = sidebar();
     const main = document.createElement('main');
-    main.className = 'docs-main';
+    // dot-field is the shared masthead pattern (see styles/utilities).
+    main.className = 'docs-main dot-field';
     main.id = 'main';
 
     shell.append(nav, main);

@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — Installation
+// Documentation: Installation
 // ------------------------------
 
 import { page, header, section, p, ul, code, callout } from '../components/doc.mjs';
@@ -14,7 +14,7 @@ export default () => page(
 
     code('npm install @platformdesign/components', 'bash'),
 
-    p('Import a single component — this registers <code>&lt;pl-button&gt;</code> and nothing else:'),
+    p('Import a single component. This registers <code>&lt;pl-button&gt;</code> and nothing else:'),
 
     code(`import '@platformdesign/components/pl-button';`, 'js'),
 
@@ -65,7 +65,7 @@ class SubmitButton extends Button {
     section('Styles'),
 
     p(`Components carry their own styles. The one stylesheet you load yourself is the token
-       file — the design tokens every component reads, and the entire theming surface. It's a
+       file: the design tokens every component reads, and the entire theming surface. It's a
        default export in the <a href="https://platformdesign.app" rel="noopener">platformdesign.app</a>
        format; swap in your own export to re-theme.`),
 
@@ -77,7 +77,7 @@ class SubmitButton extends Button {
 
     callout('note', 'Tokens are optional, not required',
         `Every component references tokens with fallbacks, so it still renders correctly
-         without this file. Loading it — or your own platformdesign.app export — is what makes
+         without this file. Loading it, or your own platformdesign.app export: is what makes
          the set share one system. See <a href="/documentation/theming">Theming</a>.`),
 
     section('Framework integration'),
@@ -87,7 +87,7 @@ class SubmitButton extends Button {
 
     ul([
         '<strong>React 19+</strong> passes unknown props to custom elements as attributes and supports custom events directly. Earlier versions need <code>ref</code> for object props and <code>addEventListener</code> for events.',
-        '<strong>Vue</strong> — tell the compiler these are custom elements via <code>compilerOptions.isCustomElement</code>, otherwise it warns about unknown components.',
+        '<strong>Vue</strong>: tell the compiler these are custom elements via <code>compilerOptions.isCustomElement</code>, otherwise it warns about unknown components.',
     ]),
 
     code(`// vue.config.js / vite.config.js

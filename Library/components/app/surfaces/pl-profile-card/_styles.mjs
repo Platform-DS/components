@@ -48,10 +48,16 @@ export const STYLES = /*css*/`
      name straight over the cover image. The default is half of an xl avatar;
      change it to half of whatever size is actually used. */
   pl-profile-card [data-avatar] {
-    margin-block-start: calc(var(--profile-avatar-overlap, 2.5rem) * -1);
     margin-inline: var(--card-padding, var(--pl-size-16, 1rem));
     box-shadow: 0 0 0 3px var(--card-background, var(--pl-color-surface, #fff));
     border-radius: var(--pl-border-radius-full, 9999px);
+  }
+
+  /* Only pulled up when there is actually a cover to ride onto. Applied
+     unconditionally, a card without one drags its avatar above the card's own
+     top edge, where the card's overflow clipping slices it in half. */
+  pl-profile-card [data-cover] + [data-avatar] {
+    margin-block-start: calc(var(--profile-avatar-overlap, 2.5rem) * -1);
   }
 
   /* Centring is done per-element, NOT with align-items on the column: that

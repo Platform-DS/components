@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — Authoring components
+// Documentation: Authoring components
 // ------------------------------
 // The web-facing summary of Developer_Docs/component-authoring-guide.md.
 
@@ -22,12 +22,12 @@ export default () => page(
         [
             { cells: [
                 '<code>createNativeElement(tag)</code>',
-                'The component wraps one native element — a button, an input, an anchor.',
+                'The component wraps one native element: a button, an input, an anchor.',
                 'Every native attribute, property, method, and event of that element, reflected automatically.',
             ] },
             { cells: [
                 '<code>BaseElement</code>',
-                'There is no single native element to wrap — a card, an accordion, a hero.',
+                'There is no single native element to wrap: a card, an accordion, a hero.',
                 'Typed props, a derived <code>observedAttributes</code>, one <code>render()</code>, and <code>emit()</code>.',
             ] },
         ],
@@ -43,8 +43,8 @@ export default () => page(
     p('<code>static mode</code> decides, and it is a functional choice, not a stylistic one.'),
 
     ul([
-        '<strong>Shadow</strong> (default) — style encapsulation and real <code>&lt;slot&gt;</code>s. Correct for app components.',
-        '<strong>Light</strong> — the markup joins the page\'s DOM and cascade. Correct for all content components, and for app components whose job is to participate in a document-level relationship.',
+        '<strong>Shadow</strong> (default). Style encapsulation and real <code>&lt;slot&gt;</code>s. Correct for app components.',
+        '<strong>Light</strong>: the markup joins the page\'s DOM and cascade. Correct for all content components, and for app components whose job is to participate in a document-level relationship.',
     ]),
 
     callout('warn', 'What a shadow boundary breaks',
@@ -52,7 +52,7 @@ export default () => page(
          <code>aria-labelledby</code> / <code>aria-describedby</code> (all ID-based), form
          ownership, search indexing, and browser translation. All five are scoped to a single
          DOM tree. When a component's whole purpose is one of those, it belongs in the Light
-         DOM — see <a href="/documentation/pl-label">pl-label</a>.`),
+         DOM. See <a href="/documentation/pl-label">pl-label</a>.`),
 
     section('3. Declare typed props'),
 
@@ -79,21 +79,21 @@ export default () => page(
     table(
         ['Surface', 'Backed by an attribute?', 'Use for'],
         [
-            { cells: ['<code>static props</code>', 'Yes — reflected both ways', 'Anything a consumer should be able to set in HTML.'] },
-            { cells: ['<code>static state</code>', 'No — JavaScript only', 'Internal values that should trigger a repaint but do not belong in the DOM.'] },
+            { cells: ['<code>static props</code>', 'Yes: reflected both ways', 'Anything a consumer should be able to set in HTML.'] },
+            { cells: ['<code>static state</code>', 'No: JavaScript only', 'Internal values that should trigger a repaint but do not belong in the DOM.'] },
         ],
     ),
 
     callout('note', 'Why the attribute is canonical',
         `The property setter writes the <em>attribute</em>, and
          <code>attributeChangedCallback</code> writes the value back into the store. Because
-         updates only ever flow one direction, there is no reflection loop to guard against —
+         updates only ever flow one direction, there is no reflection loop to guard against:
          the classic property-sets-attribute-sets-property ping-pong cannot happen.`),
 
     section('4. Render once'),
 
     p(`<code>render()</code> is the only method that writes to the DOM. It runs on connect and
-       after any observed attribute changes, so it must be safe to call repeatedly — update
+       after any observed attribute changes, so it must be safe to call repeatedly. Update
        what exists rather than rebuilding it.`),
 
     code(`
@@ -152,8 +152,8 @@ export default () => page(
         define(tagName, Example);
     `, 'js'),
 
-    p(`<code>define()</code> is guarded, so importing a component twice — directly and through
-       the barrel — cannot throw on a duplicate registration.`),
+    p(`<code>define()</code> is guarded, so importing a component twice: directly and through
+       the barrel: cannot throw on a duplicate registration.`),
 
     callout('note', 'The full guide',
         `This page is the short version. <code>Developer_Docs/component-authoring-guide.md</code>

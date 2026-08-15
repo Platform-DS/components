@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-button-link
+// Documentation: pl-button-link
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-button-link',
         title: 'Button Link',
-        lede: 'A link that looks like a button — and stays a link where it counts.',
+        lede: 'A link that looks like a button, and stays a link where it counts.',
     }),
 
     meta({
@@ -19,15 +19,15 @@ export default () => page(
     }),
 
     p(`<code>&lt;pl-button-link&gt;</code> wears the exact <a href="/documentation/pl-button">pl-button</a>
-       look on a real <code>&lt;a&gt;</code>, so it inherits native navigation — <code>href</code>,
+       look on a real <code>&lt;a&gt;</code>, so it inherits native navigation: <code>href</code>,
        <code>target</code>, <code>rel</code>, <code>download</code>, middle-click, "open in new
        tab", the lot. It shares the same <code>--button-*</code> hooks, so
        <code>pl-button, pl-button-link { … }</code> themes both at once.`),
 
-    callout('note', 'Link or button — pick by what it does',
+    callout('note', 'Link or button. Pick by what it does',
         `This stays an <code>&lt;a&gt;</code>, announced as a link, because it <em>navigates</em>.
          Reach for <a href="/documentation/pl-button">pl-button</a> when the action isn't going
-         somewhere — submitting, toggling, opening a dialog. Looking alike shouldn't make them
+         somewhere: submitting, toggling, opening a dialog. Looking alike shouldn't make them
          behave alike to assistive tech.`),
 
     section('Usage'),
@@ -80,10 +80,10 @@ export default () => page(
             { cells: ['<code>size</code>', '<code>String</code>', '<code>"md"</code>', '<code>sm</code>, <code>md</code>, <code>lg</code>.'] },
             { cells: ['<code>full</code>', '<code>Boolean</code>', '<code>false</code>', 'Stretch to fill the container.'] },
             { cells: ['<code>disabled</code>', '<code>Boolean</code>', '<code>false</code>', 'Make the link inert.'] },
-            { native: true, cells: ['<code>href</code>', '<code>String</code>', '—', 'Native. Destination URL.'] },
-            { native: true, cells: ['<code>target</code>', '<code>String</code>', '—', 'Native. e.g. <code>_blank</code>.'] },
-            { native: true, cells: ['<code>rel</code>', '<code>String</code>', '—', 'Native. e.g. <code>noopener</code>.'] },
-            { native: true, cells: ['<code>download</code>', '<code>String</code>', '—', 'Native. Download the target.'] },
+            { native: true, cells: ['<code>href</code>', '<code>String</code>', ': ', 'Native. Destination URL.'] },
+            { native: true, cells: ['<code>target</code>', '<code>String</code>', ': ', 'Native. e.g. <code>_blank</code>.'] },
+            { native: true, cells: ['<code>rel</code>', '<code>String</code>', ': ', 'Native. e.g. <code>noopener</code>.'] },
+            { native: true, cells: ['<code>download</code>', '<code>String</code>', ': ', 'Native. Download the target.'] },
         ],
     ),
 

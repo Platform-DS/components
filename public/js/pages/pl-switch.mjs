@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-switch
+// Documentation: pl-switch
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -48,7 +48,7 @@ export default () => page(
 
     section('In a form'),
 
-    p(`A switch submits its value only when on, and nothing when off — the native "flag" shape a
+    p(`A switch submits its value only when on, and nothing when off: the native "flag" shape a
        boolean setting wants.`),
 
     demo(`
@@ -68,13 +68,13 @@ export default () => page(
        change two things, both for the worse:`),
 
     ul([
-        '<strong>What it announces.</strong> A radio pair is read as "group of two options, one selected" — a screen reader user would hear a radio group where a sighted user sees a single toggle.',
+        '<strong>What it announces.</strong> A radio pair is read as "group of two options, one selected": a screen reader user would hear a radio group where a sighted user sees a single toggle.',
         '<strong>What it submits.</strong> A checkbox submits its value when on and nothing when off. A radio pair always submits one of two values, so "off" becomes a value your server has to interpret rather than an absent key.',
     ]),
 
     callout('note', 'When you do want two options',
-        `If the choice is between two <em>labelled states</em> — "Light / Dark" rather than an
-         on-off flag — that is a different control. Use
+        `If the choice is between two <em>labelled states</em>: "Light / Dark" rather than an
+         on-off flag. That is a different control. Use
          <a href="/documentation/pl-radio-group">pl-radio-group</a>, or
          <a href="/documentation/pl-button-group">pl-button-group</a> for a segmented look.`),
 
@@ -118,7 +118,7 @@ export default () => page(
 
     ul([
         'A real checkbox with <code>role="switch"</code>, so it announces as a switch and toggles with Space.',
-        '<code>aria-checked</code> is maintained by the browser for a native checkbox — there is no state to keep in sync by hand.',
+        '<code>aria-checked</code> is maintained by the browser for a native checkbox. There is no state to keep in sync by hand.',
         'The label text sits inside the internal <code>&lt;label&gt;</code>, so clicking it toggles the switch. No ids are involved.',
         'The track is <code>aria-hidden</code>; assistive tech reads the real control.',
         'The knob transition is dropped under <code>prefers-reduced-motion</code>.',

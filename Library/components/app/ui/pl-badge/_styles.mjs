@@ -63,6 +63,22 @@ export const STYLES = /*css*/`
   pl-badge > .pl-badge__badge[hidden] { display: none; }
 
   /*------------------------------------------------
+    Standalone — a label rather than a marker on something.
+
+    Normally the badge straddles its owner's corner, which means it sticks out
+    past the host's box and needs room around it. A badge with no owner — a
+    "New" or "Sale" pill dropped into a card's corner — has no corner to
+    straddle, and that overhang only gets it clipped by whatever is doing the
+    cropping. This puts the badge back in flow, so the host sizes to it and it
+    can be positioned like any ordinary box.
+  -------------------------------------------------*/
+
+  pl-badge[standalone] > .pl-badge__badge {
+    position: static;
+    translate: none;
+  }
+
+  /*------------------------------------------------
     Dot — a state, not a quantity. No text, so it collapses to a circle.
   -------------------------------------------------*/
   pl-badge[dot] > .pl-badge__badge {

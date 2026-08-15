@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-form
+// Documentation: pl-form
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -23,7 +23,7 @@ export default () => page(
 
     callout('note', 'Why this one cannot be Shadow DOM',
         `A form in a shadow root cannot see controls in the page, and controls in the page cannot
-         see it — form ownership is scoped to a single tree. Keeping both on the same side of the
+         see it: form ownership is scoped to a single tree. Keeping both on the same side of the
          boundary is what makes submission, validation, reset, and Enter-to-submit the platform's
          behaviour rather than a re-implementation of it.`),
 
@@ -45,7 +45,7 @@ export default () => page(
     section('Events are the form\'s own'),
 
     p(`<code>submit</code>, <code>reset</code>, and <code>invalid</code> come from the real form and
-       bubble normally — listen on <code>&lt;pl-form&gt;</code> exactly as you would on a
+       bubble normally. Listen on <code>&lt;pl-form&gt;</code> exactly as you would on a
        <code>&lt;form&gt;</code>:`),
 
     code(`
@@ -125,7 +125,7 @@ export default () => page(
         ['Member', 'Description'],
         [
             { cells: ['<code>form</code>', 'The real <code>&lt;form&gt;</code> element.'] },
-            { cells: ['<code>requestSubmit(submitter?)</code>', 'Submit as if the button had been pressed — runs validation, unlike <code>submit()</code>.'] },
+            { cells: ['<code>requestSubmit(submitter?)</code>', 'Submit as if the button had been pressed: runs validation, unlike <code>submit()</code>.'] },
             { cells: ['<code>reset()</code>', 'Reset every field to its default.'] },
             { cells: ['<code>checkValidity()</code> / <code>reportValidity()</code>', 'Native validation, the second also showing the browser\'s messages.'] },
         ],
@@ -145,7 +145,7 @@ export default () => page(
 
     ul([
         'A real <code>&lt;form&gt;</code>, so Enter submits from a text field and the browser\'s own validation messages appear where it expects.',
-        'Every field still needs a name — wrap controls in <a href="/documentation/pl-label">pl-label</a>.',
+        'Every field still needs a name. Wrap controls in <a href="/documentation/pl-label">pl-label</a>.',
         'Use <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> for groups of related fields; both are styled for you.',
         'Children are relocated with <code>moveBefore()</code> where supported, so an already-upgraded field keeps its state instead of being disconnected and re-connected.',
     ]),

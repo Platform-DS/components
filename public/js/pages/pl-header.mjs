@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-header
+// Documentation: pl-header
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-header',
         title: 'Header',
-        lede: 'Sticky, minimal, one call to action — and a nav that works with JavaScript off.',
+        lede: 'Sticky, minimal, one call to action, and a nav that works with JavaScript off.',
     }),
 
     meta({
@@ -18,7 +18,7 @@ export default () => page(
     }),
 
     p(`Step 1 of the landing-page formula. Keep the header visible at all times, and on a landing
-       page carry the brand plus <strong>one</strong> call to action — every extra link is another
+       page carry the brand plus <strong>one</strong> call to action: every extra link is another
        way to leave before converting. On a marketing site with more to navigate, a short nav is
        fine; the component supports both.`),
 
@@ -72,7 +72,7 @@ export default () => page(
 
     callout('a11y', 'With JavaScript off, the nav stays open',
         `Because the collapse rules only apply once the toggle exists, a scripting failure leaves the
-         navigation visible and usable — rather than hidden behind a button that can never work. That
+         navigation visible and usable, rather than hidden behind a button that can never work. That
          ordering is the whole reason the attribute exists.`),
 
     code(`
@@ -91,7 +91,7 @@ export default () => page(
     table(
         ['Element', 'Becomes'],
         [
-            { cells: ['First <code>&lt;a&gt;</code> or <code>[data-brand]</code>', 'The brand lockup — logo and wordmark.'] },
+            { cells: ['First <code>&lt;a&gt;</code> or <code>[data-brand]</code>', 'The brand lockup: logo and wordmark.'] },
             { cells: ['<code>&lt;nav&gt;</code>', 'The link row; the collapsible panel on small screens.'] },
             { cells: ['<code>[data-actions]</code>', 'The call to action, pushed to the far edge.'] },
             { cells: ['<code>a[aria-current]</code>', 'The current page, underlined in the brand colour.'] },
@@ -124,7 +124,7 @@ export default () => page(
     section('Accessibility'),
 
     ul([
-        'Give the <code>&lt;nav&gt;</code> an <code>aria-label</code> — "Main" — so it is distinguishable from the footer nav.',
+        'Give the <code>&lt;nav&gt;</code> an <code>aria-label</code>: "Main", so it is distinguishable from the footer nav.',
         'Mark the current page with <code>aria-current="page"</code>; it is styled for you.',
         'The toggle carries <code>aria-expanded</code>, <code>aria-controls</code>, and a label that changes between "Open menu" and "Close menu".',
         'Tab order is brand → toggle → nav, matching the visual order.',

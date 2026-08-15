@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-checkbox
+// Documentation: pl-checkbox
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-checkbox',
         title: 'Checkbox',
-        lede: 'A drawn box over a real checkbox — styled, but still the platform underneath.',
+        lede: 'A drawn box over a real checkbox: styled, but still the platform underneath.',
     }),
 
     meta({
@@ -21,7 +21,7 @@ export default () => page(
     p(`<code>&lt;pl-checkbox&gt;</code> draws its box in the shadow root but keeps a real
        <code>&lt;input type="checkbox"&gt;</code> for focus, keyboard, and form value. The visual
        mirrors the input's <code>:checked</code> and <code>:focus-visible</code> state through
-       CSS, so behaviour is never reimplemented — only repainted.`),
+       CSS, so behaviour is never reimplemented, only repainted.`),
 
     section('Usage'),
 
@@ -44,7 +44,7 @@ export default () => page(
     section('In a form'),
 
     p(`A checkbox submits its <code>value</code> (or <code>"on"</code>) only when checked, and
-       nothing when unchecked — the native serialisation, preserved through the shadow boundary.`),
+       nothing when unchecked: the native serialisation, preserved through the shadow boundary.`),
 
     demo(`
         <pl-form onsubmit="event.preventDefault();

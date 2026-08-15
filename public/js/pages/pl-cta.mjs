@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-cta
+// Documentation: pl-cta
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-cta',
         title: 'Call to Action',
-        lede: 'The closing ask — brand-filled and centred so it reads as an ending.',
+        lede: 'The closing ask: brand-filled and centred so it reads as an ending.',
     }),
 
     meta({
@@ -19,7 +19,7 @@ export default () => page(
     }),
 
     p(`Step 8 of the landing-page formula: the last chance to convert. In most cases you can repeat
-       the header's call to action verbatim — the visitor has now read the argument for it. Keep it
+       the header's call to action verbatim: the visitor has now read the argument for it. Keep it
        to one clear ask.`),
 
     section('Usage'),
@@ -39,7 +39,7 @@ export default () => page(
 
     callout('note', 'Filled by default, and the button inverts with it',
         `Unlike the other sections, this one fills with the brand colour when no
-         <code>surface</code> is set — a closing band should not look like another content band. A
+         <code>surface</code> is set: a closing band should not look like another content band. A
          primary button on that fill would be brand-on-brand, so the section flips the button to a
          pale fill with dark text automatically.`),
 
@@ -79,7 +79,7 @@ export default () => page(
     section('Accessibility'),
 
     ul([
-        'One primary action — a second competing button is the most common way this section underperforms.',
+        'One primary action: a second competing button is the most common way this section underperforms.',
         'Inputs in the form still need a name: use <a href="/documentation/pl-label">pl-label</a> or <code>aria-label</code>, even when a placeholder is present.',
         'Placeholders are not labels; they vanish as soon as the visitor types.',
         'Button colours invert with the band, so contrast holds on the brand fill and on <code>ink</code>.',

@@ -1,15 +1,15 @@
 // ------------------------------
-// Router — documentation SPA
+// Router: documentation SPA
 // ------------------------------
 // Every documentation URL renders the same shell (header, sidebar, content
-// column) and swaps only the article — which is exactly why this page is an
+// column) and swaps only the article: which is exactly why this page is an
 // SPA while the marketing home page stays static HTML.
 //
 // Routes are resolved from the generated NAV tree plus a short list of guide
 // pages, so adding a component directory adds its route automatically.
 //
 // Pages are LAZY: a route maps to a module path, imported on first visit. No
-// bundler, no manifest — the browser's own module loader is the code-splitter.
+// bundler, no manifest: the browser's own module loader is the code-splitter.
 
 import { NAV } from './nav.data.mjs';
 
@@ -35,6 +35,9 @@ const COMPONENT_PAGES = new Set([
     'pl-autocomplete', 'pl-ratings', 'pl-avatar', 'pl-chip', 'pl-badge',
     'pl-accordion', 'pl-accordion-group', 'pl-dialog', 'pl-popover', 'pl-feedback',
     'pl-product-card', 'pl-profile-card', 'pl-carousel',
+    'pl-loading', 'pl-meter', 'pl-progress', 'pl-skeleton',
+    'pl-picture', 'pl-video', 'pl-pagination', 'pl-app-navigation',
+    'pl-sidebar', 'pl-blank-page', 'pl-marketing-page', 'pl-collection-page', 'pl-product-page',
 ]);
 
 /** The URL for a documentation slug. */
@@ -94,7 +97,7 @@ async function paint(route, slug) {
         outlet.replaceChildren(node);
         // Move focus to the heading so a keyboard or screen-reader user lands
         // in the new content rather than back at the top of the document. An
-        // SPA has to do this by hand — a real navigation does it for free.
+        // SPA has to do this by hand: a real navigation does it for free.
         const heading = node.querySelector('h1');
         if (heading) {
             heading.tabIndex = -1;

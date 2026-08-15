@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-ratings
+// Documentation: pl-ratings
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-ratings',
         title: 'Ratings',
-        lede: 'A row of stars over a real range input — click, drag with the keyboard, or just display an average.',
+        lede: 'A row of stars over a real range input: click, drag with the keyboard, or just display an average.',
     }),
 
     meta({
@@ -32,13 +32,13 @@ export default () => page(
     `, { layout: 'stack' }),
 
     p(`Click a star to set the rating, or tab to the control and use the arrow keys, Home, and
-       End — all native <code>&lt;input type="range"&gt;</code> behaviour, not reimplemented. Hover
+       End: all native <code>&lt;input type="range"&gt;</code> behaviour, not reimplemented. Hover
        previews the value without committing it.`),
 
     section('Naming it'),
 
     p(`The range carries <code>aria-valuetext</code> ("3 of 5 stars") rather than its own
-       <code>aria-label</code>, specifically so it doesn't shadow a wrapping label's name —
+       <code>aria-label</code>, specifically so it doesn't shadow a wrapping label's name:
        <code>aria-label</code> on a control always wins over a <code>&lt;label&gt;</code>
        association and would silently defeat it. Name the control the same way you'd name a real
        input:`),
@@ -51,7 +51,7 @@ export default () => page(
 
     section('Readonly: a display, not a control'),
 
-    p(`Set <code>readonly</code> for a non-interactive average — a product card's "4.3 of 5". It
+    p(`Set <code>readonly</code> for a non-interactive average: a product card's "4.3 of 5". It
        accepts a <strong>fractional</strong> value and fills the affected star proportionally,
        something a whole-star range can't hold, which is exactly why readonly mode disables the
        range rather than trying to keep a slider in sync with a value it isn't shaped for. The
@@ -139,7 +139,7 @@ export default () => page(
     ),
 
     callout('note', 'Why warning, not a bespoke gold',
-        `The token contract has no dedicated "gold" — reusing <code>--pl-color-warning</code> keeps
+        `The token contract has no dedicated "gold": reusing <code>--pl-color-warning</code> keeps
          the star amber without adding a one-component colour to the palette. Override
          <code>--ratings-color</code> on any instance that wants something else.`),
 
@@ -147,9 +147,9 @@ export default () => page(
 
     ul([
         'The rating is a real <code>&lt;input type="range"&gt;</code>, so focus, Tab order, and arrow/Home/End all come from the platform.',
-        'The value announces through <code>aria-valuetext</code> ("3 of 5 stars"), not <code>aria-label</code> — the latter would override a wrapping <code>pl-label</code>\'s name instead of just describing the value.',
+        'The value announces through <code>aria-valuetext</code> ("3 of 5 stars"), not <code>aria-label</code>: the latter would override a wrapping <code>pl-label</code>\'s name instead of just describing the value.',
         'The star row is <code>aria-hidden</code>; it is a visual skin, not a second copy of the information.',
-        'Readonly mode drops the control entirely in favour of <code>role="img"</code> with a complete <code>aria-label</code> — there is nothing to focus and nothing to operate.',
+        'Readonly mode drops the control entirely in favour of <code>role="img"</code> with a complete <code>aria-label</code>. There is nothing to focus and nothing to operate.',
         'The fill transition is dropped under <code>prefers-reduced-motion</code>.',
     ]),
 );

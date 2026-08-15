@@ -1,5 +1,5 @@
 // ------------------------------
-// doc — the page-authoring vocabulary
+// doc: the page-authoring vocabulary
 // ------------------------------
 // Every documentation page is a plain function returning a DOM node, built
 // from these helpers. They exist so a component page reads as a description of
@@ -9,7 +9,7 @@
 // prints it as the code sample. A page physically cannot show an example that
 // differs from what it runs.
 //
-// Code samples render through <pl-code-block> (the library's own component) —
+// Code samples render through <pl-code-block> (the library's own component):
 // it owns the head, copy button, and syntax highlighting, so the docs don't
 // re-implement any of it.
 
@@ -75,7 +75,7 @@ export function meta(items) {
 
 /** A syntax-highlighted code block with a copy button. */
 export function code(source, lang = 'html') {
-    // The source is slotted as plain TEXT — <pl-code-block> reads it, tokenises
+    // The source is slotted as plain TEXT: <pl-code-block> reads it, tokenises
     // it, and renders a highlighted copy in its shadow root. Passing text (not
     // markup) is what keeps a sample like `<pl-button>` from being parsed as a
     // real element on the page.

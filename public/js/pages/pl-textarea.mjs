@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-textarea
+// Documentation: pl-textarea
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -20,7 +20,7 @@ export default () => page(
     }),
 
     p(`<code>&lt;pl-textarea&gt;</code> wraps a real <code>&lt;textarea&gt;</code> and inherits its
-       whole surface — <code>rows</code>, <code>maxlength</code>, <code>wrap</code>,
+       whole surface: <code>rows</code>, <code>maxlength</code>, <code>wrap</code>,
        <code>readonly</code>, the value and selection properties, and the
        <code>input</code>/<code>change</code> events. It grows with its content where the browser
        supports <code>field-sizing</code>, and resizes vertically otherwise.`),
@@ -32,7 +32,7 @@ export default () => page(
     demo(`<pl-textarea placeholder="Tell us what you think…"></pl-textarea>`, { layout: 'stack' }),
 
     callout('note', 'The value is a property, not an attribute',
-        `A <code>&lt;textarea&gt;</code> has no <code>value</code> attribute — its value is its text
+        `A <code>&lt;textarea&gt;</code> has no <code>value</code> attribute. Its value is its text
          content or its <code>value</code> property. Set it with <code>el.value = …</code>, exactly
          as with a plain textarea.`),
 

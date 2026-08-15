@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-range
+// Documentation: pl-range
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';

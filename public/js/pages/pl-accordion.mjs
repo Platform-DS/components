@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-accordion
+// Documentation: pl-accordion
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -32,7 +32,7 @@ export default () => page(
         </pl-accordion>
         <pl-accordion>
             <h3 data-summary>Does it work without a framework?</h3>
-            <p>Yes — these are custom elements, so the browser is the framework.</p>
+            <p>Yes. These are custom elements, so the browser is the framework.</p>
         </pl-accordion>
     `, { layout: 'stack' }),
 
@@ -49,14 +49,14 @@ export default () => page(
          exclusivity in this library is opt-<em>out</em>, the group has to be able to close a panel
          the user didn't just click, and the panel needs to be styleable as a region. A
          <code>name</code>-grouped <code>&lt;details&gt;</code> owns all of that itself and offers
-         no way in — so the disclosure is rebuilt on the standard
+         no way in, so the disclosure is rebuilt on the standard
          <code>aria-expanded</code>/<code>aria-controls</code> button pattern instead.`),
 
     section('Marking the summary'),
 
     p(`<code>data-summary</code> is explicit and always wins. Without it, the first heading is
        used; without any heading, the first element. Falling all the way back means a forgotten
-       marker produces a slightly odd accordion rather than one with no trigger at all — but be
+       marker produces a slightly odd accordion rather than one with no trigger at all, but be
        explicit, because "the first element" is a fragile thing to depend on.`),
 
     section('States'),
@@ -77,8 +77,8 @@ export default () => page(
 
     section('Reacting to it'),
 
-    p(`<code>pl-toggle</code> fires on real interaction only — never when a group closes a panel
-       programmatically — which is what keeps a group from bouncing events back and forth between
+    p(`<code>pl-toggle</code> fires on real interaction only, never when a group closes a panel
+       programmatically, which is what keeps a group from bouncing events back and forth between
        its children.`),
 
     code(`
@@ -123,10 +123,10 @@ export default () => page(
     section('Accessibility'),
 
     ul([
-        'The trigger is a real <code>&lt;button&gt;</code> — Tab, Enter and Space all come from the platform.',
+        'The trigger is a real <code>&lt;button&gt;</code>: Tab, Enter and Space all come from the platform.',
         'It carries <code>aria-expanded</code>, and <code>aria-controls</code> pointing at the panel.',
         'The panel is a <code>role="region"</code> named by its own trigger through <code>aria-labelledby</code>, so someone who lands inside it knows which disclosure they are in.',
-        'Closing uses <code>hidden</code>, so a collapsed panel leaves the accessibility tree and the tab order together — there is no second state to keep in sync.',
+        'Closing uses <code>hidden</code>, so a collapsed panel leaves the accessibility tree and the tab order together. There is no second state to keep in sync.',
         'Your heading level is never changed. Choose one that fits the surrounding document outline.',
         'The marker\'s rotation is dropped under <code>prefers-reduced-motion</code>.',
     ]),

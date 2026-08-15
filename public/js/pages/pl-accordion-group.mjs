@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-accordion-group
+// Documentation: pl-accordion-group
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-accordion-group',
         title: 'Accordion Group',
-        lede: 'A stack of accordions that know about each other — one open at a time, or as many as you like.',
+        lede: 'A stack of accordions that know about each other. One open at a time, or as many as you like.',
     }),
 
     meta({
@@ -34,7 +34,7 @@ export default () => page(
             </pl-accordion>
             <pl-accordion>
                 <h3 data-summary>Can I use it with React or Vue?</h3>
-                <p>Yes — a custom element is just an element to any framework.</p>
+                <p>Yes: a custom element is just an element to any framework.</p>
             </pl-accordion>
             <pl-accordion>
                 <h3 data-summary>What about server rendering?</h3>
@@ -65,7 +65,7 @@ export default () => page(
 
     callout('note', 'Why exclusivity is the default',
         `The attribute's presence adds a capability rather than removing one, which is the way an
-         attribute normally reads — <code>multiple</code> on a <code>&lt;select&gt;</code> works
+         attribute normally reads: <code>multiple</code> on a <code>&lt;select&gt;</code> works
          exactly this way. Naming it the other way round would have meant an
          <code>exclusive</code> attribute that most groups had to remember to set.`),
 
@@ -74,13 +74,13 @@ export default () => page(
     p(`<code>pl-accordion</code> emits <code>pl-toggle</code> as a bubbling event, so the group
        listens <strong>once, on itself</strong> and lets the events come to it. Nothing reaches
        into a child to wire anything up, which means accordions added or removed later need no
-       registration and no teardown — the group works on whatever is inside it at the moment an
+       registration and no teardown: the group works on whatever is inside it at the moment an
        event arrives.`),
 
     ul([
         'It only ever reacts to a panel <em>opening</em>. Closing one is nobody else\'s business.',
         '<code>pl-toggle</code> fires on real interaction only, so the panels the group closes cannot echo back at it.',
-        'Only direct children are considered — a group nested inside another group\'s panel keeps its own.',
+        'Only direct children are considered: a group nested inside another group\'s panel keeps its own.',
     ]),
 
     section('Attributes'),
@@ -109,6 +109,6 @@ export default () => page(
     ul([
         'The group adds no roles of its own. Each accordion is already a complete, labelled disclosure, and wrapping them in a <code>tablist</code> or similar would describe them as something they are not.',
         'Closing a sibling never moves focus. The button the user pressed stays focused, which is what lets them keep tabbing from where they were.',
-        'Everything else — headings, <code>aria-expanded</code>, the labelled regions — comes from <a href="/documentation/pl-accordion">pl-accordion</a>.',
+        'Everything else: headings, <code>aria-expanded</code>, the labelled regions: comes from <a href="/documentation/pl-accordion">pl-accordion</a>.',
     ]),
 );

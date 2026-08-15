@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-color-picker
+// Documentation: pl-color-picker
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -19,8 +19,8 @@ export default () => page(
     }),
 
     p(`Two real inputs made to look like one field. The swatch opens the operating system's own
-       colour picker — the reason to use <code>&lt;input type="color"&gt;</code> rather than draw a
-       swatch and build a picker — and the text field lets someone paste a hex value they already
+       colour picker: the reason to use <code>&lt;input type="color"&gt;</code> rather than draw a
+       swatch and build a picker, and the text field lets someone paste a hex value they already
        have.`),
 
     section('Usage'),
@@ -33,13 +33,13 @@ export default () => page(
 
     section('Two-way binding, with events'),
 
-    p(`The inputs stay in step by listening to each other — no store, no observer. A shared state
+    p(`The inputs stay in step by listening to each other, no store, no observer. A shared state
        container would be real machinery for what is genuinely two DOM nodes agreeing on one
        string.`),
 
     ul([
         'Dragging in the OS picker fires <code>input</code> continuously, so the hex updates live rather than waiting for the dialog to close.',
-        'Typing only propagates once the text is <em>actually a colour</em> — otherwise a half-typed <code>#2</code> would keep resetting the swatch to black.',
+        'Typing only propagates once the text is <em>actually a colour</em>: otherwise a half-typed <code>#2</code> would keep resetting the swatch to black.',
         'On blur the text is tidied: <code>#abc</code> expands to <code>#AABBCC</code>, a missing hash is added, and unusable input snaps back to the current colour.',
     ]),
 
@@ -126,13 +126,13 @@ export default () => page(
         ['Property', 'Description'],
         [
             { cells: ['<code>--picker-width</code>', 'Maximum width of the field.'] },
-            { cells: ['<code>--field-border</code>, <code>--field-accent</code>, <code>--field-ring</code>', 'Shared with the other fields — see <a href="/documentation/pl-input">pl-input</a>.'] },
+            { cells: ['<code>--field-border</code>, <code>--field-accent</code>, <code>--field-ring</code>', 'Shared with the other fields. See <a href="/documentation/pl-input">pl-input</a>.'] },
         ],
     ),
 
     callout('note', 'Why the hooks are --picker-* and not --color-picker-*',
         `The token contract reserves the <code>--color-*</code> prefix for colours, so a width
-         living under it would be ambiguous — is <code>--color-picker-width</code> a colour named
+         living under it would be ambiguous: is <code>--color-picker-width</code> a colour named
          "picker-width"? The component's hooks use <code>--picker-*</code> to stay out of that
          namespace.`),
 
@@ -141,7 +141,7 @@ export default () => page(
     ul([
         'Both inputs are real controls, so the OS picker, keyboard entry, and paste all work natively.',
         'The two share a single focus ring via <code>:focus-within</code>, so they read as one field while remaining two tab stops.',
-        'The text field carries its own <code>aria-label</code> — it mirrors the swatch, so it would otherwise be an unlabelled input.',
+        'The text field carries its own <code>aria-label</code>. It mirrors the swatch, so it would otherwise be an unlabelled input.',
         'Wrap the component in <a href="/documentation/pl-label">pl-label</a> to name the field itself.',
         'Invalid hex text is styled only after interaction, using <code>:user-invalid</code>.',
     ]),

@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-icon
+// Documentation: pl-icon
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table, el } from '../components/doc.mjs';
@@ -89,7 +89,7 @@ export default () => page(
 
     section('Accessibility'),
 
-    p(`Icons are <strong>decorative by default</strong> — the SVG carries
+    p(`Icons are <strong>decorative by default</strong>: the SVG carries
        <code>aria-hidden="true"</code> and is skipped by assistive technology. That is the right
        default: most icons sit beside a visible text label, and announcing both is the more
        common bug.`),
@@ -102,21 +102,21 @@ export default () => page(
     `),
 
     callout('a11y', 'Which one do I need?',
-        `<p>Next to visible text — <strong>no label</strong>. The text already says it.</p>
-         <p>Alone in a button — <strong>no label on the icon</strong>; put
+        `<p>Next to visible text, <strong>no label</strong>. The text already says it.</p>
+         <p>Alone in a button, <strong>no label on the icon</strong>; put
          <code>aria-label</code> on the button instead, so the accessible name belongs to the
          thing being activated.</p>
-         <p>Alone, conveying status — <strong>label the icon</strong>.</p>`),
+         <p>Alone, conveying status: <strong>label the icon</strong>.</p>`),
 
     section('Props'),
 
     table(
         ['Prop', 'Type', 'Default', 'Description'],
         [
-            { cells: ['<code>icon</code>', '<code>String</code>', '—', 'Symbol name from the spritesheet, without the <code>icon-</code> prefix.'] },
+            { cells: ['<code>icon</code>', '<code>String</code>', ': ', 'Symbol name from the spritesheet, without the <code>icon-</code> prefix.'] },
             { cells: ['<code>size</code>', '<code>String</code>', '<code>1.5rem</code>', 'Any CSS length. Sets both width and height.'] },
             { cells: ['<code>color</code>', '<code>String</code>', '<code>currentColor</code>', 'Any CSS colour.'] },
-            { cells: ['<code>label</code>', '<code>String</code>', '—', 'Accessible name. Makes the icon meaningful rather than decorative.'] },
+            { cells: ['<code>label</code>', '<code>String</code>', ': ', 'Accessible name. Makes the icon meaningful rather than decorative.'] },
         ],
     ),
 
@@ -137,7 +137,7 @@ export default () => page(
 
     p(`The spritesheet is injected into the document once, on first use, and every instance
        reads from it. Rather than referencing a symbol with <code>&lt;use href="#icon-x"&gt;</code>,
-       the component <em>clones</em> the symbol's children into its own shadow SVG — a
+       the component <em>clones</em> the symbol's children into its own shadow SVG: a
        <code>&lt;use&gt;</code> inside a shadow root cannot reliably resolve an ID defined
        outside it across browsers.`),
 

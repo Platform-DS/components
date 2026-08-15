@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-features
+// Documentation: pl-features
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-features',
         title: 'Features',
-        lede: 'The bragging section — show the product, one alternating row at a time.',
+        lede: 'The bragging section: show the product, one alternating row at a time.',
     }),
 
     meta({
@@ -55,7 +55,7 @@ export default () => page(
     `, { layout: 'bleed' }),
 
     callout('note', 'The alternation is automatic',
-        `Even-numbered rows move their figure ahead of the copy with <code>order</code> — a visual
+        `Even-numbered rows move their figure ahead of the copy with <code>order</code>: a visual
          reordering only. The DOM order stays copy-then-media in every row, so a screen reader and a
          keyboard user get the same consistent sequence throughout.`),
 
@@ -91,13 +91,13 @@ export default () => page(
 
     section('Attributes'),
 
-    p('The shared <code>surface</code>, <code>align</code>, and <code>width</code> — see the <a href="/documentation/sections">Content sections</a> guide.'),
+    p('The shared <code>surface</code>, <code>align</code>, and <code>width</code>. See the <a href="/documentation/sections">Content sections</a> guide.'),
 
     section('Accessibility'),
 
     ul([
         'Rows are <code>&lt;article&gt;</code> elements, so each feature is an addressable region.',
-        'Screenshots that only repeat the adjacent copy are decorative — give them <code>alt=""</code> rather than a redundant description.',
+        'Screenshots that only repeat the adjacent copy are decorative. Give them <code>alt=""</code> rather than a redundant description.',
         'Reordering is visual only; DOM order is unchanged, so reading and tab order stay consistent row to row.',
         'Below 55rem the columns stack, copy first.',
     ]),

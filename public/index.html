@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Platform Components — web components without the web stack</title>
+    <title>Platform Components: web components without the web stack</title>
     <meta name="description" content="A component library built on native custom elements and CSS custom properties. No build step, no framework, no dependencies. Works in React, Vue, Angular, Rails, or plain HTML.">
 
     <!-- Favicons. SVG for modern browsers, .ico as the universal fallback,
@@ -19,7 +19,7 @@
     <meta name="msapplication-config" content="/img/favicons/browserconfig.xml">
     <meta name="theme-color" content="#111111">
 
-    <!-- Outfit — the display face for headings. Loaded by the docs SITE, not
+    <!-- Outfit: the display face for headings. Loaded by the docs SITE, not
          the library: the package itself ships no external requests. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,26 +67,54 @@
         <!-- ------------------------------------------------------------
              Hero
         ------------------------------------------------------------- -->
-        <section class="hero">
+        <section class="hero dot-field">
             <div class="hero__inner">
-                <p class="hero__eyebrow">Zero dependencies</p>
+                <p class="hero__eyebrow">
+                    <pl-icon icon="sparkle" size="0.85rem"></pl-icon>
+                    52 components, zero dependencies
+                </p>
 
                 <h1>Components that outlive your <em>framework</em>.</h1>
 
                 <p class="hero__lede">
                     Platform is a component library built entirely on native custom elements
                     and CSS custom properties. There is no build step, no runtime, and no
-                    dependency tree — because the browser already does this.
+                    dependency tree, because the browser already does this.
                 </p>
 
                 <div class="hero__actions">
                     <pl-button size="lg" onclick="location.href='/documentation'">
                         Read the docs
                     </pl-button>
-                    <span class="hero__install">
-                        <span aria-hidden="true">$</span>
-                        npm i @platformdesign/components
-                    </span>
+                    <pl-button size="lg" variant="secondary" onclick="location.href='/documentation/installation'">
+                        Install
+                    </pl-button>
+                </div>
+
+                <pl-code-block language="bash" class="hero__install">npm i @platformdesign/components</pl-code-block>
+            </div>
+        </section>
+
+        <!-- ------------------------------------------------------------
+             Facts. Every figure here is checkable from the repository.
+        ------------------------------------------------------------- -->
+        <section class="facts" aria-label="Library at a glance">
+            <div class="container facts__grid">
+                <div class="fact">
+                    <p class="fact__figure">52</p>
+                    <p class="fact__label">Components</p>
+                </div>
+                <div class="fact">
+                    <p class="fact__figure">0</p>
+                    <p class="fact__label">Dependencies</p>
+                </div>
+                <div class="fact">
+                    <p class="fact__figure">0</p>
+                    <p class="fact__label">Build steps</p>
+                </div>
+                <div class="fact">
+                    <p class="fact__figure">16<span>KB</span></p>
+                    <p class="fact__label">First component, gzipped</p>
                 </div>
             </div>
         </section>
@@ -124,7 +152,7 @@
                         <h3>No framework</h3>
                         <p>
                             A custom element is just an HTML element. It works in React, Vue,
-                            Angular, Svelte, Rails, Django, a static file — anywhere HTML
+                            Angular, Svelte, Rails, Django, a static file: anywhere HTML
                             works. You don't need a port for each one.
                         </p>
                     </article>
@@ -143,7 +171,7 @@
 
                     <article class="pitch">
                         <div class="pitch__icon" aria-hidden="true">
-                            <pl-icon icon="thumbtack" size="1.25rem"></pl-icon>
+                            <pl-icon icon="lock" size="1.25rem"></pl-icon>
                         </div>
                         <h3>No supply chain</h3>
                         <p>
@@ -157,7 +185,8 @@
         </section>
 
         <!-- ------------------------------------------------------------
-             Comparison
+             Comparison. Rendered with pl-code-block, the same component the
+             documentation uses for every sample on the site.
         ------------------------------------------------------------- -->
         <section class="section section--ink">
             <div class="container">
@@ -168,15 +197,12 @@
 
                 <div class="compare">
                     <div class="compare__item">
-                        <h3>The usual way</h3>
-                        <div class="code">
-                            <div class="code__head"><span class="code__lang">bash</span></div>
-                            <pre><code>npm i @scope/ui react react-dom
+                        <h3><pl-icon icon="ellipsis" size="1rem"></pl-icon> The usual way</h3>
+                        <pl-code-block language="bash">npm i @scope/ui react react-dom
 npm i -D vite @vitejs/plugin-react
 # 200+ transitive packages
 # a config file
-# a build before you can look at it</code></pre>
-                        </div>
+# a build before you can look at it</pl-code-block>
                         <p class="compare__tally">
                             <strong>Then:</strong> a framework upgrade, a build tool migration,
                             and a rewrite when the library is abandoned.
@@ -184,14 +210,11 @@ npm i -D vite @vitejs/plugin-react
                     </div>
 
                     <div class="compare__item">
-                        <h3>This way</h3>
-                        <div class="code">
-                            <div class="code__head"><span class="code__lang">html</span></div>
-                            <pre><code>&lt;script type="module"
+                        <h3><pl-icon icon="check" size="1rem"></pl-icon> This way</h3>
+                        <pl-code-block language="html">&lt;script type="module"
         src="/components/pl-button/index.mjs"&gt;&lt;/script&gt;
 
-&lt;pl-button variant="primary"&gt;Save&lt;/pl-button&gt;</code></pre>
-                        </div>
+&lt;pl-button variant="primary"&gt;Save&lt;/pl-button&gt;</pl-code-block>
                         <p class="compare__tally">
                             <strong>Then:</strong> nothing. It's HTML. The browser is the
                             runtime and it doesn't break its own APIs.
@@ -202,27 +225,137 @@ npm i -D vite @vitejs/plugin-react
         </section>
 
         <!-- ------------------------------------------------------------
-             Live proof — real components, on the marketing page
+             Live proof. Every component below is a real instance rendered by
+             this static page, with no framework anywhere on the site.
         ------------------------------------------------------------- -->
         <section class="section">
             <div class="container">
                 <div class="section__head">
                     <h2>These are real components</h2>
                     <p>
-                        Everything below is a live instance from the library, rendered by this
-                        static HTML page. There is no framework on this site either.
+                        Nothing here is a screenshot. Each one is a live instance from the
+                        library, rendered by this static HTML page and working exactly as it
+                        would in your app.
                     </p>
                 </div>
 
-                <div class="demo">
-                    <div class="demo__stage">
-                        <pl-button>Primary</pl-button>
-                        <pl-button variant="secondary">Secondary</pl-button>
-                        <pl-button variant="ghost">Ghost</pl-button>
-                        <pl-button variant="danger">Danger</pl-button>
-                        <pl-button loading>Loading</pl-button>
-                        <pl-button disabled>Disabled</pl-button>
-                    </div>
+                <div class="showcase">
+                    <article class="showcase__panel">
+                        <h3>Inputs</h3>
+                        <div class="showcase__row">
+                            <pl-button>Primary</pl-button>
+                            <pl-button variant="secondary">Secondary</pl-button>
+                            <pl-button variant="ghost">Ghost</pl-button>
+                            <pl-button variant="danger">Danger</pl-button>
+                            <pl-button loading>Saving</pl-button>
+                        </div>
+                        <div class="showcase__row">
+                            <pl-label text="Email">
+                                <pl-input type="email" placeholder="you@example.com"></pl-input>
+                            </pl-label>
+                        </div>
+                        <div class="showcase__row">
+                            <pl-switch checked>Notifications</pl-switch>
+                            <pl-checkbox checked>Remember me</pl-checkbox>
+                        </div>
+                    </article>
+
+                    <article class="showcase__panel">
+                        <h3>Data display</h3>
+                        <div class="showcase__row">
+                            <pl-badge content="4">
+                                <pl-button variant="secondary" aria-label="Inbox, 4 unread messages">
+                                    <pl-icon icon="mail"></pl-icon>
+                                </pl-button>
+                            </pl-badge>
+                            <pl-avatar initials="AL" alt="Ada Lovelace"></pl-avatar>
+                            <pl-avatar initials="GH" alt="Grace Hopper"></pl-avatar>
+                            <pl-chip removable>Compilers</pl-chip>
+                        </div>
+                        <div class="showcase__row">
+                            <pl-ratings value="4" readonly></pl-ratings>
+                        </div>
+                    </article>
+
+                    <article class="showcase__panel">
+                        <h3>State</h3>
+                        <div class="showcase__stack">
+                            <pl-progress value="62" max="100" label="Uploading, 62%"></pl-progress>
+                            <pl-meter value="0.88" label="Disk used, 88%"></pl-meter>
+                            <div class="showcase__row">
+                                <pl-loading></pl-loading>
+                                <pl-skeleton lines="2" style="flex:1"></pl-skeleton>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="showcase__panel">
+                        <h3>Surfaces</h3>
+                        <div class="showcase__stack">
+                            <pl-feedback intent="success">
+                                <p data-title>Saved</p>
+                                <p>Your changes are live.</p>
+                            </pl-feedback>
+                            <pl-accordion-group>
+                                <pl-accordion open>
+                                    <h4 data-summary>Does it work without a framework?</h4>
+                                    <p>Yes. These are custom elements, so the browser is the framework.</p>
+                                </pl-accordion>
+                                <pl-accordion>
+                                    <h4 data-summary>Can I theme it?</h4>
+                                    <p>Override a custom property. Every component follows.</p>
+                                </pl-accordion>
+                            </pl-accordion-group>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ------------------------------------------------------------
+             Inventory
+        ------------------------------------------------------------- -->
+        <section class="section section--muted">
+            <div class="container">
+                <div class="section__head">
+                    <h2>What's in the box</h2>
+                    <p>
+                        Fifty-two components across two surfaces. App components are for
+                        building interfaces; content components are for building pages.
+                    </p>
+                </div>
+
+                <div class="inventory">
+                    <a class="inventory__group" href="/documentation/pl-input">
+                        <p class="inventory__count">17</p>
+                        <h3>Inputs</h3>
+                        <p>Buttons, fields, selects, switches, forms.</p>
+                    </a>
+                    <a class="inventory__group" href="/documentation/pl-dialog">
+                        <p class="inventory__count">9</p>
+                        <h3>Surfaces</h3>
+                        <p>Dialogs, popovers, accordions, cards, carousels.</p>
+                    </a>
+                    <a class="inventory__group" href="/documentation/pl-hero">
+                        <p class="inventory__count">7</p>
+                        <h3>Sections</h3>
+                        <p>Hero, benefits, features, testimonials, FAQs, CTA.</p>
+                    </a>
+                    <a class="inventory__group" href="/documentation/pl-badge">
+                        <p class="inventory__count">4</p>
+                        <h3>UI</h3>
+                        <p>Icons, badges, chips, avatars.</p>
+                    </a>
+                    <a class="inventory__group" href="/documentation/pl-progress">
+                        <p class="inventory__count">4</p>
+                        <h3>State</h3>
+                        <p>Progress, meter, spinner, skeleton.</p>
+                    </a>
+                    <a class="inventory__group" href="/documentation/pl-blank-page">
+                        <p class="inventory__count">11</p>
+                        <h3>Structure</h3>
+                        <p>Page shells, headers, footers, navigation, media.</p>
+                    </a>
                 </div>
             </div>
         </section>
@@ -245,7 +378,7 @@ npm i -D vite @vitejs/plugin-react
 
     <footer class="site-footer">
         <div class="site-footer__inner">
-            <p>Platform Components — MIT licensed.</p>
+            <p>Platform Components: MIT licensed.</p>
             <nav aria-label="Footer">
                 <a href="/documentation">Documentation</a> ·
                 <a href="/documentation/authoring">Authoring guide</a> ·

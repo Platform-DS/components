@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-radio-group
+// Documentation: pl-radio-group
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -41,19 +41,19 @@ export default () => page(
 
     section('Keyboard'),
 
-    p('Focus the group and try it — the behaviour matches a native radio group exactly:'),
+    p('Focus the group and try it: the behaviour matches a native radio group exactly:'),
 
     table(
         ['Key', 'Does'],
         [
-            { cells: ['<kbd>Tab</kbd>', 'Enters the group at the selected option, and leaves it — the whole group is one tab stop.'] },
+            { cells: ['<kbd>Tab</kbd>', 'Enters the group at the selected option, and leaves it: the whole group is one tab stop.'] },
             { cells: ['<kbd>↓</kbd> / <kbd>→</kbd>', 'Select the next option, wrapping at the end.'] },
             { cells: ['<kbd>↑</kbd> / <kbd>←</kbd>', 'Select the previous option, wrapping at the start.'] },
             { cells: ['<kbd>Home</kbd> / <kbd>End</kbd>', 'Select the first / last option.'] },
         ],
     ),
 
-    p(`Selection follows focus, as it does natively — moving to an option selects it, so a keyboard
+    p(`Selection follows focus, as it does natively: moving to an option selects it, so a keyboard
        user never has to press a second key to commit.`),
 
     section('Cards'),
@@ -62,8 +62,8 @@ export default () => page(
 
     demo(`
         <pl-radio-group label="Shipping" hint="Estimated at checkout." name="ship" value="std" variant="card">
-            <pl-radio value="std">Standard — 5 days</pl-radio>
-            <pl-radio value="express">Express — 2 days</pl-radio>
+            <pl-radio value="std">Standard: 5 days</pl-radio>
+            <pl-radio value="express">Express: 2 days</pl-radio>
             <pl-radio value="overnight">Overnight</pl-radio>
         </pl-radio-group>
     `, { layout: 'stack' }),
@@ -94,7 +94,7 @@ export default () => page(
 
     callout('warn', 'Setting checked in JavaScript needs a nudge',
         `A programmatic <code>radio.checked = true</code> never fires the internal input's change
-         event, which is what normally publishes the value to the form — so the option would look
+         event, which is what normally publishes the value to the form, so the option would look
          selected and submit nothing. The group calls <code>syncForm()</code> after every
          programmatic change; do the same if you set <code>checked</code> on a bare
          <code>&lt;pl-radio&gt;</code> yourself.`),
@@ -134,7 +134,7 @@ export default () => page(
     section('Accessibility'),
 
     ul([
-        'The wrapper carries <code>role="radiogroup"</code> and is named by its visible label through <code>aria-labelledby</code> — not a duplicated <code>aria-label</code>.',
+        'The wrapper carries <code>role="radiogroup"</code> and is named by its visible label through <code>aria-labelledby</code>, not a duplicated <code>aria-label</code>.',
         'Roving tabindex makes the group one tab stop, which is what a native radio group does and what keyboard users expect.',
         'Arrow keys wrap, and selection follows focus.',
         'The hint is linked with <code>aria-describedby</code>, so it is announced with the group rather than orphaned.',

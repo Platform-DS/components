@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-popover
+// Documentation: pl-popover
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -36,7 +36,7 @@ export default () => page(
         </pl-popover>
     `, { layout: 'stack' }),
 
-    p(`No script again — and unlike <a href="/documentation/pl-dialog">pl-dialog</a>, no id
+    p(`No script again, and unlike <a href="/documentation/pl-dialog">pl-dialog</a>, no id
        juggling either. A custom element carries the <code>popover</code> attribute perfectly well,
        so the element you write is the element the invoker points at.`),
 
@@ -49,7 +49,7 @@ export default () => page(
        short on room.`),
 
     p(`That is the whole "opens in the direction that fits" behaviour, decided by the style engine
-       at paint time — no scroll listeners, no <code>getBoundingClientRect</code>, and nothing to
+       at paint time, no scroll listeners, no <code>getBoundingClientRect</code>, and nothing to
        re-measure when the page moves.`),
 
     demo(`
@@ -65,13 +65,13 @@ export default () => page(
 
     callout('note', 'Where anchor positioning is missing',
         `The placement rules live inside <code>@supports (position-area: block-end)</code>. Without
-         that support the popover keeps the browser's own default placement — a centred sheet.
+         that support the popover keeps the browser's own default placement: a centred sheet.
          Not what was asked for, but never broken and never off-screen, and the Popover API itself
          (top layer, light dismiss, focus return) still works in full.`),
 
     section('Manual popovers'),
 
-    p(`<code>auto</code> — the default — light-dismisses: clicking away or pressing Escape closes
+    p(`<code>auto</code>: the default: light-dismisses: clicking away or pressing Escape closes
        it, and only one auto popover stays open in a tree at a time. <code>manual</code> opts out
        of all of that, for a panel that must stay put until the page decides otherwise.`),
 
@@ -104,13 +104,13 @@ export default () => page(
         ['Attribute', 'Type', 'Description'],
         [
             { cells: ['<code>placement</code>', '<code>String</code>', '<code>block-end</code> (default), <code>block-start</code>, <code>inline-start</code>, <code>inline-end</code>.'] },
-            { cells: ['<code>align</code>', '<code>String</code>', '<code>start</code> (default), <code>center</code>, <code>end</code> — along the placement edge.'] },
+            { cells: ['<code>align</code>', '<code>String</code>', '<code>start</code> (default), <code>center</code>, <code>end</code>: along the placement edge.'] },
             { cells: ['<code>manual</code>', '<code>Boolean</code>', 'Use <code>popover="manual"</code>: no light dismiss, no auto-closing.'] },
         ],
     ),
 
     p(`Placement is written with <em>logical</em> edges, so <code>inline-end</code> is the right
-       side in a left-to-right document and the left side in a right-to-left one — the same
+       side in a left-to-right document and the left side in a right-to-left one: the same
        vocabulary the rest of the library uses.`),
 
     section('Custom properties'),
@@ -130,7 +130,7 @@ export default () => page(
     ul([
         'The Popover API handles focus: opening moves into the panel where appropriate, and closing returns focus to the invoker.',
         'Escape closes an <code>auto</code> popover, and the browser manages the top-layer stack when several are open.',
-        'Use a real button as the invoker — <code>popovertarget</code> only works on a button, which rules out the <code>&lt;div onclick&gt;</code> version of this by construction.',
+        'Use a real button as the invoker: <code>popovertarget</code> only works on a button, which rules out the <code>&lt;div onclick&gt;</code> version of this by construction.',
         'A popover is not a dialog: it does not trap focus and does not make the page inert. If a choice must be made before continuing, use <a href="/documentation/pl-dialog">pl-dialog</a>.',
         'Transitions are dropped under <code>prefers-reduced-motion</code>.',
     ]),

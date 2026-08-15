@@ -76,7 +76,7 @@ export const HTML_ELEMENT_SPEC = Object.freeze({
             { name: 'aria-pressed', prop: 'ariaPressed', type: 'string', options: ['true', 'false', 'mixed'] },
             { name: 'autofocus', type: 'boolean' },
             { name: 'command', type: 'string' },
-            { name: 'commandfor', prop: 'commandFor', type: 'string' },
+            { name: 'commandfor', type: 'string', idref: true },
             { name: 'disabled', type: 'boolean' },
             { name: 'form', type: 'string' },
             { name: 'formaction', prop: 'formAction', type: 'string' },
@@ -85,7 +85,7 @@ export const HTML_ELEMENT_SPEC = Object.freeze({
             { name: 'formnovalidate', prop: 'formNoValidate', type: 'boolean' },
             { name: 'formtarget', prop: 'formTarget', type: 'string' },
             { name: 'name', type: 'string' },
-            { name: 'popovertarget', prop: 'popoverTargetElement', type: 'string' },
+            { name: 'popovertarget', type: 'string', idref: true },
             { name: 'popovertargetaction', prop: 'popoverTargetAction', type: 'string' },
             { name: 'type', type: 'string' },
             { name: 'value', type: 'string' },
@@ -336,6 +336,82 @@ export const HTML_ELEMENT_SPEC = Object.freeze({
         // on the host (see NON_COMPOSED_EVENTS) — without that, a `load`
         // listener on the custom element would never fire.
         events: Object.freeze(['load', 'error']),
+    }),
+
+    meter: Object.freeze({
+        properties: Object.freeze([]),
+        attributes: Object.freeze([]),
+        // A gauge within a known range: `value` sits somewhere between `min`
+        // and `max`, and low/high/optimum describe which parts of that range
+        // are good — which is what lets the browser tint it by itself.
+        reflected: frozen(
+            { name: 'value', type: 'number' },
+            { name: 'min', type: 'number' },
+            { name: 'max', type: 'number' },
+            { name: 'low', type: 'number' },
+            { name: 'high', type: 'number' },
+            { name: 'optimum', type: 'number' },
+        ),
+        prefixes: Object.freeze([]),
+        methods: Object.freeze([]),
+        events: Object.freeze([]),
+    }),
+
+    progress: Object.freeze({
+        // Read-only: the fraction completed, or -1 while indeterminate.
+        properties: frozen(
+            { name: 'position', type: 'number' },
+        ),
+        attributes: Object.freeze([]),
+        // `value` ABSENT is meaningful — that is what makes a progress bar
+        // indeterminate — so it must be removed rather than zeroed when unset.
+        reflected: frozen(
+            { name: 'value', type: 'number' },
+            { name: 'max', type: 'number' },
+        ),
+        prefixes: Object.freeze([]),
+        methods: Object.freeze([]),
+        events: Object.freeze([]),
+    }),
+
+    video: Object.freeze({
+        // Playback state the element owns; all read-only except the few the
+        // native descriptor says are writable (currentTime, volume, …), which
+        // createNativeElement works out for itself.
+        properties: frozen(
+            { name: 'currentTime', type: 'number' },
+            { name: 'duration', type: 'number' },
+            { name: 'paused', type: 'boolean' },
+            { name: 'ended', type: 'boolean' },
+            { name: 'volume', type: 'number' },
+            { name: 'playbackRate', type: 'number' },
+            { name: 'readyState', type: 'number' },
+            { name: 'videoWidth', type: 'number' },
+            { name: 'videoHeight', type: 'number' },
+        ),
+        attributes: Object.freeze([]),
+        reflected: frozen(
+            { name: 'src', type: 'string' },
+            { name: 'poster', type: 'string' },
+            { name: 'controls', type: 'boolean' },
+            { name: 'autoplay', type: 'boolean' },
+            { name: 'loop', type: 'boolean' },
+            { name: 'muted', type: 'boolean' },
+            { name: 'playsinline', prop: 'playsInline', type: 'boolean' },
+            { name: 'preload', type: 'string', options: ['none', 'metadata', 'auto'] },
+            { name: 'crossorigin', prop: 'crossOrigin', type: 'string', options: ['anonymous', 'use-credentials'] },
+            { name: 'width', type: 'number' },
+            { name: 'height', type: 'number' },
+        ),
+        prefixes: Object.freeze([]),
+        methods: Object.freeze(['play', 'pause', 'load', 'canPlayType']),
+        // Media events neither bubble nor compose, so every one listed here
+        // gets re-emitted on the host — otherwise a listener on <pl-video>
+        // would never hear the video it wraps.
+        events: Object.freeze([
+            'play', 'pause', 'ended', 'timeupdate', 'loadedmetadata',
+            'volumechange', 'error',
+        ]),
     }),
 });
 

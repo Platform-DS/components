@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-hero
+// Documentation: pl-hero
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-hero',
         title: 'Hero',
-        lede: 'The value proposition and main offer — the first thing anyone reads.',
+        lede: 'The value proposition and main offer: the first thing anyone reads.',
     }),
 
     meta({
@@ -53,7 +53,7 @@ export default () => page(
         [
             { cells: ['<code>[data-eyebrow]</code>', 'The small label above the headline.'] },
             { cells: ['<code>&lt;h1&gt;</code>', 'The headline, on its own fluid scale.'] },
-            { cells: ['<code>&lt;h1&gt; + &lt;p&gt;</code>', 'The lede — the paragraph directly after the headline.'] },
+            { cells: ['<code>&lt;h1&gt; + &lt;p&gt;</code>', 'The lede: the paragraph directly after the headline.'] },
             { cells: ['<code>[data-actions]</code>', 'The button row.'] },
             { cells: ['<code>&lt;figure&gt;</code>, <code>&lt;img&gt;</code>', 'The media, when <code>layout="split"</code>.'] },
         ],
@@ -68,7 +68,7 @@ export default () => page(
     demo(`
         <pl-hero layout="split" surface="muted">
             <h1>Ship the source.</h1>
-            <p>Standard ES modules and standard CSS — nothing to compile.</p>
+            <p>Standard ES modules and standard CSS. Nothing to compile.</p>
             <div data-actions><pl-button>Get started</pl-button></div>
             <figure><img src="/img/logo/platform-thumbnail.png" alt="Platform"></figure>
         </pl-hero>
@@ -88,7 +88,7 @@ export default () => page(
 
     section('Attributes'),
 
-    p('Plus the shared <code>surface</code>, <code>align</code>, and <code>width</code> — see the <a href="/documentation/sections">Content sections</a> guide.'),
+    p('Plus the shared <code>surface</code>, <code>align</code>, and <code>width</code>. See the <a href="/documentation/sections">Content sections</a> guide.'),
 
     table(
         ['Attribute', 'Values', 'Description'],
@@ -111,9 +111,9 @@ export default () => page(
     section('Accessibility'),
 
     ul([
-        'The headline is a real <code>&lt;h1&gt;</code> in the page source — one per page.',
+        'The headline is a real <code>&lt;h1&gt;</code> in the page source. One per page.',
         'Content is Light DOM, so it is indexed, translatable, and readable with scripts blocked.',
         'Decorative hero imagery should carry <code>alt=""</code>; meaningful imagery needs real alt text.',
-        'Keep to one primary action — the formula\'s point is that a second competing CTA costs conversions.',
+        'Keep to one primary action: the formula\'s point is that a second competing CTA costs conversions.',
     ]),
 );

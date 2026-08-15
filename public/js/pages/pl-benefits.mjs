@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-benefits
+// Documentation: pl-benefits
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-benefits',
         title: 'Benefits',
-        lede: 'What the visitor gets — the outcome, not the feature list.',
+        lede: 'What the visitor gets: the outcome, not the feature list.',
     }),
 
     meta({
@@ -65,7 +65,7 @@ export default () => page(
 
     section('Without cards'),
 
-    p('Drop <code>variant="card"</code> for a plainer grid — better on a busy page or a tinted band.'),
+    p('Drop <code>variant="card"</code> for a plainer grid: better on a busy page or a tinted band.'),
 
     demo(`
         <pl-benefits surface="muted" columns="2">
@@ -105,7 +105,7 @@ export default () => page(
     section('Accessibility'),
 
     ul([
-        'Icons are decorative here — the <code>&lt;h3&gt;</code> beside them carries the meaning, so leave <code>pl-icon</code> unlabelled.',
+        'Icons are decorative here: the <code>&lt;h3&gt;</code> beside them carries the meaning, so leave <code>pl-icon</code> unlabelled.',
         'Headings step from the section\'s <code>&lt;h2&gt;</code> to each item\'s <code>&lt;h3&gt;</code>, keeping the outline intact.',
         'The grid reflows to a single column on small screens with no change in reading order.',
     ]),

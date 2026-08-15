@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-feedback
+// Documentation: pl-feedback
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -40,8 +40,8 @@ export default () => page(
     table(
         ['Role', 'Behaviour', 'Use for'],
         [
-            { cells: ['<code>status</code> <em>(default)</em>', 'Polite — waits for a pause in whatever the screen reader is already saying.', 'Saved, copied, queued.'] },
-            { cells: ['<code>alert</code>', 'Assertive — cuts in immediately, discarding what was mid-sentence.', 'Something failed and needs attention now.'] },
+            { cells: ['<code>status</code> <em>(default)</em>', 'Polite: waits for a pause in whatever the screen reader is already saying.', 'Saved, copied, queued.'] },
+            { cells: ['<code>alert</code>', 'Assertive: cuts in immediately, discarding what was mid-sentence.', 'Something failed and needs attention now.'] },
         ],
     ),
 
@@ -51,7 +51,7 @@ export default () => page(
 
     callout('note', 'A live region only announces when it CHANGES',
         `A <code>pl-feedback</code> that is already in the HTML at page load is read as ordinary
-         content — which is fine, since it was there before anyone started listening. To have a
+         content, which is fine, since it was there before anyone started listening. To have a
          message actually announced, insert it (or change its text) in response to whatever it is
          reporting. Rendering all four states up front and toggling <code>hidden</code> between
          them is the common way to get silence.`),
@@ -111,7 +111,7 @@ export default () => page(
 
     callout('note', 'The tint is derived, not a second palette',
         `Each intent's background is <code>color-mix(in oklab, …)</code> of its own accent colour
-         against the surface. One source of truth per intent — so re-pointing
+         against the surface. One source of truth per intent, so re-pointing
          <code>--pl-color-success</code> at your own green moves the rule, the icon, and the tint
          together instead of leaving three hand-picked values to go out of step.`),
 
@@ -119,9 +119,9 @@ export default () => page(
 
     ul([
         'Announced politely by default; assertively only for <code>error</code>, or when you set <code>role="alert"</code> yourself.',
-        'The icon is decorative and drawn with a CSS mask — the message text is what gets read.',
+        'The icon is decorative and drawn with a CSS mask: the message text is what gets read.',
         'Every intent is distinguishable without colour, via its icon and the accent rule.',
         'The × is a real <code>&lt;button&gt;</code> with an <code>aria-label</code>.',
-        'For a message that must be acted on before anything else can happen, this is the wrong component — use <a href="/documentation/pl-dialog">pl-dialog</a>.',
+        'For a message that must be acted on before anything else can happen, this is the wrong component. Use <a href="/documentation/pl-dialog">pl-dialog</a>.',
     ]),
 );

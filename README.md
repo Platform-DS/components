@@ -147,7 +147,11 @@ Some app components are Light DOM too, when their whole purpose is a document-le
 npm run dev        # serve the docs site at localhost:3000
 npm test           # run the test suite
 npm run exports    # regenerate package exports, barrel, and docs nav
+npm run release -- patch   # bump 0.x.y → 0.x.y+1 and publish
+npm run release -- minor   # bump 0.x.y → 0.x+1.0 and publish
 ```
+
+Releases use semver. While the package is pre-1.0, stay on `0.y.z` — `major` is blocked unless you pass `--confirm-v1`. Add `--dry-run` to preview, `--no-publish` to bump `package.json` only, or `--otp=xxxxxx` when account 2FA is enabled.
 
 The tests need a DOM. Since the package itself ships zero dependencies, jsdom isn't one either — point at a copy you already have, or the suite skips rather than fails:
 

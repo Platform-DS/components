@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-input
+// Documentation: pl-input
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-input',
         title: 'Input',
-        lede: 'One themed field for every text-like input type — and it submits in a form.',
+        lede: 'One themed field for every text-like input type, and it submits in a form.',
     }),
 
     meta({
@@ -20,7 +20,7 @@ export default () => page(
     }),
 
     p(`<code>&lt;pl-input&gt;</code> puts a real <code>&lt;input&gt;</code> in its shadow root
-       and inherits the entire native surface — <code>value</code>, <code>placeholder</code>,
+       and inherits the entire native surface: <code>value</code>, <code>placeholder</code>,
        <code>required</code>, <code>pattern</code>, <code>min</code>/<code>max</code>/<code>step</code>,
        the validity and selection properties, <code>checkValidity()</code>,
        <code>showPicker()</code>, and the <code>input</code>/<code>change</code>/<code>invalid</code>
@@ -35,7 +35,7 @@ export default () => page(
 
     section('Types'),
 
-    p('Any type a native input supports works — the styling is shared across all of them.'),
+    p('Any type a native input supports works: the styling is shared across all of them.'),
 
     demo(`
         <pl-input type="text" placeholder="Text"></pl-input>
@@ -55,13 +55,13 @@ export default () => page(
 
     callout('note', 'Invalid styling waits for interaction',
         `The red invalid state uses <code>:user-invalid</code>, so a field never turns red on
-         first paint — only after the user has typed in it and moved on, or after a submit
+         first paint, only after the user has typed in it and moved on, or after a submit
          attempt. That's the native behaviour, preserved.`),
 
     section('In a form'),
 
     p(`Because the component is form-associated, its value is submitted with the surrounding
-       <code>&lt;form&gt;</code> even though the real input lives in a shadow root — no JavaScript
+       <code>&lt;form&gt;</code> even though the real input lives in a shadow root, no JavaScript
        bridge, no hidden mirror field.`),
 
     demo(`
@@ -87,7 +87,7 @@ export default () => page(
 
     section('Props'),
 
-    p('Every attribute is the native one, inherited from <code>&lt;input&gt;</code> — a representative set:'),
+    p('Every attribute is the native one, inherited from <code>&lt;input&gt;</code>: a representative set:'),
 
     table(
         ['Prop', 'Type', 'Description'],
@@ -128,7 +128,7 @@ export default () => page(
 
     ul([
         'The internal element is a real <code>&lt;input&gt;</code>, so type-specific keyboard behaviour, validation, and autofill are the platform\'s.',
-        'Always give it a name — via <a href="/documentation/pl-label">pl-label</a> or <code>aria-label</code>.',
+        'Always give it a name: via <a href="/documentation/pl-label">pl-label</a> or <code>aria-label</code>.',
         'Focus is delegated, so <code>.focus()</code> and a wrapping label reach the real input.',
         'Invalid styling is <code>:user-invalid</code>, so errors show after interaction, not before.',
     ]),

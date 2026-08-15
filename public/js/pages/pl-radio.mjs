@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-radio
+// Documentation: pl-radio
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -24,7 +24,7 @@ export default () => page(
 
     callout('note', 'Grouping is restored, not inherited',
         `Native radios group by <code>name</code> because they share a document. These each wrap
-         their own input in a separate shadow root, so the browser can't group them — the component
+         their own input in a separate shadow root, so the browser can't group them: the component
          restores it: selecting one unchecks its same-named peers within the nearest
          <code>&lt;form&gt;</code> (or the document), exactly the scope native radios use.`),
 
@@ -67,7 +67,7 @@ export default () => page(
         [
             { native: true, cells: ['<code>checked</code>', '<code>Boolean</code>', 'Selected state.'] },
             { native: true, cells: ['<code>value</code>', '<code>String</code>', 'Submitted when selected.'] },
-            { native: true, cells: ['<code>name</code>', '<code>String</code>', 'Group name — options sharing it are mutually exclusive.'] },
+            { native: true, cells: ['<code>name</code>', '<code>String</code>', 'Group name: options sharing it are mutually exclusive.'] },
             { native: true, cells: ['<code>disabled</code>', '<code>Boolean</code>', 'Native disabled.'] },
         ],
     ),

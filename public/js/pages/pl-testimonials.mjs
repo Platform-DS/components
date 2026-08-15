@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-testimonials
+// Documentation: pl-testimonials
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-testimonials',
         title: 'Testimonials',
-        lede: 'Trust, in someone else\'s words — built on real blockquote markup.',
+        lede: 'Trust, in someone else\'s words: built on real blockquote markup.',
     }),
 
     meta({
@@ -22,7 +22,7 @@ export default () => page(
        yourself, so this section is deliberately built on the elements HTML already has for it:
        <code>&lt;blockquote&gt;</code> for the quote, <code>&lt;cite&gt;</code> for who said it, and
        a <code>&lt;footer&gt;</code> for the attribution. Correct semantics <em>and</em> the entire
-       styling hook — no classes to memorise.`),
+       styling hook, no classes to memorise.`),
 
     section('Usage'),
 
@@ -57,7 +57,7 @@ export default () => page(
     callout('a11y', 'Give a star rating a text alternative',
         `"★★★★★" is announced character by character, or as nothing at all, depending on the screen
          reader. Put the rating in words with <code>aria-label="Rated 5 out of 5"</code> so the
-         meaning survives — the stars stay as the visual.`),
+         meaning survives: the stars stay as the visual.`),
 
     section('With an avatar'),
 
@@ -95,19 +95,19 @@ export default () => page(
 
     callout('note', 'Cards equalise, quotes do not stretch',
         `Every card fills its grid row, and the attribution is pushed to the bottom with
-         <code>align-content: space-between</code> — so a short quote and a long one still line their
+         <code>align-content: space-between</code>, so a short quote and a long one still line their
          footers up.`),
 
     section('Attributes'),
 
-    p('The shared <code>surface</code>, <code>align</code>, and <code>width</code> — see the <a href="/documentation/sections">Content sections</a> guide.'),
+    p('The shared <code>surface</code>, <code>align</code>, and <code>width</code>. See the <a href="/documentation/sections">Content sections</a> guide.'),
 
     section('Accessibility'),
 
     ul([
         'Real <code>&lt;blockquote&gt;</code>/<code>&lt;cite&gt;</code> markup, so quotes are announced as quotations and attributed correctly.',
         'Star ratings need an <code>aria-label</code> stating the rating in words.',
-        'Avatars are decorative when the name is beside them — use <code>alt=""</code>.',
+        'Avatars are decorative when the name is beside them. Use <code>alt=""</code>.',
         '<code>&lt;cite&gt;</code> is reset to upright; italic names are a styling default, not a requirement.',
     ]),
 );

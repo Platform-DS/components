@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-chip
+// Documentation: pl-chip
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table, el } from '../components/doc.mjs';
@@ -24,7 +24,7 @@ export default () => page(
     header({
         tag: 'pl-chip',
         title: 'Chip',
-        lede: 'A rounded pill around a piece of text — a sort selection, a multi-select\'s chosen option.',
+        lede: 'A rounded pill around a piece of text: a sort selection, a multi-select\'s chosen option.',
     }),
 
     meta({
@@ -34,7 +34,7 @@ export default () => page(
         'Import': '<code>@platformdesign/components/pl-chip</code>',
     }),
 
-    p(`Nothing more than a rounded, bordered pill around slotted text — bordered by default,
+    p(`Nothing more than a rounded, bordered pill around slotted text: bordered by default,
        because a row of same-background chips needs an edge to read as separate pieces. Add
        <code>removable</code> for the × that a sort or multi-select chip needs to be dismissed.`),
 
@@ -49,14 +49,14 @@ export default () => page(
 
     section('The × is a real button'),
 
-    p(`Focusable, activated with Space or Enter, announced as a button — everything a
+    p(`Focusable, activated with Space or Enter, announced as a button. Everything a
        <code>&lt;div onclick&gt;</code> would silently drop. <code>all: unset</code> strips its
        native chrome first, so none of that shows: it just reads as a small glyph that happens to
        be interactive.`),
 
     section('Removing is the consumer\'s job'),
 
-    p(`Clicking × does not remove the chip — it only emits <code>pl-remove</code> and leaves the
+    p(`Clicking × does not remove the chip. It only emits <code>pl-remove</code> and leaves the
        chip exactly where it was. This library's rule is events up, state down: the same reason
        <a href="/documentation/pl-switch">pl-switch</a> doesn't grey itself out and
        <a href="/documentation/pl-radio-group">pl-radio-group</a> doesn't delete options on its
@@ -74,7 +74,7 @@ export default () => page(
 
     section('Identity, when the label alone isn\'t enough'),
 
-    p(`<code>value</code> is what shows up in <code>pl-remove</code>'s detail — set it when the
+    p(`<code>value</code> is what shows up in <code>pl-remove</code>'s detail. Set it when the
        visible text isn't a stable identifier on its own, like a country name standing in for its
        code:`),
 
@@ -85,7 +85,7 @@ export default () => page(
     code(`
         document.querySelector('pl-chip')
             .addEventListener('pl-remove', event => {
-                console.log(event.detail.value);   // "us" — falls back to the chip's text if unset
+                console.log(event.detail.value);   // "us": falls back to the chip's text if unset
             });
     `, 'js'),
 
@@ -102,7 +102,7 @@ export default () => page(
     table(
         ['Attribute', 'Type', 'Description'],
         [
-            { cells: ['<code>removable</code>', '<code>Boolean</code>', 'Shows the × button. Off by default — a plain status tag needs no way to dismiss itself.'] },
+            { cells: ['<code>removable</code>', '<code>Boolean</code>', 'Shows the × button. Off by default: a plain status tag needs no way to dismiss itself.'] },
             { cells: ['<code>value</code>', '<code>String</code>', 'Identity carried in <code>pl-remove</code>. Defaults to the chip\'s own text.'] },
         ],
     ),
@@ -112,7 +112,7 @@ export default () => page(
     table(
         ['Member', 'Description'],
         [
-            { cells: ['<code>value</code>', 'Get or set the identity — the explicit <code>value</code>, or the visible text.'] },
+            { cells: ['<code>value</code>', 'Get or set the identity: the explicit <code>value</code>, or the visible text.'] },
             { cells: ['<code>pl-remove</code>', 'Fired by the × button. <code>detail.value</code> is the chip\'s identity. Does not remove the chip.'] },
         ],
     ),
@@ -133,8 +133,8 @@ export default () => page(
     section('Accessibility'),
 
     ul([
-        'The × is a real <code>&lt;button type="button"&gt;</code> — reachable by Tab, activated with Space/Enter, and announced as a button despite carrying none of a button\'s default appearance.',
-        'Its <code>aria-label</code> is "Remove {chip\'s text}", not a bare "Remove" — several chips in a row would otherwise announce identically to someone browsing by button.',
+        'The × is a real <code>&lt;button type="button"&gt;</code>: reachable by Tab, activated with Space/Enter, and announced as a button despite carrying none of a button\'s default appearance.',
+        'Its <code>aria-label</code> is "Remove {chip\'s text}", not a bare "Remove": several chips in a row would otherwise announce identically to someone browsing by button.',
         'The chip itself carries no interactive role; only the × does. A non-removable chip is a plain, non-interactive pill.',
     ]),
 );

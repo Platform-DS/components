@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-button-group
+// Documentation: pl-button-group
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -47,12 +47,12 @@ export default () => page(
 
     callout('note', 'Why the divider is translucent ink',
         `A fixed grey hairline disappears against a saturated fill and looks heavy against white.
-         The divider is instead <code>--pl-color-ink</code> at 18% — one value that darkens
+         The divider is instead <code>--pl-color-ink</code> at 18%. One value that darkens
          whatever is beneath it, so an outline row and a filled row need no separate treatment.`),
 
     section('Pressed state'),
 
-    p(`The group is presentation only — it does not track which segment is active. For a toolbar of
+    p(`The group is presentation only. It does not track which segment is active. For a toolbar of
        toggles, set <code>aria-pressed</code> yourself and the styling follows:`),
 
     demo(`
@@ -64,8 +64,8 @@ export default () => page(
     `),
 
     callout('warn', 'If the choice is data, this is the wrong component',
-        `A button group submits nothing. When the selection <em>is</em> a value — a plan, a
-         shipping speed, a theme — use <a href="/documentation/pl-radio-group">pl-radio-group</a>:
+        `A button group submits nothing. When the selection <em>is</em> a value: a plan, a
+         shipping speed, a theme. Use <a href="/documentation/pl-radio-group">pl-radio-group</a>:
          it carries a name, submits with the form, and announces itself as a set of options rather
          than a row of unrelated buttons.`),
 
@@ -112,7 +112,7 @@ export default () => page(
 
     ul([
         'The wrapper carries <code>role="group"</code>, so assistive tech announces the buttons as one set. Add <code>aria-label</code> to name it.',
-        'For toggles, <code>aria-pressed</code> on each button is what conveys the state — the styling only reflects it.',
+        'For toggles, <code>aria-pressed</code> on each button is what conveys the state: the styling only reflects it.',
         'Segments keep their own focus rings; the group has no <code>overflow: hidden</code> that would clip them.',
         'The buttons are real <code>&lt;pl-button&gt;</code> elements, so keyboard behaviour is unchanged by grouping.',
     ]),

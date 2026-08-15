@@ -1,5 +1,5 @@
 // ------------------------------
-// theme — light / dark toggle
+// theme: light / dark toggle
 // ------------------------------
 // The entire mechanism is one attribute on <html>, which flips `color-scheme`,
 // which re-resolves every light-dark() token in the library. That's the whole

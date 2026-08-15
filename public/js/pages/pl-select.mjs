@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-select
+// Documentation: pl-select
 // ------------------------------
 
 import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-select',
         title: 'Select',
-        lede: 'A styled dropdown over a real select — write it with plain options.',
+        lede: 'A styled dropdown over a real select. Write it with plain options.',
     }),
 
     meta({
@@ -20,14 +20,14 @@ export default () => page(
     }),
 
     p(`<code>&lt;pl-select&gt;</code> wraps a real <code>&lt;select&gt;</code> and inherits its whole
-       surface — <code>value</code>, <code>selectedIndex</code>, <code>options</code>,
-       <code>multiple</code>, <code>required</code>, the <code>change</code> event — and submits
+       surface: <code>value</code>, <code>selectedIndex</code>, <code>options</code>,
+       <code>multiple</code>, <code>required</code>, the <code>change</code> event, and submits
        with the surrounding <code>&lt;form&gt;</code>. Only the closed control is restyled; the
        dropdown popup stays the OS's, which is what keeps it native on touch and with a keyboard.`),
 
     callout('note', 'Options are adopted, not slotted',
         `A native <code>&lt;select&gt;</code> builds its list from real <code>&lt;option&gt;</code>
-         children — it won't read them through a <code>&lt;slot&gt;</code>. So the component moves
+         children. It won't read them through a <code>&lt;slot&gt;</code>. So the component moves
          the options you write into the internal select on connect (and watches for later
          additions). You still write plain <code>&lt;option&gt;</code>s; they just end up where the
          browser needs them.`),

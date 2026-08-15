@@ -1,5 +1,5 @@
 // ------------------------------
-// Documentation — pl-label
+// Documentation: pl-label
 // ------------------------------
 // The page that explains the Shadow/Light decision by example.
 
@@ -9,7 +9,7 @@ export default () => page(
     header({
         tag: 'pl-label',
         title: 'Label',
-        lede: 'A Light DOM component — because a label that cannot reach its control is not a label.',
+        lede: 'A Light DOM component, because a label that cannot reach its control is not a label.',
     }),
 
     meta({
@@ -21,7 +21,7 @@ export default () => page(
 
     callout('note', 'Why this one is not Shadow DOM',
         `A <code>&lt;label&gt;</code> associates with a control either by wrapping it or by
-         pointing <code>for</code> at its id — and <strong>both mechanisms are scoped to a
+         pointing <code>for</code> at its id, and <strong>both mechanisms are scoped to a
          single DOM tree</strong>. Put the label in a shadow root and it can no longer see the
          control in the page. Put the control in the label's shadow root and the page's
          <code>&lt;form&gt;</code> can no longer see the control. Either way, something that
@@ -29,7 +29,7 @@ export default () => page(
 
     p(`So the split is: the <strong>label is Light</strong>, because its whole job is to reach
        across the document, and the <strong>control stays Shadow</strong>, because it wants its
-       styling encapsulated. This is the general rule for the library — app components are
+       styling encapsulated. This is the general rule for the library: app components are
        Shadow unless their purpose is a document-level relationship.`),
 
     section('Usage'),
@@ -45,7 +45,7 @@ export default () => page(
     section('Hint and error text'),
 
     p(`Hints and errors are wired to the control with <code>aria-describedby</code>, which is
-       ID-based — the same cross-root problem, handled in the same place. An error also sets
+       ID-based: the same cross-root problem, handled in the same place. An error also sets
        <code>aria-invalid</code> on the control and announces itself via
        <code>aria-live</code>.`),
 
@@ -65,7 +65,7 @@ export default () => page(
 
     p(`This is the arrangement the component exists for. The label is Light, the control keeps
        its <code>&lt;input&gt;</code> in a shadow root, and clicking the label text still focuses
-       the real input inside it — because the control's shadow root is attached with
+       the real input inside it, because the control's shadow root is attached with
        <code>delegatesFocus</code>.`),
 
     code(`
@@ -75,14 +75,14 @@ export default () => page(
 
     callout('warn', 'Custom elements are not labelable by default',
         `Wrapping a plain custom element in a <code>&lt;label&gt;</code> does <em>not</em>
-         forward clicks to it — only form-associated or natively labelable elements get that
+         forward clicks to it, only form-associated or natively labelable elements get that
          for free. <code>&lt;pl-label&gt;</code> forwards the click by hand, and
          <code>delegatesFocus</code> makes it land on the real input rather than the host.`),
 
     section('Required and disabled'),
 
     p(`Both are forwarded to the control, so the state is set in one place. The required marker
-       is <code>aria-hidden</code> — <code>required</code> on the control is what actually
+       is <code>aria-hidden</code>: <code>required</code> on the control is what actually
        conveys it, and announcing "star" on top of that is noise.`),
 
     demo(`
@@ -102,9 +102,9 @@ export default () => page(
     table(
         ['Prop', 'Type', 'Default', 'Description'],
         [
-            { cells: ['<code>text</code>', '<code>String</code>', '—', 'The label text.'] },
-            { cells: ['<code>hint</code>', '<code>String</code>', '—', 'Supporting text, linked via <code>aria-describedby</code>.'] },
-            { cells: ['<code>error</code>', '<code>String</code>', '—', 'Error text. Sets <code>aria-invalid</code> and announces politely.'] },
+            { cells: ['<code>text</code>', '<code>String</code>', ': ', 'The label text.'] },
+            { cells: ['<code>hint</code>', '<code>String</code>', ': ', 'Supporting text, linked via <code>aria-describedby</code>.'] },
+            { cells: ['<code>error</code>', '<code>String</code>', ': ', 'Error text. Sets <code>aria-invalid</code> and announces politely.'] },
             { cells: ['<code>required</code>', '<code>Boolean</code>', '<code>false</code>', 'Shows the marker and forwards <code>required</code> to the control.'] },
             { cells: ['<code>disabled</code>', '<code>Boolean</code>', '<code>false</code>', 'Dims the label and forwards <code>disabled</code> to the control.'] },
         ],
@@ -113,11 +113,11 @@ export default () => page(
     section('Styling'),
 
     p(`Being Light DOM, this component has no shadow root to adopt a stylesheet onto. Its CSS is
-       injected into the document once, inside <code>@layer pl-components</code> — so your own
+       injected into the document once, inside <code>@layer pl-components</code>, so your own
        unlayered CSS always wins and you never have to fight specificity to restyle it.`),
 
     code(`
-        /* No layer needed on your side — unlayered CSS beats any layer. */
+        /* No layer needed on your side: unlayered CSS beats any layer. */
         pl-label {
             font-size: 1rem;
             letter-spacing: 0.01em;
