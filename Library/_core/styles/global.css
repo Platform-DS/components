@@ -1,0 +1,644 @@
+/*------------------------------------------------
+  Platform Components: global starter stylesheet
+
+  OPTIONAL. Every component works without this file, because each one carries
+  a fallback in every var() it reads: `var(--pl-color-ink, #111827)` resolves
+  with or without a token sheet. Nothing here is a dependency.
+
+  What it gives you is a starting point rather than a blank page:
+
+    1. the design tokens, so components share one palette with your page
+    2. a light reset, so boxes and media behave predictably
+    3. content typography, so text in and AROUND components matches
+
+  Point three is the one that is hard to get any other way. A component's own
+  text is styled inside its shadow root, but SLOTTED content is yours: the
+  paragraph you put inside a <pl-accordion>, the heading inside a <pl-hero>.
+  Without a page-level type style those inherit the browser's defaults and sit
+  next to component text that does not match. This file settles that.
+
+    <link rel="stylesheet" href="@platformdesign/components/global.css">
+
+  ------------------------------------------------
+  Written to be overridden
+  ------------------------------------------------
+  The reset and typography rules are wrapped in :where(), which has ZERO
+  specificity. So a single `h1 { font-size: 3rem }` of your own wins with no
+  !important and no layer juggling, even though the selector here is equally
+  specific on paper. Take what is useful, override the rest by writing normal
+  CSS.
+
+  If you use cascade layers, import it into one and your own layers still win
+  regardless of order:  @import "…/global.css" layer(vendor);
+-------------------------------------------------*/
+
+@import "./tokens.css";
+
+/*------------------------------------------------
+  Reset: the small number of browser defaults that fight a component library
+-------------------------------------------------*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:where(body) {
+  margin: 0;
+  /* Stops a long unbroken string (a URL, a package name) from setting a
+     minimum width for the whole page on a narrow screen. */
+  overflow-wrap: break-word;
+}
+
+/* Replaced elements are inline by default, which leaves the notorious few
+   pixels of descender space under an image sitting in a box. */
+:where(img, picture, video, canvas, svg) {
+  display: block;
+  max-inline-size: 100%;
+}
+
+/* Form controls do not inherit type by default, so a styled page ends up with
+   system-font inputs unless every one is told otherwise. */
+:where(input, button, textarea, select) {
+  font: inherit;
+  color: inherit;
+}
+
+:where(ul, ol) { padding-inline-start: 1.25em; }
+
+/* Last, so it beats the display rules above rather than losing to them. */
+:where([hidden]) { display: none; }
+
+/*------------------------------------------------
+  Typography
+
+  Reads the --pl-* bridge, not the raw contract names, for the same reason the
+  components do: re-point --pl-color-ink and this file follows, while your own
+  --color-* stay yours. See tokens.css.
+-------------------------------------------------*/
+
+:where(body) {
+  font-family: var(--pl-font-family-sans-serif, system-ui, sans-serif);
+  font-size: var(--pl-font-size-base, 1rem);
+  line-height: var(--pl-line-height-medium, 1.5);
+  color: var(--pl-color-ink, #111827);
+  background: var(--pl-color-surface, #ffffff);
+  -webkit-font-smoothing: antialiased;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  margin-block: 0 0.5em;
+  font-family: var(--pl-font-family-display, var(--pl-font-family-sans-serif, system-ui, sans-serif));
+  font-weight: var(--pl-font-weight-bold, 700);
+  line-height: var(--pl-line-height-tight, 1.15);
+  letter-spacing: -0.02em;
+  /* Evens out the last line rather than leaving one orphaned word. */
+  text-wrap: balance;
+}
+
+:where(h1) { font-size: var(--pl-font-size-2xl, 1.75rem); }
+:where(h2) { font-size: var(--pl-font-size-xl, 1.375rem); }
+:where(h3) { font-size: var(--pl-font-size-lg, 1.125rem); }
+:where(h4, h5, h6) { font-size: var(--pl-font-size-base, 1rem); }
+
+:where(p, ul, ol, dl, blockquote, figure, pre) { margin-block: 0 1em; }
+
+/* Avoids a widowed last word without the reflow cost of `balance` on a long
+   run of body copy. */
+:where(p, li) { text-wrap: pretty; }
+
+:where(a) {
+  color: var(--pl-color-primary, #2563EB);
+  text-underline-offset: 0.2em;
+}
+
+:where(small) { font-size: var(--pl-font-size-sm, 0.875rem); }
+
+:where(code, kbd, samp, pre) {
+  font-family: var(--pl-font-family-monospace, ui-monospace, monospace);
+  font-size: 0.9em;
+}
+
+:where(:not(pre) > code) {
+  padding: 0.15em 0.4em;
+  border-radius: var(--pl-border-radius-small, 4px);
+  background: var(--pl-color-surface-sunken, #F3F4F6);
+}
+
+:where(pre) { overflow-x: auto; }
+
+:where(hr) {
+  block-size: 1px;
+  border: 0;
+  background: var(--pl-color-border, #E5E7EB);
+}
+
+/* A focus ring everywhere, in the theme's own focus colour. :focus-visible
+   means it appears for keyboard use and not on a mouse click. */
+:where(:focus-visible) {
+  outline: 2px solid var(--pl-color-focus, #2563EB);
+  outline-offset: 2px;
+}
+
+/*------------------------------------------------
+  Skeleton: the CSS-only counterpart to <pl-skeleton>
+
+  Same shapes, same custom properties, same shimmer, but no JavaScript, so it
+  paints with the first frame of HTML.
+
+  That is the whole point of it. <pl-skeleton> is a Shadow DOM component, so
+  its box does not exist until its module has been fetched and the element
+  upgraded; using it to reserve space above the fold reserves nothing during
+  the window that actually matters. This class has no such window: it is a
+  plain element the browser styles on first paint, which makes it the right
+  tool for holding a layout still while the components inside it load.
+
+    <div class="pl-skeleton" data-variant="circle"></div>
+    <div class="pl-skeleton" data-lines="3"></div>
+
+  Attributes are data-* here rather than bare, because these are page markup
+  rather than a custom element's own API: `lines` on a <div> is not a real
+  attribute, `data-lines` is.
+-------------------------------------------------*/
+
+.pl-skeleton {
+  --_line: var(--skeleton-line, 0.8em);
+  --_gap: var(--skeleton-gap, 0.5rem);
+  --_base: var(--skeleton-color, var(--pl-color-surface-sunken, #F3F4F6));
+  --_sheen: var(--skeleton-sheen, color-mix(in oklab, var(--pl-color-ink, #111827) 6%, var(--_base)));
+
+  display: block;
+  block-size: var(--_line);
+  border-radius: var(--pl-border-radius-small, 4px);
+
+  background-color: var(--_base);
+  background-image: linear-gradient(90deg, transparent, var(--_sheen), transparent);
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+  animation: pl-skeleton-sheen 1.6s ease-in-out infinite;
+}
+
+/* Sized by --skeleton-size so it can be matched to the avatar it stands in for. */
+.pl-skeleton[data-variant="circle"] {
+  inline-size: var(--skeleton-size, 2.5rem);
+  block-size: var(--skeleton-size, 2.5rem);
+  border-radius: var(--pl-border-radius-full, 9999px);
+}
+
+/* Fills whatever box you give it, so an image placeholder takes the same CSS
+   as the image it replaces. */
+.pl-skeleton[data-variant="rect"] {
+  block-size: var(--skeleton-size, 8rem);
+  border-radius: var(--pl-border-radius-medium, 10px);
+}
+
+/*
+  Multi-line, without child elements: the element is cut into bars by a
+  repeating mask, so one <div> draws a whole paragraph.
+
+  Two honest differences from the component, both consequences of having no
+  children to style: the bars are square-cut (a gradient mask cannot round a
+  corner), and every line is full width where <pl-skeleton> shortens its last
+  one. If either matters, use the component, or write one .pl-skeleton per
+  line and set `inline-size` on the last.
+*/
+.pl-skeleton[data-lines] {
+  --_row: calc(var(--_line) + var(--_gap));
+  block-size: calc(var(--_row) * var(--_count, 1) - var(--_gap));
+  border-radius: 0;
+
+  -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 var(--_line), transparent var(--_line) var(--_row));
+  mask-image: repeating-linear-gradient(to bottom, #000 0 var(--_line), transparent var(--_line) var(--_row));
+}
+
+/* CSS cannot read an attribute as a number, so the count is mapped by hand.
+   Past six a skeleton is describing a block of text, not a shape. */
+.pl-skeleton[data-lines="1"] { --_count: 1; }
+.pl-skeleton[data-lines="2"] { --_count: 2; }
+.pl-skeleton[data-lines="3"] { --_count: 3; }
+.pl-skeleton[data-lines="4"] { --_count: 4; }
+.pl-skeleton[data-lines="5"] { --_count: 5; }
+.pl-skeleton[data-lines="6"] { --_count: 6; }
+
+@keyframes pl-skeleton-sheen {
+  from { background-position: -60% 0; }
+  to { background-position: 160% 0; }
+}
+
+/* The bars stay, the sweep stops. A skeleton still does its job standing
+   still, which is not true of a spinner. */
+@media (prefers-reduced-motion: reduce) {
+  .pl-skeleton {
+    animation: none;
+    background-image: none;
+  }
+}
+
+/*------------------------------------------------
+  Pre-upgrade styles: holding the layout still
+
+  A custom element is `display: inline` with unstyled children until its module
+  has been fetched and `customElements.define()` has run. Its real box does not
+  exist yet, so the page paints one size and then jumps to another. :defined
+  matches an element that has been upgraded, so :not(:defined) is exactly that
+  window, and the only place a page can style it: a component cannot style its
+  own host beforehand, because the stylesheet lives in a shadow root that has
+  not been attached.
+
+  Two treatments, chosen per component by one question: is the markup you wrote
+  the thing the component ends up showing?
+
+    MATCH THE BOX. <pl-button>Save</pl-button> and <pl-code-block>npm i …</…>
+    both carry real text that survives the upgrade. Give the host the same
+    padding, type and colours the component will use and the text sits in the
+    right place from the first paint, then simply gains a shadow root. Nothing
+    is hidden, so it still reads and still works with no JavaScript at all.
+
+    RESERVE A SKELETON. <pl-icon>, <pl-avatar> and the progress bars render
+    from attributes, not from children, so there is nothing to show yet. These
+    get a shimmer at the size the real thing will be.
+
+  Every colour below reads the component's OWN hook first
+  (--button-background before --pl-color-primary). That matters: a page that
+  themes a button to yellow themes this too, instead of painting a blue button
+  that flips colour the instant the module lands.
+-------------------------------------------------*/
+
+/* Match the box: button ------------------------------------------------- */
+
+pl-button:not(:defined),
+pl-button-link:not(:defined) {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pl-size-8, 0.5rem);
+  vertical-align: middle;
+
+  /* The same floor the upgraded button meets, or the pre-upgrade box is the
+     6px shorter one that the control-height token exists to prevent. */
+  min-block-size: var(--button-height, var(--pl-control-height-md, 2.625rem));
+  padding-block: var(--pl-size-8, 0.5rem);
+  padding-inline: var(--pl-size-16, 1rem);
+
+  font-family: var(--pl-font-family-sans-serif, system-ui, sans-serif);
+  font-size: var(--pl-font-size-base, 1rem);
+  font-weight: var(--pl-font-weight-medium, 500);
+  line-height: var(--pl-line-height-tight, 1.15);
+  text-decoration: none;
+
+  color: var(--button-color, var(--pl-color-on-primary, #FFFFFF));
+  background: var(--button-background, var(--pl-color-primary, #2563EB));
+  border: var(--pl-border-width-small, 1px) solid var(--button-border, transparent);
+  border-radius: var(--button-radius, var(--pl-control-radius, 8px));
+  cursor: pointer;
+}
+
+pl-button[size="sm"]:not(:defined),
+pl-button-link[size="sm"]:not(:defined) {
+  min-block-size: var(--button-height, var(--pl-control-height-sm, 2rem));
+  padding-block: var(--pl-size-4, 0.25rem);
+  padding-inline: var(--pl-size-12, 0.75rem);
+  font-size: var(--pl-font-size-sm, 0.875rem);
+}
+
+pl-button[size="lg"]:not(:defined),
+pl-button-link[size="lg"]:not(:defined) {
+  min-block-size: var(--button-height, var(--pl-control-height-lg, 3.25rem));
+  padding-block: var(--pl-size-12, 0.75rem);
+  padding-inline: var(--pl-size-24, 1.5rem);
+  font-size: var(--pl-font-size-lg, 1.125rem);
+}
+
+pl-button[full]:not(:defined) { display: flex; inline-size: 100%; }
+
+/* The transparent variants, so a secondary button does not start out solid
+   blue and then empty itself. */
+pl-button[variant="secondary"]:not(:defined),
+pl-button[variant="ghost"]:not(:defined) {
+  color: var(--button-color, var(--pl-color-ink, #111827));
+  background: var(--button-background, transparent);
+}
+
+pl-button[variant="secondary"]:not(:defined) {
+  border-color: var(--button-border, var(--pl-color-border-strong, #9CA3AF));
+}
+
+pl-button[variant="danger"]:not(:defined) {
+  color: var(--button-color, var(--pl-color-on-error, #FFFFFF));
+  background: var(--button-background, var(--pl-color-error, #B91C1C));
+}
+
+/* Match the box: code block --------------------------------------------- */
+
+/*
+  The source text is already in the element, so giving it the same monospace
+  metrics and padding the component uses makes the height come out right for
+  ANY number of lines, with no count to hard-code. The extra block-start
+  padding stands in for the header bar (language label and copy button) that
+  the shadow root will add above the code.
+*/
+pl-code-block:not(:defined) {
+  /*
+    Stands in for the header bar (language label, copy button) that the shadow
+    root adds above the code. Measured rather than derived: it is 0.5rem of
+    padding plus a copy button whose height comes from the monospace font's
+    own `normal` line-height, not from any token, so a calc() built out of
+    tokens drifts as soon as the font stack changes. Override it if you have
+    restyled the header.
+  */
+  --_head: var(--code-block-head-reserve, 2.111rem);
+
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+
+  padding: calc(var(--pl-size-16, 1rem) + var(--_head)) var(--pl-size-16, 1rem) var(--pl-size-16, 1rem);
+
+  font-family: var(--pl-font-family-monospace, ui-monospace, monospace);
+  font-size: var(--pl-font-size-sm, 0.875rem);
+  line-height: 1.65;
+  white-space: pre;
+  tab-size: 2;
+
+  color: var(--code-block-color, #e6e6e6);
+  background: var(--code-block-background, #12151b);
+  border: 1px solid var(--code-block-border, #2a2f37);
+  border-radius: var(--pl-border-radius-medium, 10px);
+}
+
+/* Reserve a skeleton: attribute-driven components ------------------------ */
+
+/*
+  These render from attributes rather than from children, so there is nothing
+  meaningful to paint yet. They borrow the .pl-skeleton shimmer at the size the
+  real component will occupy.
+*/
+pl-avatar:not(:defined),
+pl-loading:not(:defined),
+pl-progress:not(:defined),
+pl-meter:not(:defined),
+pl-skeleton:not(:defined) {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: var(--skeleton-color, var(--pl-color-surface-sunken, #F3F4F6));
+  background-image: linear-gradient(90deg, transparent, var(--skeleton-sheen, color-mix(in oklab, var(--pl-color-ink, #111827) 6%, var(--pl-color-surface-sunken, #F3F4F6))), transparent);
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+  animation: pl-skeleton-sheen 1.6s ease-in-out infinite;
+  border-radius: var(--pl-border-radius-small, 4px);
+}
+
+/*
+  An icon reserves its box and shows NOTHING, no shimmer. It is small, usually
+  inline in a line of text, and a grey box flashing inside a sentence for the
+  40ms before the sprite arrives is more distracting than the gap it fills. The
+  rule of thumb for the two treatments: shimmer when the element is big enough
+  that an empty space would look broken, reserve silently when a placeholder
+  would be noisier than the gap.
+
+  Square, and sized by its own `size` attribute, which CSS cannot read: 1em
+  tracks the surrounding text and is right far more often than a fixed pixel
+  value. Pass --icon-reserve for anything unusual.
+*/
+pl-icon:not(:defined) {
+  display: inline-block;
+  vertical-align: middle;
+  inline-size: var(--icon-reserve, 1em);
+  block-size: var(--icon-reserve, 1em);
+}
+
+pl-loading:not(:defined) {
+  inline-size: var(--loading-reserve, 1.5rem);
+  block-size: var(--loading-reserve, 1.5rem);
+  border-radius: var(--pl-border-radius-full, 9999px);
+}
+
+pl-avatar:not(:defined) {
+  inline-size: var(--avatar-size, 2.5rem);
+  block-size: var(--avatar-size, 2.5rem);
+  border-radius: var(--pl-border-radius-full, 9999px);
+}
+
+pl-avatar[size="xs"]:not(:defined) { --avatar-size: 1.5rem; }
+pl-avatar[size="sm"]:not(:defined) { --avatar-size: 2rem; }
+pl-avatar[size="lg"]:not(:defined) { --avatar-size: 3.5rem; }
+pl-avatar[size="xl"]:not(:defined) { --avatar-size: 5rem; }
+pl-avatar[shape="square"]:not(:defined) { border-radius: var(--pl-border-radius-medium, 10px); }
+
+/* Both are full-width bars of the same height as the real track. */
+pl-progress:not(:defined),
+pl-meter:not(:defined) {
+  display: block;
+  inline-size: 100%;
+  block-size: var(--progress-height, var(--meter-height, 0.5rem));
+  border-radius: var(--pl-border-radius-full, 9999px);
+}
+
+/* The skeleton component and the skeleton class agree on their defaults, so
+   this is the same box either way round. */
+pl-skeleton:not(:defined) {
+  display: block;
+  block-size: var(--skeleton-line, 0.8em);
+}
+
+pl-skeleton[variant="circle"]:not(:defined) {
+  display: inline-block;
+  inline-size: var(--skeleton-size, 2.5rem);
+  block-size: var(--skeleton-size, 2.5rem);
+  border-radius: var(--pl-border-radius-full, 9999px);
+}
+
+pl-skeleton[variant="rect"]:not(:defined) {
+  block-size: var(--skeleton-size, 8rem);
+  border-radius: var(--pl-border-radius-medium, 10px);
+}
+
+/* Match the box: chip and checkbox --------------------------------------- */
+
+/*
+  Both carry their own label text, so the same trick as the button works: give
+  the host the padding and type it will end up with and the text lands in the
+  right place immediately.
+*/
+pl-chip:not(:defined) {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--chip-gap, 0.375rem);
+  max-inline-size: 100%;
+
+  padding-inline: var(--chip-padding-inline, 0.75rem);
+  padding-block: var(--chip-padding-block, 0.3125rem);
+
+  font-family: var(--pl-font-family-sans-serif, system-ui, sans-serif);
+  font-size: var(--pl-font-size-sm, 0.875rem);
+  line-height: var(--pl-line-height-tight, 1.15);
+
+  color: var(--chip-color, var(--pl-color-ink, #111827));
+  background: var(--chip-background, var(--pl-color-surface, #fff));
+  border: var(--pl-border-width-small, 1px) solid var(--chip-border, var(--pl-color-border, #E5E7EB));
+  border-radius: var(--chip-radius, var(--pl-border-radius-full, 9999px));
+}
+
+/*
+  The box itself is drawn in the shadow root, so before upgrade there is only
+  the label. A ::before of the control's size, plus the same gap, keeps the
+  row the right height and the text at the right offset.
+*/
+pl-checkbox:not(:defined),
+pl-radio:not(:defined) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pl-size-8, 0.5rem);
+  font-size: var(--pl-font-size-base, 1rem);
+  line-height: var(--pl-line-height-tight, 1.15);
+}
+
+pl-checkbox:not(:defined)::before,
+pl-radio:not(:defined)::before {
+  content: "";
+  flex: none;
+  inline-size: 1.15em;
+  block-size: 1.15em;
+  border: var(--pl-border-width-small, 1px) solid var(--pl-color-border-strong, #9CA3AF);
+  border-radius: var(--pl-border-radius-small, 4px);
+}
+
+pl-radio:not(:defined)::before { border-radius: var(--pl-border-radius-full, 9999px); }
+
+/* Form fields: the box, not the chrome ---------------------------------- */
+
+/*
+  An empty field has nothing to show either, but a shimmering input reads as
+  broken rather than loading. These get the field's outline at the field's
+  height, so the form holds its shape quietly.
+*/
+pl-input:not(:defined),
+pl-search:not(:defined),
+pl-select:not(:defined),
+pl-textarea:not(:defined) {
+  box-sizing: border-box;
+  display: block;
+  inline-size: 100%;
+
+  min-block-size: var(--field-height, var(--pl-control-height-md, 2.625rem));
+  padding-block: var(--pl-size-8, 0.5rem);
+  padding-inline: var(--pl-size-12, 0.75rem);
+  font-size: var(--pl-font-size-base, 1rem);
+  line-height: var(--pl-line-height-medium, 1.5);
+
+  background: var(--field-background, var(--pl-color-surface, #fff));
+  border: var(--pl-border-width-small, 1px) solid var(--field-border, var(--pl-color-border, #cfcfcf));
+  border-radius: var(--field-radius, var(--pl-control-radius, 8px));
+}
+
+pl-textarea:not(:defined) { block-size: 6rem; }
+
+/* Light DOM components that build themselves from ATTRIBUTES --------------- */
+
+/*
+  These are the awkward ones. A Light DOM component keeps its children in the
+  page, so most of what it shows is already there before upgrade and needs no
+  help. But several BUILD part of themselves out of attributes:
+  <pl-ratings value="4"> has no stars in the markup, <pl-label text="Email">
+  has no visible label. That content does not exist yet, so there is nothing
+  to reserve unless the page reserves it.
+
+  Nothing here hides anything: the children stay visible and readable
+  throughout, exactly as they would with no JavaScript at all. These rules only
+  add the space the generated parts are about to occupy.
+*/
+
+/* The stars are drawn from `value` and `max`, so pre-upgrade the element is
+   empty. One row of star-height keeps the line from collapsing. */
+pl-ratings:not(:defined) {
+  display: inline-block;
+  block-size: var(--star-size, 1.5rem);
+}
+
+/* The track is generated; the label text is the author's. A ::before of the
+   track's exact size, plus the row gap, holds both in place. */
+pl-switch:not(:defined) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pl-size-8, 0.5rem);
+}
+
+pl-switch:not(:defined)::before {
+  content: "";
+  flex: none;
+  inline-size: var(--switch-width, 2.5rem);
+  block-size: var(--switch-height, 1.4rem);
+  background: var(--pl-color-border-strong, #9CA3AF);
+  border-radius: var(--pl-border-radius-full, 9999px);
+}
+
+/*
+  The label sits ABOVE the field and comes from the `text` attribute, so the
+  field starts one line too high and drops when the component upgrades.
+  content: attr(text) is the rare case where CSS can read an attribute, so this
+  does not merely reserve the line, it shows the real label immediately.
+*/
+pl-label:not(:defined) {
+  display: block;
+  font-family: var(--pl-font-family-sans-serif, system-ui, sans-serif);
+  font-size: var(--pl-font-size-sm, 0.875rem);
+  font-weight: var(--pl-font-weight-medium, 500);
+  line-height: var(--pl-line-height-medium, 1.5);
+}
+
+pl-label[text]:not(:defined)::before {
+  content: attr(text);
+  display: block;
+  margin-block-end: var(--pl-size-4, 0.25rem);
+}
+
+/* Padding, the accent rule and the icon column, all of which the component
+   adds on connect. */
+pl-feedback:not(:defined) {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--pl-size-12, 0.75rem);
+  padding: var(--feedback-padding, var(--pl-size-12, 0.75rem) var(--pl-size-16, 1rem));
+  font-size: var(--pl-font-size-sm, 0.875rem);
+  line-height: var(--pl-line-height-medium, 1.5);
+  border: var(--pl-border-width-small, 1px) solid transparent;
+  border-inline-start: 3px solid var(--pl-color-primary, #2563EB);
+  border-radius: var(--pl-border-radius-medium, 10px);
+}
+
+pl-feedback:not(:defined)::before {
+  content: "";
+  inline-size: 1.15rem;
+  block-size: 1.15rem;
+}
+
+pl-feedback:not(:defined) > * { grid-column: 2; margin: 0; }
+
+/* The trigger row gains padding on both sides of the heading. */
+pl-accordion:not(:defined) {
+  display: block;
+  padding-block: var(--accordion-padding-block, var(--pl-size-16, 1rem));
+  border-block-end: var(--pl-border-width-small, 1px) solid var(--pl-color-border, #E5E7EB);
+}
+
+pl-accordion:not(:defined) > :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  font-size: var(--pl-font-size-base, 1rem);
+  font-weight: var(--pl-font-weight-medium, 500);
+  line-height: var(--pl-line-height-tight, 1.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  pl-avatar:not(:defined),
+  pl-loading:not(:defined),
+  pl-progress:not(:defined),
+  pl-meter:not(:defined),
+  pl-skeleton:not(:defined) {
+    animation: none;
+    background-image: none;
+  }
+}

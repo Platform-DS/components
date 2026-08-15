@@ -30,9 +30,9 @@ export default () => page(
     code(`import '@platformdesign/components/pl-video';`, 'js'),
 
     code(`
-        <pl-video src="clip.mp4" poster="poster.jpg" controls ratio></pl-video>
+        <pl-video src="clip.mp4" poster="poster.jpg" controls data-ratio></pl-video>
 
-        <pl-video controls poster="poster.jpg" ratio>
+        <pl-video controls poster="poster.jpg" data-ratio>
             <source src="clip.webm" type="video/webm">
             <source src="clip.mp4" type="video/mp4">
             <track kind="captions" src="captions.vtt" srclang="en" label="English" default>
@@ -71,8 +71,8 @@ export default () => page(
             { cells: ['<code>src</code> / <code>poster</code>', '<code>String</code>', 'Native.'] },
             { cells: ['<code>controls</code>, <code>autoplay</code>, <code>loop</code>, <code>muted</code>, <code>playsinline</code>', '<code>Boolean</code>', 'Native.'] },
             { cells: ['<code>preload</code>', '<code>String</code>', '<code>none</code>, <code>metadata</code>, <code>auto</code>.'] },
-            { cells: ['<code>ratio</code>', '<em>presentational</em>', 'Hold a fixed aspect box. See below.'] },
-            { cells: ['<code>fit</code>', '<code>String</code>', '<code>contain</code> to letterbox instead of cropping.'] },
+            { cells: ['<code>data-ratio</code>', '<em>presentational</em>', 'Hold a fixed aspect box. See below.'] },
+            { cells: ['<code>data-fit</code>', '<code>String</code>', '<code>contain</code> to letterbox instead of cropping.'] },
         ],
     ),
 
@@ -81,7 +81,7 @@ export default () => page(
     table(
         ['Property', 'Description'],
         [
-            { cells: ['<code>--video-ratio</code>', 'The shape held by <code>ratio</code>. Defaults to <code>16 / 9</code>.'] },
+            { cells: ['<code>--video-ratio</code>', 'The shape held by <code>data-ratio</code>. Defaults to <code>16 / 9</code>.'] },
             { cells: ['<code>--video-radius</code>', 'Corner radius.'] },
             { cells: ['<code>--video-background</code>', 'Behind the frame: black by default, as letterboxing expects.'] },
         ],
@@ -93,6 +93,6 @@ export default () => page(
         'Ship a <code>&lt;track kind="captions"&gt;</code>. It is the single highest-value thing on this page, and it only works because the track is adopted into the real video.',
         'Avoid <code>autoplay</code> with sound. If you must autoplay, pair it with <code>muted</code>: browsers block it otherwise, and it is hostile besides.',
         '<code>controls</code> gives you the browser\'s own player: keyboard operable, labelled, and familiar. Replacing it means rebuilding all of that.',
-        'Set <code>ratio</code> to reserve the frame before metadata loads, so the page does not jump.',
+        'Set <code>data-ratio</code> to reserve the frame before metadata loads, so the page does not jump.',
     ]),
 );

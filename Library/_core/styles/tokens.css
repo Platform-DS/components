@@ -127,11 +127,43 @@
     filled control always pairs --color-<intent> with --color-on-<intent>, and
     the on-colour is white in every theme, so a button never inverts into dark
     text on a saturated fill.
+
+    ----------------------------------------------
+    Interaction states are DERIVED, not picked
+    ----------------------------------------------
+    :hover and :active are mixed from the fill itself rather than being second
+    and third hand-chosen shades. That is what makes theming a one-line job:
+    set --color-primary and the hover and active states follow it, instead of
+    leaving you to find three harmonious blues and keep them in step.
+
+    States DARKEN, in both themes, because the on-colour is always white. The
+    obvious alternative, lightening on a dark page so the control lifts off the
+    background, was measured and rejected: it takes white text on the primary
+    fill from 5.17:1 to 4.18:1 on hover and 3.53:1 on press, under the 4.5:1
+    this file promises every solid fill will carry. A label has to stay
+    readable in the state a pointer is sitting on.
+
+    The cost is the other direction: on a dark page a darkened fill loses
+    contrast against the background (3.66:1 at rest, about 2.8:1 hovered). That
+    is the acceptable half of the trade. Fill-vs-page contrast exists so a
+    control can be FOUND, and the resting state still carries 3:1; a hovered or
+    pressed control has already been found, by the pointer that is on it.
+
+    If your palette puts DARK text on light fills, invert the mix:
+
+        :root { --color-state-mix: #FFFFFF; }
   ==============================================*/
+
+  /* How far a state moves the fill toward --color-state-mix. Small on purpose:
+     enough to register as feedback, not enough to read as a different colour. */
+  --color-state-mix:            #000000;
+  --color-state-hover-amount:   12%;
+  --color-state-active-amount:  22%;
 
   /* Primary */
   --color-primary:              var(--color-blue-600);
-  --color-primary-hover:        var(--color-blue-700);
+  --color-primary-hover:          color-mix(in oklab, var(--color-primary) calc(100% - var(--color-state-hover-amount)), var(--color-state-mix));
+  --color-primary-active:         color-mix(in oklab, var(--color-primary) calc(100% - var(--color-state-active-amount)), var(--color-state-mix));
   --color-on-primary:           #FFFFFF;
   --color-primary-surface:      var(--color-blue-50);
   --color-primary-border:       var(--color-blue-200);
@@ -140,7 +172,8 @@
 
   /* Success */
   --color-success:              var(--color-green-700);
-  --color-success-hover:        var(--color-green-800);
+  --color-success-hover:          color-mix(in oklab, var(--color-success) calc(100% - var(--color-state-hover-amount)), var(--color-state-mix));
+  --color-success-active:         color-mix(in oklab, var(--color-success) calc(100% - var(--color-state-active-amount)), var(--color-state-mix));
   --color-on-success:           #FFFFFF;
   --color-success-surface:      var(--color-green-50);
   --color-success-border:       var(--color-green-200);
@@ -149,7 +182,8 @@
 
   /* Warning */
   --color-warning:              var(--color-amber-700);
-  --color-warning-hover:        var(--color-amber-800);
+  --color-warning-hover:          color-mix(in oklab, var(--color-warning) calc(100% - var(--color-state-hover-amount)), var(--color-state-mix));
+  --color-warning-active:         color-mix(in oklab, var(--color-warning) calc(100% - var(--color-state-active-amount)), var(--color-state-mix));
   --color-on-warning:           #FFFFFF;
   --color-warning-surface:      var(--color-amber-50);
   --color-warning-border:       var(--color-amber-200);
@@ -158,7 +192,8 @@
 
   /* Error */
   --color-error:                var(--color-red-700);
-  --color-error-hover:          var(--color-red-800);
+  --color-error-hover:            color-mix(in oklab, var(--color-error) calc(100% - var(--color-state-hover-amount)), var(--color-state-mix));
+  --color-error-active:           color-mix(in oklab, var(--color-error) calc(100% - var(--color-state-active-amount)), var(--color-state-mix));
   --color-on-error:             #FFFFFF;
   --color-error-surface:        var(--color-red-50);
   --color-error-border:         var(--color-red-200);
@@ -182,6 +217,26 @@
   --size-192: 12rem;
   --size-256: 16rem;
   --size-384: 24rem;
+
+  /* CONTROL HEIGHT — the one dimension a button and a field must agree on.
+
+     Left to their own padding they do not: a button's label sits on a tight
+     line height and a field's on a comfortable one, so the same padding
+     produced a 36px button beside a 42px input. Side by side in a form that
+     reads as a mistake, and it is the sort that no single component is wrong
+     about. So the height is a token both of them meet, and padding only sets
+     the horizontal.
+
+     Change these and every control follows, which is the point: a denser app
+     is one line, not a per-component audit. */
+  --control-height-sm: 2rem;      /* 32px */
+  --control-height-md: 2.625rem;  /* 42px */
+  --control-height-lg: 3.25rem;   /* 52px */
+
+  /* And the other dimension they have to agree on. A button at 4px beside an
+     input at 8px reads as two components that were drawn separately, which is
+     what they were. One token, so a rounder or squarer system is one edit. */
+  --control-radius: var(--border-radius-medium);
 
   /*==============================================
     TYPOGRAPHY
@@ -315,9 +370,18 @@
   --pl-color-border-strong:  var(--color-border-strong);
   --pl-color-focus:          var(--color-focus);
 
+  /* The state-derivation knobs, so a component can compute its own :hover and
+     :active from whatever fill it actually has rather than from a fixed token.
+     That is what lets `--button-background: hotpink` produce a correct hotpink
+     hover with nothing else set. */
+  --pl-color-state-mix:           var(--color-state-mix);
+  --pl-color-state-hover-amount:  var(--color-state-hover-amount);
+  --pl-color-state-active-amount: var(--color-state-active-amount);
+
   /* Intents — solid fill, its hover, and the on-colour carried on top */
   --pl-color-primary:        var(--color-primary);
   --pl-color-primary-hover:  var(--color-primary-hover);
+  --pl-color-primary-active: var(--color-primary-active);
   --pl-color-on-primary:     var(--color-on-primary);
   --pl-color-primary-surface: var(--color-primary-surface);
   --pl-color-primary-border:  var(--color-primary-border);
@@ -325,14 +389,17 @@
 
   --pl-color-success:        var(--color-success);
   --pl-color-success-hover:  var(--color-success-hover);
+  --pl-color-success-active: var(--color-success-active);
   --pl-color-on-success:     var(--color-on-success);
 
   --pl-color-warning:        var(--color-warning);
   --pl-color-warning-hover:  var(--color-warning-hover);
+  --pl-color-warning-active: var(--color-warning-active);
   --pl-color-on-warning:     var(--color-on-warning);
 
   --pl-color-error:          var(--color-error);
   --pl-color-error-hover:    var(--color-error-hover);
+  --pl-color-error-active:   var(--color-error-active);
   --pl-color-on-error:       var(--color-on-error);
 
   /* Size */
@@ -346,6 +413,11 @@
   --pl-size-48:  var(--size-48);
   --pl-size-64:  var(--size-64);
   --pl-size-96:  var(--size-96);
+
+  --pl-control-height-sm: var(--control-height-sm);
+  --pl-control-height-md: var(--control-height-md);
+  --pl-control-height-lg: var(--control-height-lg);
+  --pl-control-radius:    var(--control-radius);
 
   /* Typography */
   --pl-font-family-sans-serif: var(--font-family-sans-serif);

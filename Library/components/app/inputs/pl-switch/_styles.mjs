@@ -88,7 +88,7 @@ export const STYLES = /*css*/`
   pl-switch .pl-switch__label:empty { display: none; }
 
   /* Label first, control last. */
-  pl-switch[label-position="start"] .pl-switch__wrap { flex-direction: row-reverse; }
+  pl-switch[data-label-position="start"] .pl-switch__wrap { flex-direction: row-reverse; }
 
   @media (prefers-reduced-motion: reduce) {
     pl-switch .pl-switch__track,

@@ -73,7 +73,7 @@ export const STYLES = /*css*/`
     can be positioned like any ordinary box.
   -------------------------------------------------*/
 
-  pl-badge[standalone] > .pl-badge__badge {
+  pl-badge[data-standalone] > .pl-badge__badge {
     position: static;
     translate: none;
   }
@@ -81,7 +81,7 @@ export const STYLES = /*css*/`
   /*------------------------------------------------
     Dot — a state, not a quantity. No text, so it collapses to a circle.
   -------------------------------------------------*/
-  pl-badge[dot] > .pl-badge__badge {
+  pl-badge[data-dot] > .pl-badge__badge {
     min-inline-size: var(--badge-dot-size, 0.625rem);
     inline-size: var(--badge-dot-size, 0.625rem);
     block-size: var(--badge-dot-size, 0.625rem);
@@ -93,27 +93,27 @@ export const STYLES = /*css*/`
     of it sits outside the owner's box.
   -------------------------------------------------*/
   pl-badge > .pl-badge__badge,
-  pl-badge[position="top-end"] > .pl-badge__badge {
+  pl-badge[data-position="top-end"] > .pl-badge__badge {
     inset-block-start: var(--badge-offset-block, 0);
     inset-inline-end: var(--badge-offset-inline, 0);
     translate: 50% -50%;
   }
 
-  pl-badge[position="top-start"] > .pl-badge__badge {
+  pl-badge[data-position="top-start"] > .pl-badge__badge {
     inset-block-start: var(--badge-offset-block, 0);
     inset-inline-start: var(--badge-offset-inline, 0);
     inset-inline-end: auto;
     translate: -50% -50%;
   }
 
-  pl-badge[position="bottom-end"] > .pl-badge__badge {
+  pl-badge[data-position="bottom-end"] > .pl-badge__badge {
     inset-block-start: auto;
     inset-block-end: var(--badge-offset-block, 0);
     inset-inline-end: var(--badge-offset-inline, 0);
     translate: 50% 50%;
   }
 
-  pl-badge[position="bottom-start"] > .pl-badge__badge {
+  pl-badge[data-position="bottom-start"] > .pl-badge__badge {
     inset-block-start: auto;
     inset-block-end: var(--badge-offset-block, 0);
     inset-inline-start: var(--badge-offset-inline, 0);
@@ -125,22 +125,22 @@ export const STYLES = /*css*/`
     Intents. Every fill pairs with its own on-color, so the text stays
     readable in either theme — the library-wide rule for coloured fills.
   -------------------------------------------------*/
-  pl-badge[intent="success"] > .pl-badge__badge {
+  pl-badge[data-intent="success"] > .pl-badge__badge {
     background: var(--badge-background, var(--pl-color-success, #15803D));
     color: var(--badge-color, var(--pl-color-on-success, #fff));
   }
 
-  pl-badge[intent="warning"] > .pl-badge__badge {
+  pl-badge[data-intent="warning"] > .pl-badge__badge {
     background: var(--badge-background, var(--pl-color-warning, #B45309));
     color: var(--badge-color, var(--pl-color-on-warning, #fff));
   }
 
-  pl-badge[intent="error"] > .pl-badge__badge {
+  pl-badge[data-intent="error"] > .pl-badge__badge {
     background: var(--badge-background, var(--pl-color-error, #B91C1C));
     color: var(--badge-color, var(--pl-color-on-error, #fff));
   }
 
-  pl-badge[intent="neutral"] > .pl-badge__badge {
+  pl-badge[data-intent="neutral"] > .pl-badge__badge {
     background: var(--badge-background, var(--pl-color-border-strong, #9CA3AF));
     color: var(--badge-color, var(--pl-color-surface, #fff));
   }

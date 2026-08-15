@@ -16,13 +16,13 @@ export const STYLES = /*css*/`
 
   /* Boxed — a card around the stack. The last child's own rule would double
      with the box's edge, so it is dropped. */
-  pl-accordion-group[variant="card"] {
+  pl-accordion-group[data-variant="card"] {
     border: var(--pl-border-width-small, 1px) solid var(--accordion-border, var(--pl-color-border, #E5E7EB));
     border-radius: var(--pl-border-radius-large, 16px);
     background: var(--pl-color-surface, #fff);
     padding-inline: var(--pl-size-16, 1rem);
   }
 
-  pl-accordion-group[variant="card"] > pl-accordion:last-child { border-block-end: 0; }
+  pl-accordion-group[data-variant="card"] > pl-accordion:last-child { border-block-end: 0; }
 }
 `;

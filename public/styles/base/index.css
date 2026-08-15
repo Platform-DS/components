@@ -2,5 +2,8 @@
   Import all Base Styles
 -------------------------------------------------*/
 
+/* Fonts first: the @font-face must be known before anything asks for the
+   family, or the first paint uses the fallback and then reflows. */
+@import "./_fonts.css";
 @import "./_reset.css";
 @import "./_typography.css";

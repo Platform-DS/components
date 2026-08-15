@@ -53,14 +53,14 @@ export default () => page(
 
     demo(`
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(12rem,1fr));gap:1rem;inline-size:100%">
-            <pl-profile-card align="center">
+            <pl-profile-card data-align="center">
                 <div data-cover><img src="${WAVE('zk28fq')}" alt=""></div>
                 <pl-avatar data-avatar size="xl" initials="GH" alt=""></pl-avatar>
                 <h3 data-name>Grace Hopper</h3>
                 <p data-role>Rear Admiral</p>
                 <div data-actions><pl-button size="sm" variant="secondary">Message</pl-button></div>
             </pl-profile-card>
-            <pl-profile-card align="center">
+            <pl-profile-card data-align="center">
                 <div data-cover><img src="${WAVE('m4t7xz')}" alt=""></div>
                 <pl-avatar data-avatar size="xl" initials="KJ" alt=""></pl-avatar>
                 <h3 data-name>Katherine Johnson</h3>
@@ -109,7 +109,7 @@ export default () => page(
     table(
         ['Name', 'Description'],
         [
-            { cells: ['<code>align="center"</code>', 'Centres the text, avatar, meta and actions. The cover stays full bleed.'] },
+            { cells: ['<code>data-align="center"</code>', 'Centres the text, avatar, meta and actions. The cover stays full bleed.'] },
             { cells: ['<code>--profile-avatar-overlap</code>', 'How far the avatar rides up. Defaults to <code>2.5rem</code>: half of an <code>xl</code> avatar; set it to half of whatever size you use.'] },
             { cells: ['<code>--profile-cover-ratio</code>', 'Aspect ratio of the cover. Defaults to <code>4 / 1</code>.'] },
             { cells: ['<code>--card-padding</code> / <code>--card-background</code> / <code>--card-border</code> / <code>--card-radius</code>', 'Shared with <a href="/documentation/pl-product-card">pl-product-card</a>.'] },

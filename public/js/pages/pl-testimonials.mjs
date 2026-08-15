@@ -64,7 +64,7 @@ export default () => page(
     p('Any image in the footer is sized and rounded automatically.'),
 
     demo(`
-        <pl-testimonials surface="muted">
+        <pl-testimonials data-surface="muted">
             <ul>
                 <li>
                     <blockquote>
@@ -100,7 +100,7 @@ export default () => page(
 
     section('Attributes'),
 
-    p('The shared <code>surface</code>, <code>align</code>, and <code>width</code>. See the <a href="/documentation/sections">Content sections</a> guide.'),
+    p('The shared <code>data-surface</code>, <code>data-align</code>, and <code>data-width</code>. See the <a href="/documentation/sections">Content sections</a> guide.'),
 
     section('Accessibility'),
 

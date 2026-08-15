@@ -18,7 +18,7 @@ export const STYLES = /*css*/`
   }
 
   /* Boxed — a card around the fields. */
-  pl-form[variant="card"] > form {
+  pl-form[data-variant="card"] > form {
     padding: var(--form-padding, var(--pl-size-24, 1.5rem));
     background: var(--pl-color-surface-raised, #F9FAFB);
     border: 1px solid var(--pl-color-border, #E5E7EB);
@@ -34,7 +34,7 @@ export const STYLES = /*css*/`
     margin-block-start: var(--pl-size-8, 0.5rem);
   }
 
-  pl-form [data-actions][align="end"] { justify-content: flex-end; }
+  pl-form [data-actions][data-align="end"] { justify-content: flex-end; }
 
   /* Side-by-side fields. */
   pl-form [data-row] {

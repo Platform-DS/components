@@ -31,7 +31,7 @@ export default () => page(
        figure with its label beneath. No classes: the emphasis you would write anyway is the hook.`),
 
     demo(`
-        <pl-social-proof surface="muted">
+        <pl-social-proof data-surface="muted">
             <p>Trusted by teams shipping every day</p>
             <ul>
                 <li><strong>12,000+</strong> projects shipped</li>
@@ -76,7 +76,7 @@ export default () => page(
 
     section('Attributes'),
 
-    p('The shared <code>surface</code>, <code>align</code>, and <code>width</code>. See the <a href="/documentation/sections">Content sections</a> guide.'),
+    p('The shared <code>data-surface</code>, <code>data-align</code>, and <code>data-width</code>. See the <a href="/documentation/sections">Content sections</a> guide.'),
 
     section('Custom properties'),
 

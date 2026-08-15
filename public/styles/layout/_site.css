@@ -86,12 +86,17 @@
 .theme-toggle:hover { background: var(--site-ink-raised); }
 
 /*------------------------------------------------
-  Search — filters the docs sidebar, but lives here, to the right of the nav
-  links and ahead of the theme toggle: the sidebar is pure navigation, and a
-  "search this page" control conventionally sits with the rest of the header
-  chrome rather than at the top of the thing it searches. Only ever present on
-  the documentation page (app.mjs builds it; the marketing page has no sidebar
-  to filter).
+  Search — one field (components/search.mjs), shared by both headers, to the
+  right of the nav links and ahead of the theme toggle. On the docs page it
+  also filters the sidebar; on the home page, which has no sidebar, it only
+  jumps straight to a match. Either way it's a "search this page" control,
+  which conventionally sits with the rest of the header chrome rather than at
+  the top of the thing it searches.
+
+  pl-autocomplete is Light DOM — its real <input> is ordinary page markup, not
+  behind a shadow boundary — so it's themed here with plain descendant
+  selectors for the couple of things it has no --field-* hook for (colour,
+  placeholder), and its own hooks for the rest.
 -------------------------------------------------*/
 
 .site-header__field {
@@ -111,35 +116,40 @@
   pointer-events: none;
 }
 
-.site-header__search {
+/* The label wrapping the field (see search.mjs) exists for the accessible
+   name only — `display: contents` drops it out of layout entirely, so its
+   children lay out directly against .site-header__field exactly as if the
+   label weren't there, while the label association itself is unaffected. */
+.site-header__field label { display: contents; }
+
+.site-header__field pl-autocomplete {
   inline-size: 100%;
-  padding-block: var(--size-8);
-  /* Extra inline-start room for the icon. */
-  padding-inline: var(--size-32) var(--size-12);
-  font: inherit;
   font-size: var(--font-size-sm);
+
+  --field-background: var(--site-ink-raised);
+  --field-border: var(--site-ink-line);
+  --field-border-hover: var(--site-ink-line);
+  --field-accent: var(--ui-focus);
+  --field-ring: color-mix(in oklab, var(--ui-focus) 35%, transparent);
+  /* Room for the icon overlaid above. */
+  --field-padding-inline-start: var(--size-32);
+}
+
+.site-header__field .pl-autocomplete__input {
   color: var(--site-on-ink);
-  background: var(--site-ink-raised);
-  border: 1px solid var(--site-ink-line);
-  border-radius: var(--border-radius-medium);
+  caret-color: currentColor;
 }
 
-.site-header__search::placeholder { color: var(--site-on-ink-muted); }
-
-.site-header__search:focus-visible {
-  outline: none;
-  border-color: var(--ui-focus);
-  box-shadow: 0 0 0 1px var(--ui-focus);
-}
+.site-header__field .pl-autocomplete__input::placeholder { color: var(--site-on-ink-muted); }
 
 /* Tint the glyph to match the text as the field gains focus/content. */
 .site-header__field:focus-within .site-header__field-icon { color: var(--site-on-ink); }
 
 /* Below this the field's own floor (clamp's 9rem minimum) starts crowding the
    nav links and brand into each other before anything else has had a chance
-   to yield. At this width the off-canvas panel is already the way visitors
-   browse the sidebar, so losing the filter costs a convenience, not a path
-   to any component. */
+   to yield. At this width the docs page's off-canvas panel is already the way
+   visitors browse the sidebar, and the home page's nav collapses too, so
+   losing the field costs a convenience, not a path to any component. */
 @media (max-width: 36rem) {
   .site-header__field { display: none; }
 }

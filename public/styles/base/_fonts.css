@@ -1,0 +1,43 @@
+/*------------------------------------------------
+  Base: Fonts
+
+  Outfit, self-hosted, as ONE variable file covering weights 100 to 900.
+
+  This belongs to the docs SITE, not to the library. The package ships no font
+  and makes no external request; --pl-font-family-display names "Outfit" as a
+  preference with a system stack behind it, so a consumer who never loads this
+  file gets the fallback and nothing breaks.
+
+  ------------------------------------------------
+  Why self-hosted, and why this shortens the flash
+  ------------------------------------------------
+  The old @import from fonts.googleapis.com cost two extra connections (the
+  CSS host, then the font host) and, worse, serialised them: the browser could
+  not know which font file to fetch until Google's stylesheet had arrived and
+  been parsed. Text painted in the fallback face for the whole of that round
+  trip, then reflowed.
+
+  Serving the file ourselves removes the middle step, and the <link rel=
+  "preload"> in each page's <head> starts the download while the HTML is still
+  parsing, in parallel with the stylesheet rather than after it. In practice
+  the face is decoded before first paint, so the swap is invisible.
+
+  `font-display: swap` is deliberate anyway: if the network is slow enough
+  that the font is genuinely late, text must remain readable in the fallback
+  rather than sit invisible. A flash of the wrong font beats a flash of no
+  font.
+
+  One variable file rather than nine static weights is the other half of the
+  saving: 44 KB total for every weight the site uses, against ~30 KB per
+  static cut.
+-------------------------------------------------*/
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/fonts/Outfit/Outfit-Variable.woff2") format("woff2");
+  /* The variable axis range, so any weight in between is a real instance
+     rather than a browser-synthesised fake bold. */
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

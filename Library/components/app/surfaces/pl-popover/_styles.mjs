@@ -70,22 +70,22 @@ export const STYLES = /*css*/`
 
     /* Below the anchor, aligned to its inline start — the menu default. */
     pl-popover[popover],
-    pl-popover[popover][placement="block-end"] { position-area: block-end span-inline-end; }
-    pl-popover[popover][placement="block-start"] { position-area: block-start span-inline-end; }
-    pl-popover[popover][placement="inline-end"] { position-area: inline-end span-block-end; }
-    pl-popover[popover][placement="inline-start"] { position-area: inline-start span-block-end; }
+    pl-popover[popover][data-placement="block-end"] { position-area: block-end span-inline-end; }
+    pl-popover[popover][data-placement="block-start"] { position-area: block-start span-inline-end; }
+    pl-popover[popover][data-placement="inline-end"] { position-area: inline-end span-block-end; }
+    pl-popover[popover][data-placement="inline-start"] { position-area: inline-start span-block-end; }
 
-    pl-popover[popover][align="center"][placement="block-end"] { position-area: block-end span-all; }
-    pl-popover[popover][align="center"][placement="block-start"] { position-area: block-start span-all; }
-    pl-popover[popover][align="center"]:not([placement]) { position-area: block-end span-all; }
-    pl-popover[popover][align="center"][placement="inline-end"] { position-area: inline-end span-all; }
-    pl-popover[popover][align="center"][placement="inline-start"] { position-area: inline-start span-all; }
+    pl-popover[popover][data-align="center"][data-placement="block-end"] { position-area: block-end span-all; }
+    pl-popover[popover][data-align="center"][data-placement="block-start"] { position-area: block-start span-all; }
+    pl-popover[popover][data-align="center"]:not([data-placement]) { position-area: block-end span-all; }
+    pl-popover[popover][data-align="center"][data-placement="inline-end"] { position-area: inline-end span-all; }
+    pl-popover[popover][data-align="center"][data-placement="inline-start"] { position-area: inline-start span-all; }
 
-    pl-popover[popover][align="end"][placement="block-end"] { position-area: block-end span-inline-start; }
-    pl-popover[popover][align="end"][placement="block-start"] { position-area: block-start span-inline-start; }
-    pl-popover[popover][align="end"]:not([placement]) { position-area: block-end span-inline-start; }
-    pl-popover[popover][align="end"][placement="inline-end"] { position-area: inline-end span-block-start; }
-    pl-popover[popover][align="end"][placement="inline-start"] { position-area: inline-start span-block-start; }
+    pl-popover[popover][data-align="end"][data-placement="block-end"] { position-area: block-end span-inline-start; }
+    pl-popover[popover][data-align="end"][data-placement="block-start"] { position-area: block-start span-inline-start; }
+    pl-popover[popover][data-align="end"]:not([data-placement]) { position-area: block-end span-inline-start; }
+    pl-popover[popover][data-align="end"][data-placement="inline-end"] { position-area: inline-end span-block-start; }
+    pl-popover[popover][data-align="end"][data-placement="inline-start"] { position-area: inline-start span-block-start; }
   }
 
   @media (prefers-reduced-motion: reduce) {

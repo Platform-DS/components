@@ -29,7 +29,7 @@ export default () => page(
     demo(`
         <pl-button command="show-modal" commandfor="demo-confirm">Delete project…</pl-button>
 
-        <pl-dialog id="demo-confirm" dismissable closedby="any">
+        <pl-dialog id="demo-confirm" data-dismissable closedby="any">
             <h2 data-title>Delete this project?</h2>
             <p>Every deployment and build log goes with it. This cannot be undone.</p>
             <div data-actions>
@@ -132,7 +132,7 @@ export default () => page(
         [
             { cells: ['<code>id</code>', '<code>String</code>', 'Moved to the <code>&lt;dialog&gt;</code>, so <code>commandfor</code> can find it.'] },
             { cells: ['<code>closedby</code>', '<code>String</code>', '<code>any</code>, <code>closerequest</code>, or <code>none</code>. Passed through natively.'] },
-            { cells: ['<code>dismissable</code>', '<code>Boolean</code>', 'Adds the × in the corner: a submit button in a <code>method="dialog"</code> form.'] },
+            { cells: ['<code>data-dismissable</code>', '<code>Boolean</code>', 'Adds the × in the corner: a submit button in a <code>method="dialog"</code> form.'] },
             { cells: ['<code>data-title</code>', '<em>on a child</em>', 'Names the dialog through <code>aria-labelledby</code>.'] },
             { cells: ['<code>data-actions</code>', '<em>on a child</em>', 'The row of buttons at the end.'] },
         ],

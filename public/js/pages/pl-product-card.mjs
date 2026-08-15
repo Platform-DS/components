@@ -34,7 +34,7 @@ export default () => page(
         <pl-product-card style="max-inline-size: 18rem">
             <div data-media>
                 <img src="${IMG('jacket')}" alt="">
-                <pl-badge content="New" standalone data-badge></pl-badge>
+                <pl-badge content="New" data-standalone data-badge></pl-badge>
             </div>
             <p data-eyebrow>Outerwear</p>
             <h3 data-title><a href="#">Field Jacket</a></h3>
@@ -73,7 +73,7 @@ export default () => page(
             <pl-product-card>
                 <div data-media>
                     <img src="${IMG('boots')}" alt="">
-                    <pl-badge content="Sale" intent="error" standalone data-badge></pl-badge>
+                    <pl-badge content="Sale" data-intent="error" data-standalone data-badge></pl-badge>
                 </div>
                 <h3 data-title><a href="#">Suede Boots</a></h3>
                 <p data-price>$180 <s>$240</s></p>
@@ -98,7 +98,7 @@ export default () => page(
         ['Marker', 'Description'],
         [
             { cells: ['<code>data-media</code>', 'The image box. Fixed aspect ratio, so a grid of cards stays on one baseline whatever each image\'s intrinsic ratio is.'] },
-            { cells: ['<code>data-badge</code>', 'Inside <code>[data-media]</code>: floats over the image\'s corner. Give a <a href="/documentation/pl-badge">pl-badge</a> here the <code>standalone</code> attribute, or half of it lands outside the cropped image and is clipped.'] },
+            { cells: ['<code>data-badge</code>', 'Inside <code>[data-media]</code>: floats over the image\'s corner. Give a <a href="/documentation/pl-badge">pl-badge</a> here the <code>data-standalone</code> attribute, or half of it lands outside the cropped image and is clipped.'] },
             { cells: ['<code>data-eyebrow</code>', 'Small uppercase category line.'] },
             { cells: ['<code>data-title</code>', 'The product name. Put the link here.'] },
             { cells: ['<code>data-price</code>', 'Price. A nested <code>&lt;s&gt;</code> is styled as the struck-through original.'] },

@@ -27,15 +27,15 @@ export const STYLES = /*css*/`
   }
 
   /* A ratio turns the box into a fixed shape and the image into its filling. */
-  pl-picture[ratio] { aspect-ratio: var(--picture-ratio, auto); }
+  pl-picture[data-ratio] { aspect-ratio: var(--picture-ratio, auto); }
 
-  pl-picture[ratio] img {
+  pl-picture[data-ratio] img {
     block-size: 100%;
     object-fit: var(--picture-fit, cover);
   }
 
-  pl-picture[fit="contain"] { --picture-fit: contain; }
-  pl-picture[fit="fill"] { --picture-fit: fill; }
-  pl-picture[fit="none"] { --picture-fit: none; }
+  pl-picture[data-fit="contain"] { --picture-fit: contain; }
+  pl-picture[data-fit="fill"] { --picture-fit: fill; }
+  pl-picture[data-fit="none"] { --picture-fit: none; }
 }
 `;

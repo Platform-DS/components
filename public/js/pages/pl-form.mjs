@@ -32,10 +32,10 @@ export default () => page(
     code(`import '@platformdesign/components/pl-form';`, 'js'),
 
     demo(`
-        <pl-form variant="card">
+        <pl-form data-variant="card">
             <pl-label text="Email"><pl-input type="email" name="email" required></pl-input></pl-label>
             <pl-label text="Message"><pl-textarea name="message"></pl-textarea></pl-label>
-            <div data-actions align="end">
+            <div data-actions data-align="end">
                 <pl-button variant="ghost" type="reset">Reset</pl-button>
                 <pl-button type="submit">Send</pl-button>
             </div>
@@ -73,13 +73,13 @@ export default () => page(
     table(
         ['Hook', 'Description'],
         [
-            { cells: ['<code>data-actions</code>', 'A horizontal row of buttons, spaced away from the fields. Add <code>align="end"</code> to push them right.'] },
+            { cells: ['<code>data-actions</code>', 'A horizontal row of buttons, spaced away from the fields. Add <code>data-align="end"</code> to push them right.'] },
             { cells: ['<code>data-row</code>', 'Puts its children side by side, wrapping to a column when there is no room.'] },
         ],
     ),
 
     demo(`
-        <pl-form variant="card">
+        <pl-form data-variant="card">
             <div data-row>
                 <pl-label text="First name"><pl-input name="first"></pl-input></pl-label>
                 <pl-label text="Last name"><pl-input name="last"></pl-input></pl-label>
@@ -93,11 +93,11 @@ export default () => page(
     p('A <code>&lt;fieldset&gt;</code> is reset to the same column rhythm, so related fields group without fighting the browser\'s default border.'),
 
     demo(`
-        <pl-form variant="card">
+        <pl-form data-variant="card">
             <fieldset>
                 <legend>Shipping</legend>
                 <pl-label text="Address"><pl-input name="address"></pl-input></pl-label>
-                <pl-radio-group label="Speed" name="speed" value="std" orientation="horizontal">
+                <pl-radio-group label="Speed" name="speed" value="std" data-orientation="horizontal">
                     <pl-radio value="std">Standard</pl-radio>
                     <pl-radio value="express">Express</pl-radio>
                 </pl-radio-group>
@@ -115,7 +115,7 @@ export default () => page(
             { cells: ['<code>action</code>, <code>method</code>, <code>enctype</code>, <code>target</code>', 'Native. Where and how the form submits.'] },
             { cells: ['<code>novalidate</code>', 'Native. Skip constraint validation on submit.'] },
             { cells: ['<code>autocomplete</code>, <code>name</code>, <code>accept-charset</code>', 'Native.'] },
-            { cells: ['<code>variant="card"</code>', 'Wrap the fields in a padded, bordered panel.'] },
+            { cells: ['<code>data-variant="card"</code>', 'Wrap the fields in a padded, bordered panel.'] },
         ],
     ),
 
@@ -137,7 +137,7 @@ export default () => page(
         ['Property', 'Description'],
         [
             { cells: ['<code>--form-gap</code>', 'Space between fields (and inside <code>data-row</code>).'] },
-            { cells: ['<code>--form-padding</code>', 'Inner padding. Only visible on <code>variant="card"</code> by default.'] },
+            { cells: ['<code>--form-padding</code>', 'Inner padding. Only visible on <code>data-variant="card"</code> by default.'] },
         ],
     ),
 

@@ -33,7 +33,7 @@ export default () => page(
     code(`import '@platformdesign/components/pl-faqs';`, 'js'),
 
     demo(`
-        <pl-faqs surface="muted">
+        <pl-faqs data-surface="muted">
             <h2>Questions</h2>
             <details>
                 <summary>Do I need a build step?</summary>
@@ -52,13 +52,13 @@ export default () => page(
 
     section('One answer at a time'),
 
-    p(`Add <code>exclusive</code> and opening one answer closes the others. It works by setting the
+    p(`Add <code>data-exclusive</code> and opening one answer closes the others. It works by setting the
        <strong>native</strong> <code>name</code> attribute on each <code>&lt;details&gt;</code>: the
        browser does the closing, so there is no JavaScript state to keep in sync, and where
        <code>name</code> is unsupported it degrades to independent disclosures.`),
 
     demo(`
-        <pl-faqs exclusive>
+        <pl-faqs data-exclusive>
             <h2>One at a time</h2>
             <details><summary>Is there a runtime?</summary><p>No: the browser is the runtime.</p></details>
             <details><summary>Is there a CLI?</summary><p>No. There is nothing to generate.</p></details>
@@ -68,12 +68,12 @@ export default () => page(
 
     section('Structured data'),
 
-    p(`Add <code>schema</code> and the component emits <code>FAQPage</code> JSON-LD, which is what
+    p(`Add <code>data-schema</code> and the component emits <code>FAQPage</code> JSON-LD, which is what
        lets these questions appear as rich results in search. It is built by reading the questions
        already on the page, so the markup stays the single source of truth and the two cannot drift
        apart.`),
 
-    code(`<pl-faqs exclusive schema> … </pl-faqs>`, 'html'),
+    code(`<pl-faqs data-exclusive data-schema> … </pl-faqs>`, 'html'),
 
     code(`
         {
@@ -90,7 +90,7 @@ export default () => page(
     callout('warn', 'Only mark up FAQs that are visible',
         `Search engines expect structured data to match what the visitor actually sees. Because the
          JSON-LD is generated from the questions on the page, that holds by construction, but do not
-         add <code>schema</code> to a section whose answers are hidden by your own CSS.`),
+         add <code>data-schema</code> to a section whose answers are hidden by your own CSS.`),
 
     section('Markup'),
 
@@ -106,14 +106,14 @@ export default () => page(
 
     section('Attributes'),
 
-    p('Plus the shared <code>surface</code>, <code>align</code>, and <code>width</code>. The measure defaults to <code>52rem</code> here, since answers read better narrow.'),
+    p('Plus the shared <code>data-surface</code>, <code>data-align</code>, and <code>data-width</code>. The measure defaults to <code>52rem</code> here, since answers read better narrow.'),
 
     table(
         ['Attribute', 'Description'],
         [
-            { cells: ['<code>exclusive</code>', 'Only one answer open at a time, via the native <code>name</code> attribute.'] },
-            { cells: ['<code>schema</code>', 'Emit <code>FAQPage</code> JSON-LD built from the questions on the page.'] },
-            { cells: ['<code>name</code>', 'The group name used by <code>exclusive</code>. Generated when omitted.'] },
+            { cells: ['<code>data-exclusive</code>', 'Only one answer open at a time, via the native <code>name</code> attribute.'] },
+            { cells: ['<code>data-schema</code>', 'Emit <code>FAQPage</code> JSON-LD built from the questions on the page.'] },
+            { cells: ['<code>name</code>', 'The group name used by <code>data-exclusive</code>. Generated when omitted.'] },
         ],
     ),
 

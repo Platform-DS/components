@@ -2,7 +2,7 @@
 // Documentation: pl-collection-page
 // ------------------------------
 
-import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
+import { page, header, meta, section, p, ul, code, callout, pageDemo, table } from '../components/doc.mjs';
 
 export default () => page(
     header({
@@ -49,10 +49,10 @@ export default () => page(
 
     section('Preview'),
 
-    demo(`
-        <pl-collection-page style="--page-padding:1.25rem;--collection-item:8rem;border:1px solid var(--color-border);border-radius:12px">
+    pageDemo(`
+        <pl-collection-page>
             <header data-header><h2 style="margin:0">Products</h2></header>
-            <pl-sidebar style="--sidebar-width:9rem;--sidebar-gap:1.25rem">
+            <pl-sidebar>
                 <div data-items>
                     <pl-product-card>
                         <div data-media><img src="https://picsum.photos/seed/col1/400/400" alt=""></div>
@@ -73,9 +73,9 @@ export default () => page(
                     <pl-switch>On sale</pl-switch>
                 </div>
             </pl-sidebar>
-            <pl-pagination page="1" total="6" href="#p{page}"></pl-pagination>
+            <pl-pagination page="1" total="9" href="#p{page}"></pl-pagination>
         </pl-collection-page>
-    `, { layout: 'stack' }),
+    `, { title: 'Collection page template preview', initial: 1280 }),
 
     p(`The filters sit in a <a href="/documentation/pl-sidebar">pl-sidebar</a>, so they drop below
        the grid on their own once the main column would be squeezed. The grid keeps filling the

@@ -20,10 +20,15 @@
     <meta name="theme-color" content="#111111">
 
     <!-- Outfit: the display face for headings. Loaded by the docs SITE, not
-         the library: the package itself ships no external requests. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap">
+         the library: the package itself ships no external requests.
+
+         Self-hosted and preloaded, so the download starts while this HTML is
+         still parsing rather than after a stylesheet from a third-party host
+         has arrived and been parsed. crossorigin is required even same-origin:
+         fonts are fetched in anonymous CORS mode, and without it the preload
+         and the real request are treated as different and the file is fetched
+         twice. See styles/base/_fonts.css. -->
+    <link rel="preload" href="/fonts/Outfit/Outfit-Variable.woff2" as="font" type="font/woff2" crossorigin>
 
     <link rel="stylesheet" href="/styles/styles.css">
 

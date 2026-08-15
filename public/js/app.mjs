@@ -6,8 +6,9 @@
 // documentation.html because the sidebar is generated from the Library tree:
 // putting it in the HTML would mean maintaining the same list twice.
 
-import Router from './Router.mjs';
-import { sidebar, setActive, searchField } from './components/sidebar.mjs';
+import Router, { href } from './Router.mjs';
+import { sidebar, setActive } from './components/sidebar.mjs';
+import { siteSearch } from './components/search.mjs';
 import { initThemeToggle } from './theme.mjs';
 
 // Registering the whole library up front: the docs demo every component, and
@@ -90,8 +91,10 @@ function boot() {
     shell.append(nav, main);
 
     // The field filters the sidebar (`nav`) but sits in the header, to the
-    // right of the nav links and ahead of the theme toggle.
-    const search = searchField(nav);
+    // right of the nav links and ahead of the theme toggle. Picking a result
+    // goes through the router rather than a real navigation, so it doesn't
+    // reload the SPA shell it's already standing in.
+    const search = siteSearch({ sidebar: nav, navigate: slug => Router.go(href(slug)) });
     const headerNav = document.querySelector('.site-header__nav');
     headerNav?.insertBefore(search, headerNav.querySelector('.theme-toggle'));
 

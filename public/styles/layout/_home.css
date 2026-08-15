@@ -215,7 +215,9 @@
 .cta pl-button:not([variant]) {
   --button-background: var(--ui-brand);
   --button-color: var(--ui-on-brand);
-  --button-background-hover: var(--color-yellow-300);
+  /* No --button-background-hover: the button mixes its own states from
+     whatever --button-background is, so branding it once brands the hover and
+     the press too. This used to name a second yellow by hand. */
 }
 
 /*------------------------------------------------

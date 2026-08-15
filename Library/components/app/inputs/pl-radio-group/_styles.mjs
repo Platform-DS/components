@@ -36,7 +36,7 @@ export const STYLES = /*css*/`
     gap: var(--radio-group-gap, var(--pl-size-8, 0.5rem));
   }
 
-  pl-radio-group[orientation="horizontal"] .pl-radio-group__options {
+  pl-radio-group[data-orientation="horizontal"] .pl-radio-group__options {
     flex-direction: row;
     flex-wrap: wrap;
     gap: var(--radio-group-gap, var(--pl-size-16, 1rem));
@@ -51,9 +51,9 @@ export const STYLES = /*css*/`
     Card variant — each option gets a hit area, which is easier to click and
     reads as a set of choices rather than a list of dots.
   -------------------------------------------------*/
-  pl-radio-group[variant="card"] .pl-radio-group__options { gap: var(--radio-group-gap, var(--pl-size-8, 0.5rem)); }
+  pl-radio-group[data-variant="card"] .pl-radio-group__options { gap: var(--radio-group-gap, var(--pl-size-8, 0.5rem)); }
 
-  pl-radio-group[variant="card"] pl-radio {
+  pl-radio-group[data-variant="card"] pl-radio {
     padding: var(--pl-size-12, 0.75rem) var(--pl-size-16, 1rem);
     border: var(--pl-border-width-small, 1px) solid var(--pl-color-border, #E5E7EB);
     border-radius: var(--pl-border-radius-medium, 8px);
@@ -61,17 +61,17 @@ export const STYLES = /*css*/`
     transition: border-color 120ms ease, background 120ms ease;
   }
 
-  pl-radio-group[variant="card"] pl-radio:hover {
+  pl-radio-group[data-variant="card"] pl-radio:hover {
     border-color: var(--pl-color-border-strong, #9CA3AF);
   }
 
   /* The host mirrors its checked state as an attribute, so the card can
      respond in CSS alone. */
-  pl-radio-group[variant="card"] pl-radio[checked] {
+  pl-radio-group[data-variant="card"] pl-radio[checked] {
     border-color: var(--pl-color-primary, #2563EB);
     background: var(--pl-color-primary-surface, #EFF6FF);
   }
 
-  pl-radio-group[variant="card"][orientation="horizontal"] pl-radio { flex: 1 1 10rem; }
+  pl-radio-group[data-variant="card"][data-orientation="horizontal"] pl-radio { flex: 1 1 10rem; }
 }
 `;

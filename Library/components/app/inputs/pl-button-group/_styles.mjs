@@ -32,8 +32,8 @@ export const STYLES = /*css*/`
   pl-button-group[hidden] { display: none; }
 
   /* Fill the container, splitting the width evenly. */
-  pl-button-group[full] { display: flex; }
-  pl-button-group[full] > * { flex: 1 1 0; }
+  pl-button-group[data-full] { display: flex; }
+  pl-button-group[data-full] > * { flex: 1 1 0; }
 
   /* Square every segment; the wrapper's own radius shapes the outside. The
      segments' own borders are dropped — the group draws the only lines. */
@@ -64,22 +64,22 @@ export const STYLES = /*css*/`
   /*------------------------------------------------
     Vertical
   -------------------------------------------------*/
-  pl-button-group[orientation="vertical"] {
+  pl-button-group[data-orientation="vertical"] {
     flex-direction: column;
     align-items: stretch;
   }
 
   /* The divider turns with the axis. */
-  pl-button-group[orientation="vertical"] > * + * {
+  pl-button-group[data-orientation="vertical"] > * + * {
     border-inline-start: 0;
     border-block-start: var(--pl-border-width-small, 1px) solid var(--_divider);
   }
 
-  pl-button-group[orientation="vertical"] > :first-child {
+  pl-button-group[data-orientation="vertical"] > :first-child {
     --button-radius: calc(var(--_radius) - 1px) calc(var(--_radius) - 1px) 0 0;
   }
 
-  pl-button-group[orientation="vertical"] > :last-child {
+  pl-button-group[data-orientation="vertical"] > :last-child {
     --button-radius: 0 0 calc(var(--_radius) - 1px) calc(var(--_radius) - 1px);
   }
 }

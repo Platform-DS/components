@@ -54,13 +54,13 @@ export default () => page(
 
     demo(`
         <pl-button popovertarget="demo-above" variant="secondary" size="sm">block-start</pl-button>
-        <pl-popover id="demo-above" placement="block-start"><p>Above the button.</p></pl-popover>
+        <pl-popover id="demo-above" data-placement="block-start"><p>Above the button.</p></pl-popover>
 
         <pl-button popovertarget="demo-end" variant="secondary" size="sm">inline-end</pl-button>
-        <pl-popover id="demo-end" placement="inline-end"><p>Beside the button.</p></pl-popover>
+        <pl-popover id="demo-end" data-placement="inline-end"><p>Beside the button.</p></pl-popover>
 
         <pl-button popovertarget="demo-center" variant="secondary" size="sm">centered</pl-button>
-        <pl-popover id="demo-center" align="center"><p>Centred under the button.</p></pl-popover>
+        <pl-popover id="demo-center" data-align="center"><p>Centred under the button.</p></pl-popover>
     `, { layout: 'stack' }),
 
     callout('note', 'Where anchor positioning is missing',
@@ -72,12 +72,12 @@ export default () => page(
     section('Manual popovers'),
 
     p(`<code>auto</code>: the default: light-dismisses: clicking away or pressing Escape closes
-       it, and only one auto popover stays open in a tree at a time. <code>manual</code> opts out
+       it, and only one auto popover stays open in a tree at a time. <code>data-manual</code> opts out
        of all of that, for a panel that must stay put until the page decides otherwise.`),
 
     demo(`
         <pl-button popovertarget="demo-manual" variant="secondary" size="sm">Toggle</pl-button>
-        <pl-popover id="demo-manual" manual>
+        <pl-popover id="demo-manual" data-manual>
             <p>Clicking outside will not close this.</p>
             <pl-button popovertarget="demo-manual" popovertargetaction="hide" size="sm">Close</pl-button>
         </pl-popover>
@@ -103,9 +103,9 @@ export default () => page(
     table(
         ['Attribute', 'Type', 'Description'],
         [
-            { cells: ['<code>placement</code>', '<code>String</code>', '<code>block-end</code> (default), <code>block-start</code>, <code>inline-start</code>, <code>inline-end</code>.'] },
-            { cells: ['<code>align</code>', '<code>String</code>', '<code>start</code> (default), <code>center</code>, <code>end</code>: along the placement edge.'] },
-            { cells: ['<code>manual</code>', '<code>Boolean</code>', 'Use <code>popover="manual"</code>: no light dismiss, no auto-closing.'] },
+            { cells: ['<code>data-placement</code>', '<code>String</code>', '<code>block-end</code> (default), <code>block-start</code>, <code>inline-start</code>, <code>inline-end</code>.'] },
+            { cells: ['<code>data-align</code>', '<code>String</code>', '<code>start</code> (default), <code>center</code>, <code>end</code>: along the placement edge.'] },
+            { cells: ['<code>data-manual</code>', '<code>Boolean</code>', 'Use <code>popover="manual"</code>: no light dismiss, no auto-closing.'] },
         ],
     ),
 

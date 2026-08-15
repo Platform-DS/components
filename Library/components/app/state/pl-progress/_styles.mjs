@@ -51,7 +51,7 @@ export const STYLES = /*css*/`
     Indeterminate — a band travelling along the track.
   -------------------------------------------------*/
 
-  :host([indeterminate]) progress {
+  :host([data-indeterminate]) progress {
     background-image: linear-gradient(
       90deg,
       transparent 0%,
@@ -65,9 +65,9 @@ export const STYLES = /*css*/`
 
   /* The value pseudos would otherwise paint a filled bar over the animation —
      an indeterminate <progress> still reports a value of 0 to them. */
-  :host([indeterminate]) progress::-webkit-progress-bar { background: transparent; }
-  :host([indeterminate]) progress::-webkit-progress-value { background: transparent; }
-  :host([indeterminate]) progress::-moz-progress-bar { background: transparent; }
+  :host([data-indeterminate]) progress::-webkit-progress-bar { background: transparent; }
+  :host([data-indeterminate]) progress::-webkit-progress-value { background: transparent; }
+  :host([data-indeterminate]) progress::-moz-progress-bar { background: transparent; }
 
   @keyframes pl-progress-slide {
     from { background-position: -40% 0; }
@@ -78,7 +78,7 @@ export const STYLES = /*css*/`
     progress::-webkit-progress-value { transition: none; }
     /* A still band rather than none at all — an empty track would read as
        "nothing is happening". */
-    :host([indeterminate]) progress {
+    :host([data-indeterminate]) progress {
       animation: none;
       background-position: 50% 0;
     }

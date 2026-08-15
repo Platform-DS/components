@@ -8,7 +8,9 @@
   adds site-only chrome that is not part of the design system.
 -------------------------------------------------*/
 
-@import "../../../Library/_core/styles/tokens.css";
+/* tokens.css arrives via the library's global.css, imported ahead of this
+   file in styles.css — importing it again here would apply the same
+   declarations twice for no gain. */
 
 :root {
   /*------------------------------------------------
@@ -87,13 +89,18 @@
 
      Error is the one exception: red-700 against this near-black page is only
      2.92:1, so the button's own edge disappears. Red-600 clears both bars —
-     4.83:1 with white text and 3.5:1 against the page — so it moves one step
+     4.83:1 with white text and 3.9:1 against the page — so it moves one step
      and the others stay.
+
+     There is no --color-error-hover here any more. Hover and active are mixed
+     from whatever the fill ends up being (see the intent block in tokens.css),
+     so moving the base moves its states with it. The hand-picked red-500 hover
+     this used to carry was lighter than the fill, which is the direction that
+     drops white text under AA.
 
      The focus ring lightens too, because it is a border against the page
      rather than a surface carrying text. */
   --color-error:          var(--color-red-600);
-  --color-error-hover:    var(--color-red-500);
   --color-focus:          var(--color-blue-400);
 
   /* Tinted intent surfaces become deep washes, with their ink lightened to

@@ -4,7 +4,7 @@
 // Step 7 of the landing-page formula: objection handling. Questions a visitor
 // would otherwise leave to go ask someone else.
 //
-//   <pl-faqs exclusive schema>
+//   <pl-faqs data-exclusive data-schema>
 //     <h2>Questions</h2>
 //     <details>
 //       <summary>Do I need a build step?</summary>
@@ -44,14 +44,14 @@ export class Faqs extends SectionElement {
         // Exclusive accordion, the native way: same `name` on every <details>
         // makes the browser close the others. No JS state to keep in sync, and
         // it degrades to independent disclosures where `name` isn't supported.
-        if (this.hasAttribute('exclusive')) {
+        if ('exclusive' in this.dataset) {
             const group = this.getAttribute('name') || `pl-faqs-${++uid}`;
             for (const details of this.querySelectorAll(':scope > details')) {
                 details.name = group;
             }
         }
 
-        if (this.hasAttribute('schema')) this.#emitSchema();
+        if ('schema' in this.dataset) this.#emitSchema();
     }
 
     disconnectedCallback() {

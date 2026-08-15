@@ -31,7 +31,12 @@ export const STYLES = /*css*/`
     background: var(--field-background, var(--pl-color-surface, #fff));
     border: var(--pl-border-width-small, 1px) solid var(--field-border, var(--pl-color-border, #cfcfcf));
     border-radius: var(--pl-border-radius-medium, 10px);
-    padding: var(--pl-size-8, 0.5rem) var(--pl-size-12, 0.75rem);
+    padding-block: var(--pl-size-8, 0.5rem);
+    /* A separate start value, not folded into one padding shorthand: a
+       leading icon overlaid on the field (the header search does this) needs
+       extra room on that side only, and a consumer can't override half of a
+       shorthand without repeating the other half. */
+    padding-inline: var(--field-padding-inline-start, var(--pl-size-12, 0.75rem)) var(--pl-size-12, 0.75rem);
 
     transition: border-color 120ms ease, box-shadow 120ms ease;
   }

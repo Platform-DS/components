@@ -7,9 +7,9 @@
 // cannot see it. Keeping both in the same tree means submission, validation,
 // reset, and Enter-to-submit are the platform's, not a re-implementation.
 //
-//   <pl-form action="/subscribe" method="post" variant="card">
+//   <pl-form action="/subscribe" method="post" data-variant="card">
 //     <pl-label text="Email"><pl-input type="email" name="email" required></pl-input></pl-label>
-//     <div data-actions align="end">
+//     <div data-actions data-align="end">
 //       <pl-button type="submit">Subscribe</pl-button>
 //     </div>
 //   </pl-form>

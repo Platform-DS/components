@@ -11,8 +11,8 @@ export const STYLES = /*css*/`
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
     gap: var(--pl-size-24, 1.5rem);
     list-style: none;
-    margin-block-start: var(--pl-size-48, 3rem);
-    padding: 0;
+    margin-block-start: var(--pl-size-48, 3rem) !important;
+    padding: 0 !important;
   }
 
   pl-testimonials blockquote {
@@ -29,13 +29,13 @@ export const STYLES = /*css*/`
   }
 
   /* On a light default band, tint the card so it separates from the page. */
-  pl-testimonials:not([surface]) blockquote,
-  pl-testimonials[surface="default"] blockquote {
+  pl-testimonials:not([data-surface]) blockquote,
+  pl-testimonials[data-surface="default"] blockquote {
     background: var(--pl-color-surface-raised, #F9FAFB);
   }
 
-  pl-testimonials[surface="ink"] blockquote,
-  pl-testimonials[surface="brand"] blockquote {
+  pl-testimonials[data-surface="ink"] blockquote,
+  pl-testimonials[data-surface="brand"] blockquote {
     background: color-mix(in oklab, var(--section-ink) 8%, transparent);
   }
 

@@ -57,7 +57,7 @@ export default () => page(
         </div>
     `, { layout: 'stack' }),
 
-    p(`<code>siblings</code> controls how many numbers sit either side of the current one.`),
+    p(`<code>data-siblings</code> controls how many numbers sit either side of the current one.`),
 
     section('Attributes'),
 
@@ -67,7 +67,7 @@ export default () => page(
             { cells: ['<code>page</code>', '<code>Number</code>', 'The current page. Reflected, so it can be read back and watched.'] },
             { cells: ['<code>total</code>', '<code>Number</code>', 'How many pages there are.'] },
             { cells: ['<code>href</code>', '<code>String</code>', 'URL template containing <code>{page}</code>. Omit for buttons.'] },
-            { cells: ['<code>siblings</code>', '<code>Number</code>', 'Numbers either side of the current page. Defaults to <code>1</code>.'] },
+            { cells: ['<code>data-siblings</code>', '<code>Number</code>', 'Numbers either side of the current page. Defaults to <code>1</code>.'] },
             { cells: ['<code>label</code>', '<code>String</code>', 'Names the <code>&lt;nav&gt;</code> landmark. Defaults to "Pagination".'] },
         ],
     ),

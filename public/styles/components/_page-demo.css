@@ -1,0 +1,167 @@
+/*------------------------------------------------
+  Components: Page-template preview
+
+  A component demo can render inline. A PAGE demo cannot: page templates lay
+  themselves out with media queries, and a media query answers the viewport,
+  not the panel. So this one renders into an iframe with a viewport of its own,
+  and the toolbar changes that viewport rather than the box around it.
+
+  See pageDemo() in js/components/doc.mjs for the sizing, which has to be done
+  in script: the scale factor depends on how much room the panel actually got.
+-------------------------------------------------*/
+
+.page-demo {
+  --page-demo-height: 42rem;
+
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-large);
+  overflow: hidden;
+  background: var(--ui-surface-sunken);
+  min-inline-size: 0;
+}
+
+/*------------------------------------------------
+  Toolbar
+-------------------------------------------------*/
+.page-demo__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--size-8);
+  padding: var(--size-8) var(--size-12);
+  background: var(--color-surface);
+  border-block-end: 1px solid var(--color-border);
+}
+
+.page-demo__widths {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--ui-surface-sunken);
+  border-radius: var(--border-radius-medium);
+}
+
+.page-demo__width,
+.page-demo__expand {
+  font: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-ink-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-small);
+  padding: var(--size-4) var(--size-12);
+  cursor: pointer;
+  transition: background var(--transition-fast) var(--ease),
+              color var(--transition-fast) var(--ease);
+}
+
+.page-demo__width:hover,
+.page-demo__expand:hover {
+  color: var(--color-ink);
+  background: color-mix(in oklab, var(--color-ink) 8%, transparent);
+}
+
+/* aria-pressed is the state, so it is also the selector — no parallel class to
+   keep in sync with the thing screen readers are actually told. */
+.page-demo__width[aria-pressed="true"] {
+  color: var(--color-ink);
+  background: var(--color-surface);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+}
+
+.page-demo__expand {
+  margin-inline-start: auto;
+  border-color: var(--color-border);
+}
+
+.page-demo__width:focus-visible,
+.page-demo__expand:focus-visible {
+  outline: 2px solid var(--ui-focus);
+  outline-offset: 2px;
+}
+
+/* The measurement readout: tabular so the number does not jog as it changes. */
+.page-demo__size {
+  font-size: var(--font-size-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink-secondary);
+  padding-inline: var(--size-8);
+}
+
+/*------------------------------------------------
+  Stage
+-------------------------------------------------*/
+.page-demo__stage {
+  display: flex;
+  justify-content: center;
+  block-size: var(--page-demo-height);
+  overflow: hidden;
+  /* The checkered ground reads as "this is a canvas, not the page". */
+  background:
+    linear-gradient(45deg, var(--ui-surface-sunken) 25%, transparent 25%) 0 0 / 16px 16px,
+    linear-gradient(-45deg, var(--ui-surface-sunken) 25%, transparent 25%) 0 8px / 16px 16px,
+    var(--color-surface-raised);
+}
+
+.page-demo__viewport {
+  position: relative;
+  flex: none;
+  background: var(--color-surface);
+  box-shadow: 0 0 0 1px var(--color-border);
+}
+
+.page-demo__frame {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  border: 0;
+  /* Scaled from the top-left so the viewport wrapper, sized to the scaled
+     result, wraps it exactly — a centred origin would leave it off by half. */
+  transform-origin: top left;
+}
+
+/*------------------------------------------------
+  Expanded — the preview takes the content area, and only the content area.
+  The header and the rail stay put, so you can still navigate while a template
+  is open. Inset from the same variables the docs grid is built on, so the two
+  cannot drift apart.
+-------------------------------------------------*/
+.page-demo.is-expanded {
+  position: fixed;
+  inset-block: var(--site-header) 0;
+  inset-inline: var(--site-sidebar) 0;
+  z-index: 40;
+  border-radius: 0;
+  border-block-end: 0;
+  border-inline-end: 0;
+}
+
+.page-demo.is-expanded .page-demo__stage {
+  block-size: auto;
+  flex: 1;
+  min-block-size: 0;
+}
+
+body.has-expanded-preview { overflow: hidden; }
+
+/* The source sits below the preview, flush, the same as a demo panel. */
+.page-demo-wrap {
+  display: grid;
+  gap: var(--size-16);
+  min-inline-size: 0;
+}
+
+@media (max-width: 60rem) {
+  .page-demo { --page-demo-height: 32rem; }
+
+  /* Below this the rail is off-canvas, so the content area starts at the edge. */
+  .page-demo.is-expanded { inset-inline: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-demo__width,
+  .page-demo__expand { transition: none; }
+}

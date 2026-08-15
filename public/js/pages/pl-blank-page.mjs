@@ -2,7 +2,7 @@
 // Documentation: pl-blank-page
 // ------------------------------
 
-import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
+import { page, header, meta, section, p, ul, code, callout, pageDemo, table } from '../components/doc.mjs';
 
 export default () => page(
     header({
@@ -44,20 +44,68 @@ export default () => page(
 
     section('Preview'),
 
-    demo(`
-        <pl-blank-page style="min-block-size:19rem;--page-padding:1.25rem;border:1px solid var(--color-border);border-radius:12px;overflow:hidden">
-            <div style="padding:.75rem 1.25rem;background:var(--color-surface-sunken);font-weight:600">Header</div>
-            <main>
-                <h2 style="margin:0 0 .5rem">Settings</h2>
-                <p style="margin:0;color:var(--color-ink-secondary)">The measured content column takes the slack between the header and the footer.</p>
-            </main>
-            <div style="padding:.75rem 1.25rem;background:var(--color-surface-sunken);color:var(--color-ink-secondary);font-size:.875rem">Footer</div>
-        </pl-blank-page>
-    `, { layout: 'stack' }),
+    pageDemo(`
+        <pl-blank-page>
+            <pl-header>
+                <a href="#"><pl-icon icon="cube" size="1.5rem"></pl-icon> Northwind</a>
+                <nav aria-label="Main">
+                    <ul>
+                        <li><a href="#">Orders</a></li>
+                        <li><a href="#">Stock</a></li>
+                        <li><a href="#" aria-current="page">Settings</a></li>
+                    </ul>
+                </nav>
+                <div data-actions>
+                    <pl-button size="sm">New order</pl-button>
+                </div>
+            </pl-header>
 
-    p(`Shown at a reduced height: the real shell is <code>min-block-size: 100dvh</code>, which is
-       what pins the footer to the bottom of the viewport on a short page rather than leaving it
-       floating mid-screen.`),
+            <main>
+                <h1>Settings</h1>
+                <p>Everything between the header and the footer takes the slack, so a page with
+                   little on it still pins its footer to the bottom of the viewport.</p>
+
+                <pl-form data-variant="card">
+                    <pl-label text="Store name">
+                        <pl-input name="store" value="Northwind Supply Co."></pl-input>
+                    </pl-label>
+                    <pl-label text="Contact email">
+                        <pl-input type="email" name="email" value="hello@northwind.example"></pl-input>
+                    </pl-label>
+                    <pl-label text="Default currency">
+                        <pl-select name="currency">
+                            <option>USD</option>
+                            <option>EUR</option>
+                            <option>GBP</option>
+                        </pl-select>
+                    </pl-label>
+                    <pl-switch checked>Email me when stock runs low</pl-switch>
+                    <div data-actions data-align="end">
+                        <pl-button variant="secondary" type="reset">Cancel</pl-button>
+                        <pl-button type="submit">Save changes</pl-button>
+                    </div>
+                </pl-form>
+            </main>
+
+            <pl-footer>
+                <div data-columns>
+                    <div>
+                        <a data-brand href="#"><pl-icon icon="cube" size="1.5rem"></pl-icon> Northwind</a>
+                        <address>hello@northwind.example</address>
+                    </div>
+                    <nav aria-label="Support">
+                        <h3>Support</h3>
+                        <ul><li><a href="#">Help centre</a></li><li><a href="#">Status</a></li></ul>
+                    </nav>
+                </div>
+                <p><small>&copy; 2026 Northwind Supply Co.</small></p>
+            </pl-footer>
+        </pl-blank-page>
+    `, { title: 'Blank page template preview', initial: 1280 }),
+
+    p(`Shrink the preview and the shell holds: the header collapses to its toggle, the content
+       column keeps its measure, and the footer stays at the bottom because the shell is a column
+       at <code>min-block-size: 100dvh</code> rather than a stack that happens to end there.`),
 
     section('Custom properties'),
 

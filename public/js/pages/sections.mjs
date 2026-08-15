@@ -52,14 +52,14 @@ export default () => page(
     table(
         ['Attribute', 'Values', 'Description'],
         [
-            { cells: ['<code>surface</code>', '<code>muted</code>, <code>ink</code>, <code>brand</code>', 'The band\'s colour scheme. <code>ink</code> and <code>brand</code> invert: muted text, rules, and buttons re-point with them.'] },
-            { cells: ['<code>align</code>', '<code>center</code>', 'Centres the content column\'s text and actions.'] },
-            { cells: ['<code>width</code>', '<code>narrow</code>, <code>wide</code>, <code>full</code>', 'The content column\'s measure. Default is <code>68rem</code>.'] },
+            { cells: ['<code>data-surface</code>', '<code>muted</code>, <code>ink</code>, <code>brand</code>', 'The band\'s colour scheme. <code>ink</code> and <code>brand</code> invert: muted text, rules, and buttons re-point with them.'] },
+            { cells: ['<code>data-align</code>', '<code>center</code>', 'Centres the content column\'s text and actions.'] },
+            { cells: ['<code>data-width</code>', '<code>narrow</code>, <code>wide</code>, <code>full</code>', 'The content column\'s measure. Default is <code>68rem</code>.'] },
         ],
     ),
 
     demo(`
-        <pl-benefits surface="muted" align="center" width="narrow">
+        <pl-benefits data-surface="muted" data-align="center" data-width="narrow">
             <h2>A muted, centred, narrow band</h2>
             <p>Three attributes, no custom CSS.</p>
         </pl-benefits>

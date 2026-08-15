@@ -39,7 +39,7 @@ export default () => page(
 
     callout('note', 'Filled by default, and the button inverts with it',
         `Unlike the other sections, this one fills with the brand colour when no
-         <code>surface</code> is set: a closing band should not look like another content band. A
+         <code>data-surface</code> is set: a closing band should not look like another content band. A
          primary button on that fill would be brand-on-brand, so the section flips the button to a
          pale fill with dark text automatically.`),
 
@@ -48,7 +48,7 @@ export default () => page(
     p('A short form is the other common close. Give it a real <code>&lt;form&gt;</code>; the layout is handled.'),
 
     demo(`
-        <pl-cta surface="ink">
+        <pl-cta data-surface="ink">
             <h2>Get the changelog</h2>
             <p>One email when something ships. Nothing else.</p>
             <form onsubmit="event.preventDefault(); this.querySelector('output').value = 'Subscribed'">
@@ -74,7 +74,7 @@ export default () => page(
 
     section('Attributes'),
 
-    p('The shared <code>surface</code>, <code>align</code>, and <code>width</code>. Setting <code>surface</code> overrides the default brand fill; the measure defaults to <code>46rem</code>.'),
+    p('The shared <code>data-surface</code>, <code>data-align</code>, and <code>data-width</code>. Setting <code>data-surface</code> overrides the default brand fill; the measure defaults to <code>46rem</code>.'),
 
     section('Accessibility'),
 

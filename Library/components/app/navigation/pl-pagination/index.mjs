@@ -40,7 +40,7 @@ export class Pagination extends BaseElement {
     static mode = 'light';
 
     static get observedAttributes() {
-        return ['page', 'total', 'href', 'siblings', 'label'];
+        return ['page', 'total', 'href', 'data-siblings', 'label'];
     }
 
     #nav = null;
@@ -81,7 +81,7 @@ export class Pagination extends BaseElement {
     /** The page numbers to show, with nulls standing in for the gaps. */
     #window() {
         const { page, total } = this;
-        const siblings = Math.max(0, Number(this.getAttribute('siblings')) || 1);
+        const siblings = Math.max(0, Number(this.dataset.siblings) || 1);
 
         // first + last + current + its siblings + two gaps.
         const span = siblings * 2 + 5;

@@ -33,7 +33,7 @@ export const STYLES = /*css*/`
 
   pl-footer > * { grid-column: content; }
 
-  pl-footer[surface="ink"] {
+  pl-footer[data-surface="ink"] {
     --footer-bg: var(--pl-color-ink, #111);
     --footer-ink: var(--pl-color-surface, #fff);
     --footer-ink-muted: var(--pl-color-gray-400, #9CA3AF);

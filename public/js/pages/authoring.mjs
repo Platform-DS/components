@@ -90,6 +90,51 @@ export default () => page(
          updates only ever flow one direction, there is no reflection loop to guard against:
          the classic property-sets-attribute-sets-property ping-pong cannot happen.`),
 
+    section('3b. Everything else is a data- attribute'),
+
+    p(`Not every attribute wants to be a prop. Presentation switches that only CSS reads
+       (<code>data-surface</code>, <code>data-align</code>), and one-shot behaviour flags read once
+       on connect (<code>data-exclusive</code>, <code>data-schema</code>), need no type, no
+       reflection and no repaint. Declaring them as props would buy nothing and cost a render
+       per change.`),
+
+    p(`They still need a namespace, and <code>data-</code> is the one HTML reserves for exactly
+       this. The rule this library follows:`),
+
+    callout('note', 'If it is not a native attribute name and it does not reflect a prop, prefix it',
+        `A bare invented attribute is a claim on a name in the global HTML namespace, and the
+         platform keeps adding to that namespace: <code>popover</code>, <code>inert</code> and
+         <code>closedby</code> were all free to invent until they were not. A component that
+         shipped its own <code>popover</code> would now be fighting the browser over what the word
+         means. Prefixing takes that risk off the table permanently.`),
+
+    table(
+        ['Kind', 'Form', 'Example'],
+        [
+            { cells: ['Native attribute', 'as-is', '<code>disabled</code>, <code>open</code>, <code>name</code>, <code>value</code>, <code>href</code>. The platform owns the name; use it as the platform means it.'] },
+            { cells: ['Typed, reflected prop', 'as-is', '<code>variant</code>, <code>size</code>, <code>loading</code> on <code>pl-button</code>. Declared in <code>static props</code>, so it is real API with a JS property behind it.'] },
+            { cells: ['Everything else', '<code>data-</code>', '<code>data-surface</code>, <code>data-layout</code>, <code>data-exclusive</code>, <code>data-ratio</code>. CSS reads it as <code>[data-x]</code>, JavaScript as <code>this.dataset.x</code>.'] },
+        ],
+    ),
+
+    p(`The second benefit is at the reading end. <code>dataset</code> hands you a camelCased view
+       of exactly these attributes and nothing else, so a flag is <code>this.dataset.ratio</code>
+       rather than <code>this.getAttribute('ratio')</code>, and a boolean is
+       <code>'exclusive' in this.dataset</code>. Watch the precedence on that last one:
+       <code>!'exclusive' in this.dataset</code> parses as <code>(!'exclusive') in …</code> and is
+       always false.`),
+
+    code(`
+        // CSS-only switch: no prop, no render, no observedAttributes entry
+        pl-hero[data-layout="split"] { … }
+
+        // read once on connect
+        if ('exclusive' in this.dataset) { … }
+
+        // observed, but still namespaced
+        static get observedAttributes() { return ['data-ratio', 'data-fit']; }
+    `, 'js'),
+
     section('4. Render once'),
 
     p(`<code>render()</code> is the only method that writes to the DOM. It runs on connect and

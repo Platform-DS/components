@@ -19,17 +19,23 @@ export const fieldStyles = (sel) => /*css*/`
     font-family: var(--pl-font-family-sans-serif, system-ui, sans-serif);
     font-size: var(--pl-font-size-base, 1rem);
     line-height: var(--pl-line-height-medium, 1.5);
-    color: var(--pl-color-ink, #111);
+    color: var(--field-color, var(--pl-color-ink, #111));
 
     background: var(--field-background, var(--pl-color-surface, #fff));
     border: var(--pl-border-width-small, 1px) solid var(--field-border, var(--pl-color-border, #cfcfcf));
-    border-radius: var(--pl-border-radius-medium, 10px);
+    border-radius: var(--field-radius, var(--pl-control-radius, 8px));
     padding: var(--pl-size-8, 0.5rem) var(--pl-size-12, 0.75rem);
+
+    /* The same floor pl-button meets, so the two line up in a form row rather
+       than missing each other by the difference between a tight label line and
+       a comfortable field one. See the control-height note in tokens.css.
+       A textarea is already taller than this, so it is unaffected. */
+    min-block-size: var(--field-height, var(--pl-control-height-md, 2.625rem));
 
     transition: border-color 120ms ease, box-shadow 120ms ease;
   }
 
-  ${sel}::placeholder { color: var(--pl-color-ink-secondary, #626262); }
+  ${sel}::placeholder { color: var(--field-placeholder, var(--pl-color-ink-secondary, #626262)); }
 
   ${sel}:hover { border-color: var(--field-border-hover, var(--pl-color-border-strong, #9CA3AF)); }
 

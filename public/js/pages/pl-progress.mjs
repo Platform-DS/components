@@ -43,7 +43,7 @@ export default () => page(
     callout('note', 'Remove the attribute. Do not set it to 0',
         `<code>value="0"</code> is a determinate bar that happens to be empty; no <code>value</code>
          at all is a bar that does not know. Going back to indeterminate means
-         <code>removeAttribute('value')</code>, and the <code>indeterminate</code> attribute the
+         <code>removeAttribute('value')</code>, and the <code>data-indeterminate</code> attribute the
          component reflects onto itself is a read-only mirror of that, there for CSS to target.`),
 
     code(`
@@ -63,7 +63,7 @@ export default () => page(
             { cells: ['<code>value</code>', '<code>Number</code>', 'Amount done. Absent means indeterminate.'] },
             { cells: ['<code>max</code>', '<code>Number</code>', 'The total. Defaults to <code>1</code>.'] },
             { cells: ['<code>label</code>', '<code>String</code>', 'Accessible name: the same reasoning as <a href="/documentation/pl-meter">pl-meter</a>.'] },
-            { cells: ['<code>indeterminate</code>', '<em>reflected</em>', 'Set by the component when there is no value. A CSS hook, not an input.'] },
+            { cells: ['<code>data-indeterminate</code>', '<em>reflected</em>', 'Set by the component when there is no value. A CSS hook, not an input.'] },
             { cells: ['<code>fraction</code>', '<code>Number|null</code>', 'Progress as 0 to 1, or <code>null</code> while indeterminate.'] },
             { cells: ['<code>position</code>', '<code>Number</code>', 'Native: the same figure, but <code>-1</code> when indeterminate.'] },
         ],

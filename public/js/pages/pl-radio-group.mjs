@@ -61,7 +61,7 @@ export default () => page(
     p('A larger hit area, and a set that reads as choices rather than a list of dots.'),
 
     demo(`
-        <pl-radio-group label="Shipping" hint="Estimated at checkout." name="ship" value="std" variant="card">
+        <pl-radio-group label="Shipping" data-hint="Estimated at checkout." name="ship" value="std" data-variant="card">
             <pl-radio value="std">Standard: 5 days</pl-radio>
             <pl-radio value="express">Express: 2 days</pl-radio>
             <pl-radio value="overnight">Overnight</pl-radio>
@@ -71,7 +71,7 @@ export default () => page(
     section('Horizontal'),
 
     demo(`
-        <pl-radio-group label="Size" name="size" value="m" orientation="horizontal">
+        <pl-radio-group label="Size" name="size" value="m" data-orientation="horizontal">
             <pl-radio value="s">Small</pl-radio>
             <pl-radio value="m">Medium</pl-radio>
             <pl-radio value="l">Large</pl-radio>
@@ -83,7 +83,7 @@ export default () => page(
     demo(`
         <pl-form onsubmit="event.preventDefault();
             this.querySelector('output').textContent = 'plan = ' + new FormData(event.target).get('plan')">
-            <pl-radio-group label="Plan" name="plan" value="free" variant="card" orientation="horizontal">
+            <pl-radio-group label="Plan" name="plan" value="free" data-variant="card" data-orientation="horizontal">
                 <pl-radio value="free">Free</pl-radio>
                 <pl-radio value="pro">Pro</pl-radio>
             </pl-radio-group>
@@ -105,11 +105,11 @@ export default () => page(
         ['Attribute', 'Type', 'Description'],
         [
             { cells: ['<code>label</code>', '<code>String</code>', 'Visible group label, wired as the group\'s accessible name.'] },
-            { cells: ['<code>hint</code>', '<code>String</code>', 'Supporting text, linked via <code>aria-describedby</code>.'] },
+            { cells: ['<code>data-hint</code>', '<code>String</code>', 'Supporting text, linked via <code>aria-describedby</code>.'] },
             { cells: ['<code>name</code>', '<code>String</code>', 'Applied to every option, so it is written once.'] },
             { cells: ['<code>value</code>', '<code>String</code>', 'The selected option\'s value. Reflects as the user chooses.'] },
-            { cells: ['<code>orientation</code>', '<code>horizontal</code>', 'Lay the options out in a row.'] },
-            { cells: ['<code>variant</code>', '<code>card</code>', 'Give each option a bordered hit area.'] },
+            { cells: ['<code>data-orientation</code>', '<code>horizontal</code>', 'Lay the options out in a row.'] },
+            { cells: ['<code>data-variant</code>', '<code>card</code>', 'Give each option a bordered hit area.'] },
             { cells: ['<code>disabled</code>', '<code>Boolean</code>', 'Disables every option.'] },
         ],
     ),

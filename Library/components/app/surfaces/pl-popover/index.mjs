@@ -5,7 +5,7 @@
 //
 //   <pl-button popovertarget="filters">Filters</pl-button>
 //
-//   <pl-popover id="filters" placement="block-end">
+//   <pl-popover id="filters" data-placement="block-end">
 //     <p>Anything at all in here.</p>
 //   </pl-popover>
 //
@@ -39,7 +39,7 @@ export class Popover extends BaseElement {
     static mode = 'light';
 
     static get observedAttributes() {
-        return ['manual'];
+        return ['data-manual'];
     }
 
     #wired = false;
@@ -62,9 +62,9 @@ export class Popover extends BaseElement {
     render() {
         // "auto" is the light-dismissing kind — clicking away or pressing
         // Escape closes it, and only one auto popover in a tree stays open.
-        // "manual" opts out of all of that, for something that must stay put
+        // "data-manual" opts out of all of that, for something that must stay put
         // until the page decides otherwise.
-        this.setAttribute('popover', this.hasAttribute('manual') ? 'manual' : 'auto');
+        this.setAttribute('popover', 'manual' in this.dataset ? 'manual' : 'auto');
     }
 
     get open() { return this.matches(':popover-open'); }

@@ -7,7 +7,7 @@
 //
 //   <button command="show-modal" commandfor="confirm">Delete…</button>
 //
-//   <pl-dialog id="confirm" dismissable closedby="any">
+//   <pl-dialog id="confirm" data-dismissable closedby="any">
 //     <h2 data-title>Delete this project?</h2>
 //     <p>This cannot be undone.</p>
 //     <div data-actions>
@@ -56,7 +56,7 @@ export class Dialog extends BaseElement {
     static mode = 'light';
 
     static get observedAttributes() {
-        return [...DIALOG_ATTRS, 'dismissable'];
+        return [...DIALOG_ATTRS, 'data-dismissable'];
     }
 
     #dialog = null;
@@ -119,7 +119,7 @@ export class Dialog extends BaseElement {
     #ensureDismiss() {
         let form = this.#dialog.querySelector(':scope > .pl-dialog__dismiss');
 
-        if (!this.hasAttribute('dismissable')) {
+        if (!('dismissable' in this.dataset)) {
             form?.remove();
             return;
         }

@@ -41,7 +41,7 @@ export class RadioGroup extends BaseElement {
     static mode = 'light';
 
     static get observedAttributes() {
-        return ['label', 'hint', 'name', 'value', 'disabled'];
+        return ['label', 'data-hint', 'name', 'value', 'disabled'];
     }
 
     #label = null;
@@ -159,7 +159,7 @@ export class RadioGroup extends BaseElement {
             this.#label.hidden = !labelText;
         }
 
-        const hintText = this.getAttribute('hint');
+        const hintText = this.dataset.hint;
         if (hintText && !this.#hint) {
             this.#hint = document.createElement('span');
             this.#hint.className = 'pl-radio-group__hint';

@@ -34,6 +34,7 @@ const COMPONENTS = join(ROOT, 'Library', 'components');
 const STATIC_EXPORTS = {
     '.': './Library/index.mjs',
     './tokens.css': './Library/_core/styles/tokens.css',
+    './global.css': './Library/_core/styles/global.css',
     './_core/*': './Library/_core/*',
     './utilities/*': './Library/utilities/*',
 };

@@ -36,9 +36,9 @@ export const STYLES = /*css*/`
 
   pl-feedback[hidden] { display: none; }
 
-  pl-feedback[intent="success"] { --_accent: var(--pl-color-success, #15803D); }
-  pl-feedback[intent="warning"] { --_accent: var(--pl-color-warning, #B45309); }
-  pl-feedback[intent="error"]   { --_accent: var(--pl-color-error, #B91C1C); }
+  pl-feedback[data-intent="success"] { --_accent: var(--pl-color-success, #15803D); }
+  pl-feedback[data-intent="warning"] { --_accent: var(--pl-color-warning, #B45309); }
+  pl-feedback[data-intent="error"]   { --_accent: var(--pl-color-error, #B91C1C); }
 
   /* The glyph. Drawn with a mask so it takes the accent colour, and marked
      decorative — the message text is what gets announced. */
@@ -56,15 +56,15 @@ export const STYLES = /*css*/`
     --_icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 11v5M12 7.6v.1'/%3E%3C/svg%3E");
   }
 
-  pl-feedback[intent="success"]::before {
+  pl-feedback[data-intent="success"]::before {
     --_icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m8 12.5 2.5 2.5L16 9.5'/%3E%3C/svg%3E");
   }
 
-  pl-feedback[intent="warning"]::before {
+  pl-feedback[data-intent="warning"]::before {
     --_icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.3 3.9 1.8 18.3a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z'/%3E%3Cpath d='M12 9v4M12 16.6v.1'/%3E%3C/svg%3E");
   }
 
-  pl-feedback[intent="error"]::before {
+  pl-feedback[data-intent="error"]::before {
     --_icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='m9 9 6 6M15 9l-6 6'/%3E%3C/svg%3E");
   }
 

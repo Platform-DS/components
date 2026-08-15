@@ -5,7 +5,7 @@
 // whatever supporting sections follow underneath.
 //
 //   <pl-product-page>
-//     <div data-media><pl-picture ratio="1">…</pl-picture></div>
+//     <div data-media><pl-picture data-ratio="1">…</pl-picture></div>
 //     <div data-detail><h1>…</h1><pl-ratings readonly value="4"></pl-ratings></div>
 //     <pl-faqs>…</pl-faqs>
 //   </pl-product-page>

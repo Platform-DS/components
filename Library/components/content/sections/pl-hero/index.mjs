@@ -5,7 +5,7 @@
 // The first thing a visitor reads, so it stays in the page's own DOM — visible
 // to crawlers, translatable, and rendered with or without JavaScript.
 //
-//   <pl-hero align="center">
+//   <pl-hero data-align="center">
 //     <p data-eyebrow>Zero dependencies</p>
 //     <h1>Components that outlive your framework.</h1>
 //     <p>Native custom elements and CSS custom properties. No build step.</p>

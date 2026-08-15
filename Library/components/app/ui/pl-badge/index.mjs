@@ -51,7 +51,7 @@ export class Badge extends BaseElement {
     static mode = 'light';
 
     static get observedAttributes() {
-        return ['content', 'max', 'dot', 'intent', 'position', 'show-zero'];
+        return ['content', 'max', 'data-dot', 'data-intent', 'data-position', 'data-show-zero'];
     }
 
     #badge = null;
@@ -98,11 +98,11 @@ export class Badge extends BaseElement {
      * `show-zero` when the zero is itself worth seeing.
      */
     #visible() {
-        if (this.hasAttribute('dot')) return true;
+        if ('dot' in this.dataset) return true;
 
         const content = this.getAttribute('content');
         if (content == null || content === '') return false;
-        if (Number(content) === 0 && !this.hasAttribute('show-zero')) return false;
+        if (Number(content) === 0 && !('showZero' in this.dataset)) return false;
 
         return true;
     }
@@ -114,7 +114,7 @@ export class Badge extends BaseElement {
         this.#badge.hidden = !visible;
         // Nothing to read out, but an empty box would still be drawn — the
         // dot's size comes from CSS, so its text stays empty either way.
-        this.#badge.textContent = this.hasAttribute('dot') ? '' : this.#label();
+        this.#badge.textContent = 'dot' in this.dataset ? '' : this.#label();
     }
 
     /** The badge element itself, for positioning tweaks from script. */

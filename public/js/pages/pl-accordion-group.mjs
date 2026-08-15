@@ -27,7 +27,7 @@ export default () => page(
     code(`import '@platformdesign/components/pl-accordion-group';`, 'js'),
 
     demo(`
-        <pl-accordion-group variant="card">
+        <pl-accordion-group data-variant="card">
             <pl-accordion open>
                 <h3 data-summary>Do I need a build step?</h3>
                 <p>No. Import the module and the element registers itself.</p>
@@ -51,7 +51,7 @@ export default () => page(
     p(`Add <code>data-multiple</code> to turn exclusivity off:`),
 
     demo(`
-        <pl-accordion-group variant="card" data-multiple>
+        <pl-accordion-group data-variant="card" data-multiple>
             <pl-accordion open>
                 <h3 data-summary>Shipping</h3>
                 <p>Dispatched within two working days.</p>
@@ -67,7 +67,7 @@ export default () => page(
         `The attribute's presence adds a capability rather than removing one, which is the way an
          attribute normally reads: <code>multiple</code> on a <code>&lt;select&gt;</code> works
          exactly this way. Naming it the other way round would have meant an
-         <code>exclusive</code> attribute that most groups had to remember to set.`),
+         <code>data-exclusive</code> attribute that most groups had to remember to set.`),
 
     section('How the coordination works'),
 
@@ -89,7 +89,7 @@ export default () => page(
         ['Attribute', 'Type', 'Description'],
         [
             { cells: ['<code>data-multiple</code>', '<code>Boolean</code>', 'Allow any number of panels open at once. Without it, opening one closes the rest.'] },
-            { cells: ['<code>variant</code>', '<code>String</code>', '<code>card</code> draws a box around the stack.'] },
+            { cells: ['<code>data-variant</code>', '<code>String</code>', '<code>card</code> draws a box around the stack.'] },
         ],
     ),
 

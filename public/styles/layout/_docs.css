@@ -194,6 +194,15 @@
   color: var(--color-ink-secondary);
 }
 
+/* Filtered to zero — see filter() in sidebar.mjs. Same inline position as a
+   link, so it reads as part of the list rather than a stray notice. */
+.docs-nav__empty {
+  margin: var(--size-8) 0 0;
+  padding-inline: var(--size-16);
+  font-size: var(--font-size-sm);
+  color: var(--color-ink-secondary);
+}
+
 /*------------------------------------------------
   Content column — a fluid track with the article centred at a fixed measure
 -------------------------------------------------*/

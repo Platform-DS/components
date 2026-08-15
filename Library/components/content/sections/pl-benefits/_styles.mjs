@@ -14,13 +14,13 @@ export const STYLES = /*css*/`
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 13.5rem), 1fr));
     gap: var(--pl-size-24, 1.5rem);
     list-style: none;
-    margin-block-start: var(--pl-size-48, 3rem);
-    padding: 0;
+    margin-block-start: var(--pl-size-48, 3rem) !important;
+    padding: 0 !important;
   }
 
   /* Fixed column count when the author wants control over the rhythm. */
-  pl-benefits[columns="2"] > ul { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
-  pl-benefits[columns="4"] > ul { grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+  pl-benefits[data-columns="2"] > ul { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+  pl-benefits[data-columns="4"] > ul { grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
 
   pl-benefits > ul > li {
     display: grid;
@@ -30,15 +30,15 @@ export const STYLES = /*css*/`
   }
 
   /* Card treatment — opt in per section. */
-  pl-benefits[variant="card"] > ul > li {
+  pl-benefits[data-variant="card"] > ul > li {
     padding: var(--pl-size-24, 1.5rem);
     background: var(--pl-color-surface, #fff);
     border: 1px solid var(--section-line);
     border-radius: var(--pl-border-radius-large, 20px);
   }
 
-  pl-benefits[surface="default"][variant="card"] > ul > li,
-  pl-benefits[variant="card"]:not([surface]) > ul > li {
+  pl-benefits[data-surface="default"][data-variant="card"] > ul > li,
+  pl-benefits[data-variant="card"]:not([data-surface]) > ul > li {
     background: var(--pl-color-surface-raised, #F9FAFB);
   }
 
@@ -68,7 +68,7 @@ export const STYLES = /*css*/`
     border-radius: var(--pl-border-radius-medium, 10px);
   }
 
-  pl-benefits[surface="brand"] li > :is(pl-icon, svg, img):first-child {
+  pl-benefits[data-surface="brand"] li > :is(pl-icon, svg, img):first-child {
     color: var(--pl-color-primary, #2563EB);
   }
 }

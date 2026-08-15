@@ -2,7 +2,7 @@
 // Documentation: pl-product-page
 // ------------------------------
 
-import { page, header, meta, section, p, ul, code, callout, demo, table } from '../components/doc.mjs';
+import { page, header, meta, section, p, ul, code, callout, pageDemo, table } from '../components/doc.mjs';
 
 export default () => page(
     header({
@@ -29,7 +29,7 @@ export default () => page(
     code(`
         <pl-product-page>
             <div data-media>
-                <pl-picture ratio="1"><img src="…" alt=""></pl-picture>
+                <pl-picture data-ratio="1"><img src="…" alt=""></pl-picture>
             </div>
             <div data-detail>
                 <h1>Field Jacket</h1>
@@ -50,10 +50,10 @@ export default () => page(
 
     section('Preview'),
 
-    demo(`
-        <pl-product-page style="--page-padding:1.25rem;--product-column:14rem;--product-gap:1.5rem;border:1px solid var(--color-border);border-radius:12px">
+    pageDemo(`
+        <pl-product-page>
             <div data-media>
-                <pl-picture ratio="1" style="--picture-radius:10px">
+                <pl-picture data-ratio="1">
                     <img src="https://picsum.photos/seed/prod/700/700" alt="">
                 </pl-picture>
             </div>
@@ -65,7 +65,7 @@ export default () => page(
                 <p style="color:var(--color-ink-secondary)">Waxed cotton, cut long. Made to be worn in.</p>
                 <pl-button full><pl-icon icon="shopping-bag" size="1rem"></pl-icon> Add to bag</pl-button>
             </div>
-            <pl-faqs surface="muted">
+            <pl-faqs data-surface="muted">
                 <h3>Before you buy</h3>
                 <pl-accordion-group>
                     <pl-accordion open><h4 data-summary>How does it fit?</h4><p>True to size, with room for a knit underneath.</p></pl-accordion>
@@ -73,7 +73,7 @@ export default () => page(
                 </pl-accordion-group>
             </pl-faqs>
         </pl-product-page>
-    `, { layout: 'stack' }),
+    `, { title: 'Product page template preview', initial: 1280 }),
 
     p(`The two top columns wrap to one when the detail column would be squeezed, and the section
        underneath runs the full width of the shell, which is what lets supporting content stack

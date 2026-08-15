@@ -2,8 +2,18 @@
   Platform: Styles
 -------------------------------------------------*/
 
-/* Set Layers */  
-@layer base, layout, components, utilities;
+/* Set Layers.
+
+   pl-global is FIRST, so every site rule outranks the library's starter sheet
+   no matter how it is written. The docs are a consumer of that file like
+   anyone else: if it were only ever shipped and never used, nothing here
+   would notice it breaking. */
+@layer pl-global, base, layout, components, utilities;
+
+/* The library's optional starter: tokens, a light reset, content typography,
+   and the .pl-skeleton utility. It brings tokens.css with it, which is why
+   tokens/index.css no longer imports that file directly. */
+@import "../../Library/_core/styles/global.css" layer(pl-global);
 
 /* Base Layer */
 @import "./tokens/index.css" layer(base);

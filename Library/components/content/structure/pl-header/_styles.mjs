@@ -34,7 +34,7 @@ export const STYLES = /*css*/`
     font-family: var(--pl-font-family-sans-serif, system-ui, sans-serif);
   }
 
-  pl-header[surface="ink"] {
+  pl-header[data-surface="ink"] {
     --header-bg: var(--pl-color-ink, #111);
     --header-ink: var(--pl-color-surface, #fff);
     --header-line: var(--pl-color-gray-700, #374151);

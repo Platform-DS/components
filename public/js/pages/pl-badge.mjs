@@ -78,28 +78,28 @@ export default () => page(
     section('Zero'),
 
     p(`A count of zero hides the badge, because "0 unread" is the absence of the thing the badge
-       exists to flag. Pass <code>show-zero</code> when the zero is itself worth seeing:`),
+       exists to flag. Pass <code>data-show-zero</code> when the zero is itself worth seeing:`),
 
     demo(`
         <pl-badge content="0">
             <pl-button variant="secondary" aria-label="Inbox, no unread messages"><pl-icon icon="mail"></pl-icon></pl-button>
         </pl-badge>
-        <pl-badge content="0" show-zero>
+        <pl-badge content="0" data-show-zero>
             <pl-button variant="secondary" aria-label="Inbox, 0 unread messages"><pl-icon icon="mail"></pl-icon></pl-button>
         </pl-badge>
     `),
 
     section('Dot badges'),
 
-    p(`<code>dot</code> drops the text entirely and leaves a small circle. It says <em>something</em>,
+    p(`<code>data-dot</code> drops the text entirely and leaves a small circle. It says <em>something</em>,
        not how much, not what. Use one only where the surrounding UI already makes the state
        clear, like the word "Online" sitting right next to it:`),
 
     demo(`
-        <pl-badge dot>
+        <pl-badge data-dot>
             <pl-button variant="secondary" aria-label="Notifications, unread"><pl-icon icon="bell"></pl-icon></pl-button>
         </pl-badge>
-        <pl-badge dot intent="error">
+        <pl-badge data-dot data-intent="error">
             <pl-button variant="secondary" aria-label="Orders, new activity"><pl-icon icon="storefront"></pl-icon></pl-button>
         </pl-badge>
     `),
@@ -108,10 +108,10 @@ export default () => page(
 
     demo(`
         <pl-badge content="6"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="6" intent="success"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="calendar"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="6" intent="warning"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="bell"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="6" intent="error"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="storefront"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="6" intent="neutral"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="6" data-intent="success"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="calendar"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="6" data-intent="warning"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="bell"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="6" data-intent="error"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="storefront"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="6" data-intent="neutral"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
     `),
 
     p(`Each fill pairs with its own on-colour, so badge text stays readable in both themes: the
@@ -124,10 +124,10 @@ export default () => page(
        rules:`),
 
     demo(`
-        <pl-badge content="1" position="top-start"><pl-button variant="secondary" aria-label="top start"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="2" position="top-end"><pl-button variant="secondary" aria-label="top end"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="3" position="bottom-start"><pl-button variant="secondary" aria-label="bottom start"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="4" position="bottom-end"><pl-button variant="secondary" aria-label="bottom end"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="1" data-position="top-start"><pl-button variant="secondary" aria-label="top start"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="2" data-position="top-end"><pl-button variant="secondary" aria-label="top end"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="3" data-position="bottom-start"><pl-button variant="secondary" aria-label="bottom start"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="4" data-position="bottom-end"><pl-button variant="secondary" aria-label="bottom end"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
     `),
 
     section('Presence on an avatar'),
@@ -140,14 +140,14 @@ export default () => page(
     demo(`
         <div style="display:grid;gap:1rem">
             <div style="display:flex;align-items:center;gap:.75rem">
-                <pl-badge dot intent="success" position="bottom-end"
+                <pl-badge data-dot data-intent="success" data-position="bottom-end"
                     style="--badge-offset-block:12%;--badge-offset-inline:12%;--badge-dot-size:.875rem">
                     <pl-avatar initials="R" alt="" size="lg"></pl-avatar>
                 </pl-badge>
                 <div><div>Remy Sharp</div><div style="opacity:.7;font-size:.875rem">Online</div></div>
             </div>
             <div style="display:flex;align-items:center;gap:.75rem">
-                <pl-badge dot intent="neutral" position="bottom-end"
+                <pl-badge data-dot data-intent="neutral" data-position="bottom-end"
                     style="--badge-offset-block:12%;--badge-offset-inline:12%;--badge-dot-size:.875rem">
                     <pl-avatar initials="T" alt="" size="lg"></pl-avatar>
                 </pl-badge>
@@ -159,7 +159,7 @@ export default () => page(
     p('Without the surrounding layout, the part that matters is just:'),
 
     code(`
-        <pl-badge dot intent="success" position="bottom-end"
+        <pl-badge data-dot data-intent="success" data-position="bottom-end"
             style="--badge-offset-block: 12%; --badge-offset-inline: 12%">
             <pl-avatar initials="R" alt="Remy Sharp" size="lg"></pl-avatar>
         </pl-badge>
@@ -186,11 +186,11 @@ export default () => page(
         [
             { cells: ['<code>content</code>', '<code>String</code>', 'The count or short text to show. Absent renders nothing.'] },
             { cells: ['<code>max</code>', '<code>Number</code>', 'Caps a numeric count: over it renders <code>max+</code>.'] },
-            { cells: ['<code>dot</code>', '<code>Boolean</code>', 'Drop the text; show a small circle instead.'] },
-            { cells: ['<code>standalone</code>', '<code>Boolean</code>', 'A label rather than a marker: the badge sits in flow instead of straddling a corner. Use it when the badge has no owner to attach to.'] },
-            { cells: ['<code>show-zero</code>', '<code>Boolean</code>', 'Keep the badge visible when the count is <code>0</code>.'] },
-            { cells: ['<code>intent</code>', '<code>String</code>', '<code>primary</code> (default), <code>success</code>, <code>warning</code>, <code>error</code>, <code>neutral</code>.'] },
-            { cells: ['<code>position</code>', '<code>String</code>', '<code>top-end</code> (default), <code>top-start</code>, <code>bottom-end</code>, <code>bottom-start</code>.'] },
+            { cells: ['<code>data-dot</code>', '<code>Boolean</code>', 'Drop the text; show a small circle instead.'] },
+            { cells: ['<code>data-standalone</code>', '<code>Boolean</code>', 'A label rather than a marker: the badge sits in flow instead of straddling a corner. Use it when the badge has no owner to attach to.'] },
+            { cells: ['<code>data-show-zero</code>', '<code>Boolean</code>', 'Keep the badge visible when the count is <code>0</code>.'] },
+            { cells: ['<code>data-intent</code>', '<code>String</code>', '<code>primary</code> (default), <code>success</code>, <code>warning</code>, <code>error</code>, <code>neutral</code>.'] },
+            { cells: ['<code>data-position</code>', '<code>String</code>', '<code>top-end</code> (default), <code>top-start</code>, <code>bottom-end</code>, <code>bottom-start</code>.'] },
         ],
     ),
 
@@ -211,7 +211,7 @@ export default () => page(
         [
             { cells: ['<code>--badge-background</code> / <code>--badge-color</code>', 'Fill and text, overriding the intent.'] },
             { cells: ['<code>--badge-size</code>', 'Height, and minimum width, of a counted badge.'] },
-            { cells: ['<code>--badge-dot-size</code>', 'Diameter of a <code>dot</code> badge.'] },
+            { cells: ['<code>--badge-dot-size</code>', 'Diameter of a <code>data-dot</code> badge.'] },
             { cells: ['<code>--badge-offset-block</code> / <code>--badge-offset-inline</code>', 'Nudge the badge in from the corner: needed for round owners.'] },
             { cells: ['<code>--badge-ring</code> / <code>--badge-ring-width</code>', 'The separating ring. Set it to whatever sits <em>behind</em> the owner, not the owner itself.'] },
             { cells: ['<code>--badge-font-size</code> / <code>--badge-padding-inline</code>', 'Text size and horizontal padding.'] },
@@ -231,6 +231,6 @@ export default () => page(
         'The owner must carry the full meaning in its accessible name: <code>aria-label="Inbox, 4 unread messages"</code>. Update that name whenever the count changes.',
         'A dot badge says nothing at all on its own: pair it with visible text, as the avatar example does with "Online" / "Offline".',
         'Nothing inside the wrapper is moved or re-parented, so a badged button keeps its focus behaviour, form ownership, and any <code>aria-*</code> references to ids elsewhere in the page.',
-        'Colour alone never carries the state: <code>intent</code> tints a badge whose meaning is already in the owner\'s name.',
+        'Colour alone never carries the state: <code>data-intent</code> tints a badge whose meaning is already in the owner\'s name.',
     ]),
 );

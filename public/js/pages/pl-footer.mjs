@@ -26,7 +26,7 @@ export default () => page(
     code(`import '@platformdesign/components/pl-footer';`, 'js'),
 
     demo(`
-        <pl-footer surface="ink">
+        <pl-footer data-surface="ink">
             <div data-columns>
                 <div>
                     <a data-brand href="#"><pl-icon icon="cube" size="1.25rem"></pl-icon> Platform</a>
@@ -85,7 +85,7 @@ export default () => page(
     table(
         ['Attribute', 'Values', 'Description'],
         [
-            { cells: ['<code>surface</code>', '<code>ink</code>', 'A dark footer. The default is a muted tint.'] },
+            { cells: ['<code>data-surface</code>', '<code>ink</code>', 'A dark footer. The default is a muted tint.'] },
         ],
     ),
 

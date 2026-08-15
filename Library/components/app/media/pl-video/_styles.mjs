@@ -21,11 +21,11 @@ export const STYLES = /*css*/`
     border-radius: var(--video-radius, 0);
   }
 
-  :host([ratio]) video {
+  :host([data-ratio]) video {
     aspect-ratio: var(--video-ratio, 16 / 9);
     block-size: 100%;
     object-fit: var(--video-fit, cover);
   }
 
-  :host([fit="contain"]) video { --video-fit: contain; }
+  :host([data-fit="contain"]) video { --video-fit: contain; }
 `;

@@ -46,6 +46,14 @@ export class Autocomplete extends BaseElement {
 
     #input = null;
     #datalist = null;
+    // A list set before the element has ever connected — `options` has
+    // nowhere to write yet, since the real <datalist> doesn't exist until
+    // connectedCallback builds it. Held here and flushed once it does, so
+    // `el.options = […]` works identically whether it runs before or after
+    // `el` is in the document — the same ordering hazard `static props`
+    // solves for attributes, just for a plain property this component
+    // doesn't route through that system.
+    #pendingOptions = null;
 
     connectedCallback() {
         injectStyles(tagName, STYLES);
@@ -70,6 +78,15 @@ export class Autocomplete extends BaseElement {
             for (const child of children) {
                 if (this.#datalist.moveBefore) this.#datalist.moveBefore(child, null);
                 else this.#datalist.append(child);
+            }
+
+            // A pre-connection `.options =` is the more specific, more recent
+            // intent — it wins over whatever markup was just moved in above,
+            // the same way calling it again later always replaces what came
+            // before.
+            if (this.#pendingOptions) {
+                this.options = this.#pendingOptions;
+                this.#pendingOptions = null;
             }
 
             // The value attribute only seeds the initial value (matching a
@@ -98,7 +115,18 @@ export class Autocomplete extends BaseElement {
 
     /** Replace the suggestion list. Accepts plain strings or {value, label}. */
     set options(list) {
-        this.#datalist?.replaceChildren(
+        // Nothing to write into yet — hold it for connectedCallback to apply.
+        // Silently doing nothing here (the old behaviour) is the actual bug:
+        // `el.options = […]` before `el` is in the document — the ordinary
+        // way to build one, options and all, before inserting it anywhere —
+        // would appear to succeed and leave the real <datalist> permanently
+        // empty, with no error pointing at why.
+        if (!this.#datalist) {
+            this.#pendingOptions = list;
+            return;
+        }
+
+        this.#datalist.replaceChildren(
             ...list.map(item => {
                 const option = document.createElement('option');
                 if (typeof item === 'string') {
@@ -113,6 +141,11 @@ export class Autocomplete extends BaseElement {
     }
 
     get options() {
+        // Read back what was set, even before connecting — otherwise
+        // `el.options = list; el.options` would show an empty list right
+        // after setting a non-empty one, which is exactly the symptom of
+        // the bug the pending-options stash exists to prevent.
+        if (this.#pendingOptions) return this.#pendingOptions.map(item => typeof item === 'string' ? item : item.value);
         return [...(this.#datalist?.children ?? [])].map(o => o.value);
     }
 

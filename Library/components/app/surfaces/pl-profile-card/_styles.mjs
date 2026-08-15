@@ -63,9 +63,9 @@ export const STYLES = /*css*/`
   /* Centring is done per-element, NOT with align-items on the column: that
      would make every child shrink to its content width, pulling the
      full-bleed cover in off the card's edges. */
-  pl-profile-card[align="center"] { --profile-align: center; }
+  pl-profile-card[data-align="center"] { --profile-align: center; }
 
-  pl-profile-card[align="center"] [data-avatar] {
+  pl-profile-card[data-align="center"] [data-avatar] {
     align-self: center;
     margin-inline: 0;
   }
@@ -106,7 +106,7 @@ export const STYLES = /*css*/`
     gap: var(--pl-size-4, 0.25rem);
   }
 
-  pl-profile-card[align="center"] :is([data-meta], [data-actions]) { justify-content: center; }
+  pl-profile-card[data-align="center"] :is([data-meta], [data-actions]) { justify-content: center; }
 
   pl-profile-card [data-actions] {
     display: flex;

@@ -50,7 +50,7 @@ export default () => page(
     p('Drop the nav entirely and the call to action moves to the far edge on its own.'),
 
     demo(`
-        <pl-header surface="ink">
+        <pl-header data-surface="ink">
             <a href="#"><pl-icon icon="cube" size="1.25rem"></pl-icon> Platform</a>
             <div data-actions>
                 <pl-button-link href="#" size="sm">Start free</pl-button-link>
@@ -103,7 +103,7 @@ export default () => page(
     table(
         ['Name', 'Type', 'Description'],
         [
-            { cells: ['<code>surface</code>', 'Attribute', '<code>ink</code> for a dark bar.'] },
+            { cells: ['<code>data-surface</code>', 'Attribute', '<code>ink</code> for a dark bar.'] },
             { cells: ['<code>pl-nav-toggle</code>', 'Event', 'Fired when the panel opens or closes; <code>detail.open</code> is a boolean.'] },
             { cells: ['<code>toggle(force?)</code>', 'Method', 'Open or close the panel programmatically.'] },
         ],

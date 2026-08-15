@@ -17,6 +17,7 @@ import '../../Library/components/app/inputs/pl-label/index.mjs';
 import '../../Library/components/app/inputs/pl-switch/index.mjs';
 import '../../Library/components/app/inputs/pl-checkbox/index.mjs';
 import '../../Library/components/app/inputs/pl-ratings/index.mjs';
+import '../../Library/components/app/inputs/pl-autocomplete/index.mjs';
 
 import '../../Library/components/app/ui/pl-icon/index.mjs';
 import '../../Library/components/app/ui/pl-avatar/index.mjs';
@@ -33,6 +34,14 @@ import '../../Library/components/app/surfaces/pl-feedback/index.mjs';
 import '../../Library/components/app/surfaces/pl-accordion/index.mjs';
 import '../../Library/components/app/surfaces/pl-accordion-group/index.mjs';
 
+import { siteSearch } from './components/search.mjs';
 import { initThemeToggle } from './theme.mjs';
 
 initThemeToggle();
+
+// Same field, same header position, as the docs page (see app.mjs) — there's
+// just no sidebar here for it to narrow, so it only ever does the second of
+// the two things the shared field can do: jump straight to a match.
+const search = siteSearch();
+const headerNav = document.querySelector('.site-header__nav');
+headerNav?.insertBefore(search, headerNav.querySelector('.theme-toggle'));

@@ -29,7 +29,7 @@ export default () => page(
     code(`import '@platformdesign/components/pl-benefits';`, 'js'),
 
     demo(`
-        <pl-benefits variant="card">
+        <pl-benefits data-variant="card">
             <p data-eyebrow>Why Platform</p>
             <h2>Four fewer things to worry about</h2>
             <p>Every one of these is a problem the platform already solved.</p>
@@ -65,10 +65,10 @@ export default () => page(
 
     section('Without cards'),
 
-    p('Drop <code>variant="card"</code> for a plainer grid: better on a busy page or a tinted band.'),
+    p('Drop <code>data-variant="card"</code> for a plainer grid: better on a busy page or a tinted band.'),
 
     demo(`
-        <pl-benefits surface="muted" columns="2">
+        <pl-benefits data-surface="muted" data-columns="2">
             <h2>Two things that matter</h2>
             <ul>
                 <li><h3>It keeps working</h3><p>The browser does not break its own APIs.</p></li>
@@ -92,13 +92,13 @@ export default () => page(
 
     section('Attributes'),
 
-    p('Plus the shared <code>surface</code>, <code>align</code>, and <code>width</code>.'),
+    p('Plus the shared <code>data-surface</code>, <code>data-align</code>, and <code>data-width</code>.'),
 
     table(
         ['Attribute', 'Values', 'Description'],
         [
-            { cells: ['<code>variant</code>', '<code>card</code>', 'Give each item a padded, bordered card.'] },
-            { cells: ['<code>columns</code>', '<code>2</code>, <code>4</code>', 'Bias the auto-fit grid toward a column count. Default suits three or four.'] },
+            { cells: ['<code>data-variant</code>', '<code>card</code>', 'Give each item a padded, bordered card.'] },
+            { cells: ['<code>data-columns</code>', '<code>2</code>, <code>4</code>', 'Bias the auto-fit grid toward a column count. Default suits three or four.'] },
         ],
     ),
 

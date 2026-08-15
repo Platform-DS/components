@@ -10,18 +10,20 @@
 // Groups are native <details> disclosures: open/closed state, keyboard
 // support, and the accessible name all come from the platform.
 //
-// sidebar() builds the rail only. The filter input is searchField(), a
-// separate export: it lives in the site header (app.mjs places it there),
-// not the rail it searches. It just hides non-matching links: no library, no
-// virtual list.
+// sidebar() builds the rail only. Filtering it is filter(), a separate
+// export driven by the header search field (see components/search.mjs) —
+// that field is shared with the home page, which has no rail at all, so it
+// can't be built here.
 
 import { NAV } from '../nav.data.mjs';
-import { GUIDES, href } from '../Router.mjs';
+import { GUIDES, UTILITIES, href } from '../Router.mjs';
 import { el } from './doc.mjs';
 
-// Directory slugs are lowercase; a couple want a nicer display form.
-const LABELS = { ui: 'UI', app: 'App', content: 'Content' };
-const label = name => LABELS[name] ?? name[0].toUpperCase() + name.slice(1);
+// Directory slugs are lowercase; a couple want a nicer display form. Exported:
+// search.mjs uses the same names for its suggestion hints, so a component's
+// group reads "Inputs" there too rather than "inputs".
+const LABELS = { ui: 'UI', app: 'App', content: 'Content', pages: 'Page Templates' };
+export const label = name => LABELS[name] ?? name[0].toUpperCase() + name.slice(1);
 
 /** One navigable entry. */
 function link(slug, text, status) {
@@ -56,9 +58,12 @@ function block(title, ...content) {
 }
 
 export function sidebar() {
+    // Order runs from what you read first to what you reach for last: the
+    // guides, then the two component surfaces, then the utilities — which are
+    // the only section you go looking for rather than browse into.
     const nav = el('nav', { class: 'docs-nav', 'aria-label': 'Documentation' },
-        // Guides are few and always relevant: a plain list, no disclosure.
-        block('Guides',
+        // Few and always relevant: a plain list, no disclosure.
+        block('Overview',
             el('ul', { class: 'docs-nav__list' },
                 GUIDES.map(g => link(g.slug, g.title))),
         ),
@@ -76,56 +81,56 @@ export function sidebar() {
                 )
             )
         ),
+        // Utilities are modules, not elements: no tag name and no place in the
+        // NAV tree, so they get their own section rather than being wedged into
+        // one. Listed by what you import, not by file name.
+        block('Utilities',
+            el('ul', { class: 'docs-nav__list' },
+                UTILITIES.map(u => link(u.slug, u.title))),
+        ),
+        // Filtered to zero is a real, reachable state (search for a typo, or
+        // for a word that just isn't a component name) — this is what fills
+        // in rather than leaving a rail that has silently gone blank.
+        el('p', { class: 'docs-nav__empty', hidden: true }),
     );
 
     return el('aside', { class: 'docs-sidebar' }, nav);
 }
 
 /**
- * The filter input, built separately from sidebar() so the caller can place
- * it in the header instead of the rail: the sidebar is pure navigation, and
- * a "search this page" affordance conventionally lives with the rest of the
- * header controls, not buried at the top of the thing it searches.
+ * Hide links that don't match `query`, then any group or section left with
+ * nothing shown, then say so if that was everything.
  *
- * Takes the element sidebar() returned; filter() just needs something that
- * contains the nav markup, and the sidebar aside qualifies as well as the
- * inner <nav> would.
+ * One function doing all three, not split across independent reactions to
+ * the same query: they aren't independent — group and section visibility are
+ * DERIVED from which links matched, and the empty message is derived from
+ * both. A single pass keeps that dependency explicit instead of three
+ * observers each re-deriving a state the others already computed.
  */
-export function searchField(sidebarEl) {
-    // The icon is decorative (the input's own aria-label names the field), so
-    // it stays out of the accessibility tree.
-    return el('div', { class: 'site-header__field' },
-        el('pl-icon', {
-            class: 'site-header__field-icon',
-            icon: 'search',
-            size: '1rem',
-        }),
-        el('input', {
-            class: 'site-header__search',
-            type: 'search',
-            placeholder: 'Filter components…',
-            'aria-label': 'Filter components',
-            onInput: event => filter(sidebarEl, event.target.value.trim().toLowerCase()),
-        }),
-    );
-}
-
-/** Hide non-matching links, then any group or section left with nothing shown. */
-function filter(nav, query) {
-    for (const item of nav.querySelectorAll('.docs-nav__list > li')) {
+export function filter(root, query) {
+    for (const item of root.querySelectorAll('.docs-nav__list > li')) {
         item.hidden = query ? !item.textContent.toLowerCase().includes(query) : false;
     }
 
-    for (const details of nav.querySelectorAll('.docs-nav__group')) {
+    let anyVisible = false;
+    for (const details of root.querySelectorAll('.docs-nav__group')) {
         const visible = [...details.querySelectorAll('li')].some(li => !li.hidden);
         details.hidden = !visible;
+        anyVisible ||= visible;
         // Reveal matches inside collapsed groups; restore on an empty query.
         if (query) details.open = visible;
     }
 
-    for (const section of nav.querySelectorAll('.docs-nav__block')) {
+    for (const section of root.querySelectorAll('.docs-nav__block')) {
         const visible = [...section.querySelectorAll('.docs-nav__list > li')].some(li => !li.hidden);
         section.hidden = !visible;
+        anyVisible ||= visible;
+    }
+
+    const empty = root.querySelector('.docs-nav__empty');
+    if (empty) {
+        empty.hidden = !query || anyVisible;
+        empty.textContent = `No components match "${query}".`;
     }
 }
 

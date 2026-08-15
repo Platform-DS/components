@@ -43,7 +43,7 @@ export default () => page(
 
     demo(`
         <pl-switch checked>Label after</pl-switch>
-        <pl-switch checked label-position="start">Label before</pl-switch>
+        <pl-switch checked data-label-position="start">Label before</pl-switch>
     `, { layout: 'stack' }),
 
     section('In a form'),
@@ -88,7 +88,7 @@ export default () => page(
             { cells: ['<code>value</code>', '<code>String</code>', 'Submitted when on. Defaults to <code>"on"</code>.'] },
             { cells: ['<code>disabled</code>', '<code>Boolean</code>', 'Native disabled.'] },
             { cells: ['<code>required</code>', '<code>Boolean</code>', 'Must be on to pass validation.'] },
-            { cells: ['<code>label-position</code>', '<code>start</code>', 'Put the label before the track.'] },
+            { cells: ['<code>data-label-position</code>', '<code>start</code>', 'Put the label before the track.'] },
         ],
     ),
 

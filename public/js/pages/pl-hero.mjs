@@ -27,7 +27,7 @@ export default () => page(
     code(`import '@platformdesign/components/pl-hero';`, 'js'),
 
     demo(`
-        <pl-hero align="center" surface="ink">
+        <pl-hero data-align="center" data-surface="ink">
             <p data-eyebrow>Zero dependencies</p>
             <h1>Components that outlive your framework.</h1>
             <p>Native custom elements and CSS custom properties. No build step.</p>
@@ -55,18 +55,18 @@ export default () => page(
             { cells: ['<code>&lt;h1&gt;</code>', 'The headline, on its own fluid scale.'] },
             { cells: ['<code>&lt;h1&gt; + &lt;p&gt;</code>', 'The lede: the paragraph directly after the headline.'] },
             { cells: ['<code>[data-actions]</code>', 'The button row.'] },
-            { cells: ['<code>&lt;figure&gt;</code>, <code>&lt;img&gt;</code>', 'The media, when <code>layout="split"</code>.'] },
+            { cells: ['<code>&lt;figure&gt;</code>, <code>&lt;img&gt;</code>', 'The media, when <code>data-layout="split"</code>.'] },
         ],
     ),
 
     section('Split layout'),
 
-    p(`<code>layout="split"</code> puts the copy beside a figure above 60rem, and stacks them below
+    p(`<code>data-layout="split"</code> puts the copy beside a figure above 60rem, and stacks them below
        it. The figure can be a <code>&lt;figure&gt;</code>, <code>&lt;picture&gt;</code>,
        <code>&lt;img&gt;</code>, or <code>&lt;video&gt;</code>.`),
 
     demo(`
-        <pl-hero layout="split" surface="muted">
+        <pl-hero data-layout="split" data-surface="muted">
             <h1>Ship the source.</h1>
             <p>Standard ES modules and standard CSS. Nothing to compile.</p>
             <div data-actions><pl-button>Get started</pl-button></div>
@@ -88,12 +88,12 @@ export default () => page(
 
     section('Attributes'),
 
-    p('Plus the shared <code>surface</code>, <code>align</code>, and <code>width</code>. See the <a href="/documentation/sections">Content sections</a> guide.'),
+    p('Plus the shared <code>data-surface</code>, <code>data-align</code>, and <code>data-width</code>. See the <a href="/documentation/sections">Content sections</a> guide.'),
 
     table(
         ['Attribute', 'Values', 'Description'],
         [
-            { cells: ['<code>layout</code>', '<code>split</code>', 'Copy beside the figure above 60rem.'] },
+            { cells: ['<code>data-layout</code>', '<code>split</code>', 'Copy beside the figure above 60rem.'] },
         ],
     ),
 

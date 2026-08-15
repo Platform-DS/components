@@ -20,10 +20,15 @@
     <meta name="theme-color" content="#111111">
 
     <!-- Outfit: the display face for headings. Loaded by the docs SITE, not
-         the library: the package itself ships no external requests. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap">
+         the library: the package itself ships no external requests.
+
+         Self-hosted and preloaded, so the download starts while this HTML is
+         still parsing rather than after a stylesheet from a third-party host
+         has arrived and been parsed. crossorigin is required even same-origin:
+         fonts are fetched in anonymous CORS mode, and without it the preload
+         and the real request are treated as different and the file is fetched
+         twice. See styles/base/_fonts.css. -->
+    <link rel="preload" href="/fonts/Outfit/Outfit-Variable.woff2" as="font" type="font/woff2" crossorigin>
 
     <link rel="stylesheet" href="/styles/styles.css">
 
@@ -53,8 +58,11 @@
         </a>
 
         <nav class="site-header__nav" aria-label="Main">
+            <!-- Same two links as the docs header (see documentation.html) —
+                 "Install" isn't one of them there, and it's redundant here
+                 too now that the hero has its own Install button and npm
+                 command right below the fold. -->
             <a href="/documentation">Documentation</a>
-            <a href="/documentation/installation">Install</a>
             <a href="https://github.com/Platform-DS/components" rel="noopener">GitHub</a>
             <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
                 <pl-icon icon="sun" size="1rem"></pl-icon>
@@ -292,7 +300,7 @@ npm i -D vite @vitejs/plugin-react
                     <article class="showcase__panel">
                         <h3>Surfaces</h3>
                         <div class="showcase__stack">
-                            <pl-feedback intent="success">
+                            <pl-feedback data-intent="success">
                                 <p data-title>Saved</p>
                                 <p>Your changes are live.</p>
                             </pl-feedback>

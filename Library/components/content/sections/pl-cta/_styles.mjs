@@ -14,7 +14,7 @@ export const STYLES = /*css*/`
   }
 
   /* Brand fill unless the author picked a surface. */
-  pl-cta:not([surface]) {
+  pl-cta:not([data-surface]) {
     --section-bg: var(--pl-color-primary, #2563EB);
     --section-ink: var(--pl-color-on-primary, #FFFFFF);
     --section-ink-muted: color-mix(in oklab, var(--pl-color-on-primary, #FFFFFF) 78%, transparent);

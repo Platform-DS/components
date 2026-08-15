@@ -4,7 +4,7 @@
 // A real <picture>: your <source>s and your <img>, wrapped in an element that
 // gives them an aspect ratio and a fit.
 //
-//   <pl-picture ratio="16/9">
+//   <pl-picture data-ratio="16/9">
 //     <source srcset="wide.avif" type="image/avif" media="(min-width: 40rem)">
 //     <source srcset="wide.webp" type="image/webp">
 //     <img src="wide.jpg" alt="A field at dawn">
@@ -35,7 +35,7 @@ export class Picture extends BaseElement {
     static mode = 'light';
 
     static get observedAttributes() {
-        return ['ratio', 'fit'];
+        return ['data-ratio', 'data-fit'];
     }
 
     #picture = null;
@@ -67,7 +67,7 @@ export class Picture extends BaseElement {
     render() {
         // Both are read by CSS, not JS — set as custom properties so a ratio
         // can be any valid CSS value rather than a fixed list.
-        const ratio = this.getAttribute('ratio');
+        const ratio = this.dataset.ratio;
         if (ratio) this.style.setProperty('--picture-ratio', ratio);
         else this.style.removeProperty('--picture-ratio');
     }

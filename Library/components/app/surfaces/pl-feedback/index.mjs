@@ -3,7 +3,7 @@
 // ------------------------------
 // An inline message about something that just happened, or is about to.
 //
-//   <pl-feedback intent="success" dismissable>
+//   <pl-feedback data-intent="success" data-dismissable>
 //     <p data-title>Saved</p>
 //     <p>Your changes are live.</p>
 //   </pl-feedback>
@@ -39,7 +39,7 @@ export class Feedback extends BaseElement {
     static mode = 'light';
 
     static get observedAttributes() {
-        return ['intent', 'dismissable'];
+        return ['data-intent', 'data-dismissable'];
     }
 
     #dismiss = null;
@@ -52,10 +52,10 @@ export class Feedback extends BaseElement {
     render() {
         // An author-set role always wins — this only supplies a default.
         if (!this.hasAttribute('role')) {
-            this.setAttribute('role', this.getAttribute('intent') === 'error' ? 'alert' : 'status');
+            this.setAttribute('role', this.dataset.intent === 'error' ? 'alert' : 'status');
         }
 
-        if (this.hasAttribute('dismissable')) this.#ensureDismiss();
+        if ('dismissable' in this.dataset) this.#ensureDismiss();
         else { this.#dismiss?.remove(); this.#dismiss = null; }
     }
 

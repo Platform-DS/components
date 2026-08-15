@@ -5,7 +5,7 @@
 // not your feature list. Features go in <pl-features>; this section is for the
 // outcome those features produce.
 //
-//   <pl-benefits variant="card">
+//   <pl-benefits data-variant="card">
 //     <h2>Four fewer things to worry about</h2>
 //     <p>Problems the platform solved years ago.</p>
 //     <ul>

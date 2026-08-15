@@ -72,7 +72,7 @@ export default () => page(
     section('Vertical'),
 
     demo(`
-        <pl-button-group orientation="vertical">
+        <pl-button-group data-orientation="vertical">
             <pl-button variant="secondary">Profile</pl-button>
             <pl-button variant="secondary">Billing</pl-button>
             <pl-button variant="secondary">Team</pl-button>
@@ -82,7 +82,7 @@ export default () => page(
     section('Full width'),
 
     demo(`
-        <pl-button-group full>
+        <pl-button-group data-full>
             <pl-button variant="secondary">Cancel</pl-button>
             <pl-button>Continue</pl-button>
         </pl-button-group>
@@ -93,8 +93,8 @@ export default () => page(
     table(
         ['Attribute', 'Values', 'Description'],
         [
-            { cells: ['<code>orientation</code>', '<code>vertical</code>', 'Stack the segments instead of placing them in a row.'] },
-            { cells: ['<code>full</code>', '<code>Boolean</code>', 'Fill the container, splitting the width evenly between segments.'] },
+            { cells: ['<code>data-orientation</code>', '<code>vertical</code>', 'Stack the segments instead of placing them in a row.'] },
+            { cells: ['<code>data-full</code>', '<code>Boolean</code>', 'Fill the container, splitting the width evenly between segments.'] },
         ],
     ),
 

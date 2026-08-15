@@ -58,7 +58,7 @@ export class Progress extends ProgressElement {
         // The host attribute is the source of truth for indeterminacy, and the
         // base's reflection already mirrors its presence — this only makes the
         // intent explicit and keeps CSS able to target the state.
-        this.toggleAttribute('indeterminate', !this.hasAttribute('value'));
+        this.toggleAttribute('data-indeterminate', !this.hasAttribute('value'));
     }
 
     /** Progress as a fraction, or null while indeterminate. */

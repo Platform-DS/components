@@ -29,7 +29,7 @@ export default () => page(
     code(`import '@platformdesign/components/pl-features';`, 'js'),
 
     demo(`
-        <pl-features surface="muted">
+        <pl-features data-surface="muted">
             <h2>What you actually get</h2>
             <article>
                 <div>
@@ -91,7 +91,7 @@ export default () => page(
 
     section('Attributes'),
 
-    p('The shared <code>surface</code>, <code>align</code>, and <code>width</code>. See the <a href="/documentation/sections">Content sections</a> guide.'),
+    p('The shared <code>data-surface</code>, <code>data-align</code>, and <code>data-width</code>. See the <a href="/documentation/sections">Content sections</a> guide.'),
 
     section('Accessibility'),
 

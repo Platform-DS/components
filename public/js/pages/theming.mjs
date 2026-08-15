@@ -88,6 +88,98 @@ export default () => page(
         }
     `, 'css'),
 
+    section('Hover and active are derived, not picked'),
+
+    p(`A theme sets one colour per intent. The interaction states are mixed from it:`),
+
+    code(`
+        --color-primary-hover:  color-mix(in oklab, var(--color-primary) 88%, var(--color-state-mix));
+        --color-primary-active: color-mix(in oklab, var(--color-primary) 78%, var(--color-state-mix));
+    `, 'css'),
+
+    p(`So retheming is one line. Change <code>--color-primary</code> and its hover and press states
+       follow, instead of leaving you to pick three harmonious blues and keep them in step forever.
+       The same holds for <code>success</code>, <code>warning</code> and <code>error</code>.`),
+
+    callout('note', 'Components derive from their OWN fill, which is what makes this work per instance',
+        `<code>pl-button</code> does not read <code>--color-primary-hover</code>. It mixes its
+         states from whatever <code>--button-background</code> actually resolves to. That is the
+         difference between theming a token and theming one button: set
+         <code>--button-background: hotpink</code> on a single instance and its hover and press
+         come out hotpink too, with nothing else to set. Before this, that instance kept the
+         default blue hover, and the fix was to name a second colour by hand.`),
+
+    code(`
+        /* one line, and every state of this button follows */
+        .checkout pl-button { --button-background: #7C3AED; }
+    `, 'css'),
+
+    section('Which way a state moves'),
+
+    p(`<code>--color-state-mix</code> is what the fill is mixed toward, and it defaults to black:
+       states <strong>darken</strong>, in both light and dark themes.`),
+
+    p(`Lightening on a dark page is the more common convention, and it was measured and rejected
+       here. Because every on-colour in this system is white, lightening the fill takes the label
+       with it: white on the primary fill drops from 5.17:1 to 4.18:1 hovered and 3.53:1 pressed,
+       under the 4.5:1 that every solid fill is supposed to carry. A label has to stay readable in
+       the state the pointer is sitting on.`),
+
+    p(`The cost is the other direction: on a dark page a darkened fill loses contrast against the
+       background, about 3.7:1 at rest and 2.8:1 hovered. That is the half of the trade worth
+       paying. Fill-against-page contrast is there so a control can be <em>found</em>, and the
+       resting state still clears 3:1; a hovered control has already been found, by the pointer
+       that is on it.`),
+
+    p(`If your palette puts <strong>dark text on light fills</strong>, the constraint inverts, and
+       so should the mix:`),
+
+    code(`
+        :root {
+            --color-state-mix: #FFFFFF;        … states lighten instead
+            --color-state-hover-amount: 12%;
+            --color-state-active-amount: 22%;
+        }
+    `, 'css'),
+
+    p(`The transparent variants already do exactly this. <code>secondary</code> and
+       <code>ghost</code> have no fill and their label is the page ink, so there is no white-on-fill
+       contrast to protect. They mix toward <code>--color-ink</code> instead, which flips with the
+       theme: the tint darkens on paper and lightens in the dark, which is what a ghost button
+       wants on either.`),
+
+    p(`The transparent variants are also the answer to the obvious question, which is why the mix
+       direction is not simply <code>light-dark(#000, #fff)</code>. It could be: that does work
+       inside <code>color-mix</code>, and it is the right override if your themes live in one file
+       and switch on <code>color-scheme</code>.`),
+
+    code(`
+        :root {
+            color-scheme: light dark;
+            --color-state-mix: light-dark(#000000, #FFFFFF);
+        }
+    `, 'css'),
+
+    p(`It is not the default for two reasons. It only answers to <code>color-scheme</code>, so it
+       does nothing for a theme switched by a class or a <code>data-theme</code> attribute, which
+       is how most sites with a manual toggle work, this one included. And it assumes flipping is
+       what you want, which is exactly what the contrast numbers above say it is not, for a white
+       label on a solid fill.`),
+
+    p(`Where flipping <em>is</em> right, <code>--color-ink</code> already does it, without needing
+       <code>light-dark()</code> and without caring how the theme was switched: it is a token, so
+       it is whatever the loaded palette says it is. That is what the transparent variants use, and
+       it works under a media query, a class, an attribute, or a separate stylesheet
+       equally.`),
+
+    callout('note', 'The thing dark mode actually has to get right is the ink',
+        `A blue button is blue in either theme, give or take a shade. What genuinely changes is the
+         reading direction: dark text on light, or light text on dark. That is why the semantic
+         tokens are the ones a dark theme re-points, the raw scales stay fixed, and every
+         intent's on-colour stays white in both. Get <code>--color-ink</code>, the three surfaces
+         and the on-colours right and a dark theme is mostly done; the interaction states are a
+         detail underneath that decision, not a second one.`),
+
     section('Overriding: three levels'),
 
     p('Because tokens are just custom properties, the cascade gives you three scopes, narrowest winning:'),

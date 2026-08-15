@@ -24,9 +24,9 @@ export default () => page(
 
     demo(`
         <pl-feedback><p>Your export will finish in the background.</p></pl-feedback>
-        <pl-feedback intent="success"><p data-title>Saved</p><p>Your changes are live.</p></pl-feedback>
-        <pl-feedback intent="warning"><p>Your trial ends in three days.</p></pl-feedback>
-        <pl-feedback intent="error"><p data-title>Upload failed</p><p>The file was larger than 10 MB.</p></pl-feedback>
+        <pl-feedback data-intent="success"><p data-title>Saved</p><p>Your changes are live.</p></pl-feedback>
+        <pl-feedback data-intent="warning"><p>Your trial ends in three days.</p></pl-feedback>
+        <pl-feedback data-intent="error"><p data-title>Upload failed</p><p>The file was larger than 10 MB.</p></pl-feedback>
     `, { layout: 'stack' }),
 
     p(`Each intent gets its own icon as well as its own colour. Colour alone is not a distinction
@@ -46,7 +46,7 @@ export default () => page(
     ),
 
     p(`Interrupting is right for a genuine failure and wrong for "Saved", so it is opt-in:
-       <code>intent="error"</code> takes <code>role="alert"</code>, everything else takes
+       <code>data-intent="error"</code> takes <code>role="alert"</code>, everything else takes
        <code>status</code>. Setting <code>role</code> yourself always wins.`),
 
     callout('note', 'A live region only announces when it CHANGES',
@@ -74,7 +74,7 @@ export default () => page(
        something does.`),
 
     demo(`
-        <pl-feedback intent="success" dismissable>
+        <pl-feedback data-intent="success" data-dismissable>
             <p data-title>Copied</p>
             <p>The install command is on your clipboard.</p>
         </pl-feedback>
@@ -92,8 +92,8 @@ export default () => page(
     table(
         ['Attribute', 'Type', 'Description'],
         [
-            { cells: ['<code>intent</code>', '<code>String</code>', 'Default (informational), <code>success</code>, <code>warning</code>, <code>error</code>.'] },
-            { cells: ['<code>dismissable</code>', '<code>Boolean</code>', 'Adds the × that removes the message.'] },
+            { cells: ['<code>data-intent</code>', '<code>String</code>', 'Default (informational), <code>success</code>, <code>warning</code>, <code>error</code>.'] },
+            { cells: ['<code>data-dismissable</code>', '<code>Boolean</code>', 'Adds the × that removes the message.'] },
             { cells: ['<code>role</code>', '<code>String</code>', 'Set it yourself to override the default of <code>status</code> / <code>alert</code>.'] },
             { cells: ['<code>data-title</code>', '<em>on a child</em>', 'The emphasised first line.'] },
         ],
