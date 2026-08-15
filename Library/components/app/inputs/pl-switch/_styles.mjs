@@ -7,92 +7,93 @@
 // through sibling selectors, so the behaviour is never re-implemented.
 
 export const STYLES = /*css*/`
-@layer pl-components {
-  pl-switch {
-    display: inline-block;
-    --switch-width: 2.5rem;
-    --switch-height: 1.4rem;
-    --switch-gap: 2px;
-  }
+:where(pl-switch) {
+  --switch-width: 2.5rem;
+  --switch-height: 1.4rem;
+  --switch-gap: 2px;
+}
 
-  pl-switch[hidden] { display: none; }
+pl-switch {
+  display: inline-block;
+}
 
-  pl-switch .pl-switch__wrap {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--pl-size-8, 0.5rem);
-    cursor: pointer;
+pl-switch[hidden] { display: none; }
 
-    font-family: var(--pl-font-family-sans-serif, system-ui, sans-serif);
-    font-size: var(--pl-font-size-base, 1rem);
-    line-height: var(--pl-line-height-tight, 1.15);
-    color: var(--pl-color-ink, #111827);
-    -webkit-user-select: none;
-    user-select: none;
-  }
+pl-switch .pl-switch__wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pl-size-8, 0.5rem);
+  cursor: pointer;
 
-  /* The real control — present for focus, keyboard, and form value. */
-  pl-switch .pl-switch__input {
-    position: absolute;
-    inline-size: 1px;
-    block-size: 1px;
-    margin: 0;
-    opacity: 0;
-    pointer-events: none;
-  }
+  font-family: var(--pl-font-family-sans-serif, system-ui, sans-serif);
+  font-size: var(--pl-font-size-base, 1rem);
+  line-height: var(--pl-line-height-tight, 1.15);
+  color: var(--pl-color-ink, #111827);
+  -webkit-user-select: none;
+  user-select: none;
+}
 
-  pl-switch .pl-switch__track {
-    flex: none;
-    position: relative;
-    inline-size: var(--switch-width);
-    block-size: var(--switch-height);
-    background: var(--switch-off, var(--pl-color-border-strong, #9CA3AF));
-    border-radius: var(--pl-border-radius-full, 9999px);
-    transition: background 160ms ease;
-  }
+/* The real control — present for focus, keyboard, and form value. */
+pl-switch .pl-switch__input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
 
-  /* The knob. A pseudo-element so the markup stays a track and nothing else. */
-  pl-switch .pl-switch__track::after {
-    content: "";
-    position: absolute;
-    inset-block-start: var(--switch-gap);
-    inset-inline-start: var(--switch-gap);
-    inline-size: calc(var(--switch-height) - var(--switch-gap) * 2);
-    block-size: calc(var(--switch-height) - var(--switch-gap) * 2);
-    background: var(--switch-knob, #FFFFFF);
-    border-radius: var(--pl-border-radius-full, 9999px);
-    box-shadow: var(--pl-box-shadow-small, 0 1px 2px rgb(0 0 0 / 0.2));
-    transition: translate 160ms ease;
-  }
+pl-switch .pl-switch__track {
+  flex: none;
+  position: relative;
+  inline-size: var(--switch-width);
+  block-size: var(--switch-height);
+  background: var(--switch-off, var(--pl-color-border-strong, #9CA3AF));
+  border-radius: var(--pl-border-radius-full, 9999px);
+  transition: background 160ms ease;
+}
 
-  pl-switch .pl-switch__input:checked ~ .pl-switch__track {
-    background: var(--switch-on, var(--pl-color-primary, #2563EB));
-  }
+/* The knob. A pseudo-element so the markup stays a track and nothing else. */
+pl-switch .pl-switch__track::after {
+  content: "";
+  position: absolute;
+  inset-block-start: var(--switch-gap);
+  inset-inline-start: var(--switch-gap);
+  inline-size: calc(var(--switch-height) - var(--switch-gap) * 2);
+  block-size: calc(var(--switch-height) - var(--switch-gap) * 2);
+  background: var(--switch-knob, #FFFFFF);
+  border-radius: var(--pl-border-radius-full, 9999px);
+  box-shadow: var(--pl-box-shadow-small, 0 1px 2px rgb(0 0 0 / 0.2));
+  transition: translate 160ms ease;
+}
 
-  /* Logical translate, so it slides the correct way in a RTL document. */
-  pl-switch .pl-switch__input:checked ~ .pl-switch__track::after {
-    translate: calc(var(--switch-width) - var(--switch-height)) 0;
-  }
+pl-switch .pl-switch__input:checked ~ .pl-switch__track {
+  background: var(--switch-on, var(--pl-color-primary, #2563EB));
+}
 
-  pl-switch .pl-switch__input:focus-visible ~ .pl-switch__track {
-    outline: 2px solid var(--pl-color-focus, #2563EB);
-    outline-offset: 2px;
-  }
+/* Logical translate, so it slides the correct way in a RTL document. */
+pl-switch .pl-switch__input:checked ~ .pl-switch__track::after {
+  translate: calc(var(--switch-width) - var(--switch-height)) 0;
+}
 
-  pl-switch[disabled] .pl-switch__wrap {
-    cursor: not-allowed;
-    opacity: var(--pl-opacity-60, 0.6);
-  }
+pl-switch .pl-switch__input:focus-visible ~ .pl-switch__track {
+  outline: 2px solid var(--pl-color-focus, #2563EB);
+  outline-offset: 2px;
+}
 
-  pl-switch .pl-switch__label:empty { display: none; }
+pl-switch[disabled] .pl-switch__wrap {
+  cursor: not-allowed;
+  opacity: var(--pl-opacity-60, 0.6);
+}
 
-  /* Label first, control last. */
-  pl-switch[data-label-position="start"] .pl-switch__wrap { flex-direction: row-reverse; }
+pl-switch .pl-switch__label:empty { display: none; }
 
-  @media (prefers-reduced-motion: reduce) {
-    pl-switch .pl-switch__track,
-    pl-switch .pl-switch__track::after { transition: none; }
-  }
+/* Label first, control last. */
+pl-switch[data-label-position="start"] .pl-switch__wrap { flex-direction: row-reverse; }
+
+@media (prefers-reduced-motion: reduce) {
+  pl-switch .pl-switch__track,
+  pl-switch .pl-switch__track::after { transition: none; }
 }
 `;

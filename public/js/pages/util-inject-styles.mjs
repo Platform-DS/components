@@ -27,9 +27,7 @@ export default () => page(
         import { injectStyles } from '@platformdesign/components/_core/utilities/injectStyles.mjs';
 
         const STYLES = \`
-            @layer pl-components {
-                my-banner { display: block; padding: 1rem; }
-            }
+            my-banner { display: block; padding: 1rem; }
         \`;
 
         class MyBanner extends HTMLElement {
@@ -56,13 +54,45 @@ export default () => page(
         '<strong>Appended, not assigned.</strong> The sheet goes on the end of <code>document.adoptedStyleSheets</code>, so components that arrive later never clobber the ones already there.',
     ]),
 
-    callout('note', 'Wrap your rules in a layer',
-        `Every caller is expected to wrap its CSS in <code>@layer pl-components</code>. Adopted
-         stylesheets come <em>after</em> the document's own in the cascade, so without a layer a
-         component's rules would beat the consumer's stylesheet and only lose to
-         <code>!important</code>. Inside a layer, unlayered author CSS wins automatically, whatever
-         the selectors say. This is the difference between a component you can restyle and one you
-         have to fight.`),
+    callout('note', 'Do NOT wrap these in a layer',
+        `These sheets used to wrap everything in <code>@layer pl-components</code>, so that a
+         consumer's CSS would win without a specificity fight. It won too much. An unlayered rule
+         beats a layered one at <em>any</em> specificity, so a page with nothing more exotic than
+         <code>p { margin: 3rem 0 }</code> beat <code>pl-hero &gt; p</code> and took the section's
+         vertical rhythm with it. Measured against five such rules, every one of them won: a hero
+         lede at 48px instead of 16, a figure at 80px instead of 0, a section title at 64px instead
+         of 40. A component that loses to a bare element selector does not have a layout, it has a
+         suggestion.`),
+
+    p(`Unlayered restores ordinary specificity, which turns out to be the behaviour everyone
+       actually wanted. Measured against the same page:`),
+
+    table(
+        ['The page writes', 'Weight', 'Who wins'],
+        [
+            { cells: ['<code>p { margin: 3rem }</code>', '(0,0,1)', 'The <strong>component</strong>, whose <code>pl-hero &gt; p</code> is (0,0,2). This is the bleed the change exists to stop.'] },
+            { cells: ['<code>pl-hero { --section-space: 10rem }</code>', '(0,0,1)', 'The <strong>page</strong>. Token defaults sit in <code>:where()</code>, so they weigh nothing and anything at all outranks them.'] },
+            { cells: ['<code>pl-hero h1 { font-size: 5rem }</code>', '(0,0,2)', 'The <strong>page</strong>. Type rules are <code>:where(pl-hero) &gt; h1</code>, so they weigh only what they target.'] },
+            { cells: ['<code>.brand pl-hero h1 { … }</code>', '(0,1,2)', 'The <strong>page</strong>. A class always wins; this is the escape hatch that works everywhere, on every component.'] },
+            { cells: ['<code>p { margin: 0 !important }</code>', '—', 'The <strong>page</strong>. Nothing here is <code>!important</code>, so the hammer still works when you need it.'] },
+        ],
+    ),
+
+    callout('warn', 'The one tie you can lose',
+        `Adopted sheets sort after the document's own, so an override written at
+         <em>exactly</em> a component's specificity loses the tie.
+         <code>pl-footer address { font-style: italic }</code> ties
+         <code>pl-footer address</code> and the component wins. Add a class, an id, or a child
+         combinator: any of the three is one notch of intent more than a tie, and the rule of thumb
+         that never fails is that a class beats anything this library writes.`),
+
+    callout('note', 'Why not just use !important everywhere',
+        `It was the obvious fix and it is wrong twice over. Inside a layer, important declarations
+         <em>reverse</em> the layer order, so <code>!important</code> here would also beat a
+         consumer's own <code>!important</code> and nothing in a page could reach these rules at
+         all. And it would undo the reason content components are Light DOM in the first place:
+         the page's cascade is supposed to reach them. Custom properties are the theming path, but
+         they should not be the <em>only</em> one.`),
 
     section('When you need it'),
 
@@ -84,6 +114,6 @@ export default () => page(
 
     ul([
         '<a href="/documentation/authoring">Authoring components</a>: the base classes that call this for you.',
-        '<a href="/documentation/theming">Theming</a>: the layer this cooperates with.',
+        '<a href="/documentation/theming">Theming</a>: the custom properties these rules read.',
     ]),
 );

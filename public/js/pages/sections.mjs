@@ -91,12 +91,12 @@ export default () => page(
     section('Styling from your own page'),
 
     p(`Because these are Light DOM, your stylesheet reaches them directly, no
-       <code>::part()</code>, no custom property indirection. The components' rules live in
-       <code>@layer pl-components</code>, so your unlayered CSS always wins without a specificity
-       fight:`),
+       <code>::part()</code>, no custom property indirection. The components' rules are unlayered
+       and tag-level, so ordinary specificity settles it: one class of your own outranks them, and
+       a stray <code>p { margin: 3rem }</code> elsewhere in your stylesheet does not:`),
 
     code(`
-        /* No layer needed on your side: unlayered CSS beats any layer. */
+        /* Tag-level is enough here: nothing in the library outranks it. */
         pl-hero {
             --section-space: 10rem;
         }

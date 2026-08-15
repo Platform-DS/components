@@ -113,11 +113,11 @@ export default () => page(
     section('Styling'),
 
     p(`Being Light DOM, this component has no shadow root to adopt a stylesheet onto. Its CSS is
-       injected into the document once, inside <code>@layer pl-components</code>, so your own
-       unlayered CSS always wins and you never have to fight specificity to restyle it.`),
+       injected into the document once, unlayered, so ordinary specificity decides: your class or
+       id beats it, and a bare <code>label { … }</code> in your page does not.`),
 
     code(`
-        /* No layer needed on your side: unlayered CSS beats any layer. */
+        /* One class is enough — the component's own rules are tag-level. */
         pl-label {
             font-size: 1rem;
             letter-spacing: 0.01em;
