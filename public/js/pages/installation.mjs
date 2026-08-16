@@ -2,7 +2,7 @@
 // Documentation: Installation
 // ------------------------------
 
-import { page, header, section, p, ul, code, callout } from '../components/doc.mjs';
+import { page, header, section, p, ul, code, callout, table } from '../components/doc.mjs';
 
 export default () => page(
     header({
@@ -79,6 +79,61 @@ class SubmitButton extends Button {
         `Every component references tokens with fallbacks, so it still renders correctly
          without this file. Loading it, or your own platformdesign.app export: is what makes
          the set share one system. See <a href="/documentation/theming">Theming</a>.`),
+
+    section('Serving it well'),
+
+    p(`The source is the package: 125 ES modules, no build step, and importing a component imports
+       exactly the files it needs. For an app with a bundler that is already the right answer, and
+       nothing below applies. Your bundler minifies and tree-shakes across your whole app, which a
+       pre-bundled file cannot; handing it a built artefact would be strictly worse.`),
+
+    p(`For a page with <strong>no build step</strong>, the case this library exists for, the
+       source costs requests. Measured with brotli, which is what a CDN actually sends:`),
+
+    table(
+        ['What you load', 'As source', 'Built', 'Saving'],
+        [
+            { cells: ['One component', '7 files, 13.9 kB', '4 files, 6.2 kB', '55%'] },
+            { cells: ['Two components', '11 files, 14.8 kB', '7 files, 6.8 kB', '54%'] },
+            { cells: ['A 13-tag landing page', '37 files, 38.0 kB', '20 files, 23.1 kB', '39%'] },
+            { cells: ['The whole library', '125 files, 85.8 kB', '<strong>1 file, 43.9 kB</strong>', '49%'] },
+        ],
+    ),
+
+    p(`So the package also ships a built distribution under the <code>/min</code> subpath. It is
+       opt-in by import path rather than a <code>browser</code> condition, because a condition
+       would hand a bundler minified input behind its back, and the point of the source being the
+       default is that what you import is what runs.`),
+
+    code(`
+        <!-- the whole library, one request -->
+        <script type="module" src="/node_modules/@platformdesign/components/dist/platform.js"></script>
+
+        <!-- or just what you use; they share chunks, so the second costs almost nothing -->
+        <script type="module">
+            import '@platformdesign/components/min/pl-button';
+            import '@platformdesign/components/min/pl-hero';
+        </script>
+    `, 'html'),
+
+    callout('note', 'Which of the two, and why the answer is usually the split one',
+        `<code>platform.js</code> is one request and 43.9 kB. The per-component files total less
+         than that for any realistic page (a thirteen-tag landing page is 23.1 kB) but arrive as
+         twenty small files. On HTTP/2 that trade favours the split build, and it keeps the shared
+         core in a chunk the browser caches once across every page of your site. Reach for the
+         single file when you want one script tag and no thought, or when you genuinely use most of
+         the library.`),
+
+    p(`Compression is the server's job, not the package's: none of these numbers happen without
+       brotli or gzip enabled. Serve the files from your own origin where you can: a second origin
+       costs a DNS lookup, a TCP handshake and a TLS negotiation before the first byte, which on a
+       landing page is worth more than the bytes you saved.`),
+
+    callout('note', 'Building it yourself',
+        `<code>npm run build</code> regenerates <code>dist/</code> and prints the table above, so
+         the trade is measured rather than assumed. esbuild is resolved from wherever you already
+         have it and is never a dependency of this package. The zero-dependency promise covers
+         what consumers install, and it would be hollow if the repo quietly grew a toolchain.`),
 
     section('Framework integration'),
 

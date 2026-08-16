@@ -40,8 +40,11 @@ const TYPES = {
 /** Map a URL path to a file on disk, or null if it escapes the served roots. */
 async function resolve(pathname) {
     // Library/ and Developer_Docs/ live outside public/ but are served so the
-    // docs can import the real source.
-    const fromRoot = pathname.startsWith('/Library/') || pathname.startsWith('/Developer_Docs/');
+    // docs can import the real source. dist/ joins them so a built bundle can be
+    // exercised against the same pages the source is.
+    const fromRoot = pathname.startsWith('/Library/')
+        || pathname.startsWith('/Developer_Docs/')
+        || pathname.startsWith('/dist/');
     const base = fromRoot ? ROOT : PUBLIC;
 
     // normalize() collapses any ../ before we join, so a crafted path can't

@@ -53,12 +53,31 @@ export default () => page(
     demo(`
         <pl-form onsubmit="event.preventDefault();
             this.querySelector('output').value = 'plan = ' + (new FormData(event.target).get('plan') ?? '(none)')">
-            <pl-radio name="plan" value="free" checked>Free</pl-radio>
-            <pl-radio name="plan" value="pro">Pro</pl-radio>
-            <div data-actions><pl-button type="submit" size="sm">Submit</pl-button></div>
+            <pl-label text="Plan" hint="You can change this at any time.">
+                <pl-radio name="plan" value="free" checked>Free</pl-radio>
+                <pl-radio name="plan" value="pro">Pro</pl-radio>
+                <pl-radio name="plan" value="team">Team</pl-radio>
+            </pl-label>
+            <div data-actions data-align="end"><pl-button type="submit" size="sm">Submit</pl-button></div>
             <output></output>
         </pl-form>
     `, { layout: 'stack' }),
+
+    p(`<a href="/documentation/pl-label">pl-label</a> is how a radio gets a label that is not its
+       own inline text: the group title above, the hint below, and the
+       <code>aria-describedby</code> wiring between them. It is Light DOM on purpose, so the
+       <code>&lt;label&gt;</code> it renders is a real one in the page's own tree, and the
+       association it makes is the platform's rather than an imitation of it.`),
+
+    callout('note', 'Why a label can reach into a shadow root at all',
+        `<code>pl-radio</code> keeps a real <code>&lt;input type="radio"&gt;</code> in its shadow
+         root, and a <code>&lt;label&gt;</code> cannot see across that boundary. It does not have
+         to: the host is a <strong>form-associated custom element</strong>, which makes it
+         labelable in its own right, so <code>label.control</code> resolves to the
+         <code>&lt;pl-radio&gt;</code> and <code>el.labels</code> lists the labels pointing at it.
+         <code>delegatesFocus</code> then sends the focus inward, and clicking the label text
+         checks the radio, fires <code>change</code>, and updates the form value, exactly as it
+         would for a bare <code>&lt;input&gt;</code>.`),
 
     section('Props'),
 

@@ -20,7 +20,7 @@
 // successful publish. With account 2FA enabled, npm often returns a 404 on
 // publish without --otp; pass a fresh authenticator code.
 
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, stat, readdir } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
@@ -112,7 +112,50 @@ function run(command, args) {
     return result.status ?? 1;
 }
 
+/**
+ * dist/ is in `files`, so whatever is on disk is what publishes. A stale build
+ * is worse than no build: consumers of the /min subpath would silently get the
+ * previous release's code under this release's version number.
+ */
+async function checkDist() {
+    const dist = join(ROOT, 'dist');
+
+    let built;
+    try {
+        built = Math.max(...(await readdir(dist)).length
+            ? await Promise.all((await readdir(dist)).map(async f => (await stat(join(dist, f))).mtimeMs))
+            : [0]);
+    } catch {
+        console.error(
+            'No dist/ — the ./min subpath would 404 for anyone who imports it.\n' +
+            'Run `npm run build` first, or remove "dist" from package.json "files".',
+        );
+        process.exit(1);
+    }
+
+    // Newest source file wins: if anything in Library/ is newer than the build,
+    // the build does not describe it.
+    let newest = 0;
+    await (async function walk(dir) {
+        for (const name of await readdir(dir, { withFileTypes: true })) {
+            const path = join(dir, name.name);
+            if (name.isDirectory()) await walk(path);
+            else newest = Math.max(newest, (await stat(path)).mtimeMs);
+        }
+    })(join(ROOT, 'Library'));
+
+    if (newest > built) {
+        console.error(
+            'dist/ is older than Library/ — it would publish the previous build.\n' +
+            'Run `npm run build`, then release again.',
+        );
+        process.exit(1);
+    }
+}
+
 const { bump, otp, dryRun, noPublish, confirmV1 } = parseArgs(process.argv.slice(2));
+
+if (!noPublish) await checkDist();
 
 const raw = await readFile(PKG_PATH, 'utf8');
 const pkg = JSON.parse(raw);

@@ -37,6 +37,15 @@ const STATIC_EXPORTS = {
     './global.css': './Library/_core/styles/global.css',
     './_core/*': './Library/_core/*',
     './utilities/*': './Library/utilities/*',
+
+    // The optional built distribution (npm run build). Opt-in by SUBPATH rather
+    // than a "browser" condition: a condition would hand a bundler minified
+    // input behind its back, and the point of the source being the default is
+    // that what you import is what runs.
+    './min': './dist/platform.js',
+    './min/*': './dist/*.js',
+    './min/tokens.css': './dist/tokens.css',
+    './min/global.css': './dist/global.css',
 };
 
 const PATTERN_EXPORTS = {

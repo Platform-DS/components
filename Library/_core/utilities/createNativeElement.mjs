@@ -187,12 +187,58 @@ export function createNativeElement(tag) {
             // The internal element's click reaches the host composed, so one
             // listener covers both activation and command invocation.
             if (FORM_ASSOCIATED.has(tag) || hasCommand) {
-                this.addEventListener('click', () => {
+                this.addEventListener('click', event => {
                     if (this.native?.disabled) return;
+                    this.#forwardActivation(event);
                     this.#activate();
                     this.#invoke();
                 });
             }
+        }
+
+        /**
+         * The labels pointing at this control, as a native input exposes them.
+         *
+         * ElementInternals knows the answer — the association already works,
+         * which is why `label.control` resolves here — but it lives on a private
+         * field. Surfacing it keeps `el.labels` meaning the same thing on
+         * <pl-radio> as on <input>, which is the whole contract of these
+         * primitives.
+         */
+        get labels() {
+            return this.#internals?.labels ?? null;
+        }
+
+        /**
+         * Run the native control's activation when the click came from OUTSIDE
+         * the shadow root.
+         *
+         * A form-associated custom element is labelable — a wrapping <pl-label>
+         * resolves to this host, and `label.control` proves it. What the host
+         * does NOT have is activation behaviour: the browser dispatches the
+         * label's synthetic click at the host and then has nothing to run, so
+         * clicking "Remember me" moved focus and left the checkbox unchecked.
+         * That is the one part of a native control that ElementInternals does
+         * not hand you, and it has to be forwarded by hand.
+         *
+         * `composedPath()[0] !== this` is the whole discriminator. A click that
+         * originated anywhere real — the internal input, the styled box, slotted
+         * label text — has that node at the head of the path, and the platform
+         * has already done the work. Only a click dispatched AT the host itself
+         * (an outer <label>, or `el.click()`) arrives with the host in front,
+         * and only that one needs forwarding. Without the check the internal
+         * <label> and this method would both fire, and a checkbox would toggle
+         * twice to nowhere.
+         */
+        #forwardActivation(event) {
+            if (event.composedPath()[0] !== this) return;
+
+            const native = this.native;
+            if (!native || native === this) return;
+
+            // Guarded above, so this cannot recurse: the click it dispatches
+            // arrives with `native` at the head of the path, not the host.
+            native.click();
         }
 
         /**
