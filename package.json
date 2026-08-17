@@ -1,6 +1,6 @@
 {
   "name": "@platformdesign/components",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Native web components. No build step, no framework, no dependencies — just the browser.",
   "license": "MIT",
   "author": "Platform Design",
