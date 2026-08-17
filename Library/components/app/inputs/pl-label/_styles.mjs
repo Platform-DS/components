@@ -46,6 +46,14 @@ export const STYLES = /*css*/`
       color: var(--pl-color-error, #B91C1C);
   }
 
+  pl-label .pl-label__success {
+      display: block;
+      margin-block-start: var(--pl-size-4, 0.25rem);
+      font-size: var(--pl-font-size-xs, 0.75rem);
+      font-weight: var(--pl-font-weight-normal, 400);
+      color: var(--pl-color-success, #047857);
+  }
+
   pl-label[disabled] {
       opacity: var(--pl-opacity-50, 0.5);
       cursor: not-allowed;

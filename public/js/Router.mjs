@@ -55,11 +55,12 @@ const COMPONENT_PAGES = new Set([
     'pl-button-group', 'pl-form', 'pl-switch', 'pl-color-picker', 'pl-radio-group',
     'pl-autocomplete', 'pl-ratings', 'pl-avatar', 'pl-chip', 'pl-badge',
     'pl-accordion', 'pl-accordion-group', 'pl-dialog', 'pl-popover', 'pl-feedback',
-    'pl-product-card', 'pl-profile-card', 'pl-carousel',
+    'pl-product-card', 'pl-profile-card', 'pl-carousel', 'pl-surface',
     'pl-loading', 'pl-meter', 'pl-progress', 'pl-skeleton',
     'pl-pie-chart', 'pl-doughnut-chart', 'pl-bar-chart',
     'pl-picture', 'pl-video', 'pl-pagination', 'pl-app-navigation',
-    'pl-sidebar', 'pl-blank-page', 'pl-marketing-page',
+    'pl-sidebar', 'pl-blank-page', 'pl-marketing-page', 'pl-ui-kit-page',
+    'pl-content-page', 'pl-brand-kit-page',
 ]);
 
 /** The URL for a documentation slug. */

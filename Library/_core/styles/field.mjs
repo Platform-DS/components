@@ -56,7 +56,28 @@ export const fieldStyles = (sel) => /*css*/`
     border-color: var(--pl-color-error, #B91C1C);
   }
 
-  ${sel}:user-invalid:focus-visible {
+  /* An AUTHOR-asserted error, which is a different claim from "the user typed
+     something the browser rejects". pl-label sets aria-invalid on the host when
+     given an error message, and a field the page has declared invalid should
+     look it immediately — the announcement and the chrome must not disagree. */
+  :host([aria-invalid="true"]) ${sel} {
+    border-color: var(--pl-color-error, #B91C1C);
+  }
+
+  ${sel}:user-invalid:focus-visible,
+  :host([aria-invalid="true"]) ${sel}:focus-visible {
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--pl-color-error, #B91C1C) 22%, transparent);
+  }
+
+  /* The author-asserted twin for the happy path: pl-label sets data-success on
+     the host when given a success message. ARIA has no "valid" state, so this
+     attribute is the styling hook and the label's message line is what speaks.
+     Error outranks it in pl-label, so the two can never render together. */
+  :host([data-success]) ${sel} {
+    border-color: var(--pl-color-success, #047857);
+  }
+
+  :host([data-success]) ${sel}:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--pl-color-success, #047857) 22%, transparent);
   }
 `;

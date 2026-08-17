@@ -182,22 +182,50 @@ export default () => page(
 
     section('Overriding: three levels'),
 
-    p('Because tokens are just custom properties, the cascade gives you three scopes, narrowest winning:'),
+    p(`Because tokens are just custom properties, the cascade gives you three scopes. The middle one
+       has a catch that is worth understanding before you hit it:`),
 
     code(`
         … 1. Global: swap the whole system (this is your export)
         :root { --color-primary: #7C3AED; }
 
-        … 2. Scoped: re-theme one region of the page
-        .checkout { --color-primary: #047857; }
+        … 2. Scoped: re-theme one region — set the ALIAS, not the contract
+        .checkout { --pl-color-primary: #047857; }
+
+        … 3. One instance: the component's own hook
+        .checkout pl-button { --button-background: #047857; }
     `, 'css'),
 
     demo(`
         <pl-button>Default</pl-button>
-        <span style="--color-primary: #047857">
-            <pl-button>Scoped export</pl-button>
+        <span style="--pl-color-primary: #047857">
+            <pl-button>Scoped</pl-button>
+        </span>
+        <span style="--button-background: #B45309">
+            <pl-button>One instance</pl-button>
         </span>
     `),
+
+    callout('warn', 'A scoped override has to name the alias',
+        `<code>.checkout { --color-primary: … }</code> does nothing, and this is the one genuinely
+         surprising thing about the token system. The bridge
+         <code>--pl-color-primary: var(--color-primary)</code> is declared once, on
+         <code>:root</code>. It RESOLVES there, and what inherits down the tree is the resolved
+         value, not the expression — so redefining <code>--color-primary</code> further down has
+         nothing left to re-resolve. Global overrides work because they change
+         <code>--color-primary</code> in the same place the bridge reads it.`),
+
+    p(`The fix is to set what components actually read. Scoped theming names
+       <code>--pl-*</code>; global theming names the contract. That split is not an accident of
+       implementation, it is the insulation the seam exists for: your application can own
+       <code>--color-primary</code> for its own layout while a region renders components at a
+       different primary, and neither disturbs the other.`),
+
+    p(`The alternative — declaring the bridge on <code>*</code> so it re-resolves at every element
+       — was rejected for exactly that reason. It would make scoped contract overrides work, and it
+       would simultaneously make pinning a <code>--pl-*</code> alias impossible, because the
+       universal rule would re-assert the contract value on every descendant. One of the two has to
+       give, and lazy per-element resolution is worth less than a seam you can rely on.`),
 
     section('Per-component hooks'),
 

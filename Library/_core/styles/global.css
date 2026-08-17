@@ -569,6 +569,18 @@ pl-textarea:not(:defined) { block-size: 6rem; }
   gap: var(--chart-gap, var(--pl-size-24, 1.5rem));
 }
 
+/* pl-surface is pure chrome, so the whole thing can be drawn before upgrade —
+   there is no generated markup to wait for. */
+pl-surface:not(:defined) {
+  display: block;
+  background: var(--surface-background, var(--pl-color-surface, #FFFFFF));
+  border: var(--surface-border-width, var(--pl-border-width-small, 1px))
+          solid var(--surface-border-color, var(--pl-color-border, #E5E7EB));
+  border-radius: var(--surface-radius, var(--pl-border-radius-large, 16px));
+  padding: var(--surface-padding, var(--pl-size-16, 1rem));
+  overflow: hidden;
+}
+
 pl-bar-chart:not(:defined) { display: block; }
 
 /* Each column reserves its own track. The fill cannot be drawn yet — its

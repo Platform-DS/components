@@ -82,8 +82,22 @@ pl-profile-card > [data-avatar] + * { margin-block-start: var(--pl-size-12, 0.75
 pl-profile-card > :not([data-cover], [data-avatar]) + * { margin-block-start: var(--pl-size-8, 0.5rem); }
 pl-profile-card > :last-child { padding-block-end: var(--card-padding, var(--pl-size-16, 1rem)); }
 
-/* No cover: the body still needs its top padding back. */
-pl-profile-card > :first-child:not([data-cover]) { padding-block-start: var(--card-padding, var(--pl-size-16, 1rem)); }
+/* No cover: the body still needs its top spacing back.
+
+   Padding for ordinary children, MARGIN for the avatar, and the difference is
+   not cosmetic. pl-avatar is a fixed-size shadow host with border-box sizing,
+   so padding is taken OUT of the circle rather than added around it: a 56px
+   avatar became a 40px circle sitting 16px down inside a box still flush
+   against the card's top border, which is the deformed look. Margin spaces the
+   component from the card without reaching inside it, which is the only tool
+   that can be right here — and it is already what the avatar uses inline. */
+pl-profile-card > :first-child:not([data-cover], [data-avatar]) {
+  padding-block-start: var(--card-padding, var(--pl-size-16, 1rem));
+}
+
+pl-profile-card > [data-avatar]:first-child {
+  margin-block-start: var(--card-padding, var(--pl-size-16, 1rem));
+}
 
 pl-profile-card [data-name] {
   font-size: var(--pl-font-size-lg, 1.125rem);

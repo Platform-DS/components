@@ -49,6 +49,7 @@ export class Label extends BaseElement {
         text:     { type: String },
         hint:     { type: String },
         error:    { type: String },
+        success:  { type: String },
         required: { type: Boolean, default: false },
         disabled: { type: Boolean, default: false },
     };
@@ -57,6 +58,7 @@ export class Label extends BaseElement {
     #text;
     #hint;
     #error;
+    #success;
 
     connectedCallback() {
         ensureStyles();
@@ -125,14 +127,21 @@ export class Label extends BaseElement {
         }
         this.#text.hidden = !text;
 
+        // A field cannot be wrong and verified at once, and error is the claim
+        // with safety consequences, so it wins when an author sets both.
+        const success = error ? null : this.props.success;
+
         this.#hint = this.#swap(this.#hint, hint, 'pl-label__hint');
         this.#error = this.#swap(this.#error, error, 'pl-label__error', 'assertive');
+        // Polite, not assertive: "Verified" is good news, and good news can
+        // wait for the screen reader to finish its sentence.
+        this.#success = this.#swap(this.#success, success, 'pl-label__success', 'polite');
 
         // Point the control at whichever messages exist. This is the id-based
         // relationship that a shadow boundary would silently break.
         const control = this.#control();
         if (control) {
-            const describedBy = [this.#hint?.id, this.#error?.id].filter(Boolean).join(' ');
+            const describedBy = [this.#hint?.id, this.#error?.id, this.#success?.id].filter(Boolean).join(' ');
             if (describedBy) control.setAttribute('aria-describedby', describedBy);
             else control.removeAttribute('aria-describedby');
 
@@ -140,6 +149,11 @@ export class Label extends BaseElement {
             control.toggleAttribute('disabled', this.props.disabled);
             if (error) control.setAttribute('aria-invalid', 'true');
             else control.removeAttribute('aria-invalid');
+            // ARIA has no "valid" state — aria-invalid="false" just means "not
+            // wrong", which every untouched field already is. So the success
+            // CHROME rides a data attribute the field styles can see, while the
+            // MESSAGE above carries the news to assistive tech.
+            control.toggleAttribute('data-success', Boolean(success));
         }
     }
 

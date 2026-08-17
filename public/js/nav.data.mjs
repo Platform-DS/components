@@ -48,6 +48,10 @@ export const NAV = [
                     {
                         "tag": "pl-profile-card",
                         "status": "ready"
+                    },
+                    {
+                        "tag": "pl-surface",
+                        "status": "ready"
                     }
                 ]
             },
@@ -250,7 +254,19 @@ export const NAV = [
                         "status": "ready"
                     },
                     {
+                        "tag": "pl-brand-kit-page",
+                        "status": "ready"
+                    },
+                    {
+                        "tag": "pl-content-page",
+                        "status": "ready"
+                    },
+                    {
                         "tag": "pl-marketing-page",
+                        "status": "ready"
+                    },
+                    {
+                        "tag": "pl-ui-kit-page",
                         "status": "ready"
                     }
                 ]

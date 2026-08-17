@@ -42,12 +42,15 @@ export default () => page(
         </pl-label>
     `, { layout: 'stack' }),
 
-    section('Hint and error text'),
+    section('Hint, error, and success text'),
 
-    p(`Hints and errors are wired to the control with <code>aria-describedby</code>, which is
+    p(`All three messages are wired to the control with <code>aria-describedby</code>, which is
        ID-based: the same cross-root problem, handled in the same place. An error also sets
-       <code>aria-invalid</code> on the control and announces itself via
-       <code>aria-live</code>.`),
+       <code>aria-invalid</code> on the control and announces itself assertively; a success
+       message sets <code>data-success</code> instead — ARIA has no "valid" state, so the
+       attribute is the field chrome's styling hook and the message line is what speaks,
+       politely. Error outranks success when both are set, since a field cannot be wrong and
+       verified at once.`),
 
     demo(`
         <pl-label text="Password" hint="At least 12 characters." required>
@@ -58,6 +61,12 @@ export default () => page(
     demo(`
         <pl-label text="Username" error="That username is already taken.">
             <pl-input type="text" value="platform"></pl-input>
+        </pl-label>
+    `, { layout: 'stack' }),
+
+    demo(`
+        <pl-label text="Email" success="Verified successfully.">
+            <pl-input type="email" value="ada@example.com"></pl-input>
         </pl-label>
     `, { layout: 'stack' }),
 
@@ -104,7 +113,8 @@ export default () => page(
         [
             { cells: ['<code>text</code>', '<code>String</code>', ': ', 'The label text.'] },
             { cells: ['<code>hint</code>', '<code>String</code>', ': ', 'Supporting text, linked via <code>aria-describedby</code>.'] },
-            { cells: ['<code>error</code>', '<code>String</code>', ': ', 'Error text. Sets <code>aria-invalid</code> and announces politely.'] },
+            { cells: ['<code>error</code>', '<code>String</code>', ': ', 'Error text. Sets <code>aria-invalid</code> on the control and announces assertively.'] },
+            { cells: ['<code>success</code>', '<code>String</code>', ': ', 'Success text. Sets <code>data-success</code> on the control and announces politely. Ignored while <code>error</code> is set.'] },
             { cells: ['<code>required</code>', '<code>Boolean</code>', '<code>false</code>', 'Shows the marker and forwards <code>required</code> to the control.'] },
             { cells: ['<code>disabled</code>', '<code>Boolean</code>', '<code>false</code>', 'Dims the label and forwards <code>disabled</code> to the control.'] },
         ],

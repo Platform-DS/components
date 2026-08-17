@@ -451,6 +451,7 @@
   --pl-line-height-tight:  var(--line-height-tight);
   --pl-line-height-medium: var(--line-height-medium);
   --pl-line-height-loose:  var(--line-height-loose);
+  --pl-letter-spacing-tight: var(--letter-spacing-tight);
   --pl-letter-spacing-loose: var(--letter-spacing-loose);
 
   /* Border, effects */

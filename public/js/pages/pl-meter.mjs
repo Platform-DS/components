@@ -57,16 +57,76 @@ export default () => page(
     p(`Same value, same thresholds, opposite meaning, and the only difference is where
        <code>optimum</code> sits.`),
 
+    section('A gradient, for low to high'),
+
+    p(`Zones answer "is this good or bad". Sometimes the reading is just a quantity, and what you
+       want the bar to say is "how much" — light at the low end, dark at the high end. That is
+       <code>data-fill="gradient"</code>:`),
+
+    demo(`
+        <div style="display:grid;gap:1rem;inline-size:100%;max-inline-size:28rem">
+            <pl-meter value="7.2" max="10" label="Storage" data-fill="gradient">
+                <span slot="value">7.2 / 10 GB</span>
+            </pl-meter>
+
+            <pl-meter value="128" max="512" label="Memory" data-fill="gradient"
+                      style="--meter-color: var(--color-success)">
+                <span slot="value">128 / 512 MB</span>
+            </pl-meter>
+
+            <pl-meter value="18" max="24" label="Hours logged" data-fill="gradient"
+                      style="--meter-color: var(--color-warning); --meter-height: 0.75rem">
+                <span slot="value">18 / 24 h</span>
+            </pl-meter>
+        </div>
+    `, { layout: 'stack' }),
+
+    p(`One color in, two out: the light end is mixed from
+       <code>--meter-color</code>, so a themed meter needs a single value rather than two that
+       have to be kept in a sensible relationship with each other. Replace the whole ramp with
+       <code>--meter-gradient</code> when you want something else entirely.`),
+
+    callout('note', 'The ramp is positional, and that is the point of doing it this way',
+        `Two thirds along the track is the same shade whether the meter reads 70% or 95%. A
+         gradient painted on the fill alone does the opposite — it stretches, so the far end is the
+         dark end at every value and the color carries no information at all. Getting the other
+         behavior means the ramp has to span the whole TRACK while only the filled part shows it,
+         which is one line of CSS (<code>background-size: calc(100% / fraction)</code>) and one
+         number from JavaScript.`),
+
+    callout('warn', 'Do not combine a ramp with low/high/optimum',
+        `They answer different questions and the answers contradict. Zones say good or bad; a ramp
+         says low or high. A meter doing both is claiming that more is worse and darker at the same
+         time, and the reader has no way to know which meaning the color carries. Pick one.`),
+
+    section('The readout'),
+
+    p(`The <code>value</code> slot is a formatted string you supply, shown at the end of the header
+       row opposite the label:`),
+
+    code(`
+        <pl-meter value="7.2" max="10" label="Storage" data-fill="gradient">
+            <span slot="value">7.2 / 10 GB</span>
+        </pl-meter>
+    `, 'html'),
+
+    p(`It is a slot rather than something the component assembles because "7.2 / 10 GB" is a unit,
+       a separator, a precision and a locale, and all four belong to the page. What the component
+       does take responsibility for is keeping the two in step: whatever you put in the slot is
+       mirrored to <code>aria-valuetext</code>, so a screen reader hears "7.2 / 10 GB" rather than
+       the bare number. The header hides itself when there is neither a label nor a readout.`),
+
     section('Attributes'),
 
     table(
         ['Attribute', 'Type', 'Description'],
         [
+            { cells: ['<code>data-fill</code>', '<code>gradient</code>', 'Paint a light-to-dark ramp instead of the zone colors.'] },
             { cells: ['<code>value</code>', '<code>Number</code>', 'The measurement. Native.'] },
             { cells: ['<code>min</code> / <code>max</code>', '<code>Number</code>', 'The range. Default <code>0</code> and <code>1</code>, which is why a bare <code>value="0.6"</code> works.'] },
             { cells: ['<code>low</code> / <code>high</code>', '<code>Number</code>', 'Boundaries of the middle zone.'] },
             { cells: ['<code>optimum</code>', '<code>Number</code>', 'Where "good" is. Decides which zone gets which color.'] },
-            { cells: ['<code>label</code>', '<code>String</code>', 'Accessible name. See below.'] },
+            { cells: ['<code>label</code>', '<code>String</code>', 'The accessible name, and the visible label in the header row.'] },
         ],
     ),
 
@@ -78,6 +138,23 @@ export default () => page(
             { cells: ['<code>--meter-height</code>', 'Bar thickness.'] },
             { cells: ['<code>--meter-track</code>', 'The unfilled track.'] },
             { cells: ['<code>--meter-optimum</code> / <code>--meter-suboptimum</code> / <code>--meter-poor</code>', 'The three zone colors.'] },
+            { cells: ['<code>--meter-color</code>', 'Base of the gradient ramp. The light end is mixed from it. Defaults to <code>--pl-color-primary</code>.'] },
+            { cells: ['<code>--meter-gradient</code>', 'Replace the derived ramp with any gradient of your own.'] },
+            { cells: ['<code>--meter-radius</code>', 'Corner rounding on the bar.'] },
+            { cells: ['<code>--meter-gap</code>', 'Space between the header row and the bar.'] },
+            { cells: ['<code>--meter-label-size</code>', 'Type size of the header row.'] },
+        ],
+    ),
+
+    section('Parts'),
+
+    table(
+        ['Part', 'Description'],
+        [
+            { cells: ['<code>header</code>', 'The label and readout row. Hidden when both are absent.'] },
+            { cells: ['<code>label</code>', 'The label text.'] },
+            { cells: ['<code>value</code>', 'The readout.'] },
+            { cells: ['<code>meter</code>', 'The bar itself.'] },
         ],
     ),
 

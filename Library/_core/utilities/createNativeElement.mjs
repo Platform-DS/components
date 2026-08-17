@@ -62,7 +62,7 @@ const propOf = entry => entry.prop ?? entry.name;
 const FORM_VALUE = new Set(['input', 'textarea', 'select']);
 const FORM_ASSOCIATED = new Set([...FORM_VALUE, 'button']);
 
-// Types whose activation behaviour acts on the owning form. <button> defaults
+// Types whose activation behavior acts on the owning form. <button> defaults
 // to submit; an <input> has to say so.
 const ACTIVATION = new Set(['submit', 'reset']);
 
@@ -215,7 +215,7 @@ export function createNativeElement(tag) {
          *
          * A form-associated custom element is labelable — a wrapping <pl-label>
          * resolves to this host, and `label.control` proves it. What the host
-         * does NOT have is activation behaviour: the browser dispatches the
+         * does NOT have is activation behavior: the browser dispatches the
          * label's synthetic click at the host and then has nothing to run, so
          * clicking "Remember me" moved focus and left the checkbox unchecked.
          * That is the one part of a native control that ElementInternals does
@@ -471,7 +471,21 @@ export function createNativeElement(tag) {
         Object.defineProperty(NativeElement.prototype, key, {
             configurable: true,
             get() { return this.native?.[key]; },
-            ...(writable ? { set(value) { if (this.native) this.native[key] = value; } } : {}),
+            ...(writable ? {
+                set(value) {
+                    if (!this.native) return;
+                    this.native[key] = value;
+                    // Repaint. A delegated property is a real state change that
+                    // never touches an attribute, so attributeChangedCallback
+                    // never fires and render() would otherwise never run: a
+                    // component drawing anything DERIVED from a native value —
+                    // pl-meter's gradient is computed from value/min/max — went
+                    // stale the moment an app wrote `el.value = x` instead of
+                    // setting the attribute. The browser redraws its own
+                    // internals either way; this is for everything around them.
+                    this.render?.();
+                },
+            } : {}),
         });
     }
 

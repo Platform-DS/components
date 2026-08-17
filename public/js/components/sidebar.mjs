@@ -23,6 +23,29 @@ import { el } from './doc.mjs';
 // search.mjs uses the same names for its suggestion hints, so a component's
 // group reads "Inputs" there too rather than "inputs".
 const LABELS = { ui: 'UI', app: 'App', content: 'Content', pages: 'Page Templates' };
+
+/**
+ * Group order within a surface, where it should not be left to chance.
+ *
+ * NAV mirrors the directory, and a directory has no meaningful order — the
+ * groups currently come out in whatever sequence their alphabetically-first
+ * component happens to create them in. That is fine until it isn't: Page
+ * Templates belongs at the END of Content, after the pieces you build a page
+ * out of, because it is the thing you reach for once you know what the pieces
+ * are. Ordering is presentation, so it lives here rather than in the generated
+ * data. Anything unlisted keeps its existing position, after the named ones.
+ */
+const GROUP_ORDER = {
+    content: ['sections', 'structure', 'pages'],
+};
+
+function ordered(surface) {
+    const wanted = GROUP_ORDER[surface.name];
+    if (!wanted) return surface.groups;
+
+    const rank = name => (wanted.indexOf(name) === -1 ? wanted.length : wanted.indexOf(name));
+    return [...surface.groups].sort((a, b) => rank(a.name) - rank(b.name));
+}
 export const label = name => LABELS[name] ?? name[0].toUpperCase() + name.slice(1);
 
 /** One navigable entry. */
@@ -70,7 +93,7 @@ export function sidebar() {
         // One section per surface, its groups nested beneath.
         NAV.map(surface =>
             block(label(surface.name),
-                surface.groups.map(g =>
+                ordered(surface).map(g =>
                     group(
                         g.name,
                         g.components.map(c => link(c.tag, c.tag, c.status)),
