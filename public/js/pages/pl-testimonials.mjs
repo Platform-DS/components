@@ -89,7 +89,7 @@ export default () => page(
             { cells: ['<code>&lt;p&gt;</code>', 'The quote itself.'] },
             { cells: ['<code>&lt;footer&gt;</code>', 'The attribution row, pinned to the card\'s base.'] },
             { cells: ['<code>&lt;cite&gt;</code>', 'The person\'s name, un-italicised and emphasised.'] },
-            { cells: ['<code>[data-rating]</code>', 'A star row in the accent colour.'] },
+            { cells: ['<code>[data-rating]</code>', 'A star row in the accent color.'] },
         ],
     ),
 

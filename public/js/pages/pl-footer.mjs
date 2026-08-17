@@ -94,8 +94,8 @@ export default () => page(
     table(
         ['Property', 'Description'],
         [
-            { cells: ['<code>--footer-bg</code>', 'Background colour.'] },
-            { cells: ['<code>--footer-ink</code>', 'Primary text colour.'] },
+            { cells: ['<code>--footer-bg</code>', 'Background color.'] },
+            { cells: ['<code>--footer-ink</code>', 'Primary text color.'] },
             { cells: ['<code>--footer-line</code>', 'The meta row rule.'] },
             { cells: ['<code>--footer-width</code>', 'Measure of the content column.'] },
         ],

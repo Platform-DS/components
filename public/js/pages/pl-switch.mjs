@@ -56,7 +56,7 @@ export default () => page(
             this.querySelector('output').textContent = JSON.stringify(Object.fromEntries(new FormData(event.target)))">
             <pl-switch name="marketing" checked>Marketing email</pl-switch>
             <pl-switch name="digest">Weekly digest</pl-switch>
-            <div data-actions><pl-button type="submit" size="sm">Submit</pl-button></div>
+            <div data-actions><pl-button type="submit" data-size="sm">Submit</pl-button></div>
             <output></output>
         </pl-form>
     `, { layout: 'stack' }),
@@ -107,8 +107,8 @@ export default () => page(
     table(
         ['Property', 'Description'],
         [
-            { cells: ['<code>--switch-on</code>', 'Track colour when on.'] },
-            { cells: ['<code>--switch-off</code>', 'Track colour when off.'] },
+            { cells: ['<code>--switch-on</code>', 'Track color when on.'] },
+            { cells: ['<code>--switch-off</code>', 'Track color when off.'] },
             { cells: ['<code>--switch-knob</code>', 'The sliding knob.'] },
             { cells: ['<code>--switch-width</code> / <code>--switch-height</code>', 'Track dimensions; the knob sizes itself from the height.'] },
         ],

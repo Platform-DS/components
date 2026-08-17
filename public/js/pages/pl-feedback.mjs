@@ -29,7 +29,7 @@ export default () => page(
         <pl-feedback data-intent="error"><p data-title>Upload failed</p><p>The file was larger than 10 MB.</p></pl-feedback>
     `, { layout: 'stack' }),
 
-    p(`Each intent gets its own icon as well as its own colour. Colour alone is not a distinction
+    p(`Each intent gets its own icon as well as its own color. Color alone is not a distinction
        for anyone who can't see it, and the glyph plus the accent rule keep the four states apart
        in greyscale too.`),
 
@@ -104,13 +104,13 @@ export default () => page(
     table(
         ['Property', 'Description'],
         [
-            { cells: ['<code>--feedback-background</code>', 'The tint. Derived from the intent colour with <code>color-mix</code> by default.'] },
+            { cells: ['<code>--feedback-background</code>', 'The tint. Derived from the intent color with <code>color-mix</code> by default.'] },
             { cells: ['<code>--feedback-padding</code>', 'Inner padding.'] },
         ],
     ),
 
     callout('note', 'The tint is derived, not a second palette',
-        `Each intent's background is <code>color-mix(in oklab, …)</code> of its own accent colour
+        `Each intent's background is <code>color-mix(in oklab, …)</code> of its own accent color
          against the surface. One source of truth per intent, so re-pointing
          <code>--pl-color-success</code> at your own green moves the rule, the icon, and the tint
          together instead of leaving three hand-picked values to go out of step.`),
@@ -120,7 +120,7 @@ export default () => page(
     ul([
         'Announced politely by default; assertively only for <code>error</code>, or when you set <code>role="alert"</code> yourself.',
         'The icon is decorative and drawn with a CSS mask: the message text is what gets read.',
-        'Every intent is distinguishable without colour, via its icon and the accent rule.',
+        'Every intent is distinguishable without color, via its icon and the accent rule.',
         'The × is a real <code>&lt;button&gt;</code> with an <code>aria-label</code>.',
         'For a message that must be acted on before anything else can happen, this is the wrong component. Use <a href="/documentation/pl-dialog">pl-dialog</a>.',
     ]),

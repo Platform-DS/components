@@ -102,6 +102,13 @@ const kb = n => (n / 1024).toFixed(1).padStart(7) + ' kB';
 const esbuild = await loadEsbuild();
 const entries = await componentEntries();
 
+// Start from empty. esbuild only ever WRITES, so a component that has been
+// deleted keeps its old output file, and `files: ["dist"]` would publish it —
+// a tag that no longer exists in the library, still importable from /min, still
+// registering itself. Content-hashed chunks have the same problem in slower
+// motion: every build leaves the previous one's chunks behind.
+if (!reportOnly) await rm(DIST, { recursive: true, force: true });
+
 // ------------------------------
 // Bundle
 // ------------------------------

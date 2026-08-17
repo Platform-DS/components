@@ -8,8 +8,8 @@
 //   <pl-loading label="Saving your changes"></pl-loading>
 //
 // The spinner inherits `color`, so it takes on whatever it is placed inside:
-// on a primary button it is the button's text colour, in a dialog it is the
-// body text colour. Nothing needs to be passed down for that to happen.
+// on a primary button it is the button's text color, in a dialog it is the
+// body text color. Nothing needs to be passed down for that to happen.
 //
 // ------------------------------
 // Silent by default

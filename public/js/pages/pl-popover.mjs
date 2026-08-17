@@ -27,7 +27,7 @@ export default () => page(
     code(`import '@platformdesign/components/pl-popover';`, 'js'),
 
     demo(`
-        <pl-button popovertarget="demo-filters" variant="secondary">Filters</pl-button>
+        <pl-button popovertarget="demo-filters" data-variant="secondary">Filters</pl-button>
 
         <pl-popover id="demo-filters">
             <p><strong>Refine</strong></p>
@@ -53,13 +53,13 @@ export default () => page(
        re-measure when the page moves.`),
 
     demo(`
-        <pl-button popovertarget="demo-above" variant="secondary" size="sm">block-start</pl-button>
+        <pl-button popovertarget="demo-above" data-variant="secondary" data-size="sm">block-start</pl-button>
         <pl-popover id="demo-above" data-placement="block-start"><p>Above the button.</p></pl-popover>
 
-        <pl-button popovertarget="demo-end" variant="secondary" size="sm">inline-end</pl-button>
+        <pl-button popovertarget="demo-end" data-variant="secondary" data-size="sm">inline-end</pl-button>
         <pl-popover id="demo-end" data-placement="inline-end"><p>Beside the button.</p></pl-popover>
 
-        <pl-button popovertarget="demo-center" variant="secondary" size="sm">centered</pl-button>
+        <pl-button popovertarget="demo-center" data-variant="secondary" data-size="sm">centered</pl-button>
         <pl-popover id="demo-center" data-align="center"><p>Centred under the button.</p></pl-popover>
     `, { layout: 'stack' }),
 
@@ -76,10 +76,10 @@ export default () => page(
        of all of that, for a panel that must stay put until the page decides otherwise.`),
 
     demo(`
-        <pl-button popovertarget="demo-manual" variant="secondary" size="sm">Toggle</pl-button>
+        <pl-button popovertarget="demo-manual" data-variant="secondary" data-size="sm">Toggle</pl-button>
         <pl-popover id="demo-manual" data-manual>
             <p>Clicking outside will not close this.</p>
-            <pl-button popovertarget="demo-manual" popovertargetaction="hide" size="sm">Close</pl-button>
+            <pl-button popovertarget="demo-manual" popovertargetaction="hide" data-size="sm">Close</pl-button>
         </pl-popover>
     `, { layout: 'stack' }),
 

@@ -110,10 +110,10 @@ export default () => page(
         ['Property', 'Description'],
         [
             { cells: ['<code>--field-background</code>', 'Field background.'] },
-            { cells: ['<code>--field-border</code>', 'Border colour.'] },
-            { cells: ['<code>--field-border-hover</code>', 'Border colour on hover.'] },
-            { cells: ['<code>--field-accent</code>', 'Focus border colour.'] },
-            { cells: ['<code>--field-ring</code>', 'Focus ring colour.'] },
+            { cells: ['<code>--field-border</code>', 'Border color.'] },
+            { cells: ['<code>--field-border-hover</code>', 'Border color on hover.'] },
+            { cells: ['<code>--field-accent</code>', 'Focus border color.'] },
+            { cells: ['<code>--field-ring</code>', 'Focus ring color.'] },
         ],
     ),
 

@@ -104,7 +104,7 @@ export default () => page(
                     <option value="Denver"></option>
                 </pl-autocomplete>
             </pl-label>
-            <div data-actions><pl-button type="submit" size="sm">Submit</pl-button></div>
+            <div data-actions><pl-button type="submit" data-size="sm">Submit</pl-button></div>
             <output></output>
         </pl-form>
     `, { layout: 'stack' }),

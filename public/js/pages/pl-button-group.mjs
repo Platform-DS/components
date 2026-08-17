@@ -28,9 +28,9 @@ export default () => page(
 
     demo(`
         <pl-button-group>
-            <pl-button variant="secondary">Day</pl-button>
-            <pl-button variant="secondary">Week</pl-button>
-            <pl-button variant="secondary">Month</pl-button>
+            <pl-button data-variant="secondary">Day</pl-button>
+            <pl-button data-variant="secondary">Week</pl-button>
+            <pl-button data-variant="secondary">Month</pl-button>
         </pl-button-group>
     `),
 
@@ -57,9 +57,9 @@ export default () => page(
 
     demo(`
         <pl-button-group>
-            <pl-button variant="secondary" aria-pressed="true">Bold</pl-button>
-            <pl-button variant="secondary" aria-pressed="false">Italic</pl-button>
-            <pl-button variant="secondary" aria-pressed="false">Underline</pl-button>
+            <pl-button data-variant="secondary" aria-pressed="true">Bold</pl-button>
+            <pl-button data-variant="secondary" aria-pressed="false">Italic</pl-button>
+            <pl-button data-variant="secondary" aria-pressed="false">Underline</pl-button>
         </pl-button-group>
     `),
 
@@ -73,9 +73,9 @@ export default () => page(
 
     demo(`
         <pl-button-group data-orientation="vertical">
-            <pl-button variant="secondary">Profile</pl-button>
-            <pl-button variant="secondary">Billing</pl-button>
-            <pl-button variant="secondary">Team</pl-button>
+            <pl-button data-variant="secondary">Profile</pl-button>
+            <pl-button data-variant="secondary">Billing</pl-button>
+            <pl-button data-variant="secondary">Team</pl-button>
         </pl-button-group>
     `),
 
@@ -83,7 +83,7 @@ export default () => page(
 
     demo(`
         <pl-button-group data-full>
-            <pl-button variant="secondary">Cancel</pl-button>
+            <pl-button data-variant="secondary">Cancel</pl-button>
             <pl-button>Continue</pl-button>
         </pl-button-group>
     `, { layout: 'stack' }),

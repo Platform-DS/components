@@ -87,7 +87,7 @@ export default () => page(
                 <pl-radio value="free">Free</pl-radio>
                 <pl-radio value="pro">Pro</pl-radio>
             </pl-radio-group>
-            <div data-actions><pl-button type="submit" size="sm">Submit</pl-button></div>
+            <div data-actions><pl-button type="submit" data-size="sm">Submit</pl-button></div>
             <output></output>
         </pl-form>
     `, { layout: 'stack' }),

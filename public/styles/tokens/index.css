@@ -83,7 +83,7 @@
   /* The solid fills deliberately do NOT move in the dark theme.
      Lightening them looks tempting, but white on blue-500 is only 3.68:1 —
      below AA — so a "brighter in the dark" fill quietly breaks the rule that a
-     coloured button always carries white text. The 600/700 fills stay put:
+     colored button always carries white text. The 600/700 fills stay put:
      they keep white at AA and still clear 3:1 against the dark page, which is
      the threshold that actually applies to a control's own boundary.
 

@@ -32,8 +32,8 @@ export default () => page(
             <h1>Components that outlive your framework.</h1>
             <p>Native custom elements and CSS custom properties. No build step.</p>
             <div data-actions>
-                <pl-button size="lg">Read the docs</pl-button>
-                <pl-button-link href="#" variant="secondary" size="lg">GitHub</pl-button-link>
+                <pl-button data-size="lg">Read the docs</pl-button>
+                <pl-button-link href="#" data-variant="secondary" data-size="lg">GitHub</pl-button-link>
             </div>
         </pl-hero>
     `, { layout: 'bleed' }),
@@ -82,7 +82,7 @@ export default () => page(
         <pl-hero>
             <h1>A hero on the page background.</h1>
             <p>No surface attribute, left-aligned by default.</p>
-            <div data-actions><pl-button variant="secondary">Learn more</pl-button></div>
+            <div data-actions><pl-button data-variant="secondary">Learn more</pl-button></div>
         </pl-hero>
     `, { layout: 'bleed' }),
 

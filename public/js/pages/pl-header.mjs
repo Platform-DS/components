@@ -36,7 +36,7 @@ export default () => page(
                 </ul>
             </nav>
             <div data-actions>
-                <pl-button-link href="#" size="sm">Get started</pl-button-link>
+                <pl-button-link href="#" data-size="sm">Get started</pl-button-link>
             </div>
         </pl-header>
     `, { layout: 'bleed' }),
@@ -53,7 +53,7 @@ export default () => page(
         <pl-header data-surface="ink">
             <a href="#"><pl-icon icon="cube" size="1.25rem"></pl-icon> Platform</a>
             <div data-actions>
-                <pl-button-link href="#" size="sm">Start free</pl-button-link>
+                <pl-button-link href="#" data-size="sm">Start free</pl-button-link>
             </div>
         </pl-header>
     `, { layout: 'bleed' }),
@@ -94,7 +94,7 @@ export default () => page(
             { cells: ['First <code>&lt;a&gt;</code> or <code>[data-brand]</code>', 'The brand lockup: logo and wordmark.'] },
             { cells: ['<code>&lt;nav&gt;</code>', 'The link row; the collapsible panel on small screens.'] },
             { cells: ['<code>[data-actions]</code>', 'The call to action, pushed to the far edge.'] },
-            { cells: ['<code>a[aria-current]</code>', 'The current page, underlined in the brand colour.'] },
+            { cells: ['<code>a[aria-current]</code>', 'The current page, underlined in the brand color.'] },
         ],
     ),
 
@@ -115,7 +115,7 @@ export default () => page(
         ['Property', 'Description'],
         [
             { cells: ['<code>--header-bg</code>', 'Bar background.'] },
-            { cells: ['<code>--header-ink</code>', 'Text colour.'] },
+            { cells: ['<code>--header-ink</code>', 'Text color.'] },
             { cells: ['<code>--header-line</code>', 'Bottom border and toggle outline.'] },
             { cells: ['<code>--header-gutter</code>', 'Inline padding.'] },
         ],

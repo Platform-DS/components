@@ -73,7 +73,7 @@ ${SEL}[data-width="wide"]   { --section-width: 84rem; }
 ${SEL}[data-width="full"]   { --section-width: 100%; --section-gutter: 0px; }
 
 /*------------------------------------------------
-  Surfaces — the band's colour scheme. The ink and brand surfaces invert, so
+  Surfaces — the band's color scheme. The ink and brand surfaces invert, so
   muted text and rules are re-pointed too, not just the background.
 -------------------------------------------------*/
 ${SEL}[data-surface="muted"] {
@@ -176,18 +176,18 @@ ${SEL}[data-align="center"] > [data-actions] { justify-content: center; }
   so on an ink or brand band a secondary button's near-black text lands on a
   near-black surface, and a primary button on a brand band is brand-on-brand.
   The section is what knows it inverted, so it re-points the button's own
-  hooks. pl-cta is listed alongside because it fills with the brand colour
+  hooks. pl-cta is listed alongside because it fills with the brand color
   even when no surface attribute is set.
 -------------------------------------------------*/
-${SEL}:is([data-surface="ink"], [data-surface="brand"]) :is(pl-button, pl-button-link):is([variant="secondary"], [variant="ghost"]),
-pl-cta:not([data-surface]) :is(pl-button, pl-button-link):is([variant="secondary"], [variant="ghost"]) {
+${SEL}:is([data-surface="ink"], [data-surface="brand"]) :is(pl-button, pl-button-link):is([data-variant="secondary"], [data-variant="ghost"]),
+pl-cta:not([data-surface]) :is(pl-button, pl-button-link):is([data-variant="secondary"], [data-variant="ghost"]) {
   --button-color: var(--section-ink);
   --button-border: var(--section-ink);
   --button-background-hover: color-mix(in oklab, var(--section-ink) 16%, transparent);
 }
 
-${SEL}[data-surface="brand"] :is(pl-button, pl-button-link):is(:not([variant]), [variant="primary"]),
-pl-cta:not([data-surface]) :is(pl-button, pl-button-link):is(:not([variant]), [variant="primary"]) {
+${SEL}[data-surface="brand"] :is(pl-button, pl-button-link):is(:not([data-variant]), [data-variant="primary"]),
+pl-cta:not([data-surface]) :is(pl-button, pl-button-link):is(:not([data-variant]), [data-variant="primary"]) {
   --button-background: var(--section-ink);
   --button-color: var(--section-bg);
   --button-background-hover: color-mix(in oklab, var(--section-ink) 86%, transparent);

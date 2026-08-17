@@ -82,7 +82,7 @@ export class Accordion extends BaseElement {
         this.#button.setAttribute('aria-controls', `pl-accordion-panel-${id}`);
 
         // A marker element, not a background image, so its rotation can be
-        // animated and its colour inherited.
+        // animated and its color inherited.
         const marker = document.createElement('span');
         marker.className = 'pl-accordion__marker';
         marker.setAttribute('aria-hidden', 'true');

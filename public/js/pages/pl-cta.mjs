@@ -31,14 +31,14 @@ export default () => page(
             <h2>Use the browser.</h2>
             <p>It already ships components, encapsulation, theming, and a module loader.</p>
             <div data-actions>
-                <pl-button size="lg">Get started</pl-button>
+                <pl-button data-size="lg">Get started</pl-button>
             </div>
             <p>No build step. No dependencies.</p>
         </pl-cta>
     `, { layout: 'bleed' }),
 
     callout('note', 'Filled by default, and the button inverts with it',
-        `Unlike the other sections, this one fills with the brand colour when no
+        `Unlike the other sections, this one fills with the brand color when no
          <code>data-surface</code> is set: a closing band should not look like another content band. A
          primary button on that fill would be brand-on-brand, so the section flips the button to a
          pale fill with dark text automatically.`),
@@ -82,6 +82,6 @@ export default () => page(
         'One primary action: a second competing button is the most common way this section underperforms.',
         'Inputs in the form still need a name: use <a href="/documentation/pl-label">pl-label</a> or <code>aria-label</code>, even when a placeholder is present.',
         'Placeholders are not labels; they vanish as soon as the visitor types.',
-        'Button colours invert with the band, so contrast holds on the brand fill and on <code>ink</code>.',
+        'Button colors invert with the band, so contrast holds on the brand fill and on <code>ink</code>.',
     ]),
 );

@@ -46,10 +46,14 @@ export class Button extends ButtonElement {
     // observedAttributes derives from these keys — never hand-maintained.
     static props = {
         ...ButtonElement.props,
-        variant: { type: String, default: 'primary' },
-        size:    { type: String, default: 'md' },
-        loading: { type: Boolean, default: false },
-        full:    { type: Boolean, default: false },
+        // data-* because none of these is an attribute <button> has. The prop
+        // system maps a data- key to a clean name, so the ATTRIBUTE is
+        // data-variant and the PROPERTY is still this.props.variant.
+        'data-variant': { type: String, default: 'primary' },
+        'data-size':    { type: String, default: 'md' },
+        'data-shape':   { type: String },
+        'data-loading': { type: Boolean, default: false },
+        'data-full':    { type: Boolean, default: false },
     };
 
     // onCreated — ButtonElement attaches the shadow root from `template` /

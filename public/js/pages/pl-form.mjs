@@ -36,7 +36,7 @@ export default () => page(
             <pl-label text="Email"><pl-input type="email" name="email" required></pl-input></pl-label>
             <pl-label text="Message"><pl-textarea name="message"></pl-textarea></pl-label>
             <div data-actions data-align="end">
-                <pl-button variant="ghost" type="reset">Reset</pl-button>
+                <pl-button data-variant="ghost" type="reset">Reset</pl-button>
                 <pl-button type="submit">Send</pl-button>
             </div>
         </pl-form>
@@ -61,7 +61,7 @@ export default () => page(
             this.querySelector('output').textContent = new URLSearchParams(new FormData(event.target)).toString()">
             <pl-label text="Name"><pl-input name="name" value="Ada" required></pl-input></pl-label>
             <pl-switch name="subscribe" checked>Subscribe</pl-switch>
-            <div data-actions><pl-button type="submit" size="sm">Submit</pl-button></div>
+            <div data-actions><pl-button type="submit" data-size="sm">Submit</pl-button></div>
             <output></output>
         </pl-form>
     `, { layout: 'stack' }),

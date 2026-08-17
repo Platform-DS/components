@@ -15,7 +15,7 @@
 //     <pl-ratings value="4" readonly></pl-ratings>
 //     <p data-price>$148 <s>$195</s></p>
 //     <div data-actions>
-//       <pl-button full><pl-icon icon="shopping-bag"></pl-icon> Add to bag</pl-button>
+//       <pl-button data-full><pl-icon icon="shopping-bag"></pl-icon> Add to bag</pl-button>
 //     </div>
 //   </pl-product-card>
 //

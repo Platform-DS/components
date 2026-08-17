@@ -8,7 +8,7 @@ export default () => page(
     header({
         tag: 'pl-loading',
         title: 'Loading',
-        lede: 'A spinner that takes the colour of whatever it is placed inside.',
+        lede: 'A spinner that takes the color of whatever it is placed inside.',
     }),
 
     meta({
@@ -28,15 +28,15 @@ export default () => page(
         <pl-loading size="2.5rem"></pl-loading>
     `),
 
-    section('It inherits colour'),
+    section('It inherits color'),
 
-    p(`The artwork is drawn in <code>currentColor</code>, so the spinner is whatever colour the
+    p(`The artwork is drawn in <code>currentColor</code>, so the spinner is whatever color the
        text around it is. Nothing has to be passed down. Put one on a primary button and it is the
-       button's label colour, put one in a dialog and it is the body text colour.`),
+       button's label color, put one in a dialog and it is the body text color.`),
 
     demo(`
-        <pl-button loading>Saving</pl-button>
-        <pl-button variant="secondary"><pl-loading size="1rem"></pl-loading> Uploading…</pl-button>
+        <pl-button data-loading>Saving</pl-button>
+        <pl-button data-variant="secondary"><pl-loading size="1rem"></pl-loading> Uploading…</pl-button>
         <span style="color: var(--color-error)"><pl-loading></pl-loading></span>
     `),
 

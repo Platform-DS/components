@@ -124,7 +124,7 @@ export default () => page(
         [
             { cells: ['<code>--avatar-size</code>', 'Width and height. The <code>size</code> presets each set this.'] },
             { cells: ['<code>--avatar-fallback-background</code>', 'Background shown behind the fallback (and while the real image loads).'] },
-            { cells: ['<code>--avatar-fallback-color</code>', 'Colour of the initials text / silhouette icon.'] },
+            { cells: ['<code>--avatar-fallback-color</code>', 'color of the initials text / silhouette icon.'] },
         ],
     ),
 

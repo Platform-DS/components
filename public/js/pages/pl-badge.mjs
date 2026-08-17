@@ -28,7 +28,7 @@ export default () => page(
 
     demo(`
         <pl-badge content="4">
-            <pl-button variant="secondary" aria-label="Inbox, 4 unread messages">
+            <pl-button data-variant="secondary" aria-label="Inbox, 4 unread messages">
                 <pl-icon icon="mail"></pl-icon>
             </pl-button>
         </pl-badge>
@@ -56,13 +56,13 @@ export default () => page(
 
     demo(`
         <pl-badge content="8">
-            <pl-button variant="secondary" aria-label="Inbox, 8 unread messages"><pl-icon icon="mail"></pl-icon></pl-button>
+            <pl-button data-variant="secondary" aria-label="Inbox, 8 unread messages"><pl-icon icon="mail"></pl-icon></pl-button>
         </pl-badge>
         <pl-badge content="99" max="99">
-            <pl-button variant="secondary" aria-label="Inbox, 99 unread messages"><pl-icon icon="mail"></pl-icon></pl-button>
+            <pl-button data-variant="secondary" aria-label="Inbox, 99 unread messages"><pl-icon icon="mail"></pl-icon></pl-button>
         </pl-badge>
         <pl-badge content="1204" max="99">
-            <pl-button variant="secondary" aria-label="Inbox, 1204 unread messages"><pl-icon icon="mail"></pl-icon></pl-button>
+            <pl-button data-variant="secondary" aria-label="Inbox, 1204 unread messages"><pl-icon icon="mail"></pl-icon></pl-button>
         </pl-badge>
     `),
 
@@ -82,10 +82,10 @@ export default () => page(
 
     demo(`
         <pl-badge content="0">
-            <pl-button variant="secondary" aria-label="Inbox, no unread messages"><pl-icon icon="mail"></pl-icon></pl-button>
+            <pl-button data-variant="secondary" aria-label="Inbox, no unread messages"><pl-icon icon="mail"></pl-icon></pl-button>
         </pl-badge>
         <pl-badge content="0" data-show-zero>
-            <pl-button variant="secondary" aria-label="Inbox, 0 unread messages"><pl-icon icon="mail"></pl-icon></pl-button>
+            <pl-button data-variant="secondary" aria-label="Inbox, 0 unread messages"><pl-icon icon="mail"></pl-icon></pl-button>
         </pl-badge>
     `),
 
@@ -97,25 +97,25 @@ export default () => page(
 
     demo(`
         <pl-badge data-dot>
-            <pl-button variant="secondary" aria-label="Notifications, unread"><pl-icon icon="bell"></pl-icon></pl-button>
+            <pl-button data-variant="secondary" aria-label="Notifications, unread"><pl-icon icon="bell"></pl-icon></pl-button>
         </pl-badge>
         <pl-badge data-dot data-intent="error">
-            <pl-button variant="secondary" aria-label="Orders, new activity"><pl-icon icon="storefront"></pl-icon></pl-button>
+            <pl-button data-variant="secondary" aria-label="Orders, new activity"><pl-icon icon="storefront"></pl-icon></pl-button>
         </pl-badge>
     `),
 
     section('Intents'),
 
     demo(`
-        <pl-badge content="6"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="6" data-intent="success"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="calendar"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="6" data-intent="warning"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="bell"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="6" data-intent="error"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="storefront"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="6" data-intent="neutral"><pl-button variant="secondary" aria-label="6 items"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="6"><pl-button data-variant="secondary" aria-label="6 items"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="6" data-intent="success"><pl-button data-variant="secondary" aria-label="6 items"><pl-icon icon="calendar"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="6" data-intent="warning"><pl-button data-variant="secondary" aria-label="6 items"><pl-icon icon="bell"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="6" data-intent="error"><pl-button data-variant="secondary" aria-label="6 items"><pl-icon icon="storefront"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="6" data-intent="neutral"><pl-button data-variant="secondary" aria-label="6 items"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
     `),
 
-    p(`Each fill pairs with its own on-colour, so badge text stays readable in both themes: the
-       same rule every coloured fill in the library follows.`),
+    p(`Each fill pairs with its own on-color, so badge text stays readable in both themes: the
+       same rule every colored fill in the library follows.`),
 
     section('Corners'),
 
@@ -124,10 +124,10 @@ export default () => page(
        rules:`),
 
     demo(`
-        <pl-badge content="1" data-position="top-start"><pl-button variant="secondary" aria-label="top start"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="2" data-position="top-end"><pl-button variant="secondary" aria-label="top end"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="3" data-position="bottom-start"><pl-button variant="secondary" aria-label="bottom start"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
-        <pl-badge content="4" data-position="bottom-end"><pl-button variant="secondary" aria-label="bottom end"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="1" data-position="top-start"><pl-button data-variant="secondary" aria-label="top start"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="2" data-position="top-end"><pl-button data-variant="secondary" aria-label="top end"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="3" data-position="bottom-start"><pl-button data-variant="secondary" aria-label="bottom start"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
+        <pl-badge content="4" data-position="bottom-end"><pl-button data-variant="secondary" aria-label="bottom end"><pl-icon icon="mail"></pl-icon></pl-button></pl-badge>
     `),
 
     section('Presence on an avatar'),
@@ -218,11 +218,11 @@ export default () => page(
         ],
     ),
 
-    callout('note', 'Why the ring defaults to the surface colour',
+    callout('note', 'Why the ring defaults to the surface color',
         `Without a ring, a dark count on a dark icon button reads as one smudged shape. The ring
          separates the two, so it should match what is <em>behind</em> the owner: the page, which
          is why it defaults to <code>--pl-color-surface</code> rather than anything about the
-         element being badged. Over a photo or a coloured band, set it yourself.`),
+         element being badged. Over a photo or a colored band, set it yourself.`),
 
     section('Accessibility'),
 
@@ -231,6 +231,6 @@ export default () => page(
         'The owner must carry the full meaning in its accessible name: <code>aria-label="Inbox, 4 unread messages"</code>. Update that name whenever the count changes.',
         'A dot badge says nothing at all on its own: pair it with visible text, as the avatar example does with "Online" / "Offline".',
         'Nothing inside the wrapper is moved or re-parented, so a badged button keeps its focus behaviour, form ownership, and any <code>aria-*</code> references to ids elsewhere in the page.',
-        'Colour alone never carries the state: <code>data-intent</code> tints a badge whose meaning is already in the owner\'s name.',
+        'color alone never carries the state: <code>data-intent</code> tints a badge whose meaning is already in the owner\'s name.',
     ]),
 );

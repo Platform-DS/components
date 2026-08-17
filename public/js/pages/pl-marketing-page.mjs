@@ -70,7 +70,7 @@ export default () => page(
                     </ul>
                 </nav>
                 <div data-actions>
-                    <pl-button-link href="#start" size="sm">Start free</pl-button-link>
+                    <pl-button-link href="#start" data-size="sm">Start free</pl-button-link>
                 </div>
             </pl-header>
 
@@ -81,8 +81,8 @@ export default () => page(
                 <p>Northwind keeps stock counts right across every channel you sell on, so you
                    stop overselling things you ran out of on Tuesday.</p>
                 <div data-actions>
-                    <pl-button-link href="#start" size="lg">Start free for 30 days</pl-button-link>
-                    <pl-button-link href="#features" variant="secondary" size="lg">See how it works</pl-button-link>
+                    <pl-button-link href="#start" data-size="lg">Start free for 30 days</pl-button-link>
+                    <pl-button-link href="#features" data-variant="secondary" data-size="lg">See how it works</pl-button-link>
                 </div>
                 <p><small>No card required. Two minutes to connect your first store.</small></p>
                 <figure>
@@ -268,8 +268,8 @@ export default () => page(
                 <p>Thirty days free, every feature included. Connect one channel and see whether the
                    numbers agree with you.</p>
                 <div data-actions>
-                    <pl-button-link href="#start" size="lg">Start free for 30 days</pl-button-link>
-                    <pl-button-link href="#start" variant="secondary" size="lg">Talk to us first</pl-button-link>
+                    <pl-button-link href="#start" data-size="lg">Start free for 30 days</pl-button-link>
+                    <pl-button-link href="#start" data-variant="secondary" data-size="lg">Talk to us first</pl-button-link>
                 </div>
                 <p><small>No card required. Cancel from the settings page in one click.</small></p>
             </pl-cta>
@@ -336,7 +336,7 @@ export default () => page(
     table(
         ['Behaviour', 'Why'],
         [
-            { cells: ['No maximum width', 'Each section is a full-bleed band that caps its own inner measure. Constraining them from outside would leave a coloured band floating in the middle of the page with white either side.'] },
+            { cells: ['No maximum width', 'Each section is a full-bleed band that caps its own inner measure. Constraining them from outside would leave a colored band floating in the middle of the page with white either side.'] },
             { cells: ['No gap between sections', 'Every band owns its vertical space through <code>--section-space</code>. A gap here would double whatever they already set.'] },
             { cells: ['Fills the viewport', 'A column at <code>min-block-size: 100dvh</code>, with the slack placed above <code>pl-footer</code>. A short page still pins its footer to the bottom rather than leaving it floating mid-screen.'] },
             { cells: ['<em>No logic</em>', 'It is a stylesheet and a tag name. Anything that needed state would belong to a section, not to the page around them.'] },

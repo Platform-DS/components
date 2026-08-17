@@ -9,7 +9,7 @@
 //
 // The three WebKit value pseudos are the whole reason to use <meter> rather
 // than draw a bar: the browser decides which one applies from low/high/optimum,
-// so the colour follows the value with nothing watching it.
+// so the color follows the value with nothing watching it.
 //
 // `appearance: none` is required first — without it WebKit keeps its own
 // rendering and ignores everything here.

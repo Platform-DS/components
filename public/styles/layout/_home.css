@@ -197,7 +197,7 @@
   opacity: 0.75;
 }
 
-/* The secondary variant reads its colours from --color-ink, unreadable on this
+/* The secondary variant reads its colors from --color-ink, unreadable on this
    yellow panel. Pin the button's own hooks to the near-black on-brand ink:
    exactly the per-instance override the theming page documents. */
 .cta pl-button {
@@ -378,7 +378,7 @@
 /*------------------------------------------------
   Buttons on the dark bands
 
-  The secondary and ghost variants take their colours from --pl-color-ink,
+  The secondary and ghost variants take their colors from --pl-color-ink,
   which is near-black: correct on paper, invisible on the ink band. These pin
   the button's own hooks to the on-ink palette, which is the same per-instance
   override the theming page documents.

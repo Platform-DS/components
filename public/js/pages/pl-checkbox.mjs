@@ -51,7 +51,7 @@ export default () => page(
             this.querySelector('output').value = [...new FormData(event.target).keys()].join(', ') || '(none checked)'">
             <pl-checkbox name="newsletter" value="yes" checked>Newsletter</pl-checkbox>
             <pl-checkbox name="offers" value="yes">Partner offers</pl-checkbox>
-            <div data-actions><pl-button type="submit" size="sm">Submit</pl-button></div>
+            <div data-actions><pl-button type="submit" data-size="sm">Submit</pl-button></div>
             <output></output>
         </pl-form>
     `, { layout: 'stack' }),
@@ -74,9 +74,9 @@ export default () => page(
     table(
         ['Property', 'Description'],
         [
-            { cells: ['<code>--checkbox-checked</code>', 'Fill and border colour when checked.'] },
-            { cells: ['<code>--checkbox-border</code>', 'Border colour when unchecked.'] },
-            { cells: ['<code>--checkbox-check</code>', 'Checkmark colour.'] },
+            { cells: ['<code>--checkbox-checked</code>', 'Fill and border color when checked.'] },
+            { cells: ['<code>--checkbox-border</code>', 'Border color when unchecked.'] },
+            { cells: ['<code>--checkbox-check</code>', 'Checkmark color.'] },
         ],
     ),
 

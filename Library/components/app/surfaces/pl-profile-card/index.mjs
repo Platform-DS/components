@@ -15,7 +15,7 @@
 //       <pl-chip>Compilers</pl-chip>
 //       <pl-chip>Mathematics</pl-chip>
 //     </div>
-//     <div data-actions><pl-button size="sm">Follow</pl-button></div>
+//     <div data-actions><pl-button data-size="sm">Follow</pl-button></div>
 //   </pl-profile-card>
 //
 // The avatar's alt is empty on purpose in that example: the name is right

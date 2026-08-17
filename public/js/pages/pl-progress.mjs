@@ -75,7 +75,7 @@ export default () => page(
         ['Property', 'Description'],
         [
             { cells: ['<code>--progress-height</code>', 'Bar thickness.'] },
-            { cells: ['<code>--progress-track</code> / <code>--progress-fill</code>', 'Track and fill colours.'] },
+            { cells: ['<code>--progress-track</code> / <code>--progress-fill</code>', 'Track and fill colors.'] },
         ],
     ),
 

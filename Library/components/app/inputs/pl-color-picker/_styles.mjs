@@ -6,10 +6,10 @@
 // when either child has focus (via :focus-within).
 //
 // Its hooks are named --picker-* rather than --color-picker-*: the --color-*
-// prefix is reserved by the token contract for colours, and a width living
+// prefix is reserved by the token contract for colors, and a width living
 // under it would be ambiguous.
 //
-// The colour swatch is an <input type="color"> with its UA chrome stripped —
+// The color swatch is an <input type="color"> with its UA chrome stripped —
 // the native picker still opens on click, which is the whole point of using it
 // rather than drawing a swatch and building a picker.
 
@@ -58,8 +58,8 @@ pl-color-picker .pl-color__swatch {
   -webkit-appearance: none;
 }
 
-/* The UA wraps the colour in its own swatch element; strip its padding and
-   border so the colour reaches the edges of our field. */
+/* The UA wraps the color in its own swatch element; strip its padding and
+   border so the color reaches the edges of our field. */
 pl-color-picker .pl-color__swatch::-webkit-color-swatch-wrapper { padding: 0; }
 pl-color-picker .pl-color__swatch::-webkit-color-swatch { border: 0; border-radius: 0; }
 pl-color-picker .pl-color__swatch::-moz-color-swatch { border: 0; border-radius: 0; }

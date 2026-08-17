@@ -8,7 +8,7 @@
 //     <h2>Use the browser.</h2>
 //     <p>It already ships components, encapsulation, and a module loader.</p>
 //     <div data-actions>
-//       <pl-button size="lg">Get started</pl-button>
+//       <pl-button data-size="lg">Get started</pl-button>
 //     </div>
 //     <p>No build step. No dependencies.</p>
 //   </pl-cta>

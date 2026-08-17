@@ -11,8 +11,8 @@
 //     <h2 data-title>Delete this project?</h2>
 //     <p>This cannot be undone.</p>
 //     <div data-actions>
-//       <form method="dialog"><pl-button variant="secondary">Cancel</pl-button></form>
-//       <pl-button variant="danger">Delete</pl-button>
+//       <form method="dialog"><pl-button data-variant="secondary">Cancel</pl-button></form>
+//       <pl-button data-variant="danger">Delete</pl-button>
 //     </div>
 //   </pl-dialog>
 //

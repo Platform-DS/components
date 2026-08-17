@@ -11,7 +11,7 @@ npm install @platformdesign/components
     import '@platformdesign/components/pl-button';
 </script>
 
-<pl-button variant="primary">Save</pl-button>
+<pl-button data-variant="primary">Save</pl-button>
 ```
 
 That's the whole integration. The library ships standard ES modules and standard CSS, so a `<script type="module">` tag is a complete install — there is nothing to compile, configure, or keep current.
@@ -120,7 +120,7 @@ The contract is a naming convention: one prefix per type, no project namespace, 
 
 The package's `tokens.css` ships a deliberately **neutral** default — a conventional blue primary with green, amber, and red intents — so it reads as a starting point rather than as somebody else's brand. Point the contract tokens at your own values to re-theme everything.
 
-A filled control always pairs an intent fill with its on-colour, and every on-colour is **white**, in light and dark alike. Dark text on a saturated fill is the usual way a button breaks when a theme flips, so that pairing is fixed rather than derived from the page's ink.
+A filled control always pairs an intent fill with its on-color, and every on-color is **white**, in light and dark alike. Dark text on a saturated fill is the usual way a button breaks when a theme flips, so that pairing is fixed rather than derived from the page's ink.
 
 A theme is a **single palette**. There is no `light-dark()` in the tokens; "dark mode" is a different export swapped in (e.g. by toggling `data-theme` and re-pointing the semantic `--color-*` tokens). Components re-theme instantly because they read the names, not a scheme.
 

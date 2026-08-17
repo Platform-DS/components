@@ -5,7 +5,7 @@
 // with the group's corners rounded and the inner ones squared off.
 //
 // The divider is the WRAPPER's own background showing through a 1px gap, not a
-// border on each button. That matters: a border would have to be colour-matched
+// border on each button. That matters: a border would have to be color-matched
 // per variant (invisible on a filled button, doubled between two outlined ones)
 // and offset by -1px to avoid a 2px seam. A gap is one declaration and looks
 // identical whatever the buttons are.
@@ -22,7 +22,7 @@ export const STYLES = /*css*/`
 pl-button-group {
   /* The divider is TRANSLUCENT INK rather than a fixed grey, so one value
      reads correctly on a white outline segment and on a saturated filled one
-     — no per-variant colour matching. */
+     — no per-variant color matching. */
 
   display: inline-flex;
   align-items: stretch;

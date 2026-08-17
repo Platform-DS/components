@@ -5,7 +5,7 @@
   SPA — head, copy button, and syntax highlighting all live in its shadow root.
   This file only THEMES it: mapping the component's --code-block-* hooks onto
   the site's dark chrome so a code block matches the header and footer in either
-  page theme. The syntax colours are the same palette the docs used before.
+  page theme. The syntax colors are the same palette the docs used before.
 
   The plain .code rules below are for the static marketing page's comparison
   blocks (public/index.html), which are unhighlighted and don't use the component.
@@ -26,7 +26,7 @@ pl-code-block {
   --code-block-syntax-number: oklch(0.8 0.11 60);
   --code-block-syntax-property: oklch(0.8 0.1 230);
   /* Bracket punctuation only now — the tag name itself renders in the block's
-     plain text colour. Same warm hue as --syntax-number, since both are
+     plain text color. Same warm hue as --syntax-number, since both are
      literals rather than identifiers. */
   --code-block-syntax-tag: oklch(0.8 0.11 60);
   /* Attribute names share --syntax-property's blue: a key introducing a

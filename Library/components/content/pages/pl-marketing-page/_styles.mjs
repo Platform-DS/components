@@ -3,7 +3,7 @@
 // ------------------------------
 // No max width here on purpose. Content sections are full-bleed bands that cap
 // their own inner measure, so constraining them from outside would leave a
-// coloured band floating in the middle of the page with white either side.
+// colored band floating in the middle of the page with white either side.
 
 export const STYLES = /*css*/`
 pl-marketing-page {

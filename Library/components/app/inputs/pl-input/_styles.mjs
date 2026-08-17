@@ -11,6 +11,6 @@ import { fieldStyles } from '../../../../_core/styles/field.mjs';
 export const STYLES = /*css*/`
   ${fieldStyles('input')}
 
-  /* Number/date spinners inherit the text colour rather than the UA default. */
+  /* Number/date spinners inherit the text color rather than the UA default. */
   input { color-scheme: light dark; }
 `;

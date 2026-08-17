@@ -29,7 +29,7 @@ pl-social-proof > ul {
 }
 
 /* Logos: normalised to one optical height, muted until hovered so the band
-   reads as texture rather than a row of competing brand colours. */
+   reads as texture rather than a row of competing brand colors. */
 pl-social-proof :is(img, svg) {
   display: block;
   block-size: var(--social-proof-logo-height, 1.75rem);

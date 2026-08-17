@@ -97,7 +97,7 @@ export default () => page(
             <pl-label text="Rate your experience">
                 <pl-ratings name="experience" value="4"></pl-ratings>
             </pl-label>
-            <div data-actions><pl-button type="submit" size="sm">Submit</pl-button></div>
+            <div data-actions><pl-button type="submit" data-size="sm">Submit</pl-button></div>
             <output></output>
         </pl-form>
     `, { layout: 'stack' }),
@@ -133,14 +133,14 @@ export default () => page(
         [
             { cells: ['<code>--star-size</code>', 'Each star\'s width and height. Defaults to <code>1.5rem</code>.'] },
             { cells: ['<code>--ratings-gap</code>', 'Space between stars.'] },
-            { cells: ['<code>--ratings-color</code>', 'Filled-star colour. Defaults to <code>--pl-color-warning</code>.'] },
-            { cells: ['<code>--ratings-empty</code>', 'Unfilled-star colour.'] },
+            { cells: ['<code>--ratings-color</code>', 'Filled-star color. Defaults to <code>--pl-color-warning</code>.'] },
+            { cells: ['<code>--ratings-empty</code>', 'Unfilled-star color.'] },
         ],
     ),
 
     callout('note', 'Why warning, not a bespoke gold',
         `The token contract has no dedicated "gold": reusing <code>--pl-color-warning</code> keeps
-         the star amber without adding a one-component colour to the palette. Override
+         the star amber without adding a one-component color to the palette. Override
          <code>--ratings-color</code> on any instance that wants something else.`),
 
     section('Accessibility'),

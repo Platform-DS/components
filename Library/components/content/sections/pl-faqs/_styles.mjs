@@ -55,7 +55,7 @@ pl-faqs summary::after {
   margin-inline-start: auto;
   background: currentColor;
   transition: rotate 180ms ease;
-  /* Plus sign drawn with a mask so it inherits the text colour. */
+  /* Plus sign drawn with a mask so it inherits the text color. */
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 1v10M1 6h10' stroke='black' stroke-width='1.75' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 

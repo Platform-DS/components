@@ -86,7 +86,7 @@ export default () => page(
                 <option value="free">Free</option>
                 <option value="pro">Pro</option>
             </pl-select>
-            <div data-actions><pl-button type="submit" size="sm">Submit</pl-button></div>
+            <div data-actions><pl-button type="submit" data-size="sm">Submit</pl-button></div>
             <output></output>
         </pl-form>
     `, { layout: 'stack' }),
@@ -111,7 +111,7 @@ export default () => page(
     table(
         ['Property', 'Description'],
         [
-            { cells: ['<code>--select-arrow</code>', 'Chevron colour.'] },
+            { cells: ['<code>--select-arrow</code>', 'Chevron color.'] },
             { cells: ['<code>--field-border</code>, <code>--field-accent</code>, <code>--field-ring</code>', 'Shared field chrome (see pl-input).'] },
         ],
     ),

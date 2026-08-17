@@ -44,7 +44,7 @@ export default () => page(
     section('Logos'),
 
     p(`Images are normalised to one optical height and muted to greyscale so the row reads as
-       texture rather than a clash of brand colours; hovering restores an individual logo.`),
+       texture rather than a clash of brand colors; hovering restores an individual logo.`),
 
     demo(`
         <pl-social-proof>

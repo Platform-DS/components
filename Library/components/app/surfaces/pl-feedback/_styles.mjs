@@ -2,11 +2,11 @@
 // Feedback Styles — LIGHT DOM
 // ------------------------------
 // A tinted band with a solid accent rule down its inline-start edge. The tint
-// is derived with color-mix from the intent colour rather than being a second
+// is derived with color-mix from the intent color rather than being a second
 // hand-picked palette — one source of truth per intent, and it stays correct
 // when a consumer re-points --pl-color-success at their own green.
 //
-// Every intent also gets a distinct ICON, because colour alone is not a
+// Every intent also gets a distinct ICON, because color alone is not a
 // distinction for anyone who cannot see it — and the accent rule plus the
 // glyph keep the four states apart in greyscale too.
 
@@ -41,7 +41,7 @@ pl-feedback[data-intent="success"] { --_accent: var(--pl-color-success, #15803D)
 pl-feedback[data-intent="warning"] { --_accent: var(--pl-color-warning, #B45309); }
 pl-feedback[data-intent="error"]   { --_accent: var(--pl-color-error, #B91C1C); }
 
-/* The glyph. Drawn with a mask so it takes the accent colour, and marked
+/* The glyph. Drawn with a mask so it takes the accent color, and marked
    decorative — the message text is what gets announced. */
 pl-feedback::before {
   content: "";

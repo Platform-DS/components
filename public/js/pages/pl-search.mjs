@@ -58,7 +58,7 @@ export default () => page(
         <pl-form onsubmit="event.preventDefault();
             this.querySelector('output').value = 'q = ' + (new FormData(event.target).get('q') || '(empty)')">
             <pl-search name="q" placeholder="Search…"></pl-search>
-            <div data-actions><pl-button type="submit" size="sm">Search</pl-button></div>
+            <div data-actions><pl-button type="submit" data-size="sm">Search</pl-button></div>
             <output></output>
         </pl-form>
     `, { layout: 'stack' }),

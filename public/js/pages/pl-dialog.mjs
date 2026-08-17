@@ -33,8 +33,8 @@ export default () => page(
             <h2 data-title>Delete this project?</h2>
             <p>Every deployment and build log goes with it. This cannot be undone.</p>
             <div data-actions>
-                <form method="dialog"><pl-button variant="secondary">Cancel</pl-button></form>
-                <pl-button variant="danger" command="close" commandfor="demo-confirm">Delete</pl-button>
+                <form method="dialog"><pl-button data-variant="secondary">Cancel</pl-button></form>
+                <pl-button data-variant="danger" command="close" commandfor="demo-confirm">Delete</pl-button>
             </div>
         </pl-dialog>
     `, { layout: 'stack' }),
@@ -88,12 +88,12 @@ export default () => page(
        must be made before continuing.`),
 
     demo(`
-        <pl-button command="show-modal" commandfor="demo-sticky" variant="secondary">Must choose</pl-button>
+        <pl-button command="show-modal" commandfor="demo-sticky" data-variant="secondary">Must choose</pl-button>
         <pl-dialog id="demo-sticky" closedby="none">
             <h2 data-title>Pick one</h2>
             <p>Escape and clicking outside are both off. The buttons are the only way out.</p>
             <div data-actions>
-                <form method="dialog"><pl-button variant="secondary">Not now</pl-button></form>
+                <form method="dialog"><pl-button data-variant="secondary">Not now</pl-button></form>
                 <form method="dialog"><pl-button>Continue</pl-button></form>
             </div>
         </pl-dialog>
@@ -145,7 +145,7 @@ export default () => page(
         [
             { cells: ['<code>--dialog-width</code>', 'Maximum width. Defaults to <code>32rem</code>.'] },
             { cells: ['<code>--dialog-padding</code>', 'Inner padding.'] },
-            { cells: ['<code>--dialog-background</code>', 'Surface colour.'] },
+            { cells: ['<code>--dialog-background</code>', 'Surface color.'] },
             { cells: ['<code>--dialog-backdrop</code>', 'The tint behind it.'] },
         ],
     ),

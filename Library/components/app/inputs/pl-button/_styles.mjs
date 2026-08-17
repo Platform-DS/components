@@ -15,14 +15,14 @@ export const STYLES = /*css*/`
   /*------------------------------------------------
     Loading — CSS-only spinner; aria-busy on the real <button> announces it.
   -------------------------------------------------*/
-  :host([loading]) button {
+  :host([data-loading]) button {
     cursor: progress;
     /* Keep the label's width so the button doesn't jump when it returns. */
     color: transparent;
     position: relative;
   }
 
-  :host([loading]) button::after {
+  :host([data-loading]) button::after {
     content: "";
     position: absolute;
     inset: 50% auto auto 50%;
@@ -39,6 +39,6 @@ export const STYLES = /*css*/`
 
   @media (prefers-reduced-motion: reduce) {
     button { transition: none; }
-    :host([loading]) button::after { animation-duration: 2s; }
+    :host([data-loading]) button::after { animation-duration: 2s; }
   }
 `;

@@ -162,11 +162,23 @@ export const NAV = [
                 "name": "state",
                 "components": [
                     {
+                        "tag": "pl-bar-chart",
+                        "status": "ready"
+                    },
+                    {
+                        "tag": "pl-doughnut-chart",
+                        "status": "ready"
+                    },
+                    {
                         "tag": "pl-loading",
                         "status": "ready"
                     },
                     {
                         "tag": "pl-meter",
+                        "status": "ready"
+                    },
+                    {
+                        "tag": "pl-pie-chart",
                         "status": "ready"
                     },
                     {
@@ -238,15 +250,7 @@ export const NAV = [
                         "status": "ready"
                     },
                     {
-                        "tag": "pl-collection-page",
-                        "status": "ready"
-                    },
-                    {
                         "tag": "pl-marketing-page",
-                        "status": "ready"
-                    },
-                    {
-                        "tag": "pl-product-page",
                         "status": "ready"
                     }
                 ]

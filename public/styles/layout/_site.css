@@ -95,7 +95,7 @@
 
   pl-autocomplete is Light DOM — its real <input> is ordinary page markup, not
   behind a shadow boundary — so it's themed here with plain descendant
-  selectors for the couple of things it has no --field-* hook for (colour,
+  selectors for the couple of things it has no --field-* hook for (color,
   placeholder), and its own hooks for the rest.
 -------------------------------------------------*/
 

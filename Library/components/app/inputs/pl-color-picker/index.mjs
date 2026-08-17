@@ -3,7 +3,7 @@
 // ------------------------------
 // A real <input type="color"> beside a real <input type="text">, wrapped in one
 // border so they read as a single field. Light DOM, so both are genuine page
-// controls: the swatch opens the OS colour picker, and the value submits with
+// controls: the swatch opens the OS color picker, and the value submits with
 // the surrounding <form> without any bridging.
 //
 //   <pl-color-picker name="brand" value="#2563EB"></pl-color-picker>
@@ -74,7 +74,7 @@ export class ColorPicker extends BaseElement {
             this.#text.placeholder = '#000000';
             // The text field mirrors the swatch, so it needs its own name in
             // the accessibility tree — otherwise it is an unlabelled input.
-            this.#text.setAttribute('aria-label', 'Hex colour value');
+            this.#text.setAttribute('aria-label', 'Hex color value');
             // Reject nonsense before submit, using the same shape as normalize().
             this.#text.pattern = '#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})';
 
@@ -90,7 +90,7 @@ export class ColorPicker extends BaseElement {
                 this.#commit(this.#swatch.value);
             });
 
-            // Typing only propagates once it is a colour — otherwise a
+            // Typing only propagates once it is a color — otherwise a
             // half-typed "#2" would repeatedly reset the swatch to black.
             this.#text.addEventListener('input', () => {
                 const hex = normalize(this.#text.value);
@@ -122,10 +122,10 @@ export class ColorPicker extends BaseElement {
         const hex = normalize(this.getAttribute('value')) ?? DEFAULT;
         this.#swatch.value = hex;
         // Don't fight the user mid-keystroke: only rewrite the text field when
-        // it does not already mean this colour.
+        // it does not already mean this color.
         if (normalize(this.#text.value) !== hex) this.#text.value = hex.toUpperCase();
 
-        // The colour input is the one that submits.
+        // The color input is the one that submits.
         for (const name of ['name', 'form', 'required']) {
             if (this.hasAttribute(name)) this.#swatch.setAttribute(name, this.getAttribute(name));
             else this.#swatch.removeAttribute(name);
@@ -136,7 +136,7 @@ export class ColorPicker extends BaseElement {
         this.#text.disabled = disabled;
     }
 
-    /** The current colour, always #rrggbb. */
+    /** The current color, always #rrggbb. */
     get value() { return this.#swatch?.value ?? normalize(this.getAttribute('value')) ?? DEFAULT; }
     set value(v) {
         const hex = normalize(v);

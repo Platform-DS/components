@@ -122,7 +122,7 @@ pl-badge[data-position="bottom-start"] > .pl-badge__badge {
 
 /*------------------------------------------------
   Intents. Every fill pairs with its own on-color, so the text stays
-  readable in either theme — the library-wide rule for coloured fills.
+  readable in either theme — the library-wide rule for colored fills.
 -------------------------------------------------*/
 pl-badge[data-intent="success"] > .pl-badge__badge {
   background: var(--badge-background, var(--pl-color-success, #15803D));

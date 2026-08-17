@@ -40,7 +40,7 @@ export default () => page(
     section('The browser does the tinting'),
 
     p(`<code>low</code>, <code>high</code> and <code>optimum</code> describe which part of the
-       range is good, and the browser picks the colour from them. Nothing in JavaScript watches the
+       range is good, and the browser picks the color from them. Nothing in JavaScript watches the
        value: cross into the bad zone and the bar changes on its own.`),
 
     p(`<code>optimum</code> is the interesting one: it says where "good" <em>is</em>. Put it below
@@ -65,7 +65,7 @@ export default () => page(
             { cells: ['<code>value</code>', '<code>Number</code>', 'The measurement. Native.'] },
             { cells: ['<code>min</code> / <code>max</code>', '<code>Number</code>', 'The range. Default <code>0</code> and <code>1</code>, which is why a bare <code>value="0.6"</code> works.'] },
             { cells: ['<code>low</code> / <code>high</code>', '<code>Number</code>', 'Boundaries of the middle zone.'] },
-            { cells: ['<code>optimum</code>', '<code>Number</code>', 'Where "good" is. Decides which zone gets which colour.'] },
+            { cells: ['<code>optimum</code>', '<code>Number</code>', 'Where "good" is. Decides which zone gets which color.'] },
             { cells: ['<code>label</code>', '<code>String</code>', 'Accessible name. See below.'] },
         ],
     ),
@@ -77,7 +77,7 @@ export default () => page(
         [
             { cells: ['<code>--meter-height</code>', 'Bar thickness.'] },
             { cells: ['<code>--meter-track</code>', 'The unfilled track.'] },
-            { cells: ['<code>--meter-optimum</code> / <code>--meter-suboptimum</code> / <code>--meter-poor</code>', 'The three zone colours.'] },
+            { cells: ['<code>--meter-optimum</code> / <code>--meter-suboptimum</code> / <code>--meter-poor</code>', 'The three zone colors.'] },
         ],
     ),
 
@@ -94,7 +94,7 @@ export default () => page(
     ul([
         'A real <code>&lt;meter&gt;</code>, so the role and the value are the platform\'s.',
         'Always set <code>label</code>: an unnamed gauge announces a number with nothing to attach it to.',
-        'Colour is never the only signal: the label should carry the reading, so a bar tinted red still says <em>92%</em> to someone who cannot see that it is red.',
+        'color is never the only signal: the label should carry the reading, so a bar tinted red still says <em>92%</em> to someone who cannot see that it is red.',
         'Slotted text inside the element is the fallback shown by browsers without <code>&lt;meter&gt;</code> support.',
     ]),
 );

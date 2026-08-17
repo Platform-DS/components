@@ -55,7 +55,7 @@ export default () => page(
     table(
         ['Prefix', 'Type', 'Examples'],
         [
-            { cells: ['<code>--color-*</code>', 'Colours: semantic, intent, and raw scales', '<code>--color-surface</code>, <code>--color-primary</code>, <code>--color-blue-600</code>'] },
+            { cells: ['<code>--color-*</code>', 'colors: semantic, intent, and raw scales', '<code>--color-surface</code>, <code>--color-primary</code>, <code>--color-blue-600</code>'] },
             { cells: ['<code>--size-*</code>', 'Spacing and dimension, one scale', '<code>--size-8</code>, <code>--size-16</code>, <code>--size-64</code>'] },
             { cells: ['<code>--font-size-*</code>', 'Type scale', '<code>--font-size-base</code>, <code>--font-size-2xl</code>'] },
             { cells: ['<code>--font-weight-*</code>', 'Weights', '<code>--font-weight-medium</code>, <code>--font-weight-bold</code>'] },
@@ -66,18 +66,18 @@ export default () => page(
         ],
     ),
 
-    section('How colours are organised'),
+    section('How colors are organised'),
 
-    p('The colour tokens come in three layers, from most semantic to most raw:'),
+    p('The color tokens come in three layers, from most semantic to most raw:'),
 
     ul([
         '<strong>Semantic</strong>: what components read for anything neutral: three surface levels (<code>--color-surface</code>, <code>-raised</code>, <code>-sunken</code>), <code>--color-ink</code> and <code>--color-ink-secondary</code>, <code>--color-border</code> and <code>--color-border-strong</code>.',
-        '<strong>Intents</strong>: a solid fill plus its on-colour for controls (<code>--color-primary</code> / <code>--color-on-primary</code>), and a tinted ramp for badges and callouts (<code>-surface</code>, <code>-border</code>, <code>-ink</code>). Same shape for <code>success</code>, <code>warning</code>, and <code>error</code>.',
+        '<strong>Intents</strong>: a solid fill plus its on-color for controls (<code>--color-primary</code> / <code>--color-on-primary</code>), and a tinted ramp for badges and callouts (<code>-surface</code>, <code>-border</code>, <code>-ink</code>). Same shape for <code>success</code>, <code>warning</code>, and <code>error</code>.',
         '<strong>Raw scales</strong>: the palette underneath: <code>--color-gray-50…950</code>, <code>--color-blue-*</code>, <code>--color-green-*</code>, <code>--color-amber-*</code>, <code>--color-red-*</code>.',
     ]),
 
     p(`A component uses whichever layer fits. A filled control always pairs the solid fill with
-       its on-colour, and every on-colour is <strong>white</strong>, in light and dark alike. That
+       its on-color, and every on-color is <strong>white</strong>, in light and dark alike. That
        pairing is fixed on purpose: dark text on a saturated fill is the usual way a button breaks
        when a theme flips.`),
 
@@ -90,7 +90,7 @@ export default () => page(
 
     section('Hover and active are derived, not picked'),
 
-    p(`A theme sets one colour per intent. The interaction states are mixed from it:`),
+    p(`A theme sets one color per intent. The interaction states are mixed from it:`),
 
     code(`
         --color-primary-hover:  color-mix(in oklab, var(--color-primary) 88%, var(--color-state-mix));
@@ -107,7 +107,7 @@ export default () => page(
          difference between theming a token and theming one button: set
          <code>--button-background: hotpink</code> on a single instance and its hover and press
          come out hotpink too, with nothing else to set. Before this, that instance kept the
-         default blue hover, and the fix was to name a second colour by hand.`),
+         default blue hover, and the fix was to name a second color by hand.`),
 
     code(`
         /* one line, and every state of this button follows */
@@ -120,7 +120,7 @@ export default () => page(
        states <strong>darken</strong>, in both light and dark themes.`),
 
     p(`Lightening on a dark page is the more common convention, and it was measured and rejected
-       here. Because every on-colour in this system is white, lightening the fill takes the label
+       here. Because every on-color in this system is white, lightening the fill takes the label
        with it: white on the primary fill drops from 5.17:1 to 4.18:1 hovered and 3.53:1 pressed,
        under the 4.5:1 that every solid fill is supposed to carry. A label has to stay readable in
        the state the pointer is sitting on.`),
@@ -176,8 +176,8 @@ export default () => page(
         `A blue button is blue in either theme, give or take a shade. What genuinely changes is the
          reading direction: dark text on light, or light text on dark. That is why the semantic
          tokens are the ones a dark theme re-points, the raw scales stay fixed, and every
-         intent's on-colour stays white in both. Get <code>--color-ink</code>, the three surfaces
-         and the on-colours right and a dark theme is mostly done; the interaction states are a
+         intent's on-color stays white in both. Get <code>--color-ink</code>, the three surfaces
+         and the on-colors right and a dark theme is mostly done; the interaction states are a
          detail underneath that decision, not a second one.`),
 
     section('Overriding: three levels'),

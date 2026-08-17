@@ -39,18 +39,18 @@ export default () => page(
     section('Variants'),
 
     demo(`
-        <pl-button-link href="#" variant="primary">Primary</pl-button-link>
-        <pl-button-link href="#" variant="secondary">Secondary</pl-button-link>
-        <pl-button-link href="#" variant="ghost">Ghost</pl-button-link>
-        <pl-button-link href="#" variant="danger">Danger</pl-button-link>
+        <pl-button-link href="#" data-variant="primary">Primary</pl-button-link>
+        <pl-button-link href="#" data-variant="secondary">Secondary</pl-button-link>
+        <pl-button-link href="#" data-variant="ghost">Ghost</pl-button-link>
+        <pl-button-link href="#" data-variant="danger">Danger</pl-button-link>
     `),
 
     section('Sizes'),
 
     demo(`
-        <pl-button-link href="#" size="sm">Small</pl-button-link>
-        <pl-button-link href="#" size="md">Medium</pl-button-link>
-        <pl-button-link href="#" size="lg">Large</pl-button-link>
+        <pl-button-link href="#" data-size="sm">Small</pl-button-link>
+        <pl-button-link href="#" data-size="md">Medium</pl-button-link>
+        <pl-button-link href="#" data-size="lg">Large</pl-button-link>
     `),
 
     section('Opening in a new tab'),
@@ -58,7 +58,7 @@ export default () => page(
     p('Native anchor attributes work as they always do:'),
 
     demo(`
-        <pl-button-link href="https://example.com" target="_blank" rel="noopener" variant="secondary">
+        <pl-button-link href="https://example.com" target="_blank" rel="noopener" data-variant="secondary">
             Open example.com
         </pl-button-link>
     `),
@@ -69,17 +69,41 @@ export default () => page(
        its <code>href</code> is dropped, it's taken out of the tab order, and it's marked
        <code>aria-disabled</code>.`),
 
-    demo(`<pl-button-link href="#" disabled>Disabled</pl-button-link>`),
+    demo(`<pl-button-link href="#" data-disabled>Disabled</pl-button-link>`),
+
+    callout('note', 'Why disabled is data-disabled here and plain disabled on pl-button',
+        `Because an anchor has no <code>disabled</code>. A button does, so
+         <a href="/documentation/pl-button">pl-button</a> uses the real one and the browser handles
+         it; a disabled link is something this component invents, so it is namespaced like anything
+         else invented. The asymmetry is the honest one: it tells you which of the two is the
+         platform's behaviour and which is ours.`),
+
+    section('Circle'),
+
+    p(`Same as <a href="/documentation/pl-button">pl-button</a>:
+       <code>data-shape="circle"</code> for a single icon, sized from
+       <code>data-size</code>, with a name supplied by <code>title</code> or a
+       <code>.pl-sr-only</code> span.`),
+
+    demo(`
+        <pl-button-link href="#" data-shape="circle" title="Open in a new tab">
+            <pl-icon icon="arrow-top-right"></pl-icon>
+        </pl-button-link>
+        <pl-button-link href="#" data-shape="circle" data-variant="secondary">
+            <pl-icon icon="mail"></pl-icon>
+            <span class="pl-sr-only">Email support</span>
+        </pl-button-link>
+    `),
 
     section('Props'),
 
     table(
         ['Prop', 'Type', 'Default', 'Description'],
         [
-            { cells: ['<code>variant</code>', '<code>String</code>', '<code>"primary"</code>', '<code>primary</code>, <code>secondary</code>, <code>ghost</code>, <code>danger</code>.'] },
-            { cells: ['<code>size</code>', '<code>String</code>', '<code>"md"</code>', '<code>sm</code>, <code>md</code>, <code>lg</code>.'] },
-            { cells: ['<code>full</code>', '<code>Boolean</code>', '<code>false</code>', 'Stretch to fill the container.'] },
-            { cells: ['<code>disabled</code>', '<code>Boolean</code>', '<code>false</code>', 'Make the link inert.'] },
+            { cells: ['<code>data-variant</code>', '<code>String</code>', '<code>"primary"</code>', '<code>primary</code>, <code>secondary</code>, <code>ghost</code>, <code>danger</code>.'] },
+            { cells: ['<code>data-size</code>', '<code>String</code>', '<code>"md"</code>', '<code>sm</code>, <code>md</code>, <code>lg</code>.'] },
+            { cells: ['<code>data-full</code>', '<code>Boolean</code>', '<code>false</code>', 'Stretch to fill the container.'] },
+            { cells: ['<code>data-disabled</code>', '<code>Boolean</code>', '<code>false</code>', 'Make the link inert.'] },
             { native: true, cells: ['<code>href</code>', '<code>String</code>', ': ', 'Native. Destination URL.'] },
             { native: true, cells: ['<code>target</code>', '<code>String</code>', ': ', 'Native. e.g. <code>_blank</code>.'] },
             { native: true, cells: ['<code>rel</code>', '<code>String</code>', ': ', 'Native. e.g. <code>noopener</code>.'] },
@@ -94,9 +118,9 @@ export default () => page(
     table(
         ['Property', 'Description'],
         [
-            { cells: ['<code>--button-background</code>', 'Fill colour.'] },
-            { cells: ['<code>--button-color</code>', 'Text colour.'] },
-            { cells: ['<code>--button-border</code>', 'Border colour.'] },
+            { cells: ['<code>--button-background</code>', 'Fill color.'] },
+            { cells: ['<code>--button-color</code>', 'Text color.'] },
+            { cells: ['<code>--button-border</code>', 'Border color.'] },
             { cells: ['<code>--button-background-hover</code>', 'Hover fill.'] },
         ],
     ),

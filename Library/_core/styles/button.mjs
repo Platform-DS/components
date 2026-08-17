@@ -8,7 +8,7 @@
 
 export const buttonStyles = (sel) => /*css*/`
   :host {
-    /* A filled button always pairs an intent fill with its on-colour, which is
+    /* A filled button always pairs an intent fill with its on-color, which is
        WHITE in every theme. Dark text on a saturated fill is the usual way
        these go wrong when a theme flips, so the pairing is fixed here rather
        than derived from the page's ink. */
@@ -18,8 +18,8 @@ export const buttonStyles = (sel) => /*css*/`
 
     /* :hover and :active are MIXED FROM --_bg rather than read from a fixed
        pair of tokens. The point is that they follow whatever fill the button
-       actually has: set --button-background to a brand colour and its states
-       come out in that colour automatically, instead of staying the blue the
+       actually has: set --button-background to a brand color and its states
+       come out in that color automatically, instead of staying the blue the
        default hover token names. Override either directly if you need to.
 
        States darken in both themes because the label is always white, and
@@ -44,8 +44,8 @@ export const buttonStyles = (sel) => /*css*/`
 
   :host([hidden]) { display: none; }
 
-  :host([full]) { display: block; }
-  :host([full]) ${sel} { width: 100%; }
+  :host([data-full]) { display: block; }
+  :host([data-full]) ${sel} { width: 100%; }
 
   ${sel} {
     appearance: none;
@@ -123,28 +123,28 @@ export const buttonStyles = (sel) => /*css*/`
      on a dark page, which is exactly what it did before this. Ink flips with
      the theme, so the tint darkens on paper and lightens in the dark, which is
      the behaviour a ghost button wants on either. */
-  :host([variant="secondary"]),
-  :host([variant="ghost"]) {
+  :host([data-variant="secondary"]),
+  :host([data-variant="ghost"]) {
     --_bg: var(--button-background, transparent);
     --_fg: var(--button-color, var(--pl-color-ink, #111827));
     --_state-mix: var(--pl-color-ink, #111827);
   }
 
-  :host([variant="secondary"]) {
+  :host([data-variant="secondary"]) {
     --_border: var(--button-border, var(--pl-color-border-strong, #9CA3AF));
   }
 
-  :host([variant="ghost"]) {
+  :host([data-variant="ghost"]) {
     --_border: var(--button-border, transparent);
   }
 
-  :host([variant="success"]) {
+  :host([data-variant="success"]) {
     --_bg: var(--button-background, var(--pl-color-success, #047857));
     --_fg: var(--button-color, var(--pl-color-on-success, #FFFFFF));
     --_border: var(--button-border, transparent);
   }
 
-  :host([variant="danger"]) {
+  :host([data-variant="danger"]) {
     --_bg: var(--button-background, var(--pl-color-error, #B91C1C));
     --_fg: var(--button-color, var(--pl-color-on-error, #FFFFFF));
     --_border: var(--button-border, transparent);
@@ -153,18 +153,59 @@ export const buttonStyles = (sel) => /*css*/`
   /*------------------------------------------------
     Sizes
   -------------------------------------------------*/
-  :host([size="sm"]) {
+  :host([data-size="sm"]) {
     --_pad-block: var(--pl-size-4, 0.25rem);
     --_pad-inline: var(--pl-size-12, 0.75rem);
     --_font-size: var(--pl-font-size-sm, 0.875rem);
     --_height: var(--button-height, var(--pl-control-height-sm, 2rem));
   }
 
-  :host([size="lg"]) {
+  :host([data-size="lg"]) {
     --_pad-block: var(--pl-size-12, 0.75rem);
     --_pad-inline: var(--pl-size-24, 1.5rem);
     --_font-size: var(--pl-font-size-lg, 1.125rem);
     --_height: var(--button-height, var(--pl-control-height-lg, 3.25rem));
+  }
+
+  /*------------------------------------------------
+    Circle
+
+    A square box with a round corner radius, for ONE icon. It composes with the
+    sizes rather than replacing them: the control height is already the right
+    diameter at every step, so a 1:1 aspect ratio turns that height into the
+    width and the padding goes away. Nothing here restates sm/md/lg.
+
+    Padding is dropped rather than balanced because with a fixed aspect ratio it
+    fights the box: horizontal padding would widen the button, which widens the
+    height that the ratio derives from, and the circle drifts off the size scale
+    it is supposed to share with every other control in the row.
+  -------------------------------------------------*/
+  :host([data-shape="circle"]) ${sel},
+  :host([data-shape="square"]) ${sel} {
+    aspect-ratio: 1;
+    inline-size: var(--_height);
+    min-inline-size: var(--_height);
+    padding: 0;
+    /* The label is a single glyph, so centring is the whole layout. */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :host([data-shape="circle"]) ${sel} {
+    border-radius: var(--button-radius, var(--pl-border-radius-full, 9999px));
+  }
+
+  /* A circle sizes itself, so it cannot also stretch. */
+  :host([data-shape="circle"]),
+  :host([data-shape="square"]) { inline-size: auto; }
+
+  :host([data-shape="circle"]) ::slotted(pl-icon),
+  :host([data-shape="square"]) ::slotted(pl-icon),
+  :host([data-shape="circle"]) ::slotted(svg),
+  :host([data-shape="square"]) ::slotted(svg) {
+    inline-size: var(--button-icon, 1.25em);
+    block-size: var(--button-icon, 1.25em);
   }
 
   ::slotted(svg),

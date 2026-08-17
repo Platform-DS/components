@@ -36,10 +36,15 @@ export class ButtonLink extends AnchorElement {
     // component's own presentation props.
     static props = {
         ...AnchorElement.props,
-        variant:  { type: String, default: 'primary' },
-        size:     { type: String, default: 'md' },
-        full:     { type: Boolean, default: false },
-        disabled: { type: Boolean, default: false },
+        // data-* because none of these is an attribute <a> has — including
+        // `disabled`, which is native on a button and simply does not exist on
+        // an anchor. The prop system maps a data- key to a clean name, so the
+        // property is still this.props.variant / .disabled.
+        'data-variant':  { type: String, default: 'primary' },
+        'data-size':     { type: String, default: 'md' },
+        'data-shape':    { type: String },
+        'data-full':     { type: Boolean, default: false },
+        'data-disabled': { type: Boolean, default: false },
     };
 
     constructor() {

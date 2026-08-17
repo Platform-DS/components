@@ -6,9 +6,9 @@
 // boundary for the group to lay them out or for a <form> to see them.
 //
 //   <pl-button-group>
-//     <pl-button variant="secondary">Day</pl-button>
-//     <pl-button variant="secondary">Week</pl-button>
-//     <pl-button variant="secondary">Month</pl-button>
+//     <pl-button data-variant="secondary">Day</pl-button>
+//     <pl-button data-variant="secondary">Week</pl-button>
+//     <pl-button data-variant="secondary">Month</pl-button>
 //   </pl-button-group>
 //
 // Presentation only — it does not manage which segment is selected. For a

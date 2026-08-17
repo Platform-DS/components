@@ -58,7 +58,7 @@ export default () => page(
        than the plain <code>&lt;pre&gt;</code> it replaces.`),
 
     sample('html', `
-        <pl-button variant="primary" size="lg">
+        <pl-button data-variant="primary" data-size="lg">
           Save changes
         </pl-button>
     `),
@@ -133,12 +133,12 @@ export default () => page(
     table(
         ['Property', 'Description'],
         [
-            { cells: ['<code>--code-block-background</code>', 'Surface colour.'] },
-            { cells: ['<code>--code-block-color</code>', 'Default text colour.'] },
+            { cells: ['<code>--code-block-background</code>', 'Surface color.'] },
+            { cells: ['<code>--code-block-color</code>', 'Default text color.'] },
             { cells: ['<code>--code-block-border</code>', 'Border and head divider.'] },
-            { cells: ['<code>--code-block-head</code>', 'Head label and copy-button colour.'] },
-            { cells: ['<code>--code-block-accent</code>', 'Copy-button hover / copied colour.'] },
-            { cells: ['<code>--code-block-syntax-*</code>', 'Per-token colours: <code>comment</code>, <code>string</code>, <code>number</code>, <code>keyword</code>, <code>property</code>, <code>tag</code>, <code>attr</code>, <code>punctuation</code>.'] },
+            { cells: ['<code>--code-block-head</code>', 'Head label and copy-button color.'] },
+            { cells: ['<code>--code-block-accent</code>', 'Copy-button hover / copied color.'] },
+            { cells: ['<code>--code-block-syntax-*</code>', 'Per-token colors: <code>comment</code>, <code>string</code>, <code>number</code>, <code>keyword</code>, <code>property</code>, <code>tag</code>, <code>attr</code>, <code>punctuation</code>.'] },
         ],
     ),
 
@@ -159,6 +159,6 @@ export default () => page(
         'Source is rendered from <code>textContent</code>, never <code>innerHTML</code>: author code is never parsed as markup.',
         'A block that overflows becomes a focusable, labelled scroll region; one that fits adds no tab stop.',
         'The copy button is a real <code>&lt;button&gt;</code> with a visible label and copied-state feedback.',
-        'Highlighting is presentational: a screen reader hears the code, not the colours.',
+        'Highlighting is presentational: a screen reader hears the code, not the colors.',
     ]),
 );

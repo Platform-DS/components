@@ -19,7 +19,7 @@ export default () => page(
     }),
 
     p(`Two real inputs made to look like one field. The swatch opens the operating system's own
-       colour picker: the reason to use <code>&lt;input type="color"&gt;</code> rather than draw a
+       color picker: the reason to use <code>&lt;input type="color"&gt;</code> rather than draw a
        swatch and build a picker, and the text field lets someone paste a hex value they already
        have.`),
 
@@ -39,8 +39,8 @@ export default () => page(
 
     ul([
         'Dragging in the OS picker fires <code>input</code> continuously, so the hex updates live rather than waiting for the dialog to close.',
-        'Typing only propagates once the text is <em>actually a colour</em>: otherwise a half-typed <code>#2</code> would keep resetting the swatch to black.',
-        'On blur the text is tidied: <code>#abc</code> expands to <code>#AABBCC</code>, a missing hash is added, and unusable input snaps back to the current colour.',
+        'Typing only propagates once the text is <em>actually a color</em>: otherwise a half-typed <code>#2</code> would keep resetting the swatch to black.',
+        'On blur the text is tidied: <code>#abc</code> expands to <code>#AABBCC</code>, a missing hash is added, and unusable input snaps back to the current color.',
     ]),
 
     demo(`
@@ -61,13 +61,13 @@ export default () => page(
     `, 'js'),
 
     callout('note', 'One value, one form entry',
-        `Only the colour input carries the <code>name</code>. The text field is a typed alias of the
+        `Only the color input carries the <code>name</code>. The text field is a typed alias of the
          same value, so a form receives a single <code>brand=%23ff8800</code> entry rather than two
          competing ones.`),
 
     section('Accepted input'),
 
-    p('The text field takes any spelling of a hex colour and normalises it:'),
+    p('The text field takes any spelling of a hex color and normalises it:'),
 
     table(
         ['You type', 'You get'],
@@ -75,7 +75,7 @@ export default () => page(
             { cells: ['<code>#abc</code>', '<code>#AABBCC</code>'] },
             { cells: ['<code>2563eb</code>', '<code>#2563EB</code>'] },
             { cells: ['<code>#FF8800</code>', '<code>#FF8800</code>'] },
-            { cells: ['anything else', 'reverts to the current colour on blur'] },
+            { cells: ['anything else', 'reverts to the current color on blur'] },
         ],
     ),
 
@@ -92,7 +92,7 @@ export default () => page(
         <pl-form onsubmit="event.preventDefault();
             this.querySelector('output').textContent = new FormData(event.target).get('accent')">
             <pl-color-picker name="accent" value="#7C3AED"></pl-color-picker>
-            <div data-actions><pl-button type="submit" size="sm">Submit</pl-button></div>
+            <div data-actions><pl-button type="submit" data-size="sm">Submit</pl-button></div>
             <output></output>
         </pl-form>
     `, { layout: 'stack' }),
@@ -102,10 +102,10 @@ export default () => page(
     table(
         ['Attribute', 'Type', 'Description'],
         [
-            { cells: ['<code>value</code>', '<code>String</code>', 'The colour, normalised to <code>#rrggbb</code>.'] },
+            { cells: ['<code>value</code>', '<code>String</code>', 'The color, normalised to <code>#rrggbb</code>.'] },
             { cells: ['<code>name</code>', '<code>String</code>', 'Field name for form submission.'] },
             { cells: ['<code>disabled</code>', '<code>Boolean</code>', 'Disables both inputs.'] },
-            { cells: ['<code>required</code>', '<code>Boolean</code>', 'Applied to the colour input.'] },
+            { cells: ['<code>required</code>', '<code>Boolean</code>', 'Applied to the color input.'] },
         ],
     ),
 
@@ -114,7 +114,7 @@ export default () => page(
     table(
         ['Member', 'Description'],
         [
-            { cells: ['<code>value</code>', 'Get or set the colour. Setting accepts any spelling and normalises it.'] },
+            { cells: ['<code>value</code>', 'Get or set the color. Setting accepts any spelling and normalises it.'] },
             { cells: ['<code>swatch</code> / <code>textInput</code>', 'The two real inputs, if you need them.'] },
             { cells: ['<code>pl-change</code>', 'Fired on every change; <code>detail.value</code> is the normalised hex.'] },
         ],
@@ -131,8 +131,8 @@ export default () => page(
     ),
 
     callout('note', 'Why the hooks are --picker-* and not --color-picker-*',
-        `The token contract reserves the <code>--color-*</code> prefix for colours, so a width
-         living under it would be ambiguous: is <code>--color-picker-width</code> a colour named
+        `The token contract reserves the <code>--color-*</code> prefix for colors, so a width
+         living under it would be ambiguous: is <code>--color-picker-width</code> a color named
          "picker-width"? The component's hooks use <code>--picker-*</code> to stay out of that
          namespace.`),
 

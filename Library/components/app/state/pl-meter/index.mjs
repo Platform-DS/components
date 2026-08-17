@@ -17,7 +17,7 @@
 //
 // That distinction is why low/high/optimum exist here and not on pl-progress.
 // They tell the browser which end of the range is GOOD, and it tints the bar
-// itself — so a meter that crosses into its bad zone changes colour without
+// itself — so a meter that crosses into its bad zone changes color without
 // anything in JavaScript watching it.
 
 // Imports

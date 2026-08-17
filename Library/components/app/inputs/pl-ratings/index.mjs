@@ -117,8 +117,8 @@ export class Ratings extends BaseElement {
             star.className = 'pl-ratings__star';
             star.dataset.index = String(i);
             // Two copies of the same path, stacked: the back one is the
-            // permanent empty outline colour, the front one is clipped to
-            // --fraction and carries the filled colour — see _styles.mjs.
+            // permanent empty outline color, the front one is clipped to
+            // --fraction and carries the filled color — see _styles.mjs.
             star.innerHTML = /*html*/`
                 <svg class="pl-ratings__star-icon pl-ratings__star-icon--bg" viewBox="0 0 24 24"><path d="${STAR_PATH}"/></svg>
                 <svg class="pl-ratings__star-icon pl-ratings__star-icon--fg" viewBox="0 0 24 24"><path d="${STAR_PATH}"/></svg>

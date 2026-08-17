@@ -50,7 +50,7 @@ export default () => page(
     table(
         ['Treatment', 'For', 'Why'],
         [
-            { cells: ['<strong>Match the box</strong>', '<code>pl-button</code>, <code>pl-code-block</code>, <code>pl-chip</code>', 'The text is already there and survives the upgrade. Give the host the padding, type and colours the component will use, and the content is in its final position from the first paint. It then simply gains a shadow root.'] },
+            { cells: ['<strong>Match the box</strong>', '<code>pl-button</code>, <code>pl-code-block</code>, <code>pl-chip</code>', 'The text is already there and survives the upgrade. Give the host the padding, type and colors the component will use, and the content is in its final position from the first paint. It then simply gains a shadow root.'] },
             { cells: ['<strong>Reserve a skeleton</strong>', '<code>pl-avatar</code>, <code>pl-progress</code>, <code>pl-meter</code>', 'These render from attributes rather than children, so there is nothing to show yet. A shimmer at the right size reads as loading instead of as broken.'] },
             { cells: ['<strong>Reserve silently</strong>', '<code>pl-icon</code>', 'Small and usually inline in a sentence. A grey box flashing mid-line is more distracting than the gap it fills.'] },
         ],
@@ -60,7 +60,7 @@ export default () => page(
 
     p(`The important detail is reading the component's OWN theming hook first, before the token it
        falls back to. A page that themes its buttons keeps that theme during the pre-upgrade window
-       instead of painting the default and flipping colour the instant the module lands:`),
+       instead of painting the default and flipping color the instant the module lands:`),
 
     code(`
         pl-button:not(:defined) {

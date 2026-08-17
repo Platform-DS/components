@@ -56,7 +56,7 @@ export default () => page(
                     </ul>
                 </nav>
                 <div data-actions>
-                    <pl-button size="sm">New order</pl-button>
+                    <pl-button data-size="sm">New order</pl-button>
                 </div>
             </pl-header>
 
@@ -81,7 +81,7 @@ export default () => page(
                     </pl-label>
                     <pl-switch checked>Email me when stock runs low</pl-switch>
                     <div data-actions data-align="end">
-                        <pl-button variant="secondary" type="reset">Cancel</pl-button>
+                        <pl-button data-variant="secondary" type="reset">Cancel</pl-button>
                         <pl-button type="submit">Save changes</pl-button>
                     </div>
                 </pl-form>

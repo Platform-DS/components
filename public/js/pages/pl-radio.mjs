@@ -58,7 +58,7 @@ export default () => page(
                 <pl-radio name="plan" value="pro">Pro</pl-radio>
                 <pl-radio name="plan" value="team">Team</pl-radio>
             </pl-label>
-            <div data-actions data-align="end"><pl-button type="submit" size="sm">Submit</pl-button></div>
+            <div data-actions data-align="end"><pl-button type="submit" data-size="sm">Submit</pl-button></div>
             <output></output>
         </pl-form>
     `, { layout: 'stack' }),
@@ -96,8 +96,8 @@ export default () => page(
     table(
         ['Property', 'Description'],
         [
-            { cells: ['<code>--radio-checked</code>', 'Ring and dot colour when selected.'] },
-            { cells: ['<code>--radio-border</code>', 'Ring colour when unselected.'] },
+            { cells: ['<code>--radio-checked</code>', 'Ring and dot color when selected.'] },
+            { cells: ['<code>--radio-border</code>', 'Ring color when unselected.'] },
         ],
     ),
 

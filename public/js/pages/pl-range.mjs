@@ -43,7 +43,7 @@ export default () => page(
         <pl-form onsubmit="event.preventDefault();
             this.querySelector('output').value = 'volume = ' + new FormData(event.target).get('volume')">
             <pl-range name="volume" min="0" max="100" value="60"></pl-range>
-            <div data-actions><pl-button type="submit" size="sm">Submit</pl-button></div>
+            <div data-actions><pl-button type="submit" data-size="sm">Submit</pl-button></div>
             <output></output>
         </pl-form>
     `, { layout: 'stack' }),
@@ -69,7 +69,7 @@ export default () => page(
         [
             { cells: ['<code>--range-fill</code>', 'Filled (left) portion of the track.'] },
             { cells: ['<code>--range-track</code>', 'Unfilled (right) portion of the track.'] },
-            { cells: ['<code>--range-thumb</code>', 'Thumb colour.'] },
+            { cells: ['<code>--range-thumb</code>', 'Thumb color.'] },
             { cells: ['<code>--range-track-size</code>', 'Track thickness.'] },
             { cells: ['<code>--range-thumb-size</code>', 'Thumb diameter.'] },
         ],

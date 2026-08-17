@@ -40,8 +40,8 @@ export default () => page(
                 <pl-chip>Mathematics</pl-chip>
             </div>
             <div data-actions>
-                <pl-button size="sm">Follow</pl-button>
-                <pl-button size="sm" variant="secondary">Message</pl-button>
+                <pl-button data-size="sm">Follow</pl-button>
+                <pl-button data-size="sm" data-variant="secondary">Message</pl-button>
             </div>
         </pl-profile-card>
     `, { layout: 'stack' }),
@@ -58,14 +58,14 @@ export default () => page(
                 <pl-avatar data-avatar size="xl" initials="GH" alt=""></pl-avatar>
                 <h3 data-name>Grace Hopper</h3>
                 <p data-role>Rear Admiral</p>
-                <div data-actions><pl-button size="sm" variant="secondary">Message</pl-button></div>
+                <div data-actions><pl-button data-size="sm" data-variant="secondary">Message</pl-button></div>
             </pl-profile-card>
             <pl-profile-card data-align="center">
                 <div data-cover><img src="${WAVE('m4t7xz')}" alt=""></div>
                 <pl-avatar data-avatar size="xl" initials="KJ" alt=""></pl-avatar>
                 <h3 data-name>Katherine Johnson</h3>
                 <p data-role>Research Mathematician</p>
-                <div data-actions><pl-button size="sm" variant="secondary">Message</pl-button></div>
+                <div data-actions><pl-button data-size="sm" data-variant="secondary">Message</pl-button></div>
             </pl-profile-card>
         </div>
     `, { layout: 'stack' }),
@@ -121,6 +121,6 @@ export default () => page(
     ul([
         'Cover and avatar images are decoration when the name is already in the card. Give them <code>alt=""</code> so they are skipped rather than announced twice.',
         'Headings stay at whatever level suits the surrounding document; nothing here changes them.',
-        'The avatar\'s ring is drawn with <code>box-shadow</code> in the card\'s own background colour, so it separates the avatar from any cover image without depending on what that image contains.',
+        'The avatar\'s ring is drawn with <code>box-shadow</code> in the card\'s own background color, so it separates the avatar from any cover image without depending on what that image contains.',
     ]),
 );

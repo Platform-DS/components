@@ -125,7 +125,7 @@
     Every solid fill is dark enough to carry WHITE text at AA for body sizes —
     which is why warning is amber-700 rather than the brighter amber-500. A
     filled control always pairs --color-<intent> with --color-on-<intent>, and
-    the on-colour is white in every theme, so a button never inverts into dark
+    the on-color is white in every theme, so a button never inverts into dark
     text on a saturated fill.
 
     ----------------------------------------------
@@ -136,7 +136,7 @@
     set --color-primary and the hover and active states follow it, instead of
     leaving you to find three harmonious blues and keep them in step.
 
-    States DARKEN, in both themes, because the on-colour is always white. The
+    States DARKEN, in both themes, because the on-color is always white. The
     obvious alternative, lightening on a dark page so the control lifts off the
     background, was measured and rejected: it takes white text on the primary
     fill from 5.17:1 to 4.18:1 on hover and 3.53:1 on press, under the 4.5:1
@@ -155,7 +155,7 @@
   ==============================================*/
 
   /* How far a state moves the fill toward --color-state-mix. Small on purpose:
-     enough to register as feedback, not enough to read as a different colour. */
+     enough to register as feedback, not enough to read as a different color. */
   --color-state-mix:            #000000;
   --color-state-hover-amount:   12%;
   --color-state-active-amount:  22%;
@@ -378,7 +378,7 @@
   --pl-color-state-hover-amount:  var(--color-state-hover-amount);
   --pl-color-state-active-amount: var(--color-state-active-amount);
 
-  /* Intents — solid fill, its hover, and the on-colour carried on top */
+  /* Intents — solid fill, its hover, and the on-color carried on top */
   --pl-color-primary:        var(--color-primary);
   --pl-color-primary-hover:  var(--color-primary-hover);
   --pl-color-primary-active: var(--color-primary-active);
@@ -392,15 +392,27 @@
   --pl-color-success-active: var(--color-success-active);
   --pl-color-on-success:     var(--color-on-success);
 
+  --pl-color-success-surface: var(--color-success-surface);
+  --pl-color-success-border:  var(--color-success-border);
+  --pl-color-success-ink:     var(--color-success-ink);
+
   --pl-color-warning:        var(--color-warning);
   --pl-color-warning-hover:  var(--color-warning-hover);
   --pl-color-warning-active: var(--color-warning-active);
   --pl-color-on-warning:     var(--color-on-warning);
 
+  --pl-color-warning-surface: var(--color-warning-surface);
+  --pl-color-warning-border:  var(--color-warning-border);
+  --pl-color-warning-ink:     var(--color-warning-ink);
+
   --pl-color-error:          var(--color-error);
   --pl-color-error-hover:    var(--color-error-hover);
   --pl-color-error-active:   var(--color-error-active);
   --pl-color-on-error:       var(--color-on-error);
+
+  --pl-color-error-surface: var(--color-error-surface);
+  --pl-color-error-border:  var(--color-error-border);
+  --pl-color-error-ink:     var(--color-error-ink);
 
   /* Size */
   --pl-size-2:   var(--size-2);

@@ -46,7 +46,7 @@ export default () => page(
             import '@platformdesign/components/pl-button';
         </script>
 
-        <pl-button variant="primary">Save</pl-button>
+        <pl-button data-variant="primary">Save</pl-button>
     `, 'html'),
 
     p(`Each module registers only itself, so you ship exactly what you use. Importing the
@@ -131,14 +131,14 @@ export default () => page(
     table(
         ['Treatment', 'Used for', 'Why'],
         [
-            { cells: ['<strong>Match the box</strong>', '<code>pl-button</code>, <code>pl-code-block</code>, <code>pl-chip</code>', 'The markup you wrote is what the component ends up showing, so the host is given the padding, type and colours it will have. The text is already in the right place, then simply gains a shadow root.'] },
+            { cells: ['<strong>Match the box</strong>', '<code>pl-button</code>, <code>pl-code-block</code>, <code>pl-chip</code>', 'The markup you wrote is what the component ends up showing, so the host is given the padding, type and colors it will have. The text is already in the right place, then simply gains a shadow root.'] },
             { cells: ['<strong>Reserve a skeleton</strong>', '<code>pl-avatar</code>, <code>pl-progress</code>, <code>pl-meter</code>, <code>pl-loading</code>', 'These render from attributes, not children, so there is nothing to show yet. They get the shimmer at the size the real thing will be.'] },
             { cells: ['<strong>Reserve silently</strong>', '<code>pl-icon</code>', 'Small and usually inline in a sentence. A grey box flashing mid-line is more distracting than the gap it fills.'] },
         ],
     ),
 
     callout('note', 'Nothing is hidden to achieve this',
-        `Colours are read from the component's own hook first
+        `colors are read from the component's own hook first
          (<code>--button-background</code> before <code>--pl-color-primary</code>), so a page that
          themes a button keeps that theme before upgrade instead of painting the default and
          flipping. And no rule hides content: with JavaScript switched off entirely the page still

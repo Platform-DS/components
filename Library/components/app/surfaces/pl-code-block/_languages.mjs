@@ -118,7 +118,7 @@ const html = [
     // Bracket punctuation only — matched on its own, ahead of everything else,
     // so the tag name it wraps is left unmatched. An unmatched run renders as
     // plain text (see tokenize()'s `kind: null` case), which is what gives the
-    // tag name the page's own foreground instead of a colour competing with
+    // tag name the page's own foreground instead of a color competing with
     // the brackets and attributes around it.
     { kind: 'tag',         pattern: /<\/|\/>|[<>]/y },
     // An attribute name is the token immediately before its `=`. A boolean

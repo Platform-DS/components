@@ -62,9 +62,9 @@ export default () => page(
         <pl-icon icon="trash"></pl-icon>
     `),
 
-    section('Size and colour'),
+    section('Size and color'),
 
-    p(`<code>size</code> takes any CSS length. Colour defaults to <code>currentColor</code>, so
+    p(`<code>size</code> takes any CSS length. Color defaults to <code>currentColor</code>, so
        an icon matches its surrounding text without being told to:`),
 
     demo(`
@@ -81,8 +81,8 @@ export default () => page(
 
     demo(`
         <pl-button><pl-icon icon="plus" size="1rem"></pl-icon> New project</pl-button>
-        <pl-button variant="secondary"><pl-icon icon="copy" size="1rem"></pl-icon> Duplicate</pl-button>
-        <pl-button variant="danger" aria-label="Delete">
+        <pl-button data-variant="secondary"><pl-icon icon="copy" size="1rem"></pl-icon> Duplicate</pl-button>
+        <pl-button data-variant="danger" aria-label="Delete">
             <pl-icon icon="trash" size="1rem"></pl-icon>
         </pl-button>
     `),
@@ -115,7 +115,7 @@ export default () => page(
         [
             { cells: ['<code>icon</code>', '<code>String</code>', ': ', 'Symbol name from the spritesheet, without the <code>icon-</code> prefix.'] },
             { cells: ['<code>size</code>', '<code>String</code>', '<code>1.5rem</code>', 'Any CSS length. Sets both width and height.'] },
-            { cells: ['<code>color</code>', '<code>String</code>', '<code>currentColor</code>', 'Any CSS colour.'] },
+            { cells: ['<code>color</code>', '<code>String</code>', '<code>currentColor</code>', 'Any CSS color.'] },
             { cells: ['<code>label</code>', '<code>String</code>', ': ', 'Accessible name. Makes the icon meaningful rather than decorative.'] },
         ],
     ),

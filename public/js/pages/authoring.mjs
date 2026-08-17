@@ -112,10 +112,34 @@ export default () => page(
         ['Kind', 'Form', 'Example'],
         [
             { cells: ['Native attribute', 'as-is', '<code>disabled</code>, <code>open</code>, <code>name</code>, <code>value</code>, <code>href</code>. The platform owns the name; use it as the platform means it.'] },
-            { cells: ['Typed, reflected prop', 'as-is', '<code>variant</code>, <code>size</code>, <code>loading</code> on <code>pl-button</code>. Declared in <code>static props</code>, so it is real API with a JS property behind it.'] },
-            { cells: ['Everything else', '<code>data-</code>', '<code>data-surface</code>, <code>data-layout</code>, <code>data-exclusive</code>, <code>data-ratio</code>. CSS reads it as <code>[data-x]</code>, JavaScript as <code>this.dataset.x</code>.'] },
+            { cells: ['Typed, reflected prop <em>whose name is also native</em>', 'as-is', '<code>disabled</code> on <code>pl-button</code>, <code>value</code> on <code>pl-input</code>. The prop is real API and the name is the platform\'s, so nothing is being claimed.'] },
+            { cells: ['Everything else, <em>reflected or not</em>', '<code>data-</code>', '<code>data-variant</code>, <code>data-size</code> and <code>data-shape</code> on <code>pl-button</code>; <code>data-surface</code>, <code>data-layout</code>, <code>data-exclusive</code>. CSS reads it as <code>[data-x]</code>, JavaScript as <code>this.dataset.x</code>.'] },
         ],
     ),
+
+    callout('note', 'Being a prop is not an exemption',
+        `<code>variant</code>, <code>size</code> and <code>loading</code> on
+         <code>&lt;pl-button&gt;</code> are typed, reflected props, and they are still written
+         <code>data-variant</code>, <code>data-size</code>, <code>data-loading</code>. A prop
+         declaration makes an attribute good API; it does not make the NAME ours to take.
+         <code>size</code> is native on <code>&lt;input&gt;</code> and <code>&lt;select&gt;</code>
+         and <code>loading</code> on <code>&lt;img&gt;</code> and <code>&lt;iframe&gt;</code>;
+         neither is native on a button, so on a button both are invented, and invented names get
+         prefixed.`),
+
+    p(`Declaring a prop with a <code>data-</code> key costs nothing at the call site. The prop
+       system maps the key to a clean name, so the ATTRIBUTE is <code>data-variant</code> and the
+       PROPERTY is still <code>this.props.variant</code>.`),
+
+    code(`
+        static props = {
+            'data-variant': { type: String, default: 'primary' },
+            'data-size':    { type: String, default: 'md' },
+        };
+
+        this.props.variant          // 'primary'
+        el.getAttribute('data-variant')
+    `, 'js'),
 
     p(`The second benefit is at the reading end. <code>dataset</code> hands you a camelCased view
        of exactly these attributes and nothing else, so a flag is <code>this.dataset.ratio</code>
