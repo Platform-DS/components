@@ -86,6 +86,23 @@ export default () => page(
         </pl-hero>
     `, { layout: 'bleed' }),
 
+    section('No graphic'),
+
+    p(`A figure is opt-in, not assumed: <code>data-layout="split"</code> is the only thing that
+       reserves a second track for one, so a hero with nothing in it but copy just... has nothing
+       in it but copy, in a single column. Pair that with <code>data-align="center"</code> for the
+       centered, text-only hero — the shape a lot of landing pages want above the fold, and the one
+       the "Usage" demo at the top of this page is already showing.`),
+
+    demo(`
+        <pl-hero data-align="center">
+            <p data-eyebrow>No figure anywhere in the markup</p>
+            <h1>Centered copy, nothing beside it.</h1>
+            <p>Drop data-align="center" and the hero centers on its own — no graphic required.</p>
+            <div data-actions><pl-button>Get started</pl-button></div>
+        </pl-hero>
+    `, { layout: 'bleed' }),
+
     section('Attributes'),
 
     p('Plus the shared <code>data-surface</code>, <code>data-align</code>, and <code>data-width</code>. See the <a href="/documentation/sections">Content sections</a> guide.'),
@@ -105,6 +122,7 @@ export default () => page(
             { cells: ['<code>--section-space</code>', 'Vertical padding of the band.'] },
             { cells: ['<code>--section-width</code>', 'Measure of the content column.'] },
             { cells: ['<code>--section-gutter</code>', 'Minimum space either side of the column.'] },
+            { cells: ['<code>--section-bg</code>, <code>--section-bg-image</code>, <code>--section-mask-image</code>', 'The band\'s color, an optional image over it, and a mask to shape that image. See <a href="/documentation/sections#background-images-and-masks">Content sections</a>.'] },
         ],
     ),
 

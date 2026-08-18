@@ -110,10 +110,13 @@ export default () => page(
         ['Property', 'Description'],
         [
             { cells: ['<code>--field-background</code>', 'Field background.'] },
-            { cells: ['<code>--field-border</code>', 'Border color.'] },
+            { cells: ['<code>--field-border</code>', 'Border color, all sides.'] },
+            { cells: ['<code>--field-border-width</code>', 'Border width, all sides. Defaults to <code>--pl-border-width-small</code>.'] },
+            { cells: ['<code>--field-border-inline-start-width</code>, <code>-inline-end-width</code>, <code>-block-start-width</code>, <code>-block-end-width</code>', 'One side\'s width, overriding <code>--field-border-width</code> for that side only — drop three of the four to zero for an underline field. See <a href="/documentation/theming">Theming</a>.'] },
             { cells: ['<code>--field-border-hover</code>', 'Border color on hover.'] },
             { cells: ['<code>--field-accent</code>', 'Focus border color.'] },
             { cells: ['<code>--field-ring</code>', 'Focus ring color.'] },
+            { cells: ['<code>--field-shadow</code>', 'Resting elevation, layered under the focus/error/success ring rather than replaced by it. Defaults to <code>--pl-box-shadow-input</code> (invisible).'] },
         ],
     ),
 

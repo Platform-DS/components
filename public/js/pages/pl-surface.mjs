@@ -75,7 +75,7 @@ export default () => page(
             { cells: ['<code>--surface-border-width</code>', '<code>--pl-border-width-small</code>', 'Set to <code>0</code> for a borderless surface.'] },
             { cells: ['<code>--surface-radius</code>', '<code>--pl-border-radius-large</code>', 'Corner rounding.'] },
             { cells: ['<code>--surface-padding</code>', '<code>--pl-size-16</code>', 'Space inside the frame.'] },
-            { cells: ['<code>--surface-shadow</code>', 'a two-layer hairline', 'Any <code>box-shadow</code> value, or <code>none</code>.'] },
+            { cells: ['<code>--surface-shadow</code>', '<code>--pl-box-shadow-surface</code>', 'Any <code>box-shadow</code> value, or <code>none</code>. Retheming <code>--pl-box-shadow-surface</code> moves every surface at once; set this instance hook to diverge from that.'] },
         ],
     ),
 

@@ -1,6 +1,6 @@
 {
   "name": "@platformdesign/components",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Native web components. No build step, no framework, no dependencies — just the browser.",
   "license": "MIT",
   "author": "Platform Design",
@@ -100,5 +100,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
   }
 }

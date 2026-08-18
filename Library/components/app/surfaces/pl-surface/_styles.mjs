@@ -12,7 +12,7 @@ export const STYLES = /*css*/`
   --surface-border-width: var(--pl-border-width-small, 1px);
   --surface-radius: var(--pl-border-radius-large, 16px);
   --surface-padding: var(--pl-size-16, 1rem);
-  --surface-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 1px 3px rgb(0 0 0 / 0.06);
+  --surface-shadow: var(--pl-box-shadow-surface, 0 1px 2px rgb(0 0 0 / 0.04), 0 1px 3px rgb(0 0 0 / 0.06));
 }
 
 pl-surface {

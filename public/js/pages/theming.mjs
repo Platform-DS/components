@@ -248,6 +248,114 @@ export default () => page(
 
     p('Each component page lists its own hooks under <strong>Custom properties</strong>.'),
 
+    section('Radius, elevation, and one-sided borders'),
+
+    p(`Color has the deepest contract because a theme lives or dies on its palette, but three more
+       systemic knobs are worth knowing on their own: one that rounds every component at once, and
+       two pairs that let inputs and surfaces diverge on purpose instead of by accident.`),
+
+    p(`<code>--radius</code> is the one-knob version of rounding. <code>--border-radius-small</code>,
+       <code>-medium</code>, and <code>-large</code> are each a multiple of it
+       (<code>0.5×</code>, <code>1×</code>, <code>2×</code>), so scaling a theme's roundness up or
+       down is one declaration instead of three kept in sync by hand — every component still reads
+       whichever tier fits its own weight, the same as always.`),
+
+    code(`
+        :root { --radius: 2px; }    … sharp, everywhere
+        :root { --radius: 20px; }   … round, everywhere, small/medium/large stay proportional
+    `, 'css'),
+
+    demo(`
+        <div style="--radius: 2px; display:inline-flex; gap:.5rem; align-items:center">
+            <pl-button>Sharp</pl-button>
+            <pl-input placeholder="Sharp" style="max-width:8rem"></pl-input>
+        </div>
+    `),
+
+    callout('note', '--radius is a global-tier knob only',
+        `Unlike the color contract, there is no <code>--pl-radius</code> alias standing between
+         <code>--radius</code> and the components. Adding one would mean
+         <code>--pl-border-radius-medium</code> stopped reading straight from
+         <code>--border-radius-medium</code> — the exact override this page's very first export
+         example shows — which is the wrong trade for a scoped tier nothing has asked for yet. Set
+         <code>--radius</code> on <code>:root</code> for the whole system; for one region, override
+         the specific tier's alias, e.g. <code>--pl-border-radius-large</code>, same as any other
+         per-component hook.`),
+
+    p(`Elevation is split into two FAMILIES rather than added as more sizes on the existing
+       <code>--box-shadow-small/medium/large</code> scale: <code>--box-shadow-input</code> and
+       <code>--box-shadow-surface</code>. An input and a card are not interchangeable just because
+       they happen to want the same shadow depth — a kit that flattens its inputs to a hairline
+       border usually still wants its cards to float, and the reverse (raised filled inputs, flat
+       cards) is just as real a choice. Keeping the two tokens separate means changing one can never
+       silently drag the other along.`),
+
+    code(`
+        :root {
+            --box-shadow-input: 0 1px 3px rgb(0 0 0 / 0.15);   … raised, filled-style inputs
+            --box-shadow-surface: none;                         … flat cards
+        }
+    `, 'css'),
+
+    callout('warn', 'If you override --box-shadow-input, never set it to the bare "none" keyword',
+        `A field's focus, error, and success rings LAYER on top of this shadow rather than replace
+         it — <code>box-shadow: var(--field-shadow, var(--pl-box-shadow-input, …)), 0 0 0 3px
+         &lt;ring&gt;</code> — and <code>none</code> is only legal as a <code>box-shadow</code>'s
+         entire value, never as one item in that comma list. Ship it as one item in a multi-shadow
+         <code>box-shadow</code> and the WHOLE declaration becomes invalid the moment a ring joins
+         it, silently deleting the ring too. The default is <code>0 0 #0000</code> — a real,
+         zero-size, fully transparent shadow — for exactly this reason; override with the same
+         shape rather than the keyword.`),
+
+    p(`<code>pl-surface</code> reads <code>--pl-box-shadow-surface</code> for its own resting
+       shadow, so retheming that one token moves every surface built on it along with it.`),
+
+    section('One-sided borders on inputs'),
+
+    p(`<code>pl-input</code> and <code>pl-textarea</code> don't declare a single
+       <code>border</code> shorthand — each of the four logical sides has its OWN width hook, all
+       four defaulting to the same value so the common case is still one declaration:`),
+
+    code(`
+        :root {
+            --field-border-width: 2px;   … every side, one declaration — the common case
+        }
+    `, 'css'),
+
+    p(`Drop three of the four sides and what is left reads as an underline field, the look a
+       Material-style kit usually wants — while <code>pl-surface</code> and every card keep their
+       own, always-full border, because they read a completely separate
+       <code>--surface-border-width</code> hook that this never touches:`),
+
+    code(`
+        :root {
+            --field-border-inline-start-width: 0;
+            --field-border-inline-end-width: 0;
+            --field-border-block-start-width: 0;
+            … bottom side left at its default width
+        }
+    `, 'css'),
+
+    demo(`
+        <div style="display:inline-flex; gap:1.5rem; align-items:flex-start">
+            <pl-input placeholder="Underline input" style="
+                max-width:10rem;
+                --field-border-inline-start-width: 0;
+                --field-border-inline-end-width: 0;
+                --field-border-block-start-width: 0;
+                --field-border-width: 2px;
+            "></pl-input>
+            <pl-surface style="max-width:10rem; padding:.75rem">
+                <p style="margin:0; font-size:.875rem">Surface — unaffected</p>
+            </pl-surface>
+        </div>
+    `),
+
+    p(`<code>pl-autocomplete</code> and <code>pl-color-picker</code> read the identical
+       <code>--field-border-*-width</code> hooks by hand, since neither shares
+       <code>pl-input</code>'s stylesheet — so one override still reaches every field-shaped
+       control in the system, not just the two that happen to share a base class.`),
+
     section('Keeping your tokens and the components\' tokens apart'),
 
     p(`Components never read the contract names directly. They read a parallel set of

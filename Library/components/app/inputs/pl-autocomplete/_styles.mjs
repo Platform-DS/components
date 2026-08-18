@@ -28,7 +28,15 @@ pl-autocomplete .pl-autocomplete__input {
   color: var(--pl-color-ink, #111827);
 
   background: var(--field-background, var(--pl-color-surface, #fff));
-  border: var(--pl-border-width-small, 1px) solid var(--field-border, var(--pl-color-border, #cfcfcf));
+
+  /* Same four independent widths as pl-input, and the same hook names — see
+     the field.mjs comment for why a "border" shorthand can't do this. */
+  border-style: solid;
+  border-color: var(--field-border, var(--pl-color-border, #cfcfcf));
+  border-inline-start-width: var(--field-border-inline-start-width, var(--field-border-width, var(--pl-border-width-small, 1px)));
+  border-inline-end-width:   var(--field-border-inline-end-width,   var(--field-border-width, var(--pl-border-width-small, 1px)));
+  border-block-start-width:  var(--field-border-block-start-width,  var(--field-border-width, var(--pl-border-width-small, 1px)));
+  border-block-end-width:    var(--field-border-block-end-width,    var(--field-border-width, var(--pl-border-width-small, 1px)));
   border-radius: var(--pl-border-radius-medium, 10px);
   padding-block: var(--pl-size-8, 0.5rem);
   /* A separate start value, not folded into one padding shorthand: a
@@ -36,6 +44,9 @@ pl-autocomplete .pl-autocomplete__input {
      extra room on that side only, and a consumer can't override half of a
      shorthand without repeating the other half. */
   padding-inline: var(--field-padding-inline-start, var(--pl-size-12, 0.75rem)) var(--pl-size-12, 0.75rem);
+
+  --_shadow: var(--field-shadow, var(--pl-box-shadow-input, 0 0 #0000));
+  box-shadow: var(--_shadow);
 
   transition: border-color 120ms ease, box-shadow 120ms ease;
 }
@@ -51,7 +62,7 @@ pl-autocomplete .pl-autocomplete__input:hover {
 pl-autocomplete .pl-autocomplete__input:focus-visible {
   outline: none;
   border-color: var(--field-accent, var(--pl-color-primary, #2563EB));
-  box-shadow: 0 0 0 3px var(--field-ring, color-mix(in oklab, var(--pl-color-primary, #2563EB) 22%, transparent));
+  box-shadow: var(--_shadow), 0 0 0 3px var(--field-ring, color-mix(in oklab, var(--pl-color-primary, #2563EB) 22%, transparent));
 }
 
 pl-autocomplete .pl-autocomplete__input:disabled {
@@ -66,6 +77,6 @@ pl-autocomplete .pl-autocomplete__input:user-invalid {
 }
 
 pl-autocomplete .pl-autocomplete__input:user-invalid:focus-visible {
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--pl-color-error, #B91C1C) 22%, transparent);
+  box-shadow: var(--_shadow), 0 0 0 3px color-mix(in oklab, var(--pl-color-error, #B91C1C) 22%, transparent);
 }
 `;

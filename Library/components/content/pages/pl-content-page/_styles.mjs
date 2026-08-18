@@ -18,6 +18,9 @@ export const STYLES = /*css*/`
   --content-accent: var(--pl-color-primary, #2563EB);
   --content-accent-2: var(--pl-color-warning, #B45309);
   --content-rule: var(--pl-color-border, #E5E7EB);
+  --content-dropcap-font-size: 4em;
+  --content-dropcap-line-height: 0.82;
+  --content-dropcap-color: var(--content-accent);
 }
 
 /* The PAGE runs edge to edge — it is the ground the article sits on, so its
@@ -187,9 +190,9 @@ pl-content-page [data-dropcap]::first-letter {
   float: inline-start;
   font-family: var(--pl-font-family-display, var(--pl-font-family-sans-serif, system-ui, sans-serif));
   font-weight: var(--pl-font-weight-bold, 700);
-  font-size: 4em;
-  line-height: 0.82;
-  color: var(--content-accent);
+  font-size: var(--content-dropcap-font-size);
+  line-height: var(--content-dropcap-line-height);
+  color: var(--content-dropcap-color);
   padding: 0.08em 0.15em 0 0;
 }
 

@@ -281,9 +281,14 @@
   /*==============================================
     BORDER
   ==============================================*/
-  --border-radius-small:  4px;
-  --border-radius-medium: 8px;
-  --border-radius-large:  16px;
+  /* --radius is the one knob: every tier below is a multiple of it, so
+     rounding an entire theme up or down is one declaration instead of three
+     kept in sync by hand. --border-radius-full stays absolute — "pill" is a
+     shape, not a point on the rounding scale, so it does not track --radius. */
+  --radius: 8px;
+  --border-radius-small:  calc(var(--radius) * 0.5);
+  --border-radius-medium: var(--radius);
+  --border-radius-large:  calc(var(--radius) * 2);
   --border-radius-full:   9999px;
 
   --border-width-small:  1px;
@@ -296,6 +301,23 @@
   --box-shadow-small:  0 1px 2px 0 rgb(0 0 0 / 0.05);
   --box-shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --box-shadow-large:  0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* Two elevation FAMILIES, not two more sizes on the scale above. An input
+     and a card are never interchangeable just because they happen to want the
+     same shadow depth — a kit that flattens its inputs to a hairline border
+     usually still wants its cards to float, and the reverse case (raised
+     filled inputs, flat cards) is just as real. Keeping them as separate
+     tokens means changing one can never silently drag the other along.
+
+     --box-shadow-input's "off" value is 0 0 #0000, NOT the bare none keyword.
+     A field's focus/error/success ring is LAYERED on top of this shadow, not
+     swapped in for it — box-shadow: var(--this), <ring> — and none is only
+     legal as a box-shadow's WHOLE value, never as one item in that list. Drop
+     none in and the entire declaration becomes invalid the moment a ring
+     joins it, which silently deletes the ring too. If you override this
+     token, keep it a real (even if invisible) shadow for the same reason. */
+  --box-shadow-input:   0 0 #0000;
+  --box-shadow-surface: 0 1px 2px rgb(0 0 0 / 0.04), 0 1px 3px rgb(0 0 0 / 0.06);
 
   --opacity-10:  0.10;
   --opacity-20:  0.20;
@@ -455,6 +477,14 @@
   --pl-letter-spacing-loose: var(--letter-spacing-loose);
 
   /* Border, effects */
+  /* No --pl-radius alias: the three tiers alias --border-radius-* directly,
+     same as every other pair here, which is what keeps a THEME'S OWN
+     "--border-radius-medium: 8px" (the docs' own export example, above)
+     landing correctly. Deriving the aliases from a --pl-radius layer instead
+     would give --radius a scoped tier to match --pl-color-primary's, but at
+     the cost of breaking that direct override — the alias would stop
+     reading the contract token a theme actually sets. --radius only has a
+     global tier (set it on :root) until that trade is worth making. */
   --pl-border-radius-small:  var(--border-radius-small);
   --pl-border-radius-medium: var(--border-radius-medium);
   --pl-border-radius-large:  var(--border-radius-large);
@@ -462,9 +492,11 @@
   --pl-border-width-small:   var(--border-width-small);
   --pl-border-width-medium:  var(--border-width-medium);
 
-  --pl-box-shadow-small:  var(--box-shadow-small);
-  --pl-box-shadow-medium: var(--box-shadow-medium);
-  --pl-box-shadow-large:  var(--box-shadow-large);
+  --pl-box-shadow-small:   var(--box-shadow-small);
+  --pl-box-shadow-medium:  var(--box-shadow-medium);
+  --pl-box-shadow-large:   var(--box-shadow-large);
+  --pl-box-shadow-input:   var(--box-shadow-input);
+  --pl-box-shadow-surface: var(--box-shadow-surface);
 
   --pl-opacity-50: var(--opacity-50);
   --pl-opacity-60: var(--opacity-60);

@@ -172,6 +172,9 @@ export default () => page(
             { cells: ['<code>--content-accent</code>', '<code>--pl-color-primary</code>', 'First decorative accent: kicker, drop cap, odd diamonds.'] },
             { cells: ['<code>--content-accent-2</code>', '<code>--pl-color-warning</code>', 'Second accent: quote mark, even diamonds.'] },
             { cells: ['<code>--content-rule</code>', '<code>--pl-color-border</code>', 'The hairline rules: ornament lines and the colophon border.'] },
+            { cells: ['<code>--content-dropcap-font-size</code>', '<code>4em</code>', 'Size of the drop cap, relative to the paragraph\'s own font size.'] },
+            { cells: ['<code>--content-dropcap-line-height</code>', '<code>0.82</code>', 'Line height of the drop cap. Tight on purpose — a loose value pushes it below the text baseline it should sit on.'] },
+            { cells: ['<code>--content-dropcap-color</code>', '<code>--content-accent</code>', 'Color of the drop cap. Independent of <code>--content-accent</code>, so recoloring the drop cap alone doesn\'t also recolor the kicker and diamonds.'] },
         ],
     ),
 

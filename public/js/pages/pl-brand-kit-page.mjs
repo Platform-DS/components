@@ -35,22 +35,37 @@ export default () => page(
          variant grounds, the tiles, and the strip all recolor together; the swatch circles
          repaint because each one paints a token directly.`),
 
+    callout('note', 'Three narrow exceptions to "the page owns nothing"',
+        `Every region here is still the author's own markup — except three, and each one only
+         fills what was left EMPTY. A blank <code>data-mark</code> gets a placeholder icon rather
+         than a dashed hole; blank <code>data-wordmark</code> / <code>data-tagline</code> elements
+         pick up <code>name</code> and <code>tagline</code>; and <code>images</code> drops photos
+         into whichever untoned tiles in the EXISTING imagery grid are still empty — no separate
+         band, no new markup. Put real content in any of these yourself and the fill never runs.`),
+
     section('The template'),
 
     pageDemo(`
-        <pl-brand-kit-page>
+        <pl-brand-kit-page name="Northwind" tagline="Tagline"
+            images='["https://picsum.photos/seed/nw-ref1/480/480",
+                     "https://picsum.photos/seed/nw-ref2/480/480",
+                     "https://picsum.photos/seed/nw-ref3/480/480"]'>
 
-            <!-- Primary logo on its ground -->
+            <!-- Primary logo on its ground — data-mark, data-wordmark, and
+                 data-tagline are all left empty, so all three fill: the mark
+                 from the library's default icon, the text from name/tagline -->
             <section data-logo data-tone="primary">
                 <p data-label>Primary logo</p>
                 <div data-mark></div>
                 <div>
-                    <p data-wordmark>Northwind</p>
-                    <p data-tagline>Tagline</p>
+                    <p data-wordmark></p>
+                    <p data-tagline></p>
                 </div>
             </section>
 
-            <!-- The lockup on its other grounds -->
+            <!-- The lockup on its other grounds — same empty mark, same fill.
+                 Its name span is hand-authored on purpose: the two-line break
+                 is a layout choice, not a value name/tagline can express. -->
             <div data-variants>
                 <section data-variant data-tone="accent">
                     <p data-label>Logo on accent</p>
@@ -105,7 +120,10 @@ export default () => page(
                 </div>
             </section>
 
-            <!-- Imagery and applications -->
+            <!-- Imagery and applications — three untoned tiles are left empty
+                 here, so images fills them in document order: the tall one
+                 first, then the two plain ones. The two toned "application"
+                 tiles keep their own hand-authored text either way. -->
             <section data-band>
                 <h2 data-band-title>Imagery &amp; applications</h2>
                 <div data-tiles>
@@ -128,10 +146,50 @@ export default () => page(
         </pl-brand-kit-page>
     `, { title: 'Brand kit template preview', initial: 834 }),
 
-    p(`The empty marks and tiles render as dashed slots on purpose, so the board reads correctly
-       before the assets exist. Drop an <code>&lt;img&gt;</code>, an inline SVG, or a
-       <code>pl-picture</code> into a <code>data-mark</code> or <code>data-tile</code> and it
-       fills the frame, cover-fit.`),
+    p(`The three empty tiles above are ordinary <code>data-tile</code> elements — nothing new was
+       added to the imagery grid to make this work. <code>images</code> just walks the tiles that
+       are already there and drops one URL into each empty, untoned one it finds, in document
+       order. The default template has three such slots, which is why three is the practical
+       ceiling: give it more and the extras are dropped with a console warning; give it fewer and
+       the remaining slots stay empty dashed placeholders, same as if <code>images</code> were
+       never set. A tile the author already filled — toned or not — is never a candidate.`),
+
+    p(`<code>data-mark</code>, <code>data-wordmark</code>, and <code>data-tagline</code> follow the
+       identical rule: leave one empty and it fills — from <code>brand-icon</code> or the built-in
+       default for the mark, from <code>name</code> and <code>tagline</code> for the text. Put real
+       content in any of them yourself and the fill never runs; the component only ever touches
+       what the author left empty.`),
+
+    section('Props &amp; attributes'),
+
+    p(`<code>images</code>, <code>name</code>, and <code>tagline</code> are typed props — each
+       round-trips through <code>this.props</code> the same way any <code>Array</code>- or
+       <code>String</code>-typed prop does (see <a href="/documentation/authoring">Reflecting
+       properties &amp; attributes</a>). <code>brand-icon</code> is not: it's markup, not a value
+       with a type to enforce, so it's a plain observed attribute read straight off the element.
+       There is no <code>el.props.brandIcon</code> — read or write it with
+       <code>getAttribute</code>/<code>setAttribute</code> like any other attribute.`),
+
+    table(
+        ['Attribute', 'Kind', 'Default', 'Description'],
+        [
+            { cells: ['<code>name</code>', 'prop, <code>String</code>', '<code>\'\'</code>', 'Fills an empty <code>data-wordmark</code>.'] },
+            { cells: ['<code>tagline</code>', 'prop, <code>String</code>', '<code>\'\'</code>', 'Fills an empty <code>data-tagline</code>.'] },
+            { cells: ['<code>images</code>', 'prop, <code>Array</code>', '<code>[]</code>', 'Fills empty, untoned <code>data-tile</code> elements in document order, one URL each. Extra URLs beyond the available empty tiles are dropped with a console warning.'] },
+            { cells: ['<code>brand-icon</code>', 'plain attribute', '—', 'Raw <code>&lt;svg&gt;</code> markup, used to fill every empty <code>data-mark</code>. Falls back to the library\'s default icon when unset or not well-formed SVG.'] },
+        ],
+    ),
+
+    code(`
+        el.props.name = 'Northwind';
+        el.props.tagline = 'Where the wind takes you';
+        el.props.images = [
+            'https://cdn.example.com/moodboard-1.jpg',
+            'https://cdn.example.com/moodboard-2.jpg',
+        ];
+
+        el.setAttribute('brand-icon', '<svg viewBox="0 0 24 24">…</svg>');
+    `, 'js'),
 
     section('Theming it'),
 
@@ -169,14 +227,16 @@ export default () => page(
         [
             { cells: ['<code>data-tone</code>', 'A background/ink pair on any region: <code>primary</code>, <code>accent</code>, <code>dark</code>, <code>light</code>.'] },
             { cells: ['<code>data-logo</code>', 'The hero band: a corner <code>data-label</code>, a <code>data-mark</code>, a <code>data-wordmark</code> and <code>data-tagline</code>.'] },
-            { cells: ['<code>data-mark</code>', 'A sized frame for the logo; dashed slot while empty. <code>data-mark="circle"</code> rounds it.'] },
+            { cells: ['<code>data-mark</code>', 'A sized frame for the logo. Left empty, it fills itself with <code>brand-icon</code> or the default. <code>data-mark="circle"</code> rounds it.'] },
+            { cells: ['<code>data-wordmark</code>', 'The brand name. Left empty, it fills itself with <code>name</code>.'] },
+            { cells: ['<code>data-tagline</code>', 'The tagline. Left empty, it fills itself with <code>tagline</code>.'] },
             { cells: ['<code>data-variants</code>', 'A two-up grid of <code>data-variant</code> panels, each with its own tone.'] },
-            { cells: ['<code>data-lockup</code>', 'A small mark beside a stacked name.'] },
+            { cells: ['<code>data-lockup</code>', 'A small mark beside a stacked name — hand-authored text, not <code>name</code>; see below.'] },
             { cells: ['<code>data-band</code>', 'A padded, centered band. Its <code>data-band-title</code> sits between two short rules.'] },
             { cells: ['<code>data-swatches</code> / <code>data-swatch</code>', 'The palette circles. <code>primary</code>, <code>accent</code>, <code>sunken</code>, <code>ink</code>, <code>surface</code>, <code>success</code>, <code>warning</code>, <code>danger</code>; a <code>&lt;small&gt;</code> inside is the value line.'] },
             { cells: ['<code>data-faces</code> / <code>data-face</code>', 'The type specimens: a <code>data-glyph</code>, a <code>data-face-name</code>, a <code>data-alphabet</code>. Face is <code>display</code>, <code>body</code>, or <code>mono</code>.'] },
             { cells: ['<code>data-sample</code>', 'The headline-plus-body sentence under the specimens.'] },
-            { cells: ['<code>data-tiles</code> / <code>data-tile</code>', 'The imagery mosaic. <code>data-span="tall"</code> or <code>"wide"</code>; a tone makes a tile a colored plate; empty untoned tiles are dashed slots.'] },
+            { cells: ['<code>data-tiles</code> / <code>data-tile</code>', 'The imagery mosaic. <code>data-span="tall"</code> or <code>"wide"</code>; a tone makes a tile a colored plate; an empty untoned tile is a dashed slot — or fills itself with the next URL from <code>images</code>.'] },
             { cells: ['<code>data-strip</code>', 'The closing rule: each child span takes a tone and shares the width.'] },
         ],
     ),

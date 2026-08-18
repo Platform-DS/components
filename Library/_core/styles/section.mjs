@@ -43,9 +43,19 @@ export const SECTION_STYLES = /*css*/`
   --section-ink-muted: var(--pl-color-ink-secondary, #626262);
   --section-accent: var(--pl-color-primary, #2563EB);
   --section-line: var(--pl-color-border, #cfcfcf);
+
+  /* The background image and its mask — both optional, both "none" by
+     default, and both painted on ::before rather than the section itself.
+     See that rule for why. */
+  --section-bg-image: none;
+  --section-mask-image: none;
+  --section-mask-size: 100% 100%;
+  --section-mask-position: center;
+  --section-mask-repeat: no-repeat;
 }
 
 ${SEL} {
+  position: relative;
   display: grid;
   grid-template-columns:
     [full-start] minmax(var(--section-gutter), 1fr)
@@ -55,11 +65,49 @@ ${SEL} {
 
   padding-block: var(--section-space);
 
+  /* The color stays HERE, on the section's own box, and is never masked —
+     see ::before below for why that split matters. */
   background: var(--section-bg);
   color: var(--section-ink);
   font-family: var(--pl-font-family-sans-serif, system-ui, sans-serif);
   font-size: var(--pl-font-size-base, 1rem);
   line-height: var(--pl-line-height-medium, 1.5);
+}
+
+/* The OPTIONAL image, and only the image, lives on its own layer — not
+   because mask-image can't be applied to ${SEL} directly (it can), but
+   because it would then mask EVERYTHING the section paints, headline and
+   body copy included, the moment a mask was set. A dedicated layer between
+   the color and the real content gives the mask something to shape that
+   isn't also the text.
+
+   That separation is also what makes a masked photo fade TO the section's
+   own color instead of to transparent-then-page: this layer paints ABOVE
+   ${SEL}'s own background (z-index: -1 still beats an unpositioned box's own
+   background in paint order — see Appendix E) but BELOW the real content, so
+   cutting a hole in it, with the mask, reveals --section-bg sitting behind,
+   not whatever the page happens to render under the section. */
+${SEL}::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background-image: var(--section-bg-image);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  /* Unprefixed and -webkit- both declared, unprefixed last so it wins where
+     supported: Safari has not shipped mask-image without the prefix. */
+  -webkit-mask-image: var(--section-mask-image);
+  mask-image: var(--section-mask-image);
+  -webkit-mask-size: var(--section-mask-size);
+  mask-size: var(--section-mask-size);
+  -webkit-mask-position: var(--section-mask-position);
+  mask-position: var(--section-mask-position);
+  -webkit-mask-repeat: var(--section-mask-repeat);
+  mask-repeat: var(--section-mask-repeat);
 }
 
 ${SEL} > * { grid-column: content; }

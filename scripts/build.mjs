@@ -31,10 +31,12 @@
 //   npm run build
 //   npm run build -- --report     size table only, nothing written
 //
-// esbuild is resolved the same way jsdom is in the test suite: from wherever
-// the developer already has it, never as a dependency of this package. The
-// zero-dependency promise covers what CONSUMERS install; it would be a hollow
-// promise if the repo itself quietly grew a toolchain.
+// esbuild is a devDependency of THIS repo only — the zero-dependency promise
+// covers what CONSUMERS install (`Library/` has none), not what maintainers
+// need to produce dist/. ESBUILD, if set, still overrides it, and the bare
+// specifier is tried as a last resort — useful for a global install or a
+// CI image that provides its own — but the ordinary path is just
+// `npm install` once and `npm run build` from then on.
 
 import { mkdir, rm, readFile, writeFile, readdir, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -66,10 +68,10 @@ async function loadEsbuild() {
     }
 
     console.error(
-        '\nesbuild not found. It is not a dependency of this package on purpose —\n' +
-        'point at a copy you already have, or install one locally:\n\n' +
-        '  ESBUILD=/path/to/node_modules/esbuild/lib/main.js npm run build\n' +
-        '  npm i -D esbuild && npm run build\n\n' +
+        '\nesbuild not found. It is a devDependency — run `npm install` once, or\n' +
+        'point at a copy you already have:\n\n' +
+        '  npm install\n' +
+        '  ESBUILD=/path/to/node_modules/esbuild/lib/main.js npm run build\n\n' +
         failures.map(f => `  tried ${f}`).join('\n') + '\n',
     );
     process.exit(1);

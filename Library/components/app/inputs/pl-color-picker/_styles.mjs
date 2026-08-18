@@ -25,8 +25,19 @@ pl-color-picker .pl-color__field {
   overflow: hidden;
 
   background: var(--field-background, var(--pl-color-surface, #fff));
-  border: var(--pl-border-width-small, 1px) solid var(--field-border, var(--pl-color-border, #E5E7EB));
+
+  /* Same four independent widths as pl-input, and the same hook names — see
+     the field.mjs comment for why a "border" shorthand can't do this. */
+  border-style: solid;
+  border-color: var(--field-border, var(--pl-color-border, #E5E7EB));
+  border-inline-start-width: var(--field-border-inline-start-width, var(--field-border-width, var(--pl-border-width-small, 1px)));
+  border-inline-end-width:   var(--field-border-inline-end-width,   var(--field-border-width, var(--pl-border-width-small, 1px)));
+  border-block-start-width:  var(--field-border-block-start-width,  var(--field-border-width, var(--pl-border-width-small, 1px)));
+  border-block-end-width:    var(--field-border-block-end-width,    var(--field-border-width, var(--pl-border-width-small, 1px)));
   border-radius: var(--pl-border-radius-medium, 8px);
+
+  --_shadow: var(--field-shadow, var(--pl-box-shadow-input, 0 0 #0000));
+  box-shadow: var(--_shadow);
 
   transition: border-color 120ms ease, box-shadow 120ms ease;
 }
@@ -38,7 +49,7 @@ pl-color-picker .pl-color__field:hover {
 /* One ring for the pair — the two inputs read as a single control. */
 pl-color-picker .pl-color__field:focus-within {
   border-color: var(--field-accent, var(--pl-color-focus, #2563EB));
-  box-shadow: 0 0 0 3px var(--field-ring, color-mix(in oklab, var(--pl-color-focus, #2563EB) 22%, transparent));
+  box-shadow: var(--_shadow), 0 0 0 3px var(--field-ring, color-mix(in oklab, var(--pl-color-focus, #2563EB) 22%, transparent));
 }
 
 /*------------------------------------------------

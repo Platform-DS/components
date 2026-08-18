@@ -88,6 +88,45 @@ export default () => page(
 
     p('They are data attributes rather than classes so they cannot collide with your own naming.'),
 
+    section('Background images and masks'),
+
+    p(`Every section's fill is <code>--section-bg</code> — a solid color, set directly on the band
+       and re-pointed by <code>data-surface</code>. Two more properties layer an image on top of
+       it, and a third shapes that image with a mask:`),
+
+    table(
+        ['Property', 'Default', 'Description'],
+        [
+            { cells: ['<code>--section-bg-image</code>', '<code>none</code>', 'Any CSS <code>&lt;image&gt;</code>: a <code>url(…)</code> photo, a gradient, or several layered with commas. Cover-fit, centered.'] },
+            { cells: ['<code>--section-mask-image</code>', '<code>none</code>', 'A mask shape: a gradient for a fade, a <code>url(…)</code> SVG for a silhouette. Shapes the image only.'] },
+            { cells: ['<code>--section-mask-size</code>, <code>-position</code>, <code>-repeat</code>', '<code>100% 100%</code>, <code>center</code>, <code>no-repeat</code>', 'The usual <code>mask-*</code> geometry, for a mask that should tile or sit off-center.'] },
+        ],
+    ),
+
+    demo(`
+        <pl-hero data-align="center" style="
+            --section-bg: #0F1115;
+            --section-ink: #fff;
+            --section-bg-image: linear-gradient(135deg, #7C3AED, #2563EB);
+            --section-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+        ">
+            <p data-eyebrow>Masked background</p>
+            <h1>Fades to the section's own color</h1>
+            <p>Not to whatever happens to render behind it.</p>
+        </pl-hero>
+    `, { layout: 'bleed' }),
+
+    callout('note', 'The mask only ever touches the image, never the text',
+        `<code>mask-image</code> shapes everything an element paints, so applying it to the section
+         itself would cut the headline along with the background the moment a mask was set. The
+         image lives on its own layer, behind the real content but above the section's own
+         <code>--section-bg</code> — which is also why a masked photo fades TO that color instead of
+         to transparent-then-page. Nothing under it can ever be lost, because there's nothing
+         painted under it except color that was already meant to be there.`),
+
+    p(`No image, no mask, nothing changes: both default to <code>none</code>, and every section that
+       never sets them renders exactly as it did before these properties existed.`),
+
     section('Styling from your own page'),
 
     p(`Because these are Light DOM, your stylesheet reaches them directly, no
