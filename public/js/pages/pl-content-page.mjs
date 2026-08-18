@@ -70,7 +70,6 @@ export default () => page(
                        idea per level, each level set in a distinct size, weight, or face from
                        the theme.</p>
                 </div>
-                <blockquote data-pull-quote>You will read this before the body copy.</blockquote>
             </section>
 
             <!-- A movement with a sub header and two-column prose -->
@@ -158,6 +157,7 @@ export default () => page(
             { cells: ['<code>data-quote</code>', 'The full-color quote band: a paragraph and a <code>&lt;cite&gt;</code>.'] },
             { cells: ['<code>data-closing</code>', 'Centered resolution and call to action. <code>data-footnote</code> for the aside.'] },
             { cells: ['<code>data-colophon</code>', 'The article\'s own footer row, inside the measure.'] },
+            { cells: ['<code>data-full</code>', 'On any top-level region: opt out of the measure and run the width of the page.'] },
         ],
     ),
 
@@ -166,8 +166,8 @@ export default () => page(
     table(
         ['Property', 'Default', 'Description'],
         [
-            { cells: ['<code>--content-measure</code>', '<code>52rem</code>', 'Width of the column.'] },
-            { cells: ['<code>--content-padding</code>', '<code>--pl-size-48 --pl-size-32</code>', 'Space around the article.'] },
+            { cells: ['<code>--content-measure</code>', '<code>52rem</code>', 'Width of the inner column. The page itself is always full width.'] },
+            { cells: ['<code>--content-padding</code>', '<code>--pl-size-48 --pl-size-32</code>', 'Space around the article. The inline half is the gutter the measure is centered in.'] },
             { cells: ['<code>--content-flow</code>', '<code>--pl-size-48</code>', 'Vertical rhythm between top-level regions.'] },
             { cells: ['<code>--content-accent</code>', '<code>--pl-color-primary</code>', 'First decorative accent: kicker, drop cap, odd diamonds.'] },
             { cells: ['<code>--content-accent-2</code>', '<code>--pl-color-warning</code>', 'Second accent: quote mark, even diamonds.'] },

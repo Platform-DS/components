@@ -20,11 +20,14 @@ export const STYLES = /*css*/`
   --content-rule: var(--pl-color-border, #E5E7EB);
 }
 
+/* The PAGE runs edge to edge — it is the ground the article sits on, so its
+   background has to reach the viewport. The MEASURE is applied to the children
+   instead, one centered column of readable line length. Capping the host
+   itself, as this once did, stopped the background at 52rem and left the
+   article floating on the body's color. */
 pl-content-page {
   display: block;
   inline-size: 100%;
-  max-inline-size: var(--content-measure);
-  margin-inline: auto;
   padding: var(--content-padding);
   background: var(--pl-color-surface-sunken, #F3F4F6);
   color: var(--pl-color-ink, #111827);
@@ -37,11 +40,26 @@ pl-content-page[hidden] { display: none; }
 
 /* UA margins off — blockquote's 1em 40px above all. :where() rather than :is()
    is load-bearing: :is() would take the specificity of its most specific
-   argument (0,0,2) and outrank the flow rule below, which zeroes the top margin
-   of the one top-level child that is a blockquote — the quote band. :where()
-   contributes nothing, so this sits at (0,0,1) and loses to the flow rule on
-   source order. Keep it ABOVE that rule. */
+   argument (0,0,2) and outrank the two rules below, which both sit at (0,0,1)
+   and win only on source order. So this reset MUST come first: it zeroes the
+   margins, then the container re-centers and the flow re-spaces. Move it below
+   either one and a top-level blockquote — the quote band — loses that property
+   back to the zeroed reset. */
 pl-content-page :where(h1, h2, h3, p, blockquote) { margin: 0; }
+
+/* The inner container. Every top-level region is centered and capped, so the
+   measure holds without the author wrapping anything. Regions that set a
+   TIGHTER measure of their own — the closing block's 56ch — win on
+   specificity and keep it. */
+pl-content-page > * {
+  inline-size: 100%;
+  max-inline-size: var(--content-measure);
+  margin-inline: auto;
+}
+
+/* Opt out, for a region that should run the width of the page: a full-bleed
+   quote band, a wide figure. It still respects the page's own padding. */
+pl-content-page > [data-full] { max-inline-size: none; }
 
 /* The rhythm between movements, owned here so the regions don't have to. */
 pl-content-page > * + * { margin-block-start: var(--content-flow); }
@@ -141,6 +159,13 @@ pl-content-page [data-body] {
   display: grid;
   grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
   gap: var(--pl-size-48, 3rem);
+}
+
+/* No pull quote, no second column. The sidebar track is only worth reserving
+   when something sits in it — otherwise the prose is squeezed to two thirds
+   with a blank third beside it. */
+pl-content-page [data-body]:not(:has([data-pull-quote])) {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 pl-content-page [data-body] p + p { margin-block-start: var(--pl-size-16, 1.25rem); }
